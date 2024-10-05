@@ -1,0 +1,56 @@
+name: Build, Test, and Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - '**'
+  delete:
+    branches:
+      - '**'
+
+jobs:
+  build-test-deploy:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run linting check
+        run: npm run check
+
+      - name: Start HTTP server and run tests
+        run: |
+          npx http-server ./src &
+          sleep 5
+          npx playwright test
+
+      - name: Run build script
+        run: npm run build
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: ${{ github.ref_name }}
+
+  cleanup:
+    runs-on: ubuntu-latest
+    if: github.event.ref_type == 'branch' && github.ref != 'refs/heads/main'
+
+    steps:
+      - name: Delete GitHub Pages branch
+        run: |
+          branch_name=${GITHUB_REF#refs/heads/}
+          pages_branch="gh-pages-${branch_name}"
+          curl -X DELETE -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            "https://api.github.com/repos/${{ github.repository }}/git/refs/heads/${pages_branch}"
