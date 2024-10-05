@@ -23,19 +23,16 @@ export default {
 			input: "src/**/*.html",
 			transformHtml: [
 				(html) => {
-					const baseTag = process.env.GITHUB_REF_NAME
-						? `<base href="/custom-element-kit/${process.env.GITHUB_REF_NAME}/">`
-						: "";
-					const updatedHeadHtml = html.includes("<head>")
-						? html.replace("<head>", `<head>${baseTag}`)
-						: html.replace(/<head(\s[^>]*)>/, `<head$1>${baseTag}`);
-					const updatedHrefTags = process.env.GITHUB_REF_NAME
-						? updatedHeadHtml.replace(
-								/href="assets\//g,
-								`href="${process.env.GITHUB_REF_NAME}/assets/`,
-							)
-						: updatedHeadHtml;
-					return replaceElementWithDeclarativeShadowDom(updatedHrefTags);
+					const refName = process.env.GITHUB_REF_NAME;
+					const baseTag = refName ? '<base href="/custom-element-kit/">' : "";
+					const updatedHtml = html.replace(
+						/<head(\s[^>]*)?>/,
+						`<head$1>${baseTag}`,
+					);
+					const finalHtml = refName
+						? updatedHtml.replace(/href="assets\//g, `href="${refName}/assets/`)
+						: updatedHtml;
+					return replaceElementWithDeclarativeShadowDom(finalHtml);
 				},
 			],
 			minify: false,
