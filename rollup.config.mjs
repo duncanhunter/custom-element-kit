@@ -24,7 +24,7 @@ export default {
 			transformHtml: [
 				(html) => {
 					const baseTag = process.env.GITHUB_REF_NAME
-						? `<base href="/custom-element-kit/${process.env.GITHUB_REF_NAME}">`
+						? `<base href="/custom-element-kit/${process.env.GITHUB_REF_NAME}/">`
 						: "";
 					const updatedHeadHtml = html.includes("<head>")
 						? html.replace("<head>", `<head>${baseTag}`)
