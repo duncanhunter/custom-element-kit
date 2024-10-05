@@ -23,10 +23,10 @@ export default {
 			input: "src/**/*.html",
 			transformHtml: [
 				(html) => {
-                    const baseTag = '<base href="/custom-element-kit/">';
-                    const updatedHeadHtml = html.includes("<head>")
-                        ? html.replace("<head>", `<head>${baseTag}`)
-                        : html.replace(/<head(\s[^>]*)>/, `<head$1>${baseTag}`);
+					const baseTag = '<base href="/custom-element-kit/">';
+					const updatedHeadHtml = html.includes("<head>")
+						? html.replace("<head>", `<head>${baseTag}`)
+						: html.replace(/<head(\s[^>]*)>/, `<head$1>${baseTag}`);
 					return replaceElementWithDeclarativeShadowDom(updatedHeadHtml);
 				},
 			],
