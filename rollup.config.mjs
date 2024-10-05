@@ -29,7 +29,13 @@ export default {
 					const updatedHeadHtml = html.includes("<head>")
 						? html.replace("<head>", `<head>${baseTag}`)
 						: html.replace(/<head(\s[^>]*)>/, `<head$1>${baseTag}`);
-					return replaceElementWithDeclarativeShadowDom(updatedHeadHtml);
+					const updatedHrefTags = process.env.GITHUB_REF_NAME
+						? updatedHeadHtml.replace(
+								/href="assets\//g,
+								`href="${process.env.GITHUB_REF_NAME}/assets/`,
+							)
+						: updatedHeadHtml;
+					return replaceElementWithDeclarativeShadowDom(updatedHrefTags);
 				},
 			],
 			minify: false,
