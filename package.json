@@ -12,7 +12,10 @@
 		"format": "npx @biomejs/biome check --write --unsafe .",
 		"check": "npx @biomejs/biome check ."
 	},
-	"keywords": ["web components", "custom elements"],
+	"keywords": [
+		"web components",
+		"custom elements"
+	],
 	"author": "Duncan Hunter",
 	"license": "MIT",
 	"devDependencies": {
@@ -21,9 +24,11 @@
 		"@rollup/plugin-terser": "0.4.4",
 		"@web/rollup-plugin-html": "2.3.0",
 		"http-server": "14.1.1",
+		"linkedom": "0.18.5",
 		"rollup": "2.79.2",
 		"rollup-plugin-minify-html-literals": "1.2.6",
 		"rollup-plugin-multi-input": "1.5.0",
-		"rollup-plugin-summary": "2.0.1"
+		"rollup-plugin-summary": "2.0.1",
+		"shiki": "1.21.0"
 	}
 }
