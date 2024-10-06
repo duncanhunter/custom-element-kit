@@ -78,11 +78,12 @@ export class Input extends FormElement {
 		return [...FormElement.observedAttributes, ...inputControlAttributes];
 	}
 
-	get template() {
-		return inputTemplate;
-	}
-	get styles() {
-		return inputStyles;
+	constructor() {
+		super();
+		if (!this.shadowRoot) {
+			this.attachShadow({ mode: "open" });
+			this.shadowRoot.innerHTML = `<style>${inputStyles}</style>${inputTemplate}`;
+		}
 	}
 
 	get controlElement() {

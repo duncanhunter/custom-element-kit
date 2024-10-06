@@ -80,11 +80,12 @@ export class TextArea extends FormElement {
 		return [...FormElement.observedAttributes, ...textareaControlAttributes];
 	}
 
-	get template() {
-		return textareaTemplate;
-	}
-	get styles() {
-		return textareaStyles;
+	constructor() {
+		super();
+		if (!this.shadowRoot) {
+			this.attachShadow({ mode: "open" });
+			this.shadowRoot.innerHTML = `<style>${textareaStyles}</style>${textareaTemplate}`;
+		}
 	}
 
 	get controlElement() {

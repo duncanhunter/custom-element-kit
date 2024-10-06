@@ -7,8 +7,7 @@
   <title>Custom Element Kit</title>
   <link rel="stylesheet" href="../../core/styles.css">
   <link rel="stylesheet" href="../../core/page-layout.css">
-  <script type="module" src="../../core/form-element.js"></script>
-  <script type="module" src="input.js"></script>
+  <script type="module" src="code-block.js"></script>
 </head>
 
 <body>
@@ -32,13 +31,13 @@
       </aside>
       <main>
         <section>
-          <h1>Input (ui-input)</h1>
-
-          <form novalidate>
-            <ui-input required value="nsw" label="nsw"></ui-input>
-            <button type="submit">Submit</button>
-            <button type="reset">Reset</button>
-          </form>
+          <h1>Code Block (ui-code-block)</h1>
+          <ui-code-block>
+            <ui-checkbox value="vic" label="vic"></ui-checkbox>
+          </ui-code-block>
+          <ui-code-block theme="github-light" lang="html">
+            <ui-checkbox value="vic" label="vic"></ui-checkbox>
+          </ui-code-block>
         </section>
       </main>
     </div>

@@ -74,13 +74,6 @@ legend {
 }
 `;
 
-/*
-min-selections="2"
-max-selections="2"
-exact-selections="2"
-required
-*/
-
 export class CheckboxGroup extends HTMLElement {
 	static formAssociated = true;
 	static get observedAttributes() {
@@ -114,7 +107,7 @@ export class CheckboxGroup extends HTMLElement {
 			this.attachShadow({ mode: "open" });
 			this.shadowRoot.innerHTML = `<style>${checkboxGroupStyles}</style>${checkboxGroupTemplate}`;
 		}
-		this.#errorElement = this.shadowRoot.getElementById("error"); //querySelector("[name='error']");
+		this.#errorElement = this.shadowRoot.getElementById("error");
 		this.#labelElement = this.shadowRoot.getElementById("label");
 		this.#helpElement = this.shadowRoot.getElementById("help");
 		this.#fieldsetElement = this.shadowRoot.querySelector("fieldset");

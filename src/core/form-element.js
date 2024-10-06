@@ -19,10 +19,6 @@ export class FormElement extends HTMLElement {
 		super();
 		this.pristine = true;
 		this.#internals = this.attachInternals();
-		if (!this.shadowRoot) {
-			this.attachShadow({ mode: "open" });
-			this.shadowRoot.innerHTML = `<style>${this.styles}</style>${this.template}`;
-		}
 		this.#errorElement = this.shadowRoot.getElementById("error");
 		this.#labelElement = this.shadowRoot.getElementById("label");
 		this.#helpElement = this.shadowRoot.getElementById("help");
