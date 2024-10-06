@@ -1,67 +1,4 @@
-:not(:defined) > template[shadowrootmode] ~ * {
-	display: none;
-}
-
-*,
-*::before,
-*::after {
-	box-sizing: border-box;
-}
-
-body {
-	font-family: sans-serif;
-}
-
-img,
-picture,
-video,
-canvas,
-svg {
-	display: block;
-	max-width: 100%;
-}
-
-input,
-button,
-textarea,
-select {
-	font: inherit;
-}
-
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	overflow-wrap: break-word;
-	margin: 0;
-	padding: 0;
-	font-weight: normal;
-}
-
-body,
-fieldset {
-	margin: 0;
-	padding: 0;
-	border: none;
-}
-
-ui-visually-hidden:not(:focus-within) {
-	position: absolute;
-	width: 1px;
-	height: 1px;
-	margin: -1px;
-	padding: 0;
-	border: 0;
-	clip: rect(0, 0, 0, 0);
-	overflow: hidden;
-	white-space: nowrap;
-}
-
 :root {
-	--ui-color-gray-50: hsl(0 0% 97.5%);
 	--ui-color-gray-100: hsl(240 4.8% 95.9%);
 	--ui-color-gray-200: hsl(240 5.9% 90%);
 	--ui-color-gray-300: hsl(240 4.9% 83.9%);
@@ -85,17 +22,10 @@ ui-visually-hidden:not(:focus-within) {
 	--ui-color-green-600: hsl(142.1 76.2% 36.3%);
 	--ui-color-green-800: hsl(142.8 64.2% 24.1%);
 
+	--ui-color-blue-200: hsl(200.6 94.4% 86.1%);
 	--ui-color-blue-300: hsl(199.4 95.5% 73.9%);
-	--ui-color-blue-600: hsl(200.4 98% 39.4%);
+	--ui-color-blue-500: hsl(198.6 88.7% 48.4%);
 	--ui-color-blue-800: hsl(201 90% 27.5%);
-
-	--ui-color-primary-200: hsl(200.6 94.4% 86.1%);
-	--ui-color-primary-300: hsl(199.4 95.5% 73.9%);
-	--ui-color-primary-400: hsl(198.4 93.2% 59.6%);
-	--ui-color-primary-500: hsl(198.6 88.7% 48.4%);
-	--ui-color-primary-600: hsl(200.4 98% 39.4%);
-	--ui-color-primary-700: hsl(201.3 96.3% 32.2%);
-	--ui-color-primary-800: hsl(201 90% 27.5%);
 
 	--ui-border-radius-0: 0.0625rem;
 	--ui-border-radius-1: 0.125rem;
@@ -106,8 +36,6 @@ ui-visually-hidden:not(:focus-within) {
 	--ui-border-radius-pill: 9999px;
 
 	--ui-shadow-1: 0 1px 2px -1px hsl(220 3% 15% / calc(1% + 9%));
-	--ui-shadow-2: 0 3px 5px -2px hsl(220 3% 15% / calc(1% + 3%)), 0 7px 14px -5px
-		hsl(220 3% 15% / calc(1% + 5%));
 	--ui-shadow-3:
 		0 -1px 3px 0 hsl(220 3% 15% / calc(1% + 2%)), 0 1px 2px -5px hsl(
 			220 3% 15% /
@@ -116,17 +44,6 @@ ui-visually-hidden:not(:focus-within) {
 			220 3% 15% /
 			calc(1% + 5%)
 		), 0 12px 15px -5px hsl(220 3% 15% / calc(1% + 7%));
-	--ui-shadow-4:
-		0 -2px 5px 0 hsl(220 3% 15% / calc(1% + 2%)), 0 1px 1px -2px hsl(
-			220 3% 15% /
-			calc(1% + 3%)
-		), 0 2px 2px -2px hsl(220 3% 15% / calc(1% + 3%)), 0 5px 5px -2px hsl(
-			220 3% 15% /
-			calc(1% + 4%)
-		), 0 9px 9px -2px hsl(220 3% 15% / calc(1% + 5%)), 0 16px 16px -2px hsl(
-			220 3% 15% /
-			calc(1% + 6%)
-		);
 	--ui-shadow-5:
 		0 -1px 2px 0 hsl(220 3% 15% / calc(1% + 2%)), 0 2px 1px -2px hsl(
 			220 3% 15% /
@@ -138,17 +55,6 @@ ui-visually-hidden:not(:focus-within) {
 			220 3% 15% /
 			calc(1% + 7%)
 		);
-	--ui-shadow-6:
-		0 -1px 2px 0 hsl(220 3% 15% / calc(1% + 2%)), 0 3px 2px -2px hsl(
-			220 3% 15% /
-			calc(1% + 3%)
-		), 0 7px 5px -2px hsl(220 3% 15% / calc(1% + 3%)), 0 12px 10px -2px hsl(
-			220 3% 15% /
-			calc(1% + 4%)
-		), 0 22px 18px -2px hsl(220 3% 15% / calc(1% + 5%)), 0 41px 33px -2px hsl(
-			220 3% 15% /
-			calc(1% + 6%)
-		), 0 100px 80px -2px hsl(220 3% 15% / calc(1% + 7%));
 
 	--ui-space-0: 0.0625rem; /* 1px */
 	--ui-space-1: 0.125rem; /* 2px */
@@ -209,8 +115,7 @@ ui-visually-hidden:not(:focus-within) {
 	--ui-text-color-1: var(--ui-color-gray-800);
 	--ui-text-color-2: var(--ui-color-gray-600);
 	--ui-text-color-3: var(--ui-color-gray-400);
-	--ui-surface-color-00: white;
-	--ui-surface-color-0: var(--ui-color-gray-100);
+	--ui-surface-color-0: white;
 	--ui-surface-color-1: var(--ui-color-gray-200);
 	--ui-surface-color-2: var(--ui-color-gray-300);
 	--ui-surface-color-3: var(--ui-color-gray-400);
@@ -219,6 +124,10 @@ ui-visually-hidden:not(:focus-within) {
 	--ui-border-color-2: var(--ui-color-gray-700);
 	--ui-border-color-3: var(--ui-color-gray-400);
 	--ui-border-color-4: var(--ui-color-gray-200);
+	--ui-color-primary-200: var(--ui-color-blue-200);
+	--ui-color-primary-300: var(--ui-color-blue-300);
+	--ui-color-primary-500: var(--ui-color-blue-500);
+	--ui-color-primary-800: var(--ui-color-blue-800);
 
 	body {
 		background-color: var(--ui-surface-color-0);
@@ -235,7 +144,6 @@ ui-visually-hidden:not(:focus-within) {
 		--ui-text-color-1: var(--ui-color-gray-100);
 		--ui-text-color-2: var(--ui-color-gray-200);
 		--ui-text-color-3: var(--ui-color-gray-300);
-		--ui-surface-color-00: var(--ui-color-gray-950);
 		--ui-surface-color-0: var(--ui-color-gray-900);
 		--ui-surface-color-1: var(--ui-color-gray-800);
 		--ui-surface-color-2: var(--ui-color-gray-700);
@@ -245,6 +153,10 @@ ui-visually-hidden:not(:focus-within) {
 		--ui-border-color-2: var(--ui-color-gray-400);
 		--ui-border-color-3: var(--ui-color-gray-600);
 		--ui-border-color-4: var(--ui-color-gray-800);
+		--ui-color-primary-200: var(--ui-color-blue-200);
+		--ui-color-primary-300: var(--ui-color-blue-300);
+		--ui-color-primary-500: var(--ui-color-blue-500);
+		--ui-color-primary-800: var(--ui-color-blue-800);
 
 		body {
 			background-color: var(--ui-surface-color-0);
@@ -253,6 +165,56 @@ ui-visually-hidden:not(:focus-within) {
 		color: var(--ui-text-color-1);
 		caret-color: var(--ui-color-primary-600);
 	}
+}
+
+:not(:defined) > template[shadowrootmode] ~ * {
+	display: none;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: var(--ui-font-sans);
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+	display: block;
+	max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+	font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	overflow-wrap: break-word;
+	margin: 0;
+	padding: 0;
+	font-weight: normal;
+}
+
+body,
+fieldset {
+	margin: 0;
+	padding: 0;
+	border: none;
 }
 
 [class^="ui-text-"] {
