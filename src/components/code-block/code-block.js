@@ -34,7 +34,11 @@ export class CodeBlock extends HTMLElement {
 	}
 
 	connectedCallback() {
-		this.#observer.observe(this, { childList: true, characterData: true, subtree: true });
+		this.#observer.observe(this, {
+			childList: true,
+			characterData: true,
+			subtree: true,
+		});
 		if (!this.serverRendered) {
 			this.#updateCodeBlock();
 		}
@@ -61,20 +65,27 @@ export class CodeBlock extends HTMLElement {
 	async #updateCodeBlock() {
 		this.removeAttribute("server-rendered");
 
-		const codeElement = this.shadowRoot.querySelector('code');
+		const codeElement = this.shadowRoot.querySelector("code");
 		const lang = this.getAttribute("lang") || "plaintext";
 		const theme = this.getAttribute("theme") || "github";
-		const noTrim = this.getAttribute("no-trim") === 'true';
+		const noTrim = this.getAttribute("no-trim") === "true";
 		const rawContent = this.innerHTML;
-		const formattedContent = noTrim ? rawContent : this.#formatContent(rawContent);
-		codeElement.removeAttribute('data-highlighted');
+		const formattedContent = noTrim
+			? rawContent
+			: this.#formatContent(rawContent);
+		codeElement.removeAttribute("data-highlighted");
 		codeElement.className = lang;
 		codeElement.textContent = formattedContent;
 
-		this.shadowRoot.querySelector('#hljs-theme').href = `https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/${theme}.min.css`;
+		this.shadowRoot.querySelector("#hljs-theme").href =
+			`https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/${theme}.min.css`;
 		try {
-			const hljs = await import('https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/es/highlight.min.js');
-			const langModule = await import(`https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/es/languages/${lang}.min.js`);
+			const hljs = await import(
+				"https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/es/highlight.min.js"
+			);
+			const langModule = await import(
+				`https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/es/languages/${lang}.min.js`
+			);
 			hljs.default.registerLanguage(lang, langModule.default);
 			hljs.default.highlightElement(codeElement, { language: lang });
 		} catch (error) {
@@ -83,14 +94,18 @@ export class CodeBlock extends HTMLElement {
 	}
 
 	#formatContent(content) {
-		const lines = content.split('\n');
+		const lines = content.split("\n");
 		const minLeadingWhitespace = Math.min(
 			...lines
-				.filter(line => line.trim().length > 0)
-				.map(line => line.match(/^\s*/)[0].length)
+				.filter((line) => line.trim().length > 0)
+				.map((line) => line.match(/^\s*/)[0].length),
 		);
-		const filteredLines = lines.filter((line, index) => !(index === 0 && line.trim() === ''));
-		return filteredLines.map(line => line.slice(minLeadingWhitespace)).join('\n');
+		const filteredLines = lines.filter(
+			(line, index) => !(index === 0 && line.trim() === ""),
+		);
+		return filteredLines
+			.map((line) => line.slice(minLeadingWhitespace))
+			.join("\n");
 	}
 }
 

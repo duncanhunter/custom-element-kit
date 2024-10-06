@@ -31,7 +31,10 @@ export default {
 						/<head(\s[^>]*)?>/,
 						`<head$1>${baseTag}`,
 					);
-					return replaceElementWithDeclarativeShadowDom(updatedHtml);
+					console.time("replaceElementWithDeclarativeShadowDom");
+					const result = replaceElementWithDeclarativeShadowDom(updatedHtml);
+					console.timeEnd("replaceElementWithDeclarativeShadowDom");
+					return result;
 				},
 			],
 			minify: false,
