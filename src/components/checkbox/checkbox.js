@@ -62,18 +62,7 @@ export class Checkbox extends FormElement {
 	}
 
 	constructor() {
-		super();
-		if (!this.shadowRoot) {
-			this.attachShadow({ mode: "open" });
-			this.shadowRoot.innerHTML = `<style>${checkboxStyles}</style>${checkboxTemplate}`;
-		}
-	}
-
-	connectedCallback() {
-		super.connectedCallback();
-		if (this.closest("ui-checkbox-group")) {
-			this.formDisabled = true;
-		}
+		super(checkboxStyles, checkboxTemplate);
 	}
 
 	get controlElement() {
@@ -90,6 +79,13 @@ export class Checkbox extends FormElement {
 
 	set checked(value) {
 		this.controlElement.checked = value;
+	}
+
+	connectedCallback() {
+		super.connectedCallback();
+		if (this.closest("ui-checkbox-group")) {
+			this.formDisabled = true;
+		}
 	}
 }
 

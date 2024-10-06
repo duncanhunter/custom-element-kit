@@ -81,11 +81,7 @@ export class TextArea extends FormElement {
 	}
 
 	constructor() {
-		super();
-		if (!this.shadowRoot) {
-			this.attachShadow({ mode: "open" });
-			this.shadowRoot.innerHTML = `<style>${textareaStyles}</style>${textareaTemplate}`;
-		}
+		super(textareaStyles, textareaTemplate);
 	}
 
 	get controlElement() {

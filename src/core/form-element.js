@@ -15,10 +15,14 @@ export class FormElement extends HTMLElement {
 		patternMismatch: `${this.label} is invalid`,
 	};
 
-	constructor() {
+	constructor(styles, template) {
 		super();
 		this.pristine = true;
 		this.#internals = this.attachInternals();
+		if (!this.shadowRoot) {
+			this.attachShadow({ mode: "open" });
+			this.shadowRoot.innerHTML = `<style>${styles}</style>${template}`;
+		}
 		this.#errorElement = this.shadowRoot.getElementById("error");
 		this.#labelElement = this.shadowRoot.getElementById("label");
 		this.#helpElement = this.shadowRoot.getElementById("help");

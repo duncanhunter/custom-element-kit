@@ -79,11 +79,7 @@ export class Input extends FormElement {
 	}
 
 	constructor() {
-		super();
-		if (!this.shadowRoot) {
-			this.attachShadow({ mode: "open" });
-			this.shadowRoot.innerHTML = `<style>${inputStyles}</style>${inputTemplate}`;
-		}
+		super(inputStyles, inputTemplate);
 	}
 
 	get controlElement() {
