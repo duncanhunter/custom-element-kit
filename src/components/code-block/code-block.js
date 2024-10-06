@@ -1,14 +1,15 @@
-export const codeBlockTemplate = /* html */ `
-<div part="container"><slot></slot></div>
+export const codeBlockTemplate = `
+    <link id="hljs-theme" rel="stylesheet">
+    <pre><code class=""></code></pre>
 `;
 
-export const codeBlockStyles = /* css */ `
-pre {
-    padding: var(--ui-space-6);
-}
-code {
-    white-space: pre-wrap;
-}
+export const codeBlockStyles = `
+    pre {
+        margin: 0;
+    }
+    code {
+        white-space: pre-wrap;
+    }
 `;
 
 export class CodeBlock extends HTMLElement {
@@ -16,7 +17,7 @@ export class CodeBlock extends HTMLElement {
 		return ["lang", "theme", "no-trim"];
 	}
 
-	#slot;
+	#observer;
 
 	constructor() {
 		super();
@@ -24,65 +25,69 @@ export class CodeBlock extends HTMLElement {
 			this.attachShadow({ mode: "open" });
 			this.shadowRoot.innerHTML = `<style>${codeBlockStyles}</style>${codeBlockTemplate}`;
 		}
-		this.#slot = this.shadowRoot.querySelector("slot");
+
+		this.#observer = new MutationObserver(() => this.#handleMutations());
+	}
+
+	get serverRendered() {
+		return this.hasAttribute("server-rendered");
 	}
 
 	connectedCallback() {
-		if (this.hasAttribute('server-rendered')) {
-			this.#slot.addEventListener('slotchange', this.#handleSlotChange);
-		} else {
-			// this.#updateCodeBlock();
+		this.#observer.observe(this, { childList: true, characterData: true, subtree: true });
+		if (!this.serverRendered) {
+			this.#updateCodeBlock();
 		}
 	}
 
 	disconnectedCallback() {
-		this.#slot.removeEventListener('slotchange', this.#handleSlotChange);
+		this.#observer.disconnect();
 	}
 
 	attributeChangedCallback(name, oldValue, newValue) {
-		if (oldValue !== newValue) {
-			// this.#updateCodeBlock();
+		if (oldValue !== newValue && oldValue) {
+			if (!this.serverRendered) {
+				this.#updateCodeBlock();
+			}
 		}
 	}
 
-	#handleSlotChange = () => {
-		this.removeAttribute('server-rendered');
-		// this.#updateCodeBlock();
+	#handleMutations() {
+		if (!this.serverRendered) {
+			this.#updateCodeBlock();
+		}
 	}
 
 	async #updateCodeBlock() {
-		console.log('updateCodeBlock');
-		const containerElement = this.shadowRoot.querySelector("[part=container]");
-		const slotContent = this.#getSlotContentAsHTML(this.#slot);
-		const lang = this.getAttribute("lang") || "html";
-		const theme = this.getAttribute("theme") || "github-dark";
+		this.removeAttribute("server-rendered");
 
+		const codeElement = this.shadowRoot.querySelector('code');
+		const lang = this.getAttribute("lang") || "plaintext";
+		const theme = this.getAttribute("theme") || "github";
+		const noTrim = this.getAttribute("no-trim") === 'true';
+		const rawContent = this.innerHTML;
+		const formattedContent = noTrim ? rawContent : this.#formatContent(rawContent);
+		codeElement.removeAttribute('data-highlighted');
+		codeElement.className = lang;
+		codeElement.textContent = formattedContent;
+
+		this.shadowRoot.querySelector('#hljs-theme').href = `https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/${theme}.min.css`;
 		try {
-			const { codeToHtml } = ""//await import("https://esm.sh/shiki@1.0.0");
-			containerElement.innerHTML = ""//await codeToHtml(slotContent, { lang, theme });
+			const hljs = await import('https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/es/highlight.min.js');
+			const langModule = await import(`https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/es/languages/${lang}.min.js`);
+			hljs.default.registerLanguage(lang, langModule.default);
+			hljs.default.highlightElement(codeElement, { language: lang });
 		} catch (error) {
 			console.error("Failed to highlight code:", error);
-			return;
 		}
-	}
-
-	#getSlotContentAsHTML(slot) {
-		const assignedNodes = slot.assignedNodes({ flatten: true });
-		let htmlString = "";
-		for (const node of assignedNodes) {
-			if (node.nodeType === Node.ELEMENT_NODE) {
-				htmlString += node.outerHTML;
-			} else if (node.nodeType === Node.TEXT_NODE) {
-				htmlString += node.textContent;
-			}
-		}
-		return this.getAttribute("no-trim") ? htmlString : this.#formatContent(htmlString);
 	}
 
 	#formatContent(content) {
 		const lines = content.split('\n');
 		const minLeadingWhitespace = Math.min(
-			...lines.filter(line => line.trim().length > 0).map(line => line.match(/^\s*/)[0].length)
+			...lines
+				.filter(line => line.trim().length > 0)
+				.map(line => line.match(/^\s*/)[0].length)
 		);
 		const filteredLines = lines.filter((line, index) => !(index === 0 && line.trim() === ''));
 		return filteredLines.map(line => line.slice(minLeadingWhitespace)).join('\n');

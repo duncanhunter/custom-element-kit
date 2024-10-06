@@ -2,7 +2,7 @@ global.HTMLElement = class HTMLElement { };
 global.customElements = { define: () => { } };
 
 import { parseHTML } from 'linkedom';
-import { codeToHtml } from 'shiki';
+import hljs from 'highlight.js';
 
 function formatContent(content) {
 	const lines = content.split('\n');
@@ -53,23 +53,33 @@ export async function replaceElementWithDeclarativeShadowDom(htmlString) {
 		let template = module[`${camelCase(elementName)}Template`];
 
 		if (elementName === 'code-block') {
-			console.log('found code block');
-			const lang = attributes.lang || 'html';
+			const lang = attributes.lang || 'xml';
 			const theme = attributes.theme || 'github-dark';
 			const noTrim = attributes['no-trim'] === 'true';
 			const innerContent = element.innerHTML;
 			const formattedContent = noTrim ? innerContent : formatContent(innerContent);
 
 			let highlightedCode;
+			let css;
 			try {
-				highlightedCode = await codeToHtml(formattedContent, { lang, theme });
+				const langModule = await import(`highlight.js/lib/languages/${lang}`);
+				hljs.registerLanguage(lang, langModule.default);
+
+				highlightedCode = hljs.highlight(formattedContent, { language: `${lang}` }).value
+
+				const response = await fetch(`https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/${theme}.min.css`);
+				if (!response.ok) {
+					throw new Error(`Failed to fetch CSS for theme "${theme}": ${response.statusText}`);
+				}
+				css = await response.text();
+
 			} catch (error) {
 				console.error("Failed to highlight code:", error);
 				continue;
 			}
 
-			const shadowDomContent = `<style>${styles}</style><div part="container">${highlightedCode}</div>`;
-			const shadowRootTemplate = `<template shadowrootmode="open"><slot>${shadowDomContent}</slot></template>`;
+			const shadowDomContent = `<style>${styles}${css}</style><link id="hljs-theme" rel="stylesheet"><pre><code class="${lang} hljs language-${lang}" data-highlighted="yes">${highlightedCode}</code></pre>`;
+			const shadowRootTemplate = `<template shadowrootmode="open">${shadowDomContent}</template>`;
 
 			const newElement = document.createElement(tagName);
 			for (const [key, value] of Object.entries(attributes)) {
