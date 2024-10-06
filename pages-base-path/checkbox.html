@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><base href="/custom-element-kit/pages-base-path/">
+<html lang="en"><head><base href="/custom-element-kit/pages-base-path/">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Custom Element Kit</title>
@@ -31,8 +31,8 @@
         <section>
           <h1>Checkbox (ui-checkbox)</h1>
 
-          <form novalidate="">
-            <ui-checkbox required="" value="nsw" label="nsw"><template shadowrootmode="open"><style>
+          <form novalidate>
+            <ui-checkbox server-rendered="" label="nsw" value="nsw" required><template shadowrootmode="open"><style>
 :host {
 	display: flex;
 	align-items: flex-start;
@@ -67,7 +67,7 @@
   outline-color: var(--ui-border-color-error);
 }
 </style>
-<input type="checkbox" id="control" part="control" aria-describedby="help error" value="nsw"/>
+<input type="checkbox" id="control" part="control" aria-describedby="help error" value="nsw">
 <div>
 	<label for="control" id="label" part="label"><slot name="label">nsw</slot></label>
 	<div id="help" part="help"><slot name="help"></slot></div>
@@ -82,7 +82,7 @@
                 checkbox</a> by DuncanHunter (<a href="https://codepen.io/duncanhunter">@duncanhunter</a>)
               on <a href="https://codepen.io">CodePen</a>.</span>
           </p>
-          <script async="" src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+          <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
         </section>
       </main>
     </div>
