@@ -74,13 +74,6 @@ legend {
 }
 `;
 
-/*
-min-selections="2"
-max-selections="2"
-exact-selections="2"
-required
-*/
-
 export class CheckboxGroup extends HTMLElement {
 	static formAssociated = true;
 	static get observedAttributes() {
@@ -114,7 +107,7 @@ export class CheckboxGroup extends HTMLElement {
 			this.attachShadow({ mode: "open" });
 			this.shadowRoot.innerHTML = `<style>${checkboxGroupStyles}</style>${checkboxGroupTemplate}`;
 		}
-		this.#errorElement = this.shadowRoot.getElementById("error"); //querySelector("[name='error']");
+		this.#errorElement = this.shadowRoot.getElementById("error");
 		this.#labelElement = this.shadowRoot.getElementById("label");
 		this.#helpElement = this.shadowRoot.getElementById("help");
 		this.#fieldsetElement = this.shadowRoot.querySelector("fieldset");
@@ -275,7 +268,6 @@ export class CheckboxGroup extends HTMLElement {
 		this.addEventListener("input", this.#handleInput);
 		this.addEventListener("change", this.#handleChange);
 		this.#slot.addEventListener("slotchange", (e) => {
-			console.log("slot change");
 			this.#validate();
 		});
 
@@ -309,13 +301,7 @@ export class CheckboxGroup extends HTMLElement {
 			this.#internals.setFormValue(newValue);
 		}
 		if (name === "error" && newValue !== oldValue) {
-			console.log("error attribute changed");
 			this.#errorElement.textContent = newValue;
-			// const div = document.createElement('div');
-			// div.textContent = newValue;
-			// div.id = 'inserted-error';
-			// this.shadowRoot.querySelector("div[id='inserted-error']")?.remove();
-			// this.shadowRoot.querySelector('legend').appendChild(div);
 		}
 		if (name === "label") {
 			this.#labelElement.textContent = newValue;
@@ -361,7 +347,6 @@ export class CheckboxGroup extends HTMLElement {
 
 	#validate = ({ showError = false } = {}) => {
 		const selectedCount = this.checkedValues.length;
-		console.log("validate", { selectedCount });
 		this.error = "";
 
 		const setValidityAndError = (validity, message) => {
@@ -413,13 +398,12 @@ export class CheckboxGroup extends HTMLElement {
 			this.#internals.form?.validateOnInputAfterSubmit &&
 			this.#internals.form.submitted
 		) {
-			console.log("handleInput", event.target.value);
 			event.preventDefault();
 			event.stopPropagation();
 			this.pristine = false;
 			this.#validate({ showError: true });
 		}
-		// this.dispatchEvent(new event.constructor(event.type, event));
+		// TODO this.dispatchEvent(new event.constructor(event.type, event));
 	};
 
 	#handleChange = (event) => {
@@ -428,17 +412,15 @@ export class CheckboxGroup extends HTMLElement {
 			event.stopPropagation();
 
 			this.pristine = false;
-			console.log("handleChange", event.target.value);
 
 			this.#internals.setFormValue(this.value);
 			this.#validate({ showError: true });
 		}
-		// this.dispatchEvent(new event.constructor(event.type, event));
+		// TODO this.dispatchEvent(new event.constructor(event.type, event));
 	};
 
 	#handleFormSubmit = (event) => {
 		this.#validate({ showError: true });
-		// console.log(this.#internals.form.elements.length);
 		if (this.error) {
 			event.preventDefault();
 			for (const control of this.#internals.form.elements) {

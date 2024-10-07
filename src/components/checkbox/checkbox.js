@@ -61,18 +61,8 @@ export class Checkbox extends FormElement {
 		return [...FormElement.observedAttributes, ...checkboxControlAttributes];
 	}
 
-	connectedCallback() {
-		super.connectedCallback();
-		if (this.closest("ui-checkbox-group")) {
-			this.formDisabled = true;
-		}
-	}
-
-	get template() {
-		return checkboxTemplate;
-	}
-	get styles() {
-		return checkboxStyles;
+	constructor() {
+		super(checkboxStyles, checkboxTemplate);
 	}
 
 	get controlElement() {
@@ -89,6 +79,13 @@ export class Checkbox extends FormElement {
 
 	set checked(value) {
 		this.controlElement.checked = value;
+	}
+
+	connectedCallback() {
+		super.connectedCallback();
+		if (this.closest("ui-checkbox-group")) {
+			this.formDisabled = true;
+		}
 	}
 }
 

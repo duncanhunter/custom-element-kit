@@ -80,11 +80,8 @@ export class TextArea extends FormElement {
 		return [...FormElement.observedAttributes, ...textareaControlAttributes];
 	}
 
-	get template() {
-		return textareaTemplate;
-	}
-	get styles() {
-		return textareaStyles;
+	constructor() {
+		super(textareaStyles, textareaTemplate);
 	}
 
 	get controlElement() {

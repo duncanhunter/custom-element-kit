@@ -5,7 +5,7 @@ import { rollupPluginHTML as html } from "@web/rollup-plugin-html";
 import minifyHTML from "rollup-plugin-minify-html-literals";
 import multiInput from "rollup-plugin-multi-input";
 import summary from "rollup-plugin-summary";
-import { replaceElementWithDeclarativeShadowDom } from "./src/utils/replace-element-with-declarative-shadow-dom.js";
+import { replaceElementWithDeclarativeShadowDom } from "./src/utils/replace-element-with-declarative-shadow-dom.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -23,7 +23,15 @@ export default {
 			input: "src/**/*.html",
 			transformHtml: [
 				(html) => {
-					return replaceElementWithDeclarativeShadowDom(html);
+					const refName = process.env.GITHUB_REF_NAME;
+					const baseTag = refName
+						? `<base href="/custom-element-kit/${refName}/">`
+						: "";
+					const updatedHtml = html.replace(
+						/<head(\s[^>]*)?>/,
+						`<head$1>${baseTag}`,
+					);
+					return replaceElementWithDeclarativeShadowDom(updatedHtml);
 				},
 			],
 			minify: false,

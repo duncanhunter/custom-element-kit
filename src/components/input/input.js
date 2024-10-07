@@ -78,11 +78,8 @@ export class Input extends FormElement {
 		return [...FormElement.observedAttributes, ...inputControlAttributes];
 	}
 
-	get template() {
-		return inputTemplate;
-	}
-	get styles() {
-		return inputStyles;
+	constructor() {
+		super(inputStyles, inputTemplate);
 	}
 
 	get controlElement() {

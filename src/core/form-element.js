@@ -15,13 +15,16 @@ export class FormElement extends HTMLElement {
 		patternMismatch: `${this.label} is invalid`,
 	};
 
-	constructor() {
+	constructor(styles, template) {
 		super();
 		this.pristine = true;
 		this.#internals = this.attachInternals();
 		if (!this.shadowRoot) {
 			this.attachShadow({ mode: "open" });
-			this.shadowRoot.innerHTML = `<style>${this.styles}</style>${this.template}`;
+			this.shadowRoot.innerHTML = `<style>${styles}</style>${template}`;
+			console.log("attached shadowRoot");
+		} else {
+			console.log("shadowRoot already exists");
 		}
 		this.#errorElement = this.shadowRoot.getElementById("error");
 		this.#labelElement = this.shadowRoot.getElementById("label");
@@ -245,7 +248,6 @@ export class FormElement extends HTMLElement {
 
 	#handleFormSubmit = (event) => {
 		this.#validate({ showError: true });
-		console.log(this.#internals.form.elements.length);
 		if (this.error) {
 			event.preventDefault();
 			for (const control of this.#internals.form.elements) {
