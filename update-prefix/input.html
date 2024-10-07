@@ -1,0 +1,90 @@
+<html lang="en"><head><base href="/custom-element-kit/update-prefix/">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Element Kit</title>
+  <link rel="stylesheet" href="assets/styles-10b1b73c.css">
+  <link rel="stylesheet" href="assets/page-layout-ed243161.css">
+  
+  
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1 class="ui-text-2">Custom Element Kit</h1>
+    </header>
+    <div class="content">
+      <aside>
+        <h2 class="ui-text-1 ui-text-bold">Getting Started</h2>
+        <ul>
+          <li><a href="index.html">Getting Started</a></li>
+        </ul>
+        <h2 class="ui-text-1 ui-text-bold">Components</h2>
+        <ul>
+          <li><a href="checkbox.html">Checkbox</a></li>
+          <li><a href="checkbox-group.html">Checkbox Group</a></li>
+          <li><a href="input.html">Input</a></li>
+          <li><a href="code-block.html">Code block</a></li>
+        </ul>
+      </aside>
+      <main>
+        <section>
+          <h1>Input (ui-input)</h1>
+
+          <form novalidate>
+            <ui-input label="nsw" value="nsw" required ssr-id="ssr-t1o48t3mv" server-rendered=""><template shadowrootmode="open"><style>
+:host {
+	display: flex;
+	flex-direction: column;
+	font-size: var(--ui-font-size-1);
+	font-family: var(--ui-font-family);
+	color: var(--ui-text-color-0);
+  
+	#control {
+	  border: var(--ui-form-control-border);
+	  border-radius: var(--ui-border-radius);
+	  height: var(--ui-form-control-height-medium);
+	  font-size: inherit;
+	  color: inherit;
+  
+	  &:focus {
+		outline: var(--ui-focus-ring);
+		outline-offset: var(--ui-focus-ring-offset);
+	  }
+	}
+
+	#error {
+		color: var(--ui-text-color-error);
+	}
+  
+	&[help] #help,
+	&[error] #error {
+	  margin-block-start: var(--ui-space-2);
+	}
+}
+
+:host([invalid]) {
+  #control {
+	border-color: var(--ui-border-color-error);
+  
+	&:focus {
+	  outline-color: var(--ui-border-color-error);
+	}
+  }
+}
+</style>
+<label for="control" id="label" part="label"><slot name="label">nsw</slot></label>
+<div id="help" part="help"><slot name="help"></slot></div>
+<div id="error" part="error"><slot name="error"></slot></div>
+<input type="text" id="control" part="control" aria-describedby="help error" value="nsw">
+</template></ui-input>
+            <button type="submit">Submit</button>
+            <button type="reset">Reset</button>
+          </form>
+        </section>
+      </main>
+    </div>
+  </div>
+
+
+<script type="module" src="./form-element.js"></script><script type="module" src="./input.js"></script></body></html>
