@@ -11,30 +11,30 @@ export const textareaStyles = /* css */ `
 :host {
 	display: flex;
 	flex-direction: column;
-	font-size: var(--ui-font-size-1);
-	font-family: var(--ui-font-family);
-	color: var(--ui-text-color-0);
+	font-size: var(--cek-font-size-1);
+	font-family: var(--cek-font-family);
+	color: var(--cek-text-color-0);
 	
 	#control {
-		border: var(--ui-form-control-border);
-		border-radius: var(--ui-border-radius);
+		border: var(--cek-form-control-border);
+		border-radius: var(--cek-border-radius);
 		font-size: inherit;
 		font-family: inherit;
 		color: inherit;
   
 	  &:focus {
-		outline: var(--ui-focus-ring);
-		outline-offset: var(--ui-focus-ring-offset);
+		outline: var(--cek-focus-ring);
+		outline-offset: var(--cek-focus-ring-offset);
 	  }
 	}
 	
 	#error {
-	  color: var(--ui-text-color-error);
+	  color: var(--cek-text-color-error);
 	}
   
 	&[help] #help,
 	&[error] #error {
-	  margin-block-start: var(--ui-space-2);
+	  margin-block-start: var(--cek-space-2);
 	}
 }
 
@@ -44,10 +44,10 @@ export const textareaStyles = /* css */ `
 
 :host([invalid]) {
   #control {
-	border-color: var(--ui-border-color-error);
+	border-color: var(--cek-border-color-error);
   
 	&:focus {
-	  outline-color: var(--ui-border-color-error);
+	  outline-color: var(--cek-border-color-error);
 	}
   }
   
@@ -93,4 +93,4 @@ export class TextArea extends FormElement {
 	}
 }
 
-customElements.define("ui-textarea", TextArea);
+customElements.define("cek-textarea", TextArea);

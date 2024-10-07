@@ -15,9 +15,9 @@ export const checkboxGroupStyles = /* css */ `
 :host {
 	display: flex;
 	flex-direction: column;
-	font-size: var(--ui-font-size-1);
-	font-family: var(--ui-font-family);
-	color: var(--ui-text-color-0);
+	font-size: var(--cek-font-size-1);
+	font-family: var(--cek-font-family);
+	color: var(--cek-text-color-0);
 }
 
 fieldset {
@@ -35,40 +35,40 @@ legend {
 }
 
 #control {
-  border: var(--ui-form-control-border);
-  border-radius: var(--ui-border-radius);
-  height: var(--ui-form-control-height-medium);
+  border: var(--cek-form-control-border);
+  border-radius: var(--cek-border-radius);
+  height: var(--cek-form-control-height-medium);
   font-size: inherit;
   color: inherit;
 
   &:focus {
-	outline: var(--ui-focus-ring);
-	outline-offset: var(--ui-focus-ring-offset);
+	outline: var(--cek-focus-ring);
+	outline-offset: var(--cek-focus-ring-offset);
   }
 }
 
 #error {
-	color: var(--ui-text-color-error);
+	color: var(--cek-text-color-error);
 }
 
 :host([help]) #help,
 :host([error]) #error {
-  margin-block-start: var(--ui-space-2);
+  margin-block-start: var(--cek-space-2);
 }
 
 [part="container"] {
   display: flex;
   flex-direction: column;
-  margin-block: var(--ui-space-4);
-  gap: var(--ui-space-4);
+  margin-block: var(--cek-space-4);
+  gap: var(--cek-space-4);
 }
 
 :host([error]) {
   #control {
-	border-color: var(--ui-border-color-error);
+	border-color: var(--cek-border-color-error);
   
 	&:focus {
-	  outline-color: var(--ui-border-color-error);
+	  outline-color: var(--cek-border-color-error);
 	}
   }
 }
@@ -209,7 +209,7 @@ export class CheckboxGroup extends HTMLElement {
 	}
 
 	get checkboxes() {
-		return this.querySelectorAll("ui-checkbox");
+		return this.querySelectorAll("cek-checkbox");
 	}
 
 	get required() {
@@ -394,7 +394,7 @@ export class CheckboxGroup extends HTMLElement {
 
 	#handleInput = (event) => {
 		if (
-			event.target.matches("ui-checkbox") &&
+			event.target.matches("cek-checkbox") &&
 			this.#internals.form?.validateOnInputAfterSubmit &&
 			this.#internals.form.submitted
 		) {
@@ -407,7 +407,7 @@ export class CheckboxGroup extends HTMLElement {
 	};
 
 	#handleChange = (event) => {
-		if (event.target.matches("ui-checkbox") && this.validateOnChange) {
+		if (event.target.matches("cek-checkbox") && this.validateOnChange) {
 			event.preventDefault();
 			event.stopPropagation();
 
@@ -436,4 +436,4 @@ export class CheckboxGroup extends HTMLElement {
 	};
 }
 
-customElements.define("ui-checkbox-group", CheckboxGroup);
+customElements.define("cek-checkbox-group", CheckboxGroup);

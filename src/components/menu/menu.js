@@ -26,10 +26,10 @@ dialog {
 	outline: none;
 	padding: 0;
 	margin: 0;
-	border: var(--ui-border);
-	box-shadow:  var(--ui-shadow-3);
-	border-radius: var(--ui-border-radius);
-	background-color: var(--ui-surface-color-00);
+	border: var(--cek-border);
+	box-shadow:  var(--cek-shadow-3);
+	border-radius: var(--cek-border-radius);
+	background-color: var(--cek-surface-color-00);
 }
 `;
 
@@ -69,7 +69,7 @@ export class Menu extends HTMLElement {
 	}
 
 	get menuItems() {
-		return Array.from(this.querySelectorAll(":scope > ui-menu-item"));
+		return Array.from(this.querySelectorAll(":scope > cek-menu-item"));
 	}
 
 	get modal() {
@@ -145,7 +145,7 @@ export class Menu extends HTMLElement {
 			"pointermove",
 			this.#handlePopoverPointerMove,
 		);
-		this.addEventListener("ui-select", this.#handleUiSelect);
+		this.addEventListener("cek-select", this.#handleSelect);
 
 		if (this.#isSubmenu) {
 			this.#triggerButtonElement.addEventListener(
@@ -194,7 +194,7 @@ export class Menu extends HTMLElement {
 			"mousemove",
 			this.#handlePopoverPointerMove,
 		);
-		this.removeEventListener("ui-select", this.#handleUiSelect);
+		this.removeEventListener("cek-select", this.#handleSelect);
 
 		if (this.#isSubmenu) {
 			this.#triggerButtonElement.removeEventListener(
@@ -236,14 +236,14 @@ export class Menu extends HTMLElement {
 		}
 
 		if (
-			event.target.tagName === "UI-MENU-ITEM" &&
+			event.target.tagName.toLowerCase() === "cek-menu-item" &&
 			document.activeElement !== event.target
 		) {
 			event.target.focus();
 		}
 	};
 
-	#handleUiSelect = () => {
+	#handleSelect = () => {
 		if (this.open) {
 			this.hide();
 		}
@@ -263,7 +263,7 @@ export class Menu extends HTMLElement {
 		}
 
 		if (
-			event.relatedTarget?.tagName === "UI-MENU-ITEM" ||
+			event.relatedTarget?.tagName.toLowerCase() === "cek-menu-item" ||
 			this.shadowRoot.contains(event.relatedTarget)
 		) {
 			return;
@@ -284,7 +284,10 @@ export class Menu extends HTMLElement {
 		event.preventDefault();
 		event.stopImmediatePropagation();
 
-		if (!event.target || event.target.tagName !== "UI-MENU-ITEM") {
+		if (
+			!event.target ||
+			event.target.tagName.toLowerCase() !== "cek-menu-item"
+		) {
 			return;
 		}
 
@@ -297,7 +300,7 @@ export class Menu extends HTMLElement {
 			?.hasAttribute("open");
 
 		if (
-			event.target.tagName === "UI-MENU-ITEM" &&
+			event.target.tagName.toLowerCase() === "cek-menu-item" &&
 			event.target.parentElement.menuItems.includes(event.target) &&
 			event.target !== submenuParentMenuItem &&
 			isOpenSubmenu
@@ -377,11 +380,14 @@ export class Menu extends HTMLElement {
 		event.preventDefault();
 		event.stopImmediatePropagation();
 
-		if (event.target.tagName === "UI-MENU-ITEM" && event.target.value) {
+		if (
+			event.target.tagName.toLowerCase() === "cek-menu-item" &&
+			event.target.value
+		) {
 			this.hide();
 
 			this.dispatchEvent(
-				new CustomEvent("ui-select", {
+				new CustomEvent("cek-select", {
 					detail: { value: event.target.value },
 					bubbles: true,
 				}),
@@ -404,8 +410,8 @@ export class Menu extends HTMLElement {
 		event.stopImmediatePropagation();
 
 		if (
-			event.target?.tagName === "UI-BUTTON" &&
-			event.relatedTarget?.tagName !== "UI-MENU-ITEM"
+			event.target?.tagName.toLowerCase() === "cek-button" &&
+			event.relatedTarget?.tagName.toLowerCase() !== "cek-menu-item"
 		) {
 			this.hide();
 		}
@@ -581,13 +587,13 @@ export class Menu extends HTMLElement {
 		);
 		arrowIconElement.style.height = "1em";
 		arrowIconElement.style.width = "1em";
-		arrowIconElement.style.margin = "0 var(--ui-space-2)";
+		arrowIconElement.style.margin = "0 var(--cek-space-2)";
 	}
 
 	#getFocusedMenu() {
 		let element = document.activeElement;
 
-		while (element && element.tagName !== "UI-MENU") {
+		while (element && element.tagName.toLowerCase() !== "cek-menu") {
 			element = element.parentElement;
 		}
 		return element ? element : this;
@@ -639,39 +645,39 @@ export const menuItemStyles = /*css*/ `
 }
 
 :host([open]) :where(a, button) {
-	background-color: var(--ui-surface-color-0);
+	background-color: var(--cek-surface-color-0);
 }
 
 svg[part=arrow-icon] {
 	width: 1em;
 	height: 1em;
-	margin-inline: var(--ui-space-2);
+	margin-inline: var(--cek-space-2);
 }
 
 button, a {
 	position: relative;
 	appearance: none;
 	border: 0;
-	border-radius: var(--ui-border-radius);
-	background-color: var(--ui-surface-color-00);	
-	padding: var(--ui-space-2) var(--ui-space-3);;
-	margin: var(--ui-space-2);
+	border-radius: var(--cek-border-radius);
+	background-color: var(--cek-surface-color-00);	
+	padding: var(--cek-space-2) var(--cek-space-3);;
+	margin: var(--cek-space-2);
 	font: inherit;
-	color: var(--ui-text-color-2);
+	color: var(--cek-text-color-2);
 	text-align: inherit;
 	flex: auto;
-	font-family: var(--ui-font-family);
-	line-height: var(--ui-line-height);
+	font-family: var(--cek-font-family);
+	line-height: var(--cek-line-height);
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	cursor: pointer;
 	box-sizing: border-box;
 	text-decoration: none;
-	min-height: var(--ui-height-small);
+	min-height: var(--cek-height-small);
 
 	&:focus {
-	    background-color: var(--ui-surface-color-0);
+	    background-color: var(--cek-surface-color-0);
 		outline: none;
 	}
 }
@@ -681,7 +687,7 @@ button, a {
 }
 
 :host(:is([type=checkbox], [type=radio])) [part=checked] {
-	width: var(--ui-space-7);
+	width: var(--cek-space-7);
 }
 
 :host([type="checkbox"][checked=""]) [part=check-icon] {
@@ -703,18 +709,18 @@ slot[name=start], slot[name=end] {
 slot {
     flex: 1 1 auto;
     display: inline-block;
-	margin-inline: var(--ui-space-2);
+	margin-inline: var(--cek-space-2);
 }
 
 slot[name=submenu] {
     display: contents;
 }
 
-::slotted(ui-icon) {
-	margin-inline: var(--ui-space-1);
+::slotted(cek-icon) {
+	margin-inline: var(--cek-space-1);
 }
 
-::slotted(ui-icon) {
+::slotted(cek-icon) {
 	font-size: 1.3em;
 }
 `;
@@ -829,17 +835,17 @@ export const menuLabelHtml = /*html*/ `
 
 export const menuLabelStyles = /*css*/ `
 :host {
-	border-radius: var(--ui-border-radius);
-	background-color: var(--ui-surface-color-00);	
-	padding: var(--ui-space-2) var(--ui-space-3);;
-	margin: var(--ui-space-4);
+	border-radius: var(--cek-border-radius);
+	background-color: var(--cek-surface-color-00);	
+	padding: var(--cek-space-2) var(--cek-space-3);;
+	margin: var(--cek-space-4);
 	font: inherit;
-	color: var(--ui-text-color-2);
+	color: var(--cek-text-color-2);
 	text-align: inherit;
 	flex: auto;
-	font-size: var(--ui-font-size-0);
-	font-family: var(--ui-font-family);
-	line-height: var(--ui-line-height);
+	font-size: var(--cek-font-size-0);
+	font-family: var(--cek-font-family);
+	line-height: var(--cek-line-height);
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -856,8 +862,8 @@ slot {
     display: inline-block;
 }
 
-::slotted(ui-icon) {
-	margin-inline: var(--ui-space-2);
+::slotted(cek-icon) {
+	margin-inline: var(--cek-space-2);
 }
 `;
 
@@ -871,6 +877,6 @@ export class MenuLabel extends HTMLElement {
 	}
 }
 
-customElements.define("ui-menu-item", MenuItem);
-customElements.define("ui-menu-label", MenuLabel);
-customElements.define("ui-menu", Menu);
+customElements.define("cek-menu-item", MenuItem);
+customElements.define("cek-menu-label", MenuLabel);
+customElements.define("cek-menu", Menu);

@@ -8,7 +8,7 @@ test("given checkbox group it should submit with error", async ({
 
 	await page.goto("/components/checkbox-group/checkbox-group.html");
 	await page.getByText("Submit").click();
-	const customElement = await page.locator("ui-checkbox-group");
+	const customElement = await page.locator("cek-checkbox-group");
 	const validityMessage = await customElement.evaluate(
 		(element) => element.validationMessage,
 	);
