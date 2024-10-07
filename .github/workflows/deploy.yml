@@ -1,12 +1,15 @@
-name: Build, Test, and Deploy to GitHub Pages
+name: Build, test, deploy and cleanup
 
 on:
   push:
     branches:
-      - '**'
+      - main
   delete:
-    branches:
-      - '**'
+    branches-ignore:
+      - main
+  pull_request:
+    types:
+      - closed
 
 jobs:
   build-test-deploy:
@@ -48,12 +51,26 @@ jobs:
 
   cleanup:
     runs-on: ubuntu-latest
-    if: github.event.ref_type == 'branch' && github.ref != 'refs/heads/main'
+    if: |
+      (github.event_name == 'delete' && github.event.ref_type == 'branch' && github.ref != 'refs/heads/main') ||
+      (github.event_name == 'pull_request' && github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main')
 
     steps:
-      - name: Delete GitHub Pages branch
+      - name: Delete Branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          branch_name=${GITHUB_REF#refs/heads/}
-          pages_branch="${branch_name}"
-          curl -X DELETE -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            "https://api.github.com/repos/${{ github.repository }}/git/refs/heads/${pages_branch}"
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            BRANCH_NAME="${{ github.event.pull_request.head.ref }}"
+          elif [[ "${{ github.event_name }}" == "delete" ]]; then
+            BRANCH_NAME="${{ github.ref }}"
+            BRANCH_NAME="${BRANCH_NAME#refs/heads/}"
+          else
+            echo "Unsupported event type: ${{ github.event_name }}"
+            exit 1
+          fi
+
+          echo "Deleting branch $BRANCH_NAME"
+
+          curl -X DELETE -H "Authorization: token $GITHUB_TOKEN" \
+            "https://api.github.com/repos/${{ github.repository }}/git/refs/heads/$BRANCH_NAME"
