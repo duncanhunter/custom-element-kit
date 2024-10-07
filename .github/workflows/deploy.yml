@@ -4,12 +4,6 @@ on:
   push:
     branches:
       - "**"
-  delete:
-    branches-ignore:
-      - main
-  pull_request:
-    types:
-      - closed
 
 jobs:
   build-test-deploy:
@@ -42,24 +36,9 @@ jobs:
       - name: Run build script
         run: npm run build
 
-      - name: Fetch Open PR Branch Names
-        id: fetch-pr-branches
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          REPO="duncanhunter/custom-element-kit"
-          PR_BRANCHES=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
-            "https://api.github.com/repos/$REPO/pulls?state=open" | jq -r '.[].head.ref' | paste -sd "\n" -)
-          echo "PR_BRANCHES=${PR_BRANCHES}" >> $GITHUB_ENV
-
       - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
+        uses: peaceiris/actions-gh-pages@v3.9.1
         with:
-          branch: gh-pages
-          folder: dist
-          target-folder: ${{ github.ref_name}}
-          clean: true
-          clean-exclude: |
-            main
-            ${{ env.PR_BRANCHES }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          destination_dir: ${{ github.ref_name }}
