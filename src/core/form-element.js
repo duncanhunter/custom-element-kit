@@ -22,6 +22,9 @@ export class FormElement extends HTMLElement {
 		if (!this.shadowRoot) {
 			this.attachShadow({ mode: "open" });
 			this.shadowRoot.innerHTML = `<style>${styles}</style>${template}`;
+			console.log("attached shadowRoot");
+		} else {
+			console.log("shadowRoot already exists");
 		}
 		this.#errorElement = this.shadowRoot.getElementById("error");
 		this.#labelElement = this.shadowRoot.getElementById("label");
