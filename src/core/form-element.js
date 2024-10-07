@@ -245,7 +245,6 @@ export class FormElement extends HTMLElement {
 
 	#handleFormSubmit = (event) => {
 		this.#validate({ showError: true });
-		console.log(this.#internals.form.elements.length);
 		if (this.error) {
 			event.preventDefault();
 			for (const control of this.#internals.form.elements) {

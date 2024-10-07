@@ -1,7 +1,8 @@
-global.HTMLElement = class HTMLElement {};
-global.customElements = { define: () => {} };
-
 import hljs from "highlight.js";
+
+const languageModuleCache = new Map();
+const themeCssCache = new Map();
+const registeredLanguages = new Set();
 
 function formatContent(content) {
 	const lines = content.split("\n");
@@ -30,33 +31,44 @@ export async function processCodeBlockElement(
 	const innerContent = element.innerHTML;
 	const formattedContent = noTrim ? innerContent : formatContent(innerContent);
 
-	let highlightedCode;
-	let css;
 	try {
-		const langModule = await import(`highlight.js/lib/languages/${lang}`);
-		hljs.registerLanguage(lang, langModule.default);
+		if (!languageModuleCache.has(lang)) {
+			const langModule = await import(`highlight.js/lib/languages/${lang}`);
+			languageModuleCache.set(lang, langModule.default);
+		}
 
-		highlightedCode = hljs.highlight(formattedContent, {
-			language: `${lang}`,
+		if (!registeredLanguages.has(lang)) {
+			hljs.registerLanguage(lang, languageModuleCache.get(lang));
+			registeredLanguages.add(lang);
+		}
+
+		const highlightedCode = hljs.highlight(formattedContent, {
+			language: lang,
 		}).value;
 
-		const response = await fetch(
-			`https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/${theme}.min.css`,
-		);
-		if (!response.ok) {
-			throw new Error(
-				`Failed to fetch CSS for theme "${theme}": ${response.statusText}`,
+		if (!themeCssCache.has(theme)) {
+			const response = await fetch(
+				`https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/${theme}.min.css`,
 			);
+			if (!response.ok) {
+				throw new Error(
+					`Failed to fetch CSS for theme "${theme}": ${response.statusText}`,
+				);
+			}
+			const css = await response.text();
+			themeCssCache.set(theme, css);
 		}
-		css = await response.text();
+		const css = themeCssCache.get(theme);
+
 		const newElement = document.createElement(element.tagName.toLowerCase());
 		newElement.setAttribute("server-rendered", "");
-		newElement.innerHTML = `<template shadowrootmode="open"><style>${styles}${css}</style><link id="hljs-theme" rel="stylesheet"><pre><code class="${lang} hljs language-${lang}" data-highlighted="yes">${highlightedCode}</code></pre></template>${element.innerHTML}`;
+		newElement.innerHTML = `<template shadowrootmode="open">
+      <style>${styles}${css}</style>
+      <pre><code class="${lang} hljs language-${lang}" data-highlighted="yes">${highlightedCode}</code></pre>
+    </template>${element.innerHTML}`;
 		element.replaceWith(newElement);
 		element.removeAttribute("ssr-id");
-		return;
 	} catch (error) {
 		console.error("Failed to highlight code:", error);
-		return;
 	}
 }

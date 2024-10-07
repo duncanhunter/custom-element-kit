@@ -1,6 +1,7 @@
-global.HTMLElement = class HTMLElement { };
-global.customElements = { define: () => { } };
+global.HTMLElement = class HTMLElement {};
+global.customElements = { define: () => {} };
 
+// Note: initial use of module is is slower likely due to the import and will require testing on request repsponse usage versus static site generation.
 import { parseHTML } from "linkedom";
 import { processCodeBlockElement } from "./process-code-block-element.mjs";
 
@@ -115,6 +116,9 @@ async function processElement(element, document) {
 	const shadowDomContent = `<style>${styles}</style>${template}`;
 	const newElement = document.createElement(tagName);
 	newElement.setAttribute("server-rendered", "");
+	for (const { name, value } of element.attributes) {
+		newElement.setAttribute(name, value);
+	}
 	newElement.innerHTML = `<template shadowrootmode="open">${shadowDomContent}</template>${element.innerHTML}`;
 	const ssrId = element.getAttribute("ssr-id");
 	const originalElement = document.querySelector(`[ssr-id="${ssrId}"]`);
