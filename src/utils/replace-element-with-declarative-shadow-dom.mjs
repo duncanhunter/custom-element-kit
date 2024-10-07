@@ -1,22 +1,66 @@
-global.HTMLElement = class HTMLElement {};
-global.customElements = { define: () => {} };
+global.HTMLElement = class HTMLElement { };
+global.customElements = { define: () => { } };
 
-import hljs from "highlight.js";
 import { parseHTML } from "linkedom";
 
-function formatContent(content) {
-	const lines = content.split("\n");
-	const minLeadingWhitespace = Math.min(
-		...lines
-			.filter((line) => line.trim().length > 0)
-			.map((line) => line.match(/^\s*/)[0].length),
-	);
-	const filteredLines = lines.filter(
-		(line, index) => !(index === 0 && line.trim() === ""),
-	);
-	return filteredLines
-		.map((line) => line.slice(minLeadingWhitespace))
-		.join("\n");
+const FORM_COMPONENTS = new Set([
+	"input",
+	"textarea",
+	"checkbox",
+	"checkbox-group",
+	"range",
+	"button",
+	"radio-group",
+	"radio",
+	"date-picker",
+	"date-input",
+	"calendar",
+	"select",
+	"combobox",
+	"option",
+]);
+
+const SKIPPED_COMPONENTS = new Set(["code-block"]);
+
+const moduleCache = new Map();
+
+async function getTemplateAndStyles(elementName) {
+	if (moduleCache.has(elementName)) {
+		return moduleCache.get(elementName);
+	}
+
+	try {
+		const module = await import(
+			`../components/${elementName}/${elementName}.js`
+		);
+		const camelCase = (str) =>
+			str.replace(/-./g, (match) => match.charAt(1).toUpperCase());
+		const styles = module[`${camelCase(elementName)}Styles`] || "";
+		const template = module[`${camelCase(elementName)}Template`] || "";
+		const templateAndStyles = { styles, template };
+		moduleCache.set(elementName, templateAndStyles);
+		return templateAndStyles;
+	} catch (error) {
+		console.error(
+			`Failed to load module '../components/${elementName}/${elementName}.js':`,
+			error,
+		);
+		return null;
+	}
+}
+
+function isWithinSkippedComponent(element) {
+	let parent = element.parentElement;
+	while (parent) {
+		if (parent.tagName?.toLowerCase().startsWith("ui-")) {
+			const parentComponentName = parent.tagName.toLowerCase().slice(3);
+			if (SKIPPED_COMPONENTS.has(parentComponentName)) {
+				return true;
+			}
+		}
+		parent = parent.parentElement;
+	}
+	return false;
 }
 
 function getAttributes(element) {
@@ -27,95 +71,21 @@ function getAttributes(element) {
 	return attributes;
 }
 
-function generateUniqueId() {
-	return `id-${Date.now().toString(36)}-${Math.random().toString(36).substr(2, 9)}`;
+function generateUniqueId(prefix = "id") {
+	return `${prefix}-${Math.random().toString(36).substr(2, 9)}`;
 }
 
-export async function replaceElementWithDeclarativeShadowDom(htmlString) {
-	const { document } = parseHTML(htmlString);
-	const allElements = document.querySelectorAll("*");
-	const customElements = Array.from(allElements).filter((element) =>
-		element.tagName.toLowerCase().startsWith("ui-"),
-	);
+async function processElement(element, document) {
+	const tagName = element.tagName.toLowerCase();
+	const elementName = tagName.slice(3).trim();
+	const attributes = getAttributes(element);
 
-	for (const element of customElements) {
-		if (
-			element.hasAttribute("server-rendered") ||
-			element.parentElement.closest("ui-code-block")
-		) {
-			continue;
-		}
-		element.setAttribute("data-parse-id", generateUniqueId());
-		const tagName = element.tagName.toLowerCase();
-		const elementName = tagName.slice(3);
-		const attributes = getAttributes(element);
-		const parseId = element.getAttribute("data-parse-id");
+	let { template, styles } = await getTemplateAndStyles(elementName);
 
-		let module;
-		try {
-			module = await import(`../components/${elementName}/${elementName}.js`);
-		} catch (error) {
-			console.error(
-				`Failed to load module '../components/${elementName}/${elementName}.js':`,
-				error,
-			);
-			continue;
-		}
+	if (FORM_COMPONENTS.has(elementName)) {
+		const propsToHandle = ["value", "label", "help", "error"];
 
-		const camelCase = (str) =>
-			str.replace(/-./g, (match) => match.charAt(1).toUpperCase());
-		const styles = module[`${camelCase(elementName)}Styles`];
-		const props = ["value", "label", "help", "error"];
-		let template = module[`${camelCase(elementName)}Template`];
-
-		if (elementName === "code-block") {
-			const lang = attributes.lang || "xml";
-			const theme = attributes.theme || "github-dark";
-			const noTrim = attributes["no-trim"] === "true";
-			const innerContent = element.innerHTML;
-			const formattedContent = noTrim
-				? innerContent
-				: formatContent(innerContent);
-
-			let highlightedCode;
-			let css;
-			try {
-				const langModule = await import(`highlight.js/lib/languages/${lang}`);
-				hljs.registerLanguage(lang, langModule.default);
-
-				highlightedCode = hljs.highlight(formattedContent, {
-					language: `${lang}`,
-				}).value;
-
-				const response = await fetch(
-					`https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/${theme}.min.css`,
-				);
-				if (!response.ok) {
-					throw new Error(
-						`Failed to fetch CSS for theme "${theme}": ${response.statusText}`,
-					);
-				}
-				css = await response.text();
-			} catch (error) {
-				console.error("Failed to highlight code:", error);
-				continue;
-			}
-
-			const shadowDomContent = `<style>${styles}${css}</style><link id="hljs-theme" rel="stylesheet"><pre><code class="${lang} hljs language-${lang}" data-highlighted="yes">${highlightedCode}</code></pre>`;
-			const shadowRootTemplate = `<template shadowrootmode="open">${shadowDomContent}</template>`;
-
-			const newElement = document.createElement(tagName);
-			for (const [key, value] of Object.entries(attributes)) {
-				newElement.setAttribute(key, value);
-			}
-			newElement.setAttribute("server-rendered", "");
-			newElement.innerHTML = shadowRootTemplate;
-			element.replaceWith(newElement);
-			element.removeAttribute("data-parse-id");
-			continue;
-		}
-
-		for (const prop of props) {
+		for (const prop of propsToHandle) {
 			if (attributes[prop]) {
 				const id = prop === "value" ? "control" : prop;
 				if (prop === "value") {
@@ -139,24 +109,45 @@ export async function replaceElementWithDeclarativeShadowDom(htmlString) {
 		if (attributes.error && !attributes.invalid) {
 			template = template.replace(/(error=["'][^"']*["'])/, "$1 invalid");
 		}
+	}
 
-		const shadowDomContent = `<style>${styles}</style>${template}`;
+	const shadowDomContent = `<style>${styles}</style>${template}`;
+	const newElement = document.createElement(tagName);
+	newElement.setAttribute("server-rendered", "");
+	newElement.innerHTML = `<template shadowrootmode="open">${shadowDomContent}</template>${element.innerHTML}`;
+	const ssrId = element.getAttribute("ssr-id");
+	const originalElement = document.querySelector(`[ssr-id="${ssrId}"]`);
+	originalElement.replaceWith(newElement);
+	originalElement.removeAttribute("ssr-id");
+}
 
-		const shadowRoot = `<template shadowrootmode="open">${shadowDomContent}</template>${element.innerHTML}`;
+export async function replaceElementWithDeclarativeShadowDom(htmlString) {
+	const { document } = parseHTML(htmlString);
+	const allElements = document.querySelectorAll("*");
 
-		const newElement = document.createElement(tagName);
-		for (const [key, value] of Object.entries(attributes)) {
-			newElement.setAttribute(key, value);
+	const customElementsList = Array.from(allElements).filter((element) => {
+		const tagName = element.tagName.toLowerCase();
+		if (
+			!tagName.startsWith("ui-") ||
+			SKIPPED_COMPONENTS.has(tagName.slice(3)) ||
+			isWithinSkippedComponent(element)
+		) {
+			return false;
 		}
-		newElement.setAttribute("server-rendered", "");
-		newElement.innerHTML = shadowRoot;
-		const originalElement = document.querySelector(
-			`[data-parse-id="${parseId}"]`,
-		);
-		if (originalElement) {
-			newElement.removeAttribute("data-parse-id");
-			originalElement.replaceWith(newElement);
-		}
+		return true;
+	});
+
+	for (const element of customElementsList) {
+		const ssrId = generateUniqueId("ssr");
+		element.setAttribute("ssr-id", ssrId);
+	}
+
+	if (customElementsList.length === 0) {
+		return htmlString;
+	}
+
+	for (const element of customElementsList) {
+		await processElement(element, document);
 	}
 
 	return document.documentElement.outerHTML;
