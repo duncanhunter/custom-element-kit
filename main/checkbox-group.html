@@ -2,8 +2,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Custom Element Kit</title>
-  <link rel="stylesheet" href="assets/styles-10b1b73c.css">
-  <link rel="stylesheet" href="assets/page-layout-ed243161.css">
+  <link rel="stylesheet" href="assets/styles-f6de7a1a.css">
+  <link rel="stylesheet" href="assets/page-layout-afde46a0.css">
   
   
   
@@ -12,15 +12,15 @@
 <body>
   <div class="container">
     <header>
-      <h1 class="ui-text-2">Custom Element Kit</h1>
+      <h1 class="cek-text-2">Custom Element Kit</h1>
     </header>
     <div class="content">
       <aside>
-        <h2 class="ui-text-1 ui-text-bold">Getting Started</h2>
+        <h2 class="cek-text-1 cek-text-bold">Getting Started</h2>
         <ul>
           <li><a href="index.html">Getting Started</a></li>
         </ul>
-        <h2 class="ui-text-1 ui-text-bold">Components</h2>
+        <h2 class="cek-text-1 cek-text-bold">Components</h2>
         <ul>
           <li><a href="checkbox.html">Checkbox</a></li>
           <li><a href="checkbox-group.html">Checkbox Group</a></li>
@@ -30,18 +30,18 @@
       </aside>
       <main>
         <section>
-          <h1>Checkbox Group (ui-checkbox-group)</h1>
+          <h1>Checkbox Group (cek-checkbox-group)</h1>
           <h2 id="Validation">Validation</h2>
           <h3 id="min-selections">Validate - Min Selections (min-selections)</h3>
 
           <form novalidate>
-            <ui-checkbox-group help="Select all that apply." label="States and Territories the company operates in:" required name="states" min-selections="4" error="foo" ssr-id="ssr-uy6td6jlu" server-rendered=""><template shadowrootmode="open"><style>
+            <cek-checkbox-group help="Select all that apply." label="States and Territories the company operates in:" required name="states" min-selections="4" error="foo" ssr-id="ssr-eq4fjuu9r" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
 	flex-direction: column;
-	font-size: var(--ui-font-size-1);
-	font-family: var(--ui-font-family);
-	color: var(--ui-text-color-0);
+	font-size: var(--cek-font-size-1);
+	font-family: var(--cek-font-family);
+	color: var(--cek-text-color-0);
 }
 
 fieldset {
@@ -59,40 +59,40 @@ legend {
 }
 
 #control {
-  border: var(--ui-form-control-border);
-  border-radius: var(--ui-border-radius);
-  height: var(--ui-form-control-height-medium);
+  border: var(--cek-form-control-border);
+  border-radius: var(--cek-border-radius);
+  height: var(--cek-form-control-height-medium);
   font-size: inherit;
   color: inherit;
 
   &:focus {
-	outline: var(--ui-focus-ring);
-	outline-offset: var(--ui-focus-ring-offset);
+	outline: var(--cek-focus-ring);
+	outline-offset: var(--cek-focus-ring-offset);
   }
 }
 
 #error {
-	color: var(--ui-text-color-error);
+	color: var(--cek-text-color-error);
 }
 
 :host([help]) #help,
 :host([error]) #error {
-  margin-block-start: var(--ui-space-2);
+  margin-block-start: var(--cek-space-2);
 }
 
 [part="container"] {
   display: flex;
   flex-direction: column;
-  margin-block: var(--ui-space-4);
-  gap: var(--ui-space-4);
+  margin-block: var(--cek-space-4);
+  gap: var(--cek-space-4);
 }
 
 :host([error]) {
   #control {
-	border-color: var(--ui-border-color-error);
+	border-color: var(--cek-border-color-error);
   
 	&:focus {
-	  outline-color: var(--ui-border-color-error);
+	  outline-color: var(--cek-border-color-error);
 	}
   }
 }
@@ -108,39 +108,39 @@ legend {
 	</div>
 </fieldset>
 </template>
-              <ui-checkbox label="nsw" value="nsw" ssr-id="ssr-4ldpk2vb0" server-rendered=""><template shadowrootmode="open"><style>
+              <cek-checkbox label="nsw" value="nsw" ssr-id="ssr-klpe9vnlv" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
 	align-items: flex-start;
-	font-size: var(--ui-font-size-1);
-	font-family: var(--ui-font-family);
-	color: var(--ui-text-color-0);
+	font-size: var(--cek-font-size-1);
+	font-family: var(--cek-font-family);
+	color: var(--cek-text-color-0);
   
 	#control {
 	  border: none;
 	  outline: none;
-	  accent-color: var(--ui-color-primary-300);
-	  width: var(--ui-space-6);
-	  height: var(--ui-space-6);
+	  accent-color: var(--cek-color-primary-300);
+	  width: var(--cek-space-6);
+	  height: var(--cek-space-6);
 	}
   
 	#error {
-		color: var(--ui-text-color-error);
+		color: var(--cek-text-color-error);
 	}
 
 	&[help] #help,
 	&[error] #error {
-	  margin-block-start: var(--ui-space-2);
+	  margin-block-start: var(--cek-space-2);
 	}
 }
 
 :host(:focus-within) {
-  outline: var(--ui-focus-ring);
-  outline-offset: var(--ui-focus-ring-offset);
+  outline: var(--cek-focus-ring);
+  outline-offset: var(--cek-focus-ring-offset);
 }
 
 :host([invalid]:focus-within) {
-  outline-color: var(--ui-border-color-error);
+  outline-color: var(--cek-border-color-error);
 }
 </style>
 <input type="checkbox" id="control" part="control" aria-describedby="help error" value="nsw">
@@ -149,40 +149,40 @@ legend {
 	<div id="help" part="help"><slot name="help"></slot></div>
 	<div id="error" part="error"><slot name="error"></slot></div>
 </div>
-</template></ui-checkbox>
-              <ui-checkbox label="qld" value="qld" ssr-id="ssr-2pscxcu82" server-rendered=""><template shadowrootmode="open"><style>
+</template></cek-checkbox>
+              <cek-checkbox label="qld" value="qld" ssr-id="ssr-lx29gztl9" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
 	align-items: flex-start;
-	font-size: var(--ui-font-size-1);
-	font-family: var(--ui-font-family);
-	color: var(--ui-text-color-0);
+	font-size: var(--cek-font-size-1);
+	font-family: var(--cek-font-family);
+	color: var(--cek-text-color-0);
   
 	#control {
 	  border: none;
 	  outline: none;
-	  accent-color: var(--ui-color-primary-300);
-	  width: var(--ui-space-6);
-	  height: var(--ui-space-6);
+	  accent-color: var(--cek-color-primary-300);
+	  width: var(--cek-space-6);
+	  height: var(--cek-space-6);
 	}
   
 	#error {
-		color: var(--ui-text-color-error);
+		color: var(--cek-text-color-error);
 	}
 
 	&[help] #help,
 	&[error] #error {
-	  margin-block-start: var(--ui-space-2);
+	  margin-block-start: var(--cek-space-2);
 	}
 }
 
 :host(:focus-within) {
-  outline: var(--ui-focus-ring);
-  outline-offset: var(--ui-focus-ring-offset);
+  outline: var(--cek-focus-ring);
+  outline-offset: var(--cek-focus-ring-offset);
 }
 
 :host([invalid]:focus-within) {
-  outline-color: var(--ui-border-color-error);
+  outline-color: var(--cek-border-color-error);
 }
 </style>
 <input type="checkbox" id="control" part="control" aria-describedby="help error" value="qld">
@@ -191,40 +191,40 @@ legend {
 	<div id="help" part="help"><slot name="help"></slot></div>
 	<div id="error" part="error"><slot name="error"></slot></div>
 </div>
-</template></ui-checkbox>
-              <ui-checkbox label="act" value="act" ssr-id="ssr-jt6j0ymw1" server-rendered=""><template shadowrootmode="open"><style>
+</template></cek-checkbox>
+              <cek-checkbox label="act" value="act" ssr-id="ssr-y9qldxi0y" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
 	align-items: flex-start;
-	font-size: var(--ui-font-size-1);
-	font-family: var(--ui-font-family);
-	color: var(--ui-text-color-0);
+	font-size: var(--cek-font-size-1);
+	font-family: var(--cek-font-family);
+	color: var(--cek-text-color-0);
   
 	#control {
 	  border: none;
 	  outline: none;
-	  accent-color: var(--ui-color-primary-300);
-	  width: var(--ui-space-6);
-	  height: var(--ui-space-6);
+	  accent-color: var(--cek-color-primary-300);
+	  width: var(--cek-space-6);
+	  height: var(--cek-space-6);
 	}
   
 	#error {
-		color: var(--ui-text-color-error);
+		color: var(--cek-text-color-error);
 	}
 
 	&[help] #help,
 	&[error] #error {
-	  margin-block-start: var(--ui-space-2);
+	  margin-block-start: var(--cek-space-2);
 	}
 }
 
 :host(:focus-within) {
-  outline: var(--ui-focus-ring);
-  outline-offset: var(--ui-focus-ring-offset);
+  outline: var(--cek-focus-ring);
+  outline-offset: var(--cek-focus-ring-offset);
 }
 
 :host([invalid]:focus-within) {
-  outline-color: var(--ui-border-color-error);
+  outline-color: var(--cek-border-color-error);
 }
 </style>
 <input type="checkbox" id="control" part="control" aria-describedby="help error" value="act">
@@ -233,40 +233,40 @@ legend {
 	<div id="help" part="help"><slot name="help"></slot></div>
 	<div id="error" part="error"><slot name="error"></slot></div>
 </div>
-</template></ui-checkbox>
-              <ui-checkbox label="tas" value="tas" ssr-id="ssr-rer017d4m" server-rendered=""><template shadowrootmode="open"><style>
+</template></cek-checkbox>
+              <cek-checkbox label="tas" value="tas" ssr-id="ssr-446qwg38e" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
 	align-items: flex-start;
-	font-size: var(--ui-font-size-1);
-	font-family: var(--ui-font-family);
-	color: var(--ui-text-color-0);
+	font-size: var(--cek-font-size-1);
+	font-family: var(--cek-font-family);
+	color: var(--cek-text-color-0);
   
 	#control {
 	  border: none;
 	  outline: none;
-	  accent-color: var(--ui-color-primary-300);
-	  width: var(--ui-space-6);
-	  height: var(--ui-space-6);
+	  accent-color: var(--cek-color-primary-300);
+	  width: var(--cek-space-6);
+	  height: var(--cek-space-6);
 	}
   
 	#error {
-		color: var(--ui-text-color-error);
+		color: var(--cek-text-color-error);
 	}
 
 	&[help] #help,
 	&[error] #error {
-	  margin-block-start: var(--ui-space-2);
+	  margin-block-start: var(--cek-space-2);
 	}
 }
 
 :host(:focus-within) {
-  outline: var(--ui-focus-ring);
-  outline-offset: var(--ui-focus-ring-offset);
+  outline: var(--cek-focus-ring);
+  outline-offset: var(--cek-focus-ring-offset);
 }
 
 :host([invalid]:focus-within) {
-  outline-color: var(--ui-border-color-error);
+  outline-color: var(--cek-border-color-error);
 }
 </style>
 <input type="checkbox" id="control" part="control" aria-describedby="help error" value="tas">
@@ -275,40 +275,40 @@ legend {
 	<div id="help" part="help"><slot name="help"></slot></div>
 	<div id="error" part="error"><slot name="error"></slot></div>
 </div>
-</template></ui-checkbox>
-              <ui-checkbox label="wa" value="wa" ssr-id="ssr-fmnfgvbcu" server-rendered=""><template shadowrootmode="open"><style>
+</template></cek-checkbox>
+              <cek-checkbox label="wa" value="wa" ssr-id="ssr-hbw02mvr6" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
 	align-items: flex-start;
-	font-size: var(--ui-font-size-1);
-	font-family: var(--ui-font-family);
-	color: var(--ui-text-color-0);
+	font-size: var(--cek-font-size-1);
+	font-family: var(--cek-font-family);
+	color: var(--cek-text-color-0);
   
 	#control {
 	  border: none;
 	  outline: none;
-	  accent-color: var(--ui-color-primary-300);
-	  width: var(--ui-space-6);
-	  height: var(--ui-space-6);
+	  accent-color: var(--cek-color-primary-300);
+	  width: var(--cek-space-6);
+	  height: var(--cek-space-6);
 	}
   
 	#error {
-		color: var(--ui-text-color-error);
+		color: var(--cek-text-color-error);
 	}
 
 	&[help] #help,
 	&[error] #error {
-	  margin-block-start: var(--ui-space-2);
+	  margin-block-start: var(--cek-space-2);
 	}
 }
 
 :host(:focus-within) {
-  outline: var(--ui-focus-ring);
-  outline-offset: var(--ui-focus-ring-offset);
+  outline: var(--cek-focus-ring);
+  outline-offset: var(--cek-focus-ring-offset);
 }
 
 :host([invalid]:focus-within) {
-  outline-color: var(--ui-border-color-error);
+  outline-color: var(--cek-border-color-error);
 }
 </style>
 <input type="checkbox" id="control" part="control" aria-describedby="help error" value="wa">
@@ -317,40 +317,40 @@ legend {
 	<div id="help" part="help"><slot name="help"></slot></div>
 	<div id="error" part="error"><slot name="error"></slot></div>
 </div>
-</template></ui-checkbox>
-              <ui-checkbox label="nt" value="nt" ssr-id="ssr-ly0xubuar" server-rendered=""><template shadowrootmode="open"><style>
+</template></cek-checkbox>
+              <cek-checkbox label="nt" value="nt" ssr-id="ssr-8gcrydgqi" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
 	align-items: flex-start;
-	font-size: var(--ui-font-size-1);
-	font-family: var(--ui-font-family);
-	color: var(--ui-text-color-0);
+	font-size: var(--cek-font-size-1);
+	font-family: var(--cek-font-family);
+	color: var(--cek-text-color-0);
   
 	#control {
 	  border: none;
 	  outline: none;
-	  accent-color: var(--ui-color-primary-300);
-	  width: var(--ui-space-6);
-	  height: var(--ui-space-6);
+	  accent-color: var(--cek-color-primary-300);
+	  width: var(--cek-space-6);
+	  height: var(--cek-space-6);
 	}
   
 	#error {
-		color: var(--ui-text-color-error);
+		color: var(--cek-text-color-error);
 	}
 
 	&[help] #help,
 	&[error] #error {
-	  margin-block-start: var(--ui-space-2);
+	  margin-block-start: var(--cek-space-2);
 	}
 }
 
 :host(:focus-within) {
-  outline: var(--ui-focus-ring);
-  outline-offset: var(--ui-focus-ring-offset);
+  outline: var(--cek-focus-ring);
+  outline-offset: var(--cek-focus-ring-offset);
 }
 
 :host([invalid]:focus-within) {
-  outline-color: var(--ui-border-color-error);
+  outline-color: var(--cek-border-color-error);
 }
 </style>
 <input type="checkbox" id="control" part="control" aria-describedby="help error" value="nt">
@@ -359,40 +359,40 @@ legend {
 	<div id="help" part="help"><slot name="help"></slot></div>
 	<div id="error" part="error"><slot name="error"></slot></div>
 </div>
-</template></ui-checkbox>
-              <ui-checkbox label="vic" value="vic" ssr-id="ssr-geuzdtayp" server-rendered=""><template shadowrootmode="open"><style>
+</template></cek-checkbox>
+              <cek-checkbox label="vic" value="vic" ssr-id="ssr-k7kuoh77x" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
 	align-items: flex-start;
-	font-size: var(--ui-font-size-1);
-	font-family: var(--ui-font-family);
-	color: var(--ui-text-color-0);
+	font-size: var(--cek-font-size-1);
+	font-family: var(--cek-font-family);
+	color: var(--cek-text-color-0);
   
 	#control {
 	  border: none;
 	  outline: none;
-	  accent-color: var(--ui-color-primary-300);
-	  width: var(--ui-space-6);
-	  height: var(--ui-space-6);
+	  accent-color: var(--cek-color-primary-300);
+	  width: var(--cek-space-6);
+	  height: var(--cek-space-6);
 	}
   
 	#error {
-		color: var(--ui-text-color-error);
+		color: var(--cek-text-color-error);
 	}
 
 	&[help] #help,
 	&[error] #error {
-	  margin-block-start: var(--ui-space-2);
+	  margin-block-start: var(--cek-space-2);
 	}
 }
 
 :host(:focus-within) {
-  outline: var(--ui-focus-ring);
-  outline-offset: var(--ui-focus-ring-offset);
+  outline: var(--cek-focus-ring);
+  outline-offset: var(--cek-focus-ring-offset);
 }
 
 :host([invalid]:focus-within) {
-  outline-color: var(--ui-border-color-error);
+  outline-color: var(--cek-border-color-error);
 }
 </style>
 <input type="checkbox" id="control" part="control" aria-describedby="help error" value="vic">
@@ -401,8 +401,8 @@ legend {
 	<div id="help" part="help"><slot name="help"></slot></div>
 	<div id="error" part="error"><slot name="error"></slot></div>
 </div>
-</template></ui-checkbox>
-            </ui-checkbox-group>
+</template></cek-checkbox>
+            </cek-checkbox-group>
             <button type="submit">Submit</button>
             <button type="reset">Reset</button>
           </form>

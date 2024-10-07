@@ -1,6 +1,6 @@
 body {
-	background-color: var(--ui-surface-color-0);
-	color: var(--ui-text-color-1);
+	background-color: var(--cek-surface-color-0);
+	color: var(--cek-text-color-1);
 	display: flex;
 	justify-content: center;
 }
@@ -13,7 +13,7 @@ body {
 
 header {
 	padding: 1rem;
-	border-bottom: 1px solid var(--ui-border-color-4);
+	border-bottom: 1px solid var(--cek-border-color-4);
 	width: 100%;
 }
 
@@ -28,13 +28,13 @@ aside {
 
 h2 {
 	padding-block: 0.8rem;
-	border-bottom: 1px solid var(--ui-border-color-4);
+	border-bottom: 1px solid var(--cek-border-color-4);
 }
 
 main {
 	flex-grow: 1;
 	padding: 1rem 2rem;
-	background-color: var(--ui-surface-color-0);
+	background-color: var(--cek-surface-color-0);
 }
 
 section {
@@ -52,7 +52,7 @@ li {
 }
 
 a {
-	color: var(--ui-text-color-2);
+	color: var(--cek-text-color-2);
 	text-decoration: none;
 }
 
