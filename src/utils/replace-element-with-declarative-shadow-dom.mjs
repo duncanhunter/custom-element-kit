@@ -54,8 +54,8 @@ async function getTemplateAndStyles(elementName) {
 function isWithinComponents(element, components) {
 	let parent = element.parentElement;
 	while (parent) {
-		if (parent.tagName?.toLowerCase().startsWith("ui-")) {
-			const parentComponentName = parent.tagName.toLowerCase().slice(3);
+		if (parent.tagName?.toLowerCase().startsWith("cek-")) {
+			const parentComponentName = parent.tagName.toLowerCase().slice(4);
 			if (components.has(parentComponentName)) {
 				return true;
 			}
@@ -79,7 +79,7 @@ function generateUniqueId(prefix = "id") {
 
 async function processElement(element, document) {
 	const tagName = element.tagName.toLowerCase();
-	const elementName = tagName.slice(3).trim();
+	const elementName = tagName.slice(4).trim();
 	const attributes = getAttributes(element);
 
 	let { template, styles } = await getTemplateAndStyles(elementName);
@@ -133,8 +133,8 @@ export async function replaceElementWithDeclarativeShadowDom(htmlString) {
 	const customElementsList = Array.from(allElements).filter((element) => {
 		const tagName = element.tagName.toLowerCase();
 		if (
-			!tagName.startsWith("ui-") ||
-			SKIPPED_COMPONENTS.has(tagName.slice(3)) ||
+			!tagName.startsWith("cek-") ||
+			SKIPPED_COMPONENTS.has(tagName.slice(4)) ||
 			isWithinComponents(element, SKIPPED_COMPONENTS) ||
 			element.hasAttribute("skip-server-render") ||
 			isWithinComponents(element, new Set(["code-block"]))
@@ -154,9 +154,9 @@ export async function replaceElementWithDeclarativeShadowDom(htmlString) {
 	}
 
 	for (const element of customElementsList) {
-		if (element.tagName.toLowerCase() === "ui-code-block") {
+		if (element.tagName.toLowerCase() === "cek-code-block") {
 			const { styles } = await getTemplateAndStyles(
-				element.tagName.toLowerCase().slice(3),
+				element.tagName.toLowerCase().slice(4),
 			);
 			await processCodeBlockElement(
 				document,

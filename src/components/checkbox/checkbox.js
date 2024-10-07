@@ -13,35 +13,35 @@ export const checkboxStyles = /* css */ `
 :host {
 	display: flex;
 	align-items: flex-start;
-	font-size: var(--ui-font-size-1);
-	font-family: var(--ui-font-family);
-	color: var(--ui-text-color-0);
+	font-size: var(--cek-font-size-1);
+	font-family: var(--cek-font-family);
+	color: var(--cek-text-color-0);
   
 	#control {
 	  border: none;
 	  outline: none;
-	  accent-color: var(--ui-color-primary-300);
-	  width: var(--ui-space-6);
-	  height: var(--ui-space-6);
+	  accent-color: var(--cek-color-primary-300);
+	  width: var(--cek-space-6);
+	  height: var(--cek-space-6);
 	}
   
 	#error {
-		color: var(--ui-text-color-error);
+		color: var(--cek-text-color-error);
 	}
 
 	&[help] #help,
 	&[error] #error {
-	  margin-block-start: var(--ui-space-2);
+	  margin-block-start: var(--cek-space-2);
 	}
 }
 
 :host(:focus-within) {
-  outline: var(--ui-focus-ring);
-  outline-offset: var(--ui-focus-ring-offset);
+  outline: var(--cek-focus-ring);
+  outline-offset: var(--cek-focus-ring-offset);
 }
 
 :host([invalid]:focus-within) {
-  outline-color: var(--ui-border-color-error);
+  outline-color: var(--cek-border-color-error);
 }
 `;
 
@@ -83,10 +83,10 @@ export class Checkbox extends FormElement {
 
 	connectedCallback() {
 		super.connectedCallback();
-		if (this.closest("ui-checkbox-group")) {
+		if (this.closest("cek-checkbox-group")) {
 			this.formDisabled = true;
 		}
 	}
 }
 
-customElements.define("ui-checkbox", Checkbox);
+customElements.define("cek-checkbox", Checkbox);

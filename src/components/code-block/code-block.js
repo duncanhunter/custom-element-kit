@@ -21,7 +21,7 @@ export class CodeBlock extends HTMLElement {
 
 	constructor() {
 		super();
-		if (this.parentElement.closest("ui-code-block")) {
+		if (this.parentElement.closest("cek-code-block")) {
 			return; // Note: nested code blocks are not supported and are visual code and should inert.
 		}
 
@@ -38,7 +38,7 @@ export class CodeBlock extends HTMLElement {
 	}
 
 	connectedCallback() {
-		if (this.parentElement.closest("ui-code-block")) {
+		if (this.parentElement.closest("cek-code-block")) {
 			this.dataset.inert = true;
 			return; // Note: nested code blocks are not supported and are visual code and should inert.
 		}
@@ -119,4 +119,4 @@ export class CodeBlock extends HTMLElement {
 	}
 }
 
-customElements.define("ui-code-block", CodeBlock);
+customElements.define("cek-code-block", CodeBlock);
