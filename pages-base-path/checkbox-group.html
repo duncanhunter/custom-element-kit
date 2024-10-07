@@ -2,7 +2,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Custom Element Kit</title>
-  <link rel="stylesheet" href="assets/styles-10b1b73c.css">
+  <link rel="stylesheet" href="assets/styles-dc9471e0.css">
   <link rel="stylesheet" href="assets/page-layout-ed243161.css">
   
   
@@ -35,7 +35,7 @@
           <h3 id="min-selections">Validate - Min Selections (min-selections)</h3>
 
           <form novalidate>
-            <ui-checkbox-group server-rendered="" help="Select all that apply." label="States and Territories the company operates in:" required name="states" min-selections="4" error="foo"><template shadowrootmode="open"><style>
+            <ui-checkbox-group help="Select all that apply." label="States and Territories the company operates in:" required name="states" min-selections="4" error="foo" ssr-id="ssr-6yg5rmqtr" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
 	flex-direction: column;
@@ -108,13 +108,300 @@ legend {
 	</div>
 </fieldset>
 </template>
-              <ui-checkbox value="nsw" label="nsw"></ui-checkbox>
-              <ui-checkbox value="qld" label="qld"></ui-checkbox>
-              <ui-checkbox value="act" label="act"></ui-checkbox>
-              <ui-checkbox value="tas" label="tas"></ui-checkbox>
-              <ui-checkbox value="wa" label="wa"></ui-checkbox>
-              <ui-checkbox value="nt" label="nt"></ui-checkbox>
-              <ui-checkbox value="vic" label="vic"></ui-checkbox>
+              <ui-checkbox label="nsw" value="nsw" ssr-id="ssr-f61deipiu" server-rendered=""><template shadowrootmode="open"><style>
+:host {
+	display: flex;
+	align-items: flex-start;
+	font-size: var(--ui-font-size-1);
+	font-family: var(--ui-font-family);
+	color: var(--ui-text-color-0);
+  
+	#control {
+	  border: none;
+	  outline: none;
+	  accent-color: var(--ui-color-primary-300);
+	  width: var(--ui-space-6);
+	  height: var(--ui-space-6);
+	}
+  
+	#error {
+		color: var(--ui-text-color-error);
+	}
+
+	&[help] #help,
+	&[error] #error {
+	  margin-block-start: var(--ui-space-2);
+	}
+}
+
+:host(:focus-within) {
+  outline: var(--ui-focus-ring);
+  outline-offset: var(--ui-focus-ring-offset);
+}
+
+:host([invalid]:focus-within) {
+  outline-color: var(--ui-border-color-error);
+}
+</style>
+<input type="checkbox" id="control" part="control" aria-describedby="help error" value="nsw">
+<div>
+	<label for="control" id="label" part="label"><slot name="label">nsw</slot></label>
+	<div id="help" part="help"><slot name="help"></slot></div>
+	<div id="error" part="error"><slot name="error"></slot></div>
+</div>
+</template></ui-checkbox>
+              <ui-checkbox label="qld" value="qld" ssr-id="ssr-0u92w7zks" server-rendered=""><template shadowrootmode="open"><style>
+:host {
+	display: flex;
+	align-items: flex-start;
+	font-size: var(--ui-font-size-1);
+	font-family: var(--ui-font-family);
+	color: var(--ui-text-color-0);
+  
+	#control {
+	  border: none;
+	  outline: none;
+	  accent-color: var(--ui-color-primary-300);
+	  width: var(--ui-space-6);
+	  height: var(--ui-space-6);
+	}
+  
+	#error {
+		color: var(--ui-text-color-error);
+	}
+
+	&[help] #help,
+	&[error] #error {
+	  margin-block-start: var(--ui-space-2);
+	}
+}
+
+:host(:focus-within) {
+  outline: var(--ui-focus-ring);
+  outline-offset: var(--ui-focus-ring-offset);
+}
+
+:host([invalid]:focus-within) {
+  outline-color: var(--ui-border-color-error);
+}
+</style>
+<input type="checkbox" id="control" part="control" aria-describedby="help error" value="qld">
+<div>
+	<label for="control" id="label" part="label"><slot name="label">qld</slot></label>
+	<div id="help" part="help"><slot name="help"></slot></div>
+	<div id="error" part="error"><slot name="error"></slot></div>
+</div>
+</template></ui-checkbox>
+              <ui-checkbox label="act" value="act" ssr-id="ssr-pwxg98ls6" server-rendered=""><template shadowrootmode="open"><style>
+:host {
+	display: flex;
+	align-items: flex-start;
+	font-size: var(--ui-font-size-1);
+	font-family: var(--ui-font-family);
+	color: var(--ui-text-color-0);
+  
+	#control {
+	  border: none;
+	  outline: none;
+	  accent-color: var(--ui-color-primary-300);
+	  width: var(--ui-space-6);
+	  height: var(--ui-space-6);
+	}
+  
+	#error {
+		color: var(--ui-text-color-error);
+	}
+
+	&[help] #help,
+	&[error] #error {
+	  margin-block-start: var(--ui-space-2);
+	}
+}
+
+:host(:focus-within) {
+  outline: var(--ui-focus-ring);
+  outline-offset: var(--ui-focus-ring-offset);
+}
+
+:host([invalid]:focus-within) {
+  outline-color: var(--ui-border-color-error);
+}
+</style>
+<input type="checkbox" id="control" part="control" aria-describedby="help error" value="act">
+<div>
+	<label for="control" id="label" part="label"><slot name="label">act</slot></label>
+	<div id="help" part="help"><slot name="help"></slot></div>
+	<div id="error" part="error"><slot name="error"></slot></div>
+</div>
+</template></ui-checkbox>
+              <ui-checkbox label="tas" value="tas" ssr-id="ssr-3hts9613x" server-rendered=""><template shadowrootmode="open"><style>
+:host {
+	display: flex;
+	align-items: flex-start;
+	font-size: var(--ui-font-size-1);
+	font-family: var(--ui-font-family);
+	color: var(--ui-text-color-0);
+  
+	#control {
+	  border: none;
+	  outline: none;
+	  accent-color: var(--ui-color-primary-300);
+	  width: var(--ui-space-6);
+	  height: var(--ui-space-6);
+	}
+  
+	#error {
+		color: var(--ui-text-color-error);
+	}
+
+	&[help] #help,
+	&[error] #error {
+	  margin-block-start: var(--ui-space-2);
+	}
+}
+
+:host(:focus-within) {
+  outline: var(--ui-focus-ring);
+  outline-offset: var(--ui-focus-ring-offset);
+}
+
+:host([invalid]:focus-within) {
+  outline-color: var(--ui-border-color-error);
+}
+</style>
+<input type="checkbox" id="control" part="control" aria-describedby="help error" value="tas">
+<div>
+	<label for="control" id="label" part="label"><slot name="label">tas</slot></label>
+	<div id="help" part="help"><slot name="help"></slot></div>
+	<div id="error" part="error"><slot name="error"></slot></div>
+</div>
+</template></ui-checkbox>
+              <ui-checkbox label="wa" value="wa" ssr-id="ssr-im9tsak0q" server-rendered=""><template shadowrootmode="open"><style>
+:host {
+	display: flex;
+	align-items: flex-start;
+	font-size: var(--ui-font-size-1);
+	font-family: var(--ui-font-family);
+	color: var(--ui-text-color-0);
+  
+	#control {
+	  border: none;
+	  outline: none;
+	  accent-color: var(--ui-color-primary-300);
+	  width: var(--ui-space-6);
+	  height: var(--ui-space-6);
+	}
+  
+	#error {
+		color: var(--ui-text-color-error);
+	}
+
+	&[help] #help,
+	&[error] #error {
+	  margin-block-start: var(--ui-space-2);
+	}
+}
+
+:host(:focus-within) {
+  outline: var(--ui-focus-ring);
+  outline-offset: var(--ui-focus-ring-offset);
+}
+
+:host([invalid]:focus-within) {
+  outline-color: var(--ui-border-color-error);
+}
+</style>
+<input type="checkbox" id="control" part="control" aria-describedby="help error" value="wa">
+<div>
+	<label for="control" id="label" part="label"><slot name="label">wa</slot></label>
+	<div id="help" part="help"><slot name="help"></slot></div>
+	<div id="error" part="error"><slot name="error"></slot></div>
+</div>
+</template></ui-checkbox>
+              <ui-checkbox label="nt" value="nt" ssr-id="ssr-a888m6mgg" server-rendered=""><template shadowrootmode="open"><style>
+:host {
+	display: flex;
+	align-items: flex-start;
+	font-size: var(--ui-font-size-1);
+	font-family: var(--ui-font-family);
+	color: var(--ui-text-color-0);
+  
+	#control {
+	  border: none;
+	  outline: none;
+	  accent-color: var(--ui-color-primary-300);
+	  width: var(--ui-space-6);
+	  height: var(--ui-space-6);
+	}
+  
+	#error {
+		color: var(--ui-text-color-error);
+	}
+
+	&[help] #help,
+	&[error] #error {
+	  margin-block-start: var(--ui-space-2);
+	}
+}
+
+:host(:focus-within) {
+  outline: var(--ui-focus-ring);
+  outline-offset: var(--ui-focus-ring-offset);
+}
+
+:host([invalid]:focus-within) {
+  outline-color: var(--ui-border-color-error);
+}
+</style>
+<input type="checkbox" id="control" part="control" aria-describedby="help error" value="nt">
+<div>
+	<label for="control" id="label" part="label"><slot name="label">nt</slot></label>
+	<div id="help" part="help"><slot name="help"></slot></div>
+	<div id="error" part="error"><slot name="error"></slot></div>
+</div>
+</template></ui-checkbox>
+              <ui-checkbox label="vic" value="vic" ssr-id="ssr-70n2w2527" server-rendered=""><template shadowrootmode="open"><style>
+:host {
+	display: flex;
+	align-items: flex-start;
+	font-size: var(--ui-font-size-1);
+	font-family: var(--ui-font-family);
+	color: var(--ui-text-color-0);
+  
+	#control {
+	  border: none;
+	  outline: none;
+	  accent-color: var(--ui-color-primary-300);
+	  width: var(--ui-space-6);
+	  height: var(--ui-space-6);
+	}
+  
+	#error {
+		color: var(--ui-text-color-error);
+	}
+
+	&[help] #help,
+	&[error] #error {
+	  margin-block-start: var(--ui-space-2);
+	}
+}
+
+:host(:focus-within) {
+  outline: var(--ui-focus-ring);
+  outline-offset: var(--ui-focus-ring-offset);
+}
+
+:host([invalid]:focus-within) {
+  outline-color: var(--ui-border-color-error);
+}
+</style>
+<input type="checkbox" id="control" part="control" aria-describedby="help error" value="vic">
+<div>
+	<label for="control" id="label" part="label"><slot name="label">vic</slot></label>
+	<div id="help" part="help"><slot name="help"></slot></div>
+	<div id="error" part="error"><slot name="error"></slot></div>
+</div>
+</template></ui-checkbox>
             </ui-checkbox-group>
             <button type="submit">Submit</button>
             <button type="reset">Reset</button>
