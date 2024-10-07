@@ -43,36 +43,10 @@ jobs:
         run: npm run build
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3.9.1
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
-          destination_dir: ${{ github.ref_name }}
-
-  cleanup:
-    runs-on: ubuntu-latest
-    if: |
-      (github.event_name == 'delete' && github.event.ref_type == 'branch' && github.ref != 'refs/heads/main') ||
-      (github.event_name == 'pull_request' && github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main')
-
-    steps:
-      - name: Determine Branch Name
-        id: vars
-        shell: bash
-        run: |
-          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
-            BRANCH_NAME="${{ github.event.pull_request.head.ref }}"
-          elif [[ "${{ github.event_name }}" == "delete" ]]; then
-            BRANCH_NAME="${{ github.ref }}"
-            BRANCH_NAME="${BRANCH_NAME#refs/heads/}"
-          else
-            echo "Unsupported event type: ${{ github.event_name }}"
-            exit 1
-          fi
-          echo "BRANCH_NAME=${BRANCH_NAME}" >> $GITHUB_ENV
-
-      - name: Delete Folder in `gh-pages` Branch
-        run: |
-          echo "Deleting folder $BRANCH_NAME in gh-pages branch"
-          curl -X DELETE -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            "https://api.github.com/repos/${{ github.repository }}/contents/${{ env.BRANCH_NAME }}?ref=gh-pages"
+          branch: gh-pages
+          folder: dist
+          clean: true
+          clean-exclude: "main"
+          token: ${{ secrets.GITHUB_TOKEN }}
