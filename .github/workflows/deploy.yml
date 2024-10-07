@@ -55,5 +55,6 @@ jobs:
           clean: true
           clean-exclude: |
             main
-            ${{ env.PR_BRANCHES }}
+            clean-up-yml
           token: ${{ secrets.GITHUB_TOKEN }}
+            # ${{ env.PR_BRANCHES }}
