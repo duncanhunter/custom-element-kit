@@ -54,6 +54,6 @@ jobs:
       - name: Delete GitHub Pages branch
         run: |
           branch_name=${GITHUB_REF#refs/heads/}
-          pages_branch="gh-pages-${branch_name}"
+          pages_branch="${branch_name}"
           curl -X DELETE -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
             "https://api.github.com/repos/${{ github.repository }}/git/refs/heads/${pages_branch}"
