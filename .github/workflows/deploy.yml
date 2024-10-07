@@ -4,12 +4,6 @@ on:
   push:
     branches:
       - "**"
-  delete:
-    branches-ignore:
-      - main
-  pull_request:
-    types:
-      - closed
 
 jobs:
   build-test-deploy:
