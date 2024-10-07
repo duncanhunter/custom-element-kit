@@ -2,8 +2,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Custom Element Kit</title>
-  <link rel="stylesheet" href="assets/styles-10b1b73c.css">
-  <link rel="stylesheet" href="assets/page-layout-ed243161.css">
+  <link rel="stylesheet" href="assets/styles-f6de7a1a.css">
+  <link rel="stylesheet" href="assets/page-layout-afde46a0.css">
   
   
 </head>
@@ -11,15 +11,15 @@
 <body>
   <div class="container">
     <header>
-      <h1 class="ui-text-2">Custom Element Kit</h1>
+      <h1 class="cek-text-2">Custom Element Kit</h1>
     </header>
     <div class="content">
       <aside>
-        <h2 class="ui-text-1 ui-text-bold">Getting Started</h2>
+        <h2 class="cek-text-1 cek-text-bold">Getting Started</h2>
         <ul>
           <li><a href="index.html">Getting Started</a></li>
         </ul>
-        <h2 class="ui-text-1 ui-text-bold">Components</h2>
+        <h2 class="cek-text-1 cek-text-bold">Components</h2>
         <ul>
           <li><a href="checkbox.html">Checkbox</a></li>
           <li><a href="checkbox-group.html">Checkbox Group</a></li>
@@ -29,42 +29,42 @@
       </aside>
       <main>
         <section>
-          <h1>Checkbox (ui-checkbox)</h1>
+          <h1>Checkbox (cek-checkbox)</h1>
 
           <form novalidate>
-            <ui-checkbox label="nsw" value="nsw" required ssr-id="ssr-oy25x7sin" server-rendered=""><template shadowrootmode="open"><style>
+            <cek-checkbox label="nsw" value="nsw" required ssr-id="ssr-j40y5pzsk" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
 	align-items: flex-start;
-	font-size: var(--ui-font-size-1);
-	font-family: var(--ui-font-family);
-	color: var(--ui-text-color-0);
+	font-size: var(--cek-font-size-1);
+	font-family: var(--cek-font-family);
+	color: var(--cek-text-color-0);
   
 	#control {
 	  border: none;
 	  outline: none;
-	  accent-color: var(--ui-color-primary-300);
-	  width: var(--ui-space-6);
-	  height: var(--ui-space-6);
+	  accent-color: var(--cek-color-primary-300);
+	  width: var(--cek-space-6);
+	  height: var(--cek-space-6);
 	}
   
 	#error {
-		color: var(--ui-text-color-error);
+		color: var(--cek-text-color-error);
 	}
 
 	&[help] #help,
 	&[error] #error {
-	  margin-block-start: var(--ui-space-2);
+	  margin-block-start: var(--cek-space-2);
 	}
 }
 
 :host(:focus-within) {
-  outline: var(--ui-focus-ring);
-  outline-offset: var(--ui-focus-ring-offset);
+  outline: var(--cek-focus-ring);
+  outline-offset: var(--cek-focus-ring-offset);
 }
 
 :host([invalid]:focus-within) {
-  outline-color: var(--ui-border-color-error);
+  outline-color: var(--cek-border-color-error);
 }
 </style>
 <input type="checkbox" id="control" part="control" aria-describedby="help error" value="nsw">
@@ -73,7 +73,7 @@
 	<div id="help" part="help"><slot name="help"></slot></div>
 	<div id="error" part="error"><slot name="error"></slot></div>
 </div>
-</template></ui-checkbox>
+</template></cek-checkbox>
             <button type="submit">Submit</button>
             <button type="reset">Reset</button>
           </form>
