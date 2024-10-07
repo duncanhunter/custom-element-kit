@@ -2,6 +2,7 @@ global.HTMLElement = class HTMLElement { };
 global.customElements = { define: () => { } };
 
 import { parseHTML } from "linkedom";
+import { processCodeBlockElement } from "./process-code-block-element.mjs";
 
 const FORM_COMPONENTS = new Set([
 	"input",
@@ -20,7 +21,7 @@ const FORM_COMPONENTS = new Set([
 	"option",
 ]);
 
-const SKIPPED_COMPONENTS = new Set(["code-block"]);
+const SKIPPED_COMPONENTS = new Set([]);
 
 const moduleCache = new Map();
 
@@ -49,12 +50,12 @@ async function getTemplateAndStyles(elementName) {
 	}
 }
 
-function isWithinSkippedComponent(element) {
+function isWithinComponents(element, components) {
 	let parent = element.parentElement;
 	while (parent) {
 		if (parent.tagName?.toLowerCase().startsWith("ui-")) {
 			const parentComponentName = parent.tagName.toLowerCase().slice(3);
-			if (SKIPPED_COMPONENTS.has(parentComponentName)) {
+			if (components.has(parentComponentName)) {
 				return true;
 			}
 		}
@@ -130,7 +131,9 @@ export async function replaceElementWithDeclarativeShadowDom(htmlString) {
 		if (
 			!tagName.startsWith("ui-") ||
 			SKIPPED_COMPONENTS.has(tagName.slice(3)) ||
-			isWithinSkippedComponent(element)
+			isWithinComponents(element, SKIPPED_COMPONENTS) ||
+			element.hasAttribute("skip-server-render") ||
+			isWithinComponents(element, new Set(["code-block"]))
 		) {
 			return false;
 		}
@@ -147,7 +150,19 @@ export async function replaceElementWithDeclarativeShadowDom(htmlString) {
 	}
 
 	for (const element of customElementsList) {
-		await processElement(element, document);
+		if (element.tagName.toLowerCase() === "ui-code-block") {
+			const { styles } = await getTemplateAndStyles(
+				element.tagName.toLowerCase().slice(3),
+			);
+			await processCodeBlockElement(
+				document,
+				getAttributes(element),
+				element,
+				styles,
+			);
+		} else {
+			await processElement(element, document);
+		}
 	}
 
 	return document.documentElement.outerHTML;

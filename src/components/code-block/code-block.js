@@ -21,6 +21,10 @@ export class CodeBlock extends HTMLElement {
 
 	constructor() {
 		super();
+		if (this.parentElement.closest("ui-code-block")) {
+			return; // Note: nested code blocks are not supported and are visual code and should inert.
+		}
+
 		if (!this.shadowRoot) {
 			this.attachShadow({ mode: "open" });
 			this.shadowRoot.innerHTML = `<style>${codeBlockStyles}</style>${codeBlockTemplate}`;
@@ -34,11 +38,17 @@ export class CodeBlock extends HTMLElement {
 	}
 
 	connectedCallback() {
+		if (this.parentElement.closest("ui-code-block")) {
+			this.dataset.inert = true;
+			return; // Note: nested code blocks are not supported and are visual code and should inert.
+		}
+
 		this.#observer.observe(this, {
 			childList: true,
 			characterData: true,
 			subtree: true,
 		});
+
 		if (!this.serverRendered) {
 			this.#updateCodeBlock();
 		}
