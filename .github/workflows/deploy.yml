@@ -37,11 +37,8 @@ jobs:
         run: npm run build
 
       - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
+        uses: peaceiris/actions-gh-pages@v3.9.1
         with:
-          branch: gh-pages
-          folder: dist
-          target-folder: ${{ github.ref_name}}
-          clean: true
-          clean-exclude: main
-          token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          destination_dir: ${{ github.ref_name }}
