@@ -170,5 +170,5 @@ export async function replaceElementWithDeclarativeShadowDom(htmlString) {
 		}
 	}
 
-	return document.documentElement.outerHTML;
+	return `<!DOCTYPE html><html lang="en">${document.documentElement.outerHTML}`;
 }
