@@ -110,12 +110,17 @@ export class CodeBlock extends HTMLElement {
 			characterData: true,
 			subtree: true,
 		});
-		this.#copyButtonElement = this.shadowRoot.querySelector("[part=copy-button]");
+		this.#copyButtonElement =
+			this.shadowRoot.querySelector("[part=copy-button]");
 		this.#checkIconElement = this.shadowRoot.querySelector("[part=check-icon]");
 		this.#copyIconElement = this.shadowRoot.querySelector("[part=copy-icon]");
 		this.#codeElement = this.shadowRoot.querySelector("[part=code]");
-		this.#ariaLiveRegionElement = this.shadowRoot.querySelector("#aria-live-region");
-		this.#copyButtonElement.addEventListener("click", this.#handleCopyButtonClick);
+		this.#ariaLiveRegionElement =
+			this.shadowRoot.querySelector("#aria-live-region");
+		this.#copyButtonElement.addEventListener(
+			"click",
+			this.#handleCopyButtonClick,
+		);
 
 		if (!this.serverRendered) {
 			this.#updateCodeBlock();
@@ -124,7 +129,10 @@ export class CodeBlock extends HTMLElement {
 
 	disconnectedCallback() {
 		this.#observer.disconnect();
-		this.#copyButtonElement.removeEventListener("click", this.#handleCopyButtonClick);
+		this.#copyButtonElement.removeEventListener(
+			"click",
+			this.#handleCopyButtonClick,
+		);
 	}
 
 	attributeChangedCallback(name, oldValue, newValue) {
@@ -151,7 +159,7 @@ export class CodeBlock extends HTMLElement {
 			this.#checkIconElement.style.display = "none";
 			this.#ariaLiveRegionElement.textContent = " ";
 		}, 1000);
-	}
+	};
 
 	#handleMutations() {
 		if (!this.serverRendered) {

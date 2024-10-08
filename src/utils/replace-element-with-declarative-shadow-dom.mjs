@@ -155,7 +155,7 @@ export async function replaceElementWithDeclarativeShadowDom(htmlString) {
 
 	for (const element of customElementsList) {
 		if (element.tagName.toLowerCase() === "cek-code-block") {
-			const { styles } = await getTemplateAndStyles(
+			const { styles, template } = await getTemplateAndStyles(
 				element.tagName.toLowerCase().slice(4),
 			);
 			await processCodeBlockElement(
@@ -163,6 +163,7 @@ export async function replaceElementWithDeclarativeShadowDom(htmlString) {
 				getAttributes(element),
 				element,
 				styles,
+				template,
 			);
 		} else {
 			await processElement(element, document);
