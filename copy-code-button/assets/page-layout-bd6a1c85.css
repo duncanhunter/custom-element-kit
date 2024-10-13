@@ -54,8 +54,15 @@ li {
 a {
 	color: var(--cek-text-color-2);
 	text-decoration: none;
+	border-radius: var(--cek-border-radius);
 }
 
 a:hover {
 	text-decoration: underline;
+}
+
+a:focus {
+	border: none;
+	outline: var(--cek-focus-ring);
+	outline-offset: var(--cek-focus-ring-offset);
 }
