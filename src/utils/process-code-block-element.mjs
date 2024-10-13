@@ -29,17 +29,18 @@ export async function processCodeBlockElement(
 	const lang = attributes.lang || "xml";
 	const theme = attributes.theme || "github-dark";
 	const noTrim = attributes["no-trim"] === "true";
-	const innerContent = element.innerHTML;
-
-	let formattedContent = noTrim ? innerContent : formatContent(innerContent);
-
-	const templateMatch = formattedContent.match(
-		/<template>([\s\S]*?)<\/template>/,
+	let innerContent = element.innerHTML;
+	const templateMatch = innerContent.match(
+		/\s*<template>([\s\S]*?)<\/template>\s*/,
 	);
 
 	if (templateMatch) {
-		formattedContent = templateMatch[1];
+		innerContent = templateMatch[1];
 	}
+
+	const formattedContent = noTrim ? innerContent : formatContent(innerContent);
+
+	console.log({ formattedContent });
 
 	try {
 		if (!languageModuleCache.has(lang)) {

@@ -34,9 +34,11 @@
         <section>
           <h1>Code Block (cek-code-block)</h1>
           <cek-code-block theme="github-dark" lang="xml">
-            <cek-code-block theme="github-dark" lang="xml">
-              <cek-checkbox value="vic" label="vic"></cek-checkbox>
-            </cek-code-block>
+            <template>
+              <cek-code-block theme="github-dark" lang="xml">
+                <cek-checkbox value="vic" label="vic"></cek-checkbox>
+              </cek-code-block>
+            </template>
           </cek-code-block>
           <br>
           <cek-code-block theme="github-dark" lang="go">
@@ -45,15 +47,16 @@
             import "fmt"
 
             func main() {
-              fmt.Println("Hello, World!")
+            fmt.Println("Hello, World!")
             }
           </cek-code-block>
         </section>
 
-         <h2>Limitations</h2>
-         <ul>
-            <li>Code block component does not support nesting cek-code-block elements.</li>
-         </ul> 
+        <h2>Limitations</h2>
+        <ul>
+          <li>If the code block contains live code like other custom elements it needs to be wrapped in a &lt;template&gt;&lt;/template&gt; to avoid
+            the custom elements being defined and rendered and code executed.</li>
+        </ul>
       </main>
     </div>
   </div>

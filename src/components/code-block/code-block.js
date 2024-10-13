@@ -29,6 +29,7 @@ pre {
 
 code {
     white-space: pre-wrap;
+	border-radius: var(--cek-border-radius);
 }
 
 [part=copy-button] {
@@ -180,9 +181,11 @@ export class CodeBlock extends HTMLElement {
 		const theme = this.getAttribute("theme") || "github";
 		const noTrim = this.getAttribute("no-trim") === "true";
 		let rawContent = this.innerHTML;
-		const templateMatch = rawContent.match(/<template>([\s\S]*?)<\/template>/);
+		const templateMatch = rawContent.match(
+			/\s*<template>([\s\S]*?)<\/template>\s*/,
+		);
 		if (templateMatch) {
-			rawContent = templateMatch[1];
+			rawContent = templateMatch[1].trim();
 		}
 		const formattedContent = noTrim
 			? rawContent
