@@ -91,7 +91,7 @@ export class CodeBlock extends HTMLElement {
 	constructor() {
 		super();
 		if (this.parentElement.closest("cek-code-block")) {
-			return; // Note: nested cek-code-block's are visual visual text and should be inert.
+			return; // Note: nested cek-code-block's are visual text and should be inert.
 		}
 
 		if (!this.shadowRoot) {
@@ -109,7 +109,7 @@ export class CodeBlock extends HTMLElement {
 	connectedCallback() {
 		if (this.parentElement.closest("cek-code-block")) {
 			this.dataset.inert = true;
-			return; // Note: nested cek-code-block's are visual visual text and should be inert.
+			return; // Note: nested cek-code-block's are visual text and should be inert.
 		}
 
 		this.#observer.observe(this, {
