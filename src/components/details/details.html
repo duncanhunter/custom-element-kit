@@ -4,11 +4,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Code block component documentation.">
+  <meta name="description" content="Input component documentation.">
   <title>Custom Element Kit</title>
   <link rel="stylesheet" href="../../core/styles.css">
   <link rel="stylesheet" href="../../core/page-layout.css">
-  <script type="module" src="code-block.js"></script>
+  <script type="module" src="../../core/form-element.js"></script>
+  <script type="module" src="details.js"></script>
 </head>
 
 <body>
@@ -28,32 +29,28 @@
           <li><a href="checkbox-group.html">Checkbox Group</a></li>
           <li><a href="input.html">Input</a></li>
           <li><a href="code-block.html">Code block</a></li>
+          <li><a href="details.html">Details</a></li>
         </ul>
       </aside>
       <main>
         <section>
-          <h1>Code Block (cek-code-block)</h1>
-          <cek-code-block theme="github-dark" lang="xml">
-            <cek-code-block theme="github-dark" lang="xml">
-              <cek-checkbox value="vic" label="vic"></cek-checkbox>
-            </cek-code-block>
-          </cek-code-block>
-          <br>
-          <cek-code-block theme="github-dark" lang="go">
-            package main
+          <h1>Input (cek-input)</h1>
 
-            import "fmt"
-
-            func main() {
-              fmt.Println("Hello, World!")
-            }
-          </cek-code-block>
+          <cek-details name="accordion-1" open summary="First Home">
+            <ul>
+              <li>your home is newly constructed and has a total value of less than $600,000</li>
+              <li>the land and the dwelling you intend to build has a combined value of less than $750,000.</li>
+            </ul>
+          </cek-details>
+          <cek-details name="accordion-1" summary="HomeBuilder program">
+            <ul>
+              <li>sign the contract between 4 June 2020 and 31 December 2020</li>
+              <li>commence within 3 months of the contract date.</li>
+            </ul>
+            <p>HomeBuilder complements the NSW Government’s existing First Home Owner Grant and stamp duty concessions.
+            </p>
+          </cek-details>
         </section>
-
-         <h2>Limitations</h2>
-         <ul>
-            <li>Code block component does not support nesting cek-code-block elements.</li>
-         </ul> 
       </main>
     </div>
   </div>

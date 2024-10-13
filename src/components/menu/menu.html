@@ -8,6 +8,14 @@
   <title>Custom Element Kit</title>
   <link rel="stylesheet" href="../../core/styles.css">
   <link rel="stylesheet" href="../../core/page-layout.css">
+  <script type="module" src="../../core/popover.js"></script>
+  <script type="module" src="../button/button.js"></script>
+  <script type="module" src="../menu-item/menu-item.js"></script>
+  <script type="module" src="../menu-label/menu-label.js"></script>
+  <script type="module" src="../badge/badge.js"></script>
+  <script type="module" src="../separator/separator.js"></script>
+  <script type="module" src="../icon/icon.js"></script>
+  <script type="module" src="../code-block/code-block.js"></script>
   <script type="module" src="menu.js"></script>
 </head>
 
@@ -33,6 +41,91 @@
       <main>
         <section>
           <h1>Menu (cek-menu)</h1>
+          <cek-menu popover-width="content-width">
+            <cek-button slot="trigger" variant="primary">My Account</cek-button>
+            <cek-menu-label>Account Details</cek-menu-label>
+            <cek-separator></cek-separator>
+            <cek-menu-item value="profile">
+              <cek-icon slot="start" name="user"></cek-icon>
+              Profile <cek-visually-hidden>337 notifications</cek-visually-hidden>
+              <cek-badge slot="end" variant="danger">337</cek-badge>
+            </cek-menu-item>
+            <cek-menu-item value="keyboardShortcuts">
+              <cek-icon slot="start" name="user"></cek-icon>
+              Keyboard shortcuts
+              <div slot="end">⌘K</div>
+            </cek-menu-item>
+            <cek-menu-item>
+              <cek-icon slot="start" name="user-plus"></cek-icon>
+              Invite users
+              <cek-menu placement="right-start" slot="submenu">
+                <cek-menu-item value="email">
+                  <cek-icon slot="start" name="settings"></cek-icon>
+                  Email
+                </cek-menu-item>
+                <cek-menu-item value="message">
+                  <cek-icon slot="start" name="chat-bubble-left"></cek-icon>
+                  Message
+                </cek-menu-item>
+                <cek-separator></cek-separator>
+                <cek-menu-item value="more">
+                  <cek-icon slot="start" name="plus-circle"></cek-icon>
+                  More...
+                </cek-menu-item>
+              </cek-menu>
+            </cek-menu-item>
+          </cek-menu>
+          <cek-menu offset="4">
+            <cek-button arrow slot="trigger" variant="primary">trigger a</cek-button>
+            <cek-menu-item type="checkbox" checked href="/test" value="a1">a1</cek-menu-item>
+            <cek-menu-item type="radio" checked value="a2">a2</cek-menu-item>
+            <cek-menu-item type="checkbox" value="a3">
+              <div slot="start">start</div>a3
+            </cek-menu-item>
+            <cek-menu-item type="radio" value="a4">a4</cek-menu-item>
+            <cek-menu-item type="radio">
+              B05
+              <cek-menu placement="right-start" slot="submenu" offset="4">
+                <cek-menu-item value="b1">b1</cek-menu-item>
+                <cek-menu-item value="b2">b2</cek-menu-item>
+                <cek-menu-item>
+                  c0
+                  <cek-menu placement="right-start" slot="submenu" offset="4">
+                    <cek-menu-item value="c1">c1</cek-menu-item>
+                    <cek-menu-item value="c2">c2</cek-menu-item>
+                    <cek-menu-item value="c3">c3</cek-menu-item>
+                  </cek-menu>
+                </cek-menu-item>
+                <cek-menu-item value="b5">b5</cek-menu-item>
+              </cek-menu>
+            </cek-menu-item>
+            <cek-separator></cek-separator>
+            <cek-menu-item type="radio" value="a6">a6</cek-menu-item>
+            <cek-menu-item type="radio" value="a7">a7</cek-menu-item>
+            <cek-separator></cek-separator>
+            <cek-menu-item type="radio" value="a8">a8</cek-menu-item>
+            <cek-menu-item type="radio" value="a9">a9</cek-menu-item>
+            <cek-menu-item type="radio" value="a10">a10</cek-menu-item>
+          </cek-menu>
+          <cek-code-block lang="xml" theme="github-dark">
+            <template>
+              <cek-menu>
+                <cek-button arrow slot="trigger" variant="primary">My Account</cek-button>
+                <cek-menu-item value="email">
+                  <cek-icon slot="start" name="settings"></cek-icon>
+                  Email
+                </cek-menu-item>
+                <cek-menu-item value="message">
+                  <cek-icon slot="start" name="chat-bubble-left"></cek-icon>
+                  Message
+                </cek-menu-item>
+                <cek-menu-item value="more">
+                  <cek-icon slot="start" name="plus-circle"></cek-icon>
+                  More...
+                </cek-menu-item>
+              </cek-menu>
+            </template>
+          </cek-code-block>
         </section>
       </main>
     </div>

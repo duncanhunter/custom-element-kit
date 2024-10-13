@@ -30,7 +30,16 @@ export async function processCodeBlockElement(
 	const theme = attributes.theme || "github-dark";
 	const noTrim = attributes["no-trim"] === "true";
 	const innerContent = element.innerHTML;
-	const formattedContent = noTrim ? innerContent : formatContent(innerContent);
+	
+	let formattedContent = noTrim ? innerContent : formatContent(innerContent);
+	
+	const templateMatch = formattedContent.match(
+		/<template>([\s\S]*?)<\/template>/,
+	);
+
+	if (templateMatch) {
+		formattedContent = templateMatch[1];
+	}
 
 	try {
 		if (!languageModuleCache.has(lang)) {
@@ -69,7 +78,7 @@ export async function processCodeBlockElement(
 
 		const newElement = document.createElement(element.tagName.toLowerCase());
 		newElement.setAttribute("server-rendered", "");
-		newElement.innerHTML = `<template shadowrootmode="open"><style>${styles}${css}</style>${highlightedTemplate}</template>${element.innerHTML}`;
+		newElement.innerHTML = `<template shadowrootmode="open"><style>${styles}${css}</style>${highlightedTemplate}</template>`;
 
 		element.replaceWith(newElement);
 		element.removeAttribute("ssr-id");

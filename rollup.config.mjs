@@ -2,6 +2,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import terser from "@rollup/plugin-terser";
 import { rollupPluginHTML as html } from "@web/rollup-plugin-html";
+import copy from "rollup-plugin-copy";
 import minifyHTML from "rollup-plugin-minify-html-literals";
 import multiInput from "rollup-plugin-multi-input";
 import summary from "rollup-plugin-summary";
@@ -35,6 +36,9 @@ export default {
 				},
 			],
 			minify: false,
+		}),
+		copy({
+			targets: [{ src: "src/components/icons", dest: "dist" }],
 		}),
 		minifyHTML.default(),
 		terser(),

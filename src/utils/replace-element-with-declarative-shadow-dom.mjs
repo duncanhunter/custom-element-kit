@@ -26,6 +26,28 @@ const SKIPPED_COMPONENTS = new Set([]);
 
 const moduleCache = new Map();
 
+const camelCase = (str) =>
+	str.replace(/-./g, (match) => match.charAt(1).toUpperCase());
+
+async function getIcon(element) {
+	const name = element.getAttribute("name");
+	if (!name) {
+		return;
+	}
+
+	if (moduleCache.has("icons")) {
+		return moduleCache.get("icons")[camelCase(name)] || "";
+	}
+
+	try {
+		const { default: icons } = await import("../components/icons/icons.js");
+		moduleCache.set("icons", icons);
+		return icons[camelCase(name)] || "";
+	} catch (error) {
+		return null;
+	}
+}
+
 async function getTemplateAndStyles(elementName) {
 	if (moduleCache.has(elementName)) {
 		return moduleCache.get(elementName);
@@ -35,11 +57,10 @@ async function getTemplateAndStyles(elementName) {
 		const module = await import(
 			`../components/${elementName}/${elementName}.js`
 		);
-		const camelCase = (str) =>
-			str.replace(/-./g, (match) => match.charAt(1).toUpperCase());
 		const styles = module[`${camelCase(elementName)}Styles`] || "";
 		const template = module[`${camelCase(elementName)}Template`] || "";
-		const templateAndStyles = { styles, template };
+		const arrowIcon = module?.arrowIcon || "";
+		const templateAndStyles = { styles, template, arrowIcon };
 		moduleCache.set(elementName, templateAndStyles);
 		return templateAndStyles;
 	} catch (error) {
@@ -77,6 +98,8 @@ function generateUniqueId(prefix = "id") {
 	return `${prefix}-${Math.random().toString(36).substr(2, 9)}`;
 }
 
+const arrowsToAdd = new Set();
+
 async function processElement(element, document) {
 	const tagName = element.tagName.toLowerCase();
 	const elementName = tagName.slice(4).trim();
@@ -113,6 +136,18 @@ async function processElement(element, document) {
 		}
 	}
 
+	if (elementName === "icon") {
+		template = await getIcon(element);
+	}
+
+	if (elementName === "button" && attributes.arrow === "") {
+		const { arrowIcon } = await getTemplateAndStyles("button");
+		const buttonRegex = /(<button[^>]*>)([\s\S]*?)(<\/button>)/gi;
+		template = template.replace(buttonRegex, (match, p1, p2, p3) => {
+			return `${p1}${p2}${arrowIcon}${p3}`;
+		});
+	}
+
 	const shadowDomContent = `<style>${styles}</style>${template}`;
 	const newElement = document.createElement(tagName);
 	newElement.setAttribute("server-rendered", "");
@@ -122,8 +157,8 @@ async function processElement(element, document) {
 	newElement.innerHTML = `<template shadowrootmode="open">${shadowDomContent}</template>${element.innerHTML}`;
 	const ssrId = element.getAttribute("ssr-id");
 	const originalElement = document.querySelector(`[ssr-id="${ssrId}"]`);
+	newElement.removeAttribute("ssr-id");
 	originalElement.replaceWith(newElement);
-	originalElement.removeAttribute("ssr-id");
 }
 
 export async function replaceElementWithDeclarativeShadowDom(htmlString) {
