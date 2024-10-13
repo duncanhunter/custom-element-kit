@@ -45,6 +45,7 @@ pre {
 
 code {
     white-space: pre-wrap;
+	border-radius: var(--cek-border-radius);
 }
 
 [part=copy-button] {
@@ -132,6 +133,7 @@ pre {
 
 code {
     white-space: pre-wrap;
+	border-radius: var(--cek-border-radius);
 }
 
 [part=copy-button] {
@@ -193,7 +195,7 @@ pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5p
 <span class="hljs-keyword">import</span> <span class="hljs-string">"fmt"</span>
 
 <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
-  fmt.Println(<span class="hljs-string">"Hello, World!"</span>)
+fmt.Println(<span class="hljs-string">"Hello, World!"</span>)
 }
 </code></pre>
 	<button part="copy-button" aria-label="Copy code block">
@@ -209,10 +211,11 @@ pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5p
 </template></cek-code-block>
         </section>
 
-         <h2>Limitations</h2>
-         <ul>
-            <li>Code block component does not support nesting cek-code-block elements.</li>
-         </ul> 
+        <h2>Limitations</h2>
+        <ul>
+          <li>If the code block contains live code like other custom elements it needs to be wrapped in a &lt;template&gt;&lt;/template&gt; to avoid
+            the custom elements being defined and rendered and code executed.</li>
+        </ul>
       </main>
     </div>
   </div>
