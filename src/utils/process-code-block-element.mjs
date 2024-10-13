@@ -24,12 +24,23 @@ export async function processCodeBlockElement(
 	attributes,
 	element,
 	styles,
+	template,
 ) {
 	const lang = attributes.lang || "xml";
 	const theme = attributes.theme || "github-dark";
 	const noTrim = attributes["no-trim"] === "true";
-	const innerContent = element.innerHTML;
+	let innerContent = element.innerHTML;
+	const templateMatch = innerContent.match(
+		/\s*<template>([\s\S]*?)<\/template>\s*/,
+	);
+
+	if (templateMatch) {
+		innerContent = templateMatch[1];
+	}
+
 	const formattedContent = noTrim ? innerContent : formatContent(innerContent);
+
+	console.log({ formattedContent });
 
 	try {
 		if (!languageModuleCache.has(lang)) {
@@ -60,12 +71,16 @@ export async function processCodeBlockElement(
 		}
 		const css = themeCssCache.get(theme);
 
+		const codeRegex = /<code[^>]*>[\s\S]*?<\/code>/im;
+		const highlightedTemplate = template.replace(
+			codeRegex,
+			`<code part="code" class="${lang} hljs language-${lang}" data-highlighted="yes">${highlightedCode}</code>`,
+		);
+
 		const newElement = document.createElement(element.tagName.toLowerCase());
 		newElement.setAttribute("server-rendered", "");
-		newElement.innerHTML = `<template shadowrootmode="open">
-      <style>${styles}${css}</style>
-      <pre><code class="${lang} hljs language-${lang}" data-highlighted="yes">${highlightedCode}</code></pre>
-    </template>${element.innerHTML}`;
+		newElement.innerHTML = `<template shadowrootmode="open"><style>${styles}${css}</style>${highlightedTemplate}</template>`;
+
 		element.replaceWith(newElement);
 		element.removeAttribute("ssr-id");
 	} catch (error) {
