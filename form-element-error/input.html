@@ -1,0 +1,89 @@
+<!DOCTYPE html><html lang="en"><html lang="en"><head><base href="/custom-element-kit/form-element-error/">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Input component documentation.">
+  <title>Custom Element Kit</title>
+  <link rel="stylesheet" href="assets/styles-f6de7a1a.css">
+  <link rel="stylesheet" href="assets/page-layout-bd6a1c85.css">
+  
+  
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1 class="cek-text-2">Custom Element Kit</h1>
+    </header>
+    <div class="content">
+      <aside>
+        <h2 class="cek-text-1 cek-text-bold">Getting Started</h2>
+        <ul>
+          <li><a href="index.html">Getting Started</a></li>
+        </ul>
+        <h2 class="cek-text-1 cek-text-bold">Components</h2>
+        <ul>
+          <li><a href="checkbox.html">Checkbox</a></li>
+          <li><a href="checkbox-group.html">Checkbox Group</a></li>
+          <li><a href="input.html">Input</a></li>
+          <li><a href="code-block.html">Code block</a></li>
+        </ul>
+      </aside>
+      <main>
+        <section>
+          <h1>Input (cek-input)</h1>
+
+          <form novalidate>
+            <cek-input label="nsw" value="nsw" required server-rendered=""><template shadowrootmode="open"><style>
+:host {
+	display: flex;
+	flex-direction: column;
+	font-size: var(--cek-font-size-1);
+	font-family: var(--cek-font-family);
+	color: var(--cek-text-color-0);
+}
+
+#control {
+	border: var(--cek-form-control-border);
+	border-radius: var(--cek-border-radius);
+	height: var(--cek-form-control-height-medium);
+	font-size: inherit;
+	color: inherit;
+}
+
+#control:focus {
+		outline: var(--cek-focus-ring);
+		outline-offset: var(--cek-focus-ring-offset);
+}
+
+#error {
+	color: var(--cek-text-color-error);
+}
+  
+:host([help]) #help,
+:host([error]) #error {
+	margin-block-start: var(--cek-space-2);
+}
+
+:host([invalid]) #control {
+	border-color: var(--cek-border-color-error);
+}
+  
+:host([invalid]) #control:focus {
+	  outline-color: var(--cek-border-color-error);
+}
+</style>
+<label for="control" id="label" part="label"><slot name="label">nsw</slot></label>
+<div id="help" part="help"><slot name="help"></slot></div>
+<div id="error" part="error"><slot name="error"></slot></div>
+<input type="text" id="control" part="control" aria-describedby="help error" value="nsw">
+</template></cek-input>
+            <button type="submit">Submit</button>
+            <button type="reset">Reset</button>
+          </form>
+        </section>
+      </main>
+    </div>
+  </div>
+
+
+<script type="module" src="./form-element.js"></script><script type="module" src="./input.js"></script></body></html>
