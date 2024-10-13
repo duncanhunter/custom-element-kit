@@ -30,9 +30,9 @@ export async function processCodeBlockElement(
 	const theme = attributes.theme || "github-dark";
 	const noTrim = attributes["no-trim"] === "true";
 	const innerContent = element.innerHTML;
-	
+
 	let formattedContent = noTrim ? innerContent : formatContent(innerContent);
-	
+
 	const templateMatch = formattedContent.match(
 		/<template>([\s\S]*?)<\/template>/,
 	);
