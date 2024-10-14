@@ -21,6 +21,7 @@ export const inputStyles = /* css */ `
 	border-radius: var(--cek-border-radius);
 	height: var(--cek-form-control-height-medium);
 	font-size: inherit;
+	font-family: inherit;
 	color: inherit;
 }
 
@@ -38,11 +39,11 @@ export const inputStyles = /* css */ `
 	margin-block-start: var(--cek-space-2);
 }
 
-:host([invalid]) #control {
+:host([error]) #control {
 	border-color: var(--cek-border-color-error);
 }
   
-:host([invalid]) #control:focus {
+:host([error]) #control:focus {
 	  outline-color: var(--cek-border-color-error);
 }
 `;

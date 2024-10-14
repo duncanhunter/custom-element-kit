@@ -16,32 +16,31 @@ export const checkboxStyles = /* css */ `
 	font-size: var(--cek-font-size-1);
 	font-family: var(--cek-font-family);
 	color: var(--cek-text-color-0);
-  
-	#control {
-	  border: none;
-	  outline: none;
-	  accent-color: var(--cek-color-primary-300);
-	  width: var(--cek-space-6);
-	  height: var(--cek-space-6);
-	}
-  
-	#error {
-		color: var(--cek-text-color-error);
-	}
-
-	&[help] #help,
-	&[error] #error {
-	  margin-block-start: var(--cek-space-2);
-	}
 }
 
-:host(:focus-within) {
-  outline: var(--cek-focus-ring);
-  outline-offset: var(--cek-focus-ring-offset);
+#control {
+	border: none;
+	outline: none;
+	accent-color: var(--cek-color-primary-300);
+	width: var(--cek-space-6);
+	height: var(--cek-space-6);
+}
+  
+#error {
+	color: var(--cek-text-color-error);
+}
+  
+:host([help]) #help,
+:host([error]) #error {
+	margin-block-start: var(--cek-space-2);
 }
 
-:host([invalid]:focus-within) {
-  outline-color: var(--cek-border-color-error);
+:host([error]) #control {
+	border-color: var(--cek-border-color-error);
+}
+  
+:host([error]) #control:focus {
+	  outline-color: var(--cek-border-color-error);
 }
 `;
 
