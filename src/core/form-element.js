@@ -84,6 +84,14 @@ export class FormElement extends HTMLElement {
 		value ? this.setAttribute("help", value) : this.removeAttribute("help");
 	}
 
+	get error() {
+		return this.getAttribute("error");
+	}
+
+	set error(value) {
+		value ? this.setAttribute("error", value) : this.removeAttribute("error");
+	}
+
 	get form() {
 		return this.#internals.form;
 	}

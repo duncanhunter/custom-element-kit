@@ -185,7 +185,7 @@ export class CodeBlock extends HTMLElement {
 			/\s*<template>([\s\S]*?)<\/template>\s*/,
 		);
 		if (templateMatch) {
-			rawContent = templateMatch[1].trim();
+			rawContent = templateMatch[1];
 		}
 		const formattedContent = noTrim
 			? rawContent

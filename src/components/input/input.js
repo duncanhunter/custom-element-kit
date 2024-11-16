@@ -26,17 +26,18 @@ export const inputStyles = /* css */ `
 }
 
 #control:focus {
-		outline: var(--cek-focus-ring);
-		outline-offset: var(--cek-focus-ring-offset);
+	outline: var(--cek-focus-ring);
+	outline-offset: var(--cek-focus-ring-offset);
 }
 
 #error {
 	color: var(--cek-text-color-error);
 }
   
+:host([label]) #label,
 :host([help]) #help,
 :host([error]) #error {
-	margin-block-start: var(--cek-space-2);
+	margin-block-end: var(--cek-space-2);
 }
 
 :host([error]) #control {
@@ -44,7 +45,7 @@ export const inputStyles = /* css */ `
 }
   
 :host([error]) #control:focus {
-	  outline-color: var(--cek-border-color-error);
+	outline-color: var(--cek-border-color-error);
 }
 `;
 

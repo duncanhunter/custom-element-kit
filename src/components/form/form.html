@@ -10,10 +10,16 @@
   <link rel="stylesheet" href="../../core/page-layout.css">
   <script type="module" src="../../core/form-element.js"></script>
   <script type="module" src="../button/button.js"></script>
-  <script type="module" src="../form/form.js"></script>
-  <script type="module" src="../form/form2.js"></script>
   <script type="module" src="../code-block/code-block.js"></script>
-  <script type="module" src="input.js"></script>
+  <script type="module" src="../input/input.js"></script>
+  <script type="module" src="./form.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./form.sw.js').catch((error) => {
+        console.error('Service Worker registration failed:', error);
+      });
+    }
+  </script>
 </head>
 
 <body>
@@ -48,23 +54,19 @@
         <section>
           <h1>Input (cek-input)</h1>
 
-          <cek-form skip-server-render>
-            <cek-input required value="nsw" label="nsw"></cek-input>
+          <cek-form fetch="post:/api/endpoint1" fetch-target="ui-input[name=email]" fetch-swap="outerHTML" fetch
+            skip-server-render>
+            <cek-input required label="nsw"></cek-input>
             <div class="cek-form-actions">
               <cek-button variant="primary" type="submit">Submit</cek-button>
               <cek-button variant="secondary" type="reset">Reset</cek-button>
             </div>
           </cek-form>
 
-          <cek-form2>
-            <cek-input required name="nsw" label="nsw"></cek-input>
-            <cek-button variant="primary" type="submit">Submit</cek-button>
-          </cek-form2>
-
           <cek-code-block lang="xml" theme="github-dark">
             <template>
-              <cek-form>
-                <cek-input required value="nsw" label="nsw"></cek-input>
+              <cek-form skip-server-render>
+                <cek-input required label="nsw"></cek-input>
                 <div class="cek-form-actions">
                   <cek-button variant="primary" type="submit">Submit</cek-button>
                   <cek-button variant="secondary" type="reset">Reset</cek-button>

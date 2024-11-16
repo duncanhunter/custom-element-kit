@@ -150,10 +150,12 @@ export class Button extends HTMLElement {
 
 	constructor() {
 		super();
+
 		if (!this.shadowRoot) {
 			this.attachShadow({ mode: "open", delegatesFocus: true });
 			this.shadowRoot.innerHTML = `<style>${buttonStyles}</style>${buttonTemplate}`;
 		}
+
 		this.internals = this.attachInternals();
 		this.buttonElement = this.shadowRoot.querySelector("[part=button]");
 		this.loadingIconElement = this.shadowRoot.querySelector(
