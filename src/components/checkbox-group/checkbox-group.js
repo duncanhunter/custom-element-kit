@@ -8,7 +8,7 @@ export const checkboxGroupTemplate = /* html */ `
 	<div part="container">
 		<slot></slot>
 	</div>
-</fieldset >
+</fieldset>
 `;
 
 export const checkboxGroupStyles = /* css */ `
@@ -40,11 +40,11 @@ legend {
   height: var(--cek-form-control-height-medium);
   font-size: inherit;
   color: inherit;
+}
 
-  &:focus {
+#control:focus {
 	outline: var(--cek-focus-ring);
 	outline-offset: var(--cek-focus-ring-offset);
-  }
 }
 
 #error {
@@ -53,7 +53,7 @@ legend {
 
 :host([help]) #help,
 :host([error]) #error {
-  margin-block-start: var(--cek-space-2);
+	margin-block-start: var(--cek-space-2);
 }
 
 [part="container"] {
@@ -63,14 +63,12 @@ legend {
   gap: var(--cek-space-4);
 }
 
-:host([error]) {
-  #control {
+:host([error])  #control {
 	border-color: var(--cek-border-color-error);
-  
-	&:focus {
-	  outline-color: var(--cek-border-color-error);
-	}
-  }
+}	
+
+:host([error])  #control:focus {
+	outline-color: var(--cek-border-color-error);
 }
 `;
 

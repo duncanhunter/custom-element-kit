@@ -4,9 +4,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Input component documentation.">
   <title>Custom Element Kit</title>
-  <link rel="stylesheet" href="core/styles.css">
-  <link rel="stylesheet" href="core/page-layout.css">
+  <link rel="stylesheet" href="../../core/styles.css">
+  <link rel="stylesheet" href="../../core/page-layout.css">
+  <script type="module" src="../../core/form-element.js"></script>
+  <script type="module" src="input.js"></script>
 </head>
 
 <body>
@@ -38,9 +41,14 @@
         </ul>
       </aside>
       <main>
-        <section id="getting-started">
-          <h2 class="cek-text-3">Getting Started</h2>
-          <p>Welcome to the Custom Element Kit. Follow the instructions below to get started.</p>
+        <section>
+          <h1>Input (cek-input)</h1>
+
+          <form novalidate>
+            <cek-input required value="nsw" label="nsw"></cek-input>
+            <button type="submit">Submit</button>
+            <button type="reset">Reset</button>
+          </form>
         </section>
       </main>
     </div>

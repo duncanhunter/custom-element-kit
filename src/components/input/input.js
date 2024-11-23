@@ -14,38 +14,38 @@ export const inputStyles = /* css */ `
 	font-size: var(--cek-font-size-1);
 	font-family: var(--cek-font-family);
 	color: var(--cek-text-color-0);
-  
-	#control {
-	  border: var(--cek-form-control-border);
-	  border-radius: var(--cek-border-radius);
-	  height: var(--cek-form-control-height-medium);
-	  font-size: inherit;
-	  color: inherit;
-  
-	  &:focus {
-		outline: var(--cek-focus-ring);
-		outline-offset: var(--cek-focus-ring-offset);
-	  }
-	}
-
-	#error {
-		color: var(--cek-text-color-error);
-	}
-  
-	&[help] #help,
-	&[error] #error {
-	  margin-block-start: var(--cek-space-2);
-	}
 }
 
-:host([invalid]) {
-  #control {
-	border-color: var(--cek-border-color-error);
+#control {
+	border: var(--cek-form-control-border);
+	border-radius: var(--cek-border-radius);
+	height: var(--cek-form-control-height-medium);
+	font-size: inherit;
+	font-family: inherit;
+	color: inherit;
+}
+
+#control:focus {
+	outline: var(--cek-focus-ring);
+	outline-offset: var(--cek-focus-ring-offset);
+}
+
+#error {
+	color: var(--cek-text-color-error);
+}
   
-	&:focus {
-	  outline-color: var(--cek-border-color-error);
-	}
-  }
+:host([label]) #label,
+:host([help]) #help,
+:host([error]) #error {
+	margin-block-end: var(--cek-space-2);
+}
+
+:host([error]) #control {
+	border-color: var(--cek-border-color-error);
+}
+  
+:host([error]) #control:focus {
+	outline-color: var(--cek-border-color-error);
 }
 `;
 

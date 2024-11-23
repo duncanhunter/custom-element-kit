@@ -1,5 +1,18 @@
 export class FormElement extends HTMLElement {
 	static formAssociated = true;
+	static get observedAttributes() {
+		return [
+			"value",
+			"error",
+			"label",
+			"help",
+			"disabled",
+			"title",
+			"autofocus",
+			"required",
+			"name",
+		];
+	}
 
 	#internals;
 	#errorElement;
@@ -19,13 +32,12 @@ export class FormElement extends HTMLElement {
 		super();
 		this.pristine = true;
 		this.#internals = this.attachInternals();
+
 		if (!this.shadowRoot) {
 			this.attachShadow({ mode: "open" });
 			this.shadowRoot.innerHTML = `<style>${styles}</style>${template}`;
-			// console.log("attached shadowRoot");
-		} else {
-			// console.log("shadowRoot already exists");
 		}
+
 		this.#errorElement = this.shadowRoot.getElementById("error");
 		this.#labelElement = this.shadowRoot.getElementById("label");
 		this.#helpElement = this.shadowRoot.getElementById("help");
@@ -37,20 +49,6 @@ export class FormElement extends HTMLElement {
 
 	get styles() {
 		throw new Error("styles getter must be implemented");
-	}
-
-	static get observedAttributes() {
-		return [
-			"value",
-			"error",
-			"label",
-			"help",
-			"disabled",
-			"title",
-			"autofocus",
-			"required",
-			"name",
-		];
 	}
 
 	get controlAttributes() {
@@ -70,14 +68,6 @@ export class FormElement extends HTMLElement {
 		this.#internals.setFormValue(value);
 	}
 
-	get invalid() {
-		return this.getAttribute("invalid");
-	}
-
-	set invalid(value) {
-		value ? this.setAttribute("invalid", "") : this.removeAttribute("invalid");
-	}
-
 	get label() {
 		return this.getAttribute("label");
 	}
@@ -92,6 +82,14 @@ export class FormElement extends HTMLElement {
 
 	set help(value) {
 		value ? this.setAttribute("help", value) : this.removeAttribute("help");
+	}
+
+	get error() {
+		return this.getAttribute("error");
+	}
+
+	set error(value) {
+		value ? this.setAttribute("error", value) : this.removeAttribute("error");
 	}
 
 	get form() {
@@ -283,7 +281,6 @@ export class FormElement extends HTMLElement {
 
 	#setCustomError(error) {
 		if (error) {
-			this.invalid = true;
 			this.#errorElement.textContent = error ?? "";
 			this.controlElement.setCustomValidity(error);
 			this.#internals.setValidity(
@@ -299,7 +296,6 @@ export class FormElement extends HTMLElement {
 		this.removeAttribute("error");
 		this.error = "";
 		this.#errorElement.textContent = "";
-		this.invalid = false;
 		this.#internals.setValidity({});
 	}
 
@@ -322,7 +318,6 @@ export class FormElement extends HTMLElement {
 			if (showError) {
 				this.error = error;
 				this.#errorElement.textContent = error;
-				this.invalid = true;
 				this.dispatchEvent(
 					new CustomEvent("invalid", {
 						bubbles: true,

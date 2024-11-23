@@ -257,3 +257,8 @@ fieldset {
 .cek-text-bold {
 	font-weight: 700;
 }
+
+.cek-form-actions {
+	display: flex;
+	gap: var(--cek-space-4);
+}
