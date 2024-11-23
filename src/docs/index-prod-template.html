@@ -6,26 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Custom Element Kit Docs">
     <title>Custom Element Kit</title>
-    <link rel="stylesheet" href="./core/styles.css">
-    <link rel="stylesheet" href="./docs/page-layout.css">
-
-    <script type="module">
-        import autoDefineElements from './utils/auto-define-elements.mjs';
-        document.addEventListener('DOMContentLoaded', () => {
-            (() => {
-                const page = window.location.pathname.split('/').pop().replace('.html', '') || 'welcome';
-                const path = ['welcome'].includes(page) ? `./docs/${page}.html` : `./components/${page}/${page}.html`;
-                console.log(`Loading ${page} from ${path}`);
-                fetch(path)
-                    .then(response => response.text())
-                    .then(data => {
-                        document.getElementById('main-content').innerHTML = data;
-                        autoDefineElements('development');
-                    })
-                    .catch(error => console.error(`Error loading ${page}:`, error));
-            })();
-        });
-    </script>
+    <link rel="stylesheet" href="./assets/styles.css">
+    <link rel="stylesheet" href="./assets/page-layout.css">
 </head>
 
 <body>
@@ -51,6 +33,10 @@
             </main>
         </div>
     </div>
+    <script type="module">
+        import autoDefineElements from './assets/auto-define-elements.mjs';
+        autoDefineElements('production');
+    </script>
 </body>
 
 </html>

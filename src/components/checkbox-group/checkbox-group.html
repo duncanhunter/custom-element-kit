@@ -1,70 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
+<section>
+  <h1>Checkbox Group (cek-checkbox-group)</h1>
+  <h2 id="Validation">Validation</h2>
+  <h3 id="min-selections">Validate - Min Selections (min-selections)</h3>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Checkbox group documentation.">
-  <title>Custom Element Kit</title>
-  <link rel="stylesheet" href="../../core/styles.css">
-  <link rel="stylesheet" href="../../core/page-layout.css">
-  <script type="module" src="../../core/form-element.js"></script>
-  <script type="module" src="../checkbox/checkbox.js"></script>
-  <script type="module" src="checkbox-group.js"></script>
-</head>
-
-<body>
-  <div class="container">
-    <header>
-      <h1 class="cek-text-2">Custom Element Kit</h1>
-    </header>
-    <div class="content">
-      <aside>
-        <h2 class="cek-text-1 cek-text-bold">Getting Started</h2>
-        <ul>
-          <li><a href="index.html">Getting Started</a></li>
-        </ul>
-        <h2 class="cek-text-1 cek-text-bold">Components</h2>
-        <ul>
-          <li><a href="badge.html">Badge</a></li>
-          <li><a href="button.html">Button</a></li>
-          <li><a href="checkbox.html">Checkbox</a></li>
-          <li><a href="checkbox-group.html">Checkbox Group</a></li>
-          <li><a href="code-block.html">Code block</a></li>
-          <li><a href="details.html">Details</a></li>
-          <li><a href="icon.html">Icon</a></li>
-          <li><a href="input.html">Input</a></li>
-          <li><a href="form.html">Form</a></li>
-          <li><a href="menu.html">Menu</a></li>
-          <li><a href="select.html">Select</a></li>
-          <li><a href="separator.html">Separator</a></li>
-          <li><a href="textarea.html">Textarea</a></li>
-        </ul>
-      </aside>
-      <main>
-        <section>
-          <h1>Checkbox Group (cek-checkbox-group)</h1>
-          <h2 id="Validation">Validation</h2>
-          <h3 id="min-selections">Validate - Min Selections (min-selections)</h3>
-
-          <form novalidate>
-            <cek-checkbox-group error="foo" min-selections="4" name="states" required
-              label="States and Territories the company operates in:" help="Select all that apply.">
-              <cek-checkbox value="nsw" label="nsw"></cek-checkbox>
-              <cek-checkbox value="qld" label="qld"></cek-checkbox>
-              <cek-checkbox value="act" label="act"></cek-checkbox>
-              <cek-checkbox value="tas" label="tas"></cek-checkbox>
-              <cek-checkbox value="wa" label="wa"></cek-checkbox>
-              <cek-checkbox value="nt" label="nt"></cek-checkbox>
-              <cek-checkbox value="vic" label="vic"></cek-checkbox>
-            </cek-checkbox-group>
-            <button type="submit">Submit</button>
-            <button type="reset">Reset</button>
-          </form>
-        </section>
-      </main>
-    </div>
-  </div>
-</body>
-
-</html>
+  <form novalidate>
+    <cek-checkbox-group error="foo" min-selections="4" name="states" required
+      label="States and Territories the company operates in:" help="Select all that apply.">
+      <cek-checkbox value="nsw" label="nsw"></cek-checkbox>
+      <cek-checkbox value="qld" label="qld"></cek-checkbox>
+      <cek-checkbox value="act" label="act"></cek-checkbox>
+      <cek-checkbox value="tas" label="tas"></cek-checkbox>
+      <cek-checkbox value="wa" label="wa"></cek-checkbox>
+      <cek-checkbox value="nt" label="nt"></cek-checkbox>
+      <cek-checkbox value="vic" label="vic"></cek-checkbox>
+    </cek-checkbox-group>
+    <button type="submit">Submit</button>
+    <button type="reset">Reset</button>
+  </form>
+</section>

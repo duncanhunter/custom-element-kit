@@ -6,7 +6,7 @@ test("given input with  default value clering it and should submit with an error
 	const context = await browser.newContext({ hasTouch: true });
 	const page = await context.newPage();
 
-	await page.goto("/components/input/input.html");
+	await page.goto("/input.html");
 	await page.getByText("Submit").click();
 	const inputElement = await page.locator("cek-input");
 	await inputElement.evaluate((element) => {

@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import terser from "@rollup/plugin-terser";
@@ -22,23 +23,43 @@ export default {
 		html({
 			rootDir: __dirname,
 			input: "src/**/*.html",
+			exclude: ["src/docs/index-prod-template.html", "src/index.html"],
+			extractAssets: false,
+			minify: true,
 			transformHtml: [
-				(html) => {
+				(html, { htmlFileName }) => {
+					let wrappedContent = html;
+					if (!htmlFileName.startsWith("index")) {
+						const template = readFileSync(
+							"src/docs/index-prod-template.html",
+							"utf-8",
+						);
+						console.log(htmlFileName);
+						wrappedContent = template.replace(
+							"<!-- Page-specific content will be loaded here -->",
+							html,
+						);
+					}
+
 					const refName = process.env.GITHUB_REF_NAME;
 					const baseTag = refName
 						? `<base href="/custom-element-kit/${refName}/">`
 						: "";
-					const updatedHtml = html.replace(
+					const updatedHtml = wrappedContent.replace(
 						/<head(\s[^>]*)?>/,
 						`<head$1>${baseTag}`,
 					);
 					return replaceElementWithDeclarativeShadowDom(updatedHtml);
 				},
 			],
-			minify: false,
 		}),
 		copy({
-			targets: [{ src: "src/components/icons", dest: "dist" }],
+			targets: [
+				{ src: "src/components/icons", dest: "dist" },
+				{ src: "src/core/styles.css", dest: "dist/assets" },
+				{ src: "src/core/page-layout.css", dest: "dist/assets" },
+				{ src: "src/utils/auto-define-elements.mjs", dest: "dist/assets" },
+			],
 		}),
 		minifyHTML.default(),
 		terser(),

@@ -40,8 +40,6 @@ export async function processCodeBlockElement(
 
 	const formattedContent = noTrim ? innerContent : formatContent(innerContent);
 
-	console.log({ formattedContent });
-
 	try {
 		if (!languageModuleCache.has(lang)) {
 			const langModule = await import(`highlight.js/lib/languages/${lang}`);
