@@ -13,19 +13,24 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export default {
+	input: ["src/components/**/*.js", "!src/components/**/*.e2e.js"],
 	output: {
 		dir: "dist",
 	},
 	plugins: [
 		multiInput({
-			relative: "dist/",
+			relative: "src/components",
+			transformOutputPath: (output, input) => {
+				console.log(output, input);
+				return output.split("/")[1];
+			},
 		}),
 		html({
 			rootDir: __dirname,
 			input: "src/**/*.html",
-			exclude: ["src/docs/index-prod-template.html", "src/index.html"],
+			exclude: ["src/docs/index-prod-template.html"],
 			extractAssets: false,
-			minify: false,
+			minify: true,
 			transformHtml: [
 				(html, { htmlFileName }) => {
 					let wrappedContent = html;
@@ -57,7 +62,7 @@ export default {
 			targets: [
 				{ src: "src/components/icons", dest: "dist" },
 				{ src: "src/core/styles.css", dest: "dist/assets" },
-				{ src: "src/core/page-layout.css", dest: "dist/assets" },
+				{ src: "src/docs/page-layout.css", dest: "dist/assets" },
 				{ src: "src/utils/auto-define-elements.mjs", dest: "dist/assets" },
 			],
 		}),
