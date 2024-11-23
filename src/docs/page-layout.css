@@ -26,6 +26,11 @@ aside {
 	width: 16rem;
 }
 
+aside a.active {
+    font-weight: bold;
+    color: var(--cek-color-primary-500);
+}
+
 h2 {
 	padding-block: 0.8rem;
 	border-bottom: 1px solid var(--cek-border-color-4);

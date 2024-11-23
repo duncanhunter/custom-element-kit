@@ -22,7 +22,14 @@
                         autoDefineElements('development');
                     })
                     .catch(error => console.error(`Error loading ${page}:`, error));
+                const links = document.querySelectorAll('aside a');
+                links.forEach(link => {
+                    if (link.getAttribute('href').includes(page)) {
+                        link.classList.add('active');
+                    }
+                });
             })();
+
         });
     </script>
 </head>
