@@ -15,7 +15,6 @@
             (() => {
                 const page = window.location.pathname.split('/').pop().replace('.html', '') || 'welcome';
                 const path = ['welcome'].includes(page) ? `./docs/${page}.html` : `./components/${page}/${page}.html`;
-                console.log(`Loading ${page} from ${path}`);
                 fetch(path)
                     .then(response => response.text())
                     .then(data => {

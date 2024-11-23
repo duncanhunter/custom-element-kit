@@ -20,17 +20,14 @@ export default {
 	plugins: [
 		multiInput({
 			relative: "src/components",
-			transformOutputPath: (output, input) => {
-				console.log(output, input);
-				return output.split("/")[1];
-			},
+			transformOutputPath: (output, input) => output.split("/")[1],
 		}),
 		html({
 			rootDir: __dirname,
 			input: "src/**/*.html",
-			exclude: ["src/docs/index-prod-template.html"],
+			exclude: ["src/docs/index-prod-template.html", "src/index.html"],
 			extractAssets: false,
-			minify: false,
+			minify: true,
 			transformHtml: [
 				(html, { htmlFileName }) => {
 					let wrappedContent = html;
@@ -39,7 +36,6 @@ export default {
 							"src/docs/index-prod-template.html",
 							"utf-8",
 						);
-						console.log(htmlFileName);
 						wrappedContent = template.replace(
 							"<!-- Page-specific content will be loaded here -->",
 							html,
@@ -64,6 +60,7 @@ export default {
 				{ src: "src/core/styles.css", dest: "dist/assets" },
 				{ src: "src/docs/page-layout.css", dest: "dist/assets" },
 				{ src: "src/utils/auto-define-elements.mjs", dest: "dist/assets" },
+				{ src: "dist/welcome.html", dest: "dist", rename: "index.html" },
 			],
 		}),
 		minifyHTML.default(),
