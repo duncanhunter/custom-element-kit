@@ -29,7 +29,7 @@ jobs:
 
       - name: Start HTTP server and run tests
         run: |
-          npx http-server ./src &
+          npx http-server src -c-1 --proxy 'http://localhost:8080?' &
           sleep 5
           npx playwright test
 

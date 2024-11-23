@@ -6,7 +6,7 @@ test("given checkbox group it should submit with error", async ({
 	const context = await browser.newContext({ hasTouch: true });
 	const page = await context.newPage();
 
-	await page.goto("/components/checkbox-group/checkbox-group.html");
+	await page.goto("/checkbox-group.html");
 	await page.getByText("Submit").click();
 	const customElement = await page.locator("cek-checkbox-group");
 	const validityMessage = await customElement.evaluate(
