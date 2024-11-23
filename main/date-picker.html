@@ -1,11 +1,10 @@
 <!DOCTYPE html><html lang="en"><html lang="en"><head><base href="/custom-element-kit/main/">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Checkbox component documentation.">
+  <meta name="description" content="Input component documentation.">
   <title>Custom Element Kit</title>
   <link rel="stylesheet" href="assets/styles-83e1211f.css">
   <link rel="stylesheet" href="assets/page-layout-bd6a1c85.css">
-  
   
 </head>
 
@@ -39,63 +38,81 @@
       </aside>
       <main>
         <section>
-          <h1>Checkbox (cek-checkbox)</h1>
+          <h1>Date Picker (cek-date-picker)</h1>
 
           <form novalidate>
-            <cek-checkbox label="nsw" value="nsw" required server-rendered=""><template shadowrootmode="open"><style>
+            <cek-date-picker label="nsw" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
-	align-items: flex-start;
+	flex-direction: column;
 	font-size: var(--cek-font-size-1);
 	font-family: var(--cek-font-family);
 	color: var(--cek-text-color-0);
 }
-
+	
 #control {
-	border: none;
-	outline: none;
-	accent-color: var(--cek-color-primary-300);
-	width: var(--cek-space-6);
-	height: var(--cek-space-6);
+	border: var(--cek-form-control-border);
+	border-radius: var(--cek-border-radius);
+	font-size: inherit;
+	font-family: inherit;
+	color: inherit;
 }
   
+#control:focus {
+	outline: var(--cek-focus-ring);
+	outline-offset: var(--cek-focus-ring-offset);
+}
+
 #error {
-	color: var(--cek-text-color-error);
+color: var(--cek-text-color-error);
 }
-  
+
 :host([help]) #help,
 :host([error]) #error {
-	margin-block-start: var(--cek-space-2);
+margin-block-start: var(--cek-space-2);
 }
 
 :host([error]) #control {
-	border-color: var(--cek-border-color-error);
+border-color: var(--cek-border-color-error);
 }
-  
+
 :host([error]) #control:focus {
-	  outline-color: var(--cek-border-color-error);
+  outline-color: var(--cek-border-color-error);
+}
+
+:host([resize="none"]) #control {
+	resize: none;
+}
+
+dialog {
+	position: fixed;
+	outline: none;
+	padding: 0;
+	margin: 0;
+	border: var(--cek-border);
+	box-shadow:  var(--cek-shadow-3);
+	border-radius: var(--cek-border-radius);
+	background-color: var(--cek-surface-color-0);
 }
 </style>
-<input type="checkbox" id="control" part="control" aria-describedby="help error" value="nsw">
-<div>
-	<label for="control" id="label" part="label"><slot name="label">nsw</slot></label>
-	<div id="help" part="help"><slot name="help"></slot></div>
-	<div id="error" part="error"><slot name="error"></slot></div>
+<label for="control" id="label" part="label"><slot name="label">nsw</slot></label>
+<div id="help" part="help"><slot name="help"></slot></div>
+<div id="error" part="error"><slot name="error"></slot></div>
+<div class="input-container">
+    <input id="control" part="control" aria-describedby="help error" readonly>
+    <button id="toggle" aria-label="Toggle Calendar" part="toggle-button">📅</button>
 </div>
-</template></cek-checkbox>
-            <button type="submit">Submit</button>
-            <button type="reset">Reset</button>
+<dialog tabindex="-1" part="popover" role="menu">
+    <div id="calendar-container">
+        <!-- Calendar will be rendered here -->
+    </div>
+</dialog>
+</template></cek-date-picker>
           </form>
-          <p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="html,result" data-slug-hash="ZEgOyqP" data-pen-title="checkbox" data-user="duncanhunter" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-            <span>See the Pen <a href="https://codepen.io/duncanhunter/pen/ZEgOyqP">
-                checkbox</a> by DuncanHunter (<a href="https://codepen.io/duncanhunter">@duncanhunter</a>)
-              on <a href="https://codepen.io">CodePen</a>.</span>
-          </p>
-          <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
         </section>
       </main>
     </div>
   </div>
 
 
-<script type="module" src="./form-element.js"></script><script type="module" src="./checkbox.js"></script></body></html>
+<script type="module" src="./date-picker.js"></script></body></html>
