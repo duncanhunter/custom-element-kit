@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { copyFileSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import terser from "@rollup/plugin-terser";
@@ -60,14 +60,20 @@ export default {
 				{ src: "src/core/styles.css", dest: "dist/assets" },
 				{ src: "src/docs/page-layout.css", dest: "dist/assets" },
 				{ src: "src/utils/auto-define-elements.mjs", dest: "dist/assets" },
-				{ src: "dist/welcome.html", dest: "dist/index.html" },
 			],
-			hook: "writeBundle",
 		}),
 		minifyHTML.default(),
 		terser(),
 		summary({
 			showGzippedSize: true,
 		}),
+		{
+			name: "duplicate-welcome-html",
+			writeBundle() {
+				const srcPath = path.join(__dirname, "dist", "welcome.html");
+				const destPath = path.join(__dirname, "dist", "index.html");
+				copyFileSync(srcPath, destPath);
+			},
+		},
 	],
 };
