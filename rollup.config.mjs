@@ -25,7 +25,7 @@ export default {
 			input: "src/**/*.html",
 			exclude: ["src/docs/index-prod-template.html", "src/index.html"],
 			extractAssets: false,
-			minify: true,
+			minify: false,
 			transformHtml: [
 				(html, { htmlFileName }) => {
 					let wrappedContent = html;
