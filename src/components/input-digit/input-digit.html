@@ -74,7 +74,7 @@
             display: block;
         }
     </style>`;
-        class NumberInput extends HTMLElement {
+        class InputDigit extends HTMLElement {
             static formAssociated = true;
 
             static get observedAttributes() {
@@ -306,6 +306,10 @@
             }
 
             #onFormSubmit(event) {
+                if (!this.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
                 this.#isSubmitted = true;
                 this.#updateValue();
             }
@@ -351,7 +355,7 @@
 
         }
 
-        customElements.define('number-input', NumberInput);
+        customElements.define('input-digit', InputDigit);
     </script>
 </head>
 
@@ -359,7 +363,7 @@
     <form novalidate id="otp-form" action="#" method="POST">
         <div>
             <label for="otp">Enter Number:</label>
-            <number-input required id="otp" name="otp" group-size="3" groups="2"></number-input>
+            <input-digit required id="otp" name="otp" group-size="3" groups="2"></input-digit>
         </div>
         <div style="margin-top: 20px;">
             <button type="submit">Submit Number</button>
