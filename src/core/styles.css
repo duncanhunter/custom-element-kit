@@ -1,4 +1,57 @@
+
+:not(:defined) > template[shadowrootmode] ~ * {
+	display: none;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: var(--cek-font-sans);
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+	display: block;
+	max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+	font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	overflow-wrap: break-word;
+	margin: 0;
+	padding: 0;
+	font-weight: normal;
+}
+
+body,
+fieldset {
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+
 :root {
+	color-scheme: light dark;
+
 	--cek-color-gray-100: hsl(240 4.8% 95.9%);
 	--cek-color-gray-200: hsl(240 5.9% 90%);
 	--cek-color-gray-300: hsl(240 4.9% 83.9%);
@@ -108,27 +161,23 @@
 	--cek-height-small: var(--cek-space-10);
 	--cek-height-medium: var(--cek-space-11);
 	--cek-height-large: var(--cek-space-12);
-}
-
-:where(html) {
-	color-scheme: light;
-	--cek-text-color-0: var(--cek-color-gray-900);
-	--cek-text-color-1: var(--cek-color-gray-800);
-	--cek-text-color-2: var(--cek-color-gray-600);
-	--cek-text-color-3: var(--cek-color-gray-400);
-	--cek-surface-color-0: white;
-	--cek-surface-color-1: var(--cek-color-gray-200);
-	--cek-surface-color-2: var(--cek-color-gray-300);
-	--cek-surface-color-3: var(--cek-color-gray-400);
-	--cek-border-color-0: var(--cek-color-gray-950);
-	--cek-border-color-1: var(--cek-color-gray-900);
-	--cek-border-color-2: var(--cek-color-gray-700);
-	--cek-border-color-3: var(--cek-color-gray-400);
-	--cek-border-color-4: var(--cek-color-gray-200);
-	--cek-color-primary-200: var(--cek-color-blue-200);
-	--cek-color-primary-300: var(--cek-color-blue-300);
-	--cek-color-primary-500: var(--cek-color-blue-500);
-	--cek-color-primary-800: var(--cek-color-blue-800);
+	--cek-text-color-0: light-dark(var(--cek-color-gray-900), var(--cek-color-gray-50));
+	--cek-text-color-1: light-dark(var(--cek-color-gray-800), var(--cek-color-gray-100));
+	--cek-text-color-2: light-dark(var(--cek-color-gray-600), var(--cek-color-gray-200));
+	--cek-text-color-3: light-dark(var(--cek-color-gray-400), var(--cek-color-gray-300));
+	--cek-surface-color-0: light-dark(white, var(--cek-color-gray-900));
+	--cek-surface-color-1: light-dark(var(--cek-color-gray-200), var(--cek-color-gray-800));
+	--cek-surface-color-2: light-dark(var(--cek-color-gray-300), var(--cek-color-gray-700));
+	--cek-surface-color-3: light-dark(var(--cek-color-gray-400), var(--cek-color-gray-600));
+	--cek-border-color-0: light-dark(var(--cek-color-gray-950), var(--cek-color-gray-100));
+	--cek-border-color-1: light-dark(var(--cek-color-gray-900), var(--cek-color-gray-200));
+	--cek-border-color-2: light-dark(var(--cek-color-gray-700), var(--cek-color-gray-400));
+	--cek-border-color-3: light-dark(var(--cek-color-gray-400), var(--cek-color-gray-600));
+	--cek-border-color-4: light-dark(var(--cek-color-gray-200), var(--cek-color-gray-800));
+	--cek-color-primary-200: light-dark(var(--cek-color-blue-200), var(--cek-color-blue-200));
+	--cek-color-primary-300: light-dark(var(--cek-color-blue-300), var(--cek-color-blue-300));
+	--cek-color-primary-500: light-dark(var(--cek-color-blue-500), var(--cek-color-blue-500));
+	--cek-color-primary-800: light-dark(var(--cek-color-blue-800), var(--cek-color-blue-800));
 
 	body {
 		background-color: var(--cek-surface-color-0);
@@ -136,86 +185,6 @@
 
 	color: var(--cek-text-color-1);
 	caret-color: var(--cek-color-primary-600);
-}
-
-@media (prefers-color-scheme: dark) {
-	:where(html) {
-		color-scheme: dark;
-		--cek-text-color-0: var(--cek-color-gray-50);
-		--cek-text-color-1: var(--cek-color-gray-100);
-		--cek-text-color-2: var(--cek-color-gray-200);
-		--cek-text-color-3: var(--cek-color-gray-300);
-		--cek-surface-color-0: var(--cek-color-gray-900);
-		--cek-surface-color-1: var(--cek-color-gray-800);
-		--cek-surface-color-2: var(--cek-color-gray-700);
-		--cek-surface-color-3: var(--cek-color-gray-600);
-		--cek-border-color-0: var(--cek-color-gray-100);
-		--cek-border-color-1: var(--cek-color-gray-200);
-		--cek-border-color-2: var(--cek-color-gray-400);
-		--cek-border-color-3: var(--cek-color-gray-600);
-		--cek-border-color-4: var(--cek-color-gray-800);
-		--cek-color-primary-200: var(--cek-color-blue-200);
-		--cek-color-primary-300: var(--cek-color-blue-300);
-		--cek-color-primary-500: var(--cek-color-blue-500);
-		--cek-color-primary-800: var(--cek-color-blue-800);
-
-		body {
-			background-color: var(--cek-surface-color-0);
-		}
-
-		color: var(--cek-text-color-1);
-		caret-color: var(--cek-color-primary-600);
-	}
-}
-
-:not(:defined) > template[shadowrootmode] ~ * {
-	display: none;
-}
-
-*,
-*::before,
-*::after {
-	box-sizing: border-box;
-}
-
-body {
-	font-family: var(--cek-font-sans);
-}
-
-img,
-picture,
-video,
-canvas,
-svg {
-	display: block;
-	max-width: 100%;
-}
-
-input,
-button,
-textarea,
-select {
-	font: inherit;
-}
-
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	overflow-wrap: break-word;
-	margin: 0;
-	padding: 0;
-	font-weight: normal;
-}
-
-body,
-fieldset {
-	margin: 0;
-	padding: 0;
-	border: none;
 }
 
 [class^="cek-text-"] {
@@ -258,7 +227,13 @@ fieldset {
 	font-weight: 700;
 }
 
-.cek-form-actions {
+/* .cek-form-actions {
 	display: flex;
 	gap: var(--cek-space-4);
 }
+
+[cek-form] {
+	display: flex;
+	flex-direction: column;
+	gap: var(--cek-space-4);
+} */

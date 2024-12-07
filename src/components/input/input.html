@@ -1,15 +1,361 @@
 <section>
     <h1>Input (cek-input)</h1>
 
-    <cek-form skip-server-render>
-        <form novalidate>
+    <h2>Clear button</h2>
 
-            <cek-input required value="nsw" label="nsw"></cek-input>
-            <div class="cek-form-actions">
-                <cek-button variant="primary" type="submit">Submit</cek-button>
-                <cek-button variant="secondary" type="reset">Reset</cek-button>
-            </div>
-        </form>
-    </cek-form>
+    <p>This input includes a <span class="attribute">clear-button</span> attribute, which displays a clear button when
+        the input field contains a value.</p>
+    <cek-input clear-button value="nsw" label="State"></cek-input>
+
+    <cek-code-block lang="xml" theme="github-dark">
+        <template>
+            <cek-input clear-button value="nsw" label="State"></cek-input>
+        </template>
+    </cek-code-block>
+
+    <h2>Password button</h2>
+
+    <p>This input includes a <span class="attribute">password-button</span> and <span
+            class="attribute">type="password"</span> attribute, which displays a password button that toggles the
+        password type attribute on and off.</p>
+
+    <cek-input type="password" password-button value="12345" label="Password"></cek-input>
+
+    <cek-code-block lang="xml" theme="github-dark">
+        <template>
+            <cek-input type="password" password-button value="12345" label="Password"></cek-input>
+        </template>
+    </cek-code-block>
+
+    <h2>Form validation</h2>
+
+    <p>When the <code>&lt;cek-input&gt;</code> element is placed inside a form, it integrates with the form’s native
+        validation behavior and the component’s own validation logic. By default, validation messages appear only after
+        the form is submitted. However, you can use the <span class="attribute">validate-on-change</span> attribute to
+        trigger validation as soon as the input value changes, allowing users to see errors without submitting the form
+        first.</p>
+
+    <p>Once a form has been submitted, the input element remembers this state. Subsequent changes to the input will
+        continue to show validation errors if the input remains invalid, even if you haven’t added <span
+            class="attribute">validate-on-change</span>. This ensures a consistent experience for users correcting their
+        input after an initial form submission.</p>
+
+    <form novalidate>
+        <cek-input required label="Email Address" type="email"></cek-input>
+        <cek-input required label="Postal Code" pattern="\d{4}" help="Enter a 4-digit code"
+            validate-on-change></cek-input>
+        <button type="submit">Submit</button>
+    </form>
+
+
+    <cek-code-block lang="xml" theme="github-dark">
+        <template>
+            <form novalidate>
+                <cek-input required label="Email Address" type="email"></cek-input>
+                <cek-input required label="Postal Code" pattern="\d{4}" help="Enter a 4-digit code"
+                    validate-on-change></cek-input>
+                <button type="submit">Submit</button>
+            </form>
+        </template>
+    </cek-code-block>
+
+    <h2>Accessibility</h2>
+
+    <p>The <code>&lt;cek-input&gt;</code> component is designed to be accessible by default. Each input is associated
+        with its label, help text, and error messages through the standard ARIA attributes, ensuring screen readers
+        announce the field’s purpose, guidance, and validation state to users.</p>
+
+    <p>If you provide a <span class="attribute">label</span> attribute or slot, it’s automatically linked to the
+        underlying <code>&lt;input&gt;</code> element. Similarly, <span class="attribute">help</span> and <span
+            class="attribute">error</span> attributes or slots are referenced by <code>aria-describedby</code>,
+        informing assistive technologies about any additional instructions or problems.</p>
+
+    <p>In scenarios without a visible label, you can use the <span class="attribute">input-aria-label</span> attribute
+        to define a label accessible to screen readers, ensuring the field’s function is still clear. Required fields,
+        pattern constraints, and type mismatches are exposed to assistive technologies, and the component updates its
+        validation messages accordingly. If the form has been submitted once, changing the input’s value (especially
+        with the <span class="attribute">validate-on-change</span> attribute) allows users with assistive devices to
+        promptly learn about errors as they correct their inputs.</p>
+
+    <cek-code-block lang="xml" theme="github-dark">
+        <template>
+            <form>
+                <!-- Visible label and help text for screen readers -->
+                <cek-input label="Email" required type="email"
+                    help="We will send a confirmation email to this address."></cek-input>
+
+                <!-- Using input-aria-label for accessibility when no visible label is provided -->
+                <cek-input input-aria-label="Postal Code" pattern="\\d{4}" required validate-on-change></cek-input>
+
+                <button type="submit">Submit</button>
+            </form>
+        </template>
+    </cek-code-block>
 
 </section>
+
+<h2>Attributes</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Attribute</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>label</td>
+            <td>Sets the text content of the label element. Shown above the input field.</td>
+        </tr>
+        <tr>
+            <td>help</td>
+            <td>Sets the help text displayed above the input field, typically used for guidance.</td>
+        </tr>
+        <tr>
+            <td>error</td>
+            <td>When present, displays an error message. Also styles the input container to indicate an error state.
+            </td>
+        </tr>
+        <tr>
+            <td>required</td>
+            <td>Marks the input as required. If missing, the user can submit a form without providing a value.</td>
+        </tr>
+        <tr>
+            <td>type</td>
+            <td>Sets the input type (e.g. text, password, number). Defaults to text if not provided.</td>
+        </tr>
+        <tr>
+            <td>disabled</td>
+            <td>Disables the input. User cannot interact with the field when disabled.</td>
+        </tr>
+        <tr>
+            <td>inputmode</td>
+            <td>Provides a hint to virtual keyboards about what type of data might be entered.</td>
+        </tr>
+        <tr>
+            <td>placeholder</td>
+            <td>Sets placeholder text displayed when the input is empty and unfocused.</td>
+        </tr>
+        <tr>
+            <td>min</td>
+            <td>Minimum value for types like number/date.</td>
+        </tr>
+        <tr>
+            <td>max</td>
+            <td>Maximum value for types like number/date.</td>
+        </tr>
+        <tr>
+            <td>minlength</td>
+            <td>Minimum length for text input validation.</td>
+        </tr>
+        <tr>
+            <td>maxlength</td>
+            <td>Maximum length for text input validation.</td>
+        </tr>
+        <tr>
+            <td>pattern</td>
+            <td>Defines a regular expression the input’s value must match for validation.</td>
+        </tr>
+        <tr>
+            <td>step</td>
+            <td>Specifies the numeric intervals for numeric or date-based inputs.</td>
+        </tr>
+        <tr>
+            <td>autocomplete</td>
+            <td>Hints to the browser’s autofill feature whether or how the input should be autocompleted.</td>
+        </tr>
+        <tr>
+            <td>autofocus</td>
+            <td>If present, the input will automatically focus when the page loads.</td>
+        </tr>
+        <tr>
+            <td>title</td>
+            <td>Displays a tooltip when hovered if provided. Also used for accessibility.</td>
+        </tr>
+        <tr>
+            <td>spellcheck</td>
+            <td>Whether the input should be checked for spelling errors.</td>
+        </tr>
+        <tr>
+            <td>input-aria-label</td>
+            <td>Sets an ARIA label on the input for accessibility. Reflected as `aria-label` internally.</td>
+        </tr>
+        <tr>
+            <td>password-button</td>
+            <td>Enables a button to toggle password visibility if the input type is password.</td>
+        </tr>
+        <tr>
+            <td>clear-button</td>
+            <td>Enables a button to clear the input value.</td>
+        </tr>
+        <tr>
+            <td>validate-on-change</td>
+            <td>Triggers validation when the input’s value changes (on change event) rather than just on submit.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Slots</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Slot Name</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>label</td>
+            <td>Replaces the text inside the label element.</td>
+        </tr>
+        <tr>
+            <td>help</td>
+            <td>Replaces the help text content displayed above the input.</td>
+        </tr>
+        <tr>
+            <td>error</td>
+            <td>Replaces the error message content displayed above the input when in error state.</td>
+        </tr>
+        <tr>
+            <td>start</td>
+            <td>Content inserted at the start (left side) of the input container, such as an icon.</td>
+        </tr>
+        <tr>
+            <td>end</td>
+            <td>Content inserted at the end (right side) of the input container, such as an icon or keyboard hint.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>CSS parts</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Part Name</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>label</td>
+            <td>The label element that shows the field’s label text.</td>
+        </tr>
+        <tr>
+            <td>help</td>
+            <td>The element containing help text.</td>
+        </tr>
+        <tr>
+            <td>error</td>
+            <td>The element containing error message text.</td>
+        </tr>
+        <tr>
+            <td>container</td>
+            <td>The wrapper element around the input and any start/end slots.</td>
+        </tr>
+        <tr>
+            <td>control</td>
+            <td>The actual input element.</td>
+        </tr>
+        <tr>
+            <td>password-button</td>
+            <td>The toggle button to show/hide password characters.</td>
+        </tr>
+        <tr>
+            <td>hide-password-icon</td>
+            <td>The icon displayed on the password button when the input type is password.</td>
+        </tr>
+        <tr>
+            <td>show-password-icon</td>
+            <td>The icon displayed on the password button when the input type is text.</td>
+        </tr>
+        <tr>
+            <td>clear-button</td>
+            <td>The button to clear the input’s value.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Events</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Event</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>input</td>
+            <td>Fired when the input's value changes (on each keystroke or value change).</td>
+        </tr>
+        <tr>
+            <td>change</td>
+            <td>Fired when the input's value is committed (on blur or form submission), mirroring native input behavior.
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Methods</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Method</th>
+            <th>Parameters</th>
+            <th>Return</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>focus()</td>
+            <td>None</td>
+            <td>void</td>
+            <td>Moves keyboard focus to the internal input element.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Properties</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Property</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Read/Write</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>value</td>
+            <td>String</td>
+            <td>The current value of the input.</td>
+            <td>Read/Write</td>
+        </tr>
+        <tr>
+            <td>name</td>
+            <td>String</td>
+            <td>The name of the form control, if assigned.</td>
+            <td>Read-Only</td>
+        </tr>
+        <tr>
+            <td>validity</td>
+            <td>ValidityState</td>
+            <td>Reflects the validation state of the input.</td>
+            <td>Read-Only</td>
+        </tr>
+        <tr>
+            <td>validationMessage</td>
+            <td>String</td>
+            <td>The validation message if the input is invalid, otherwise an empty string.</td>
+            <td>Read-Only</td>
+        </tr>
+    </tbody>
+</table>

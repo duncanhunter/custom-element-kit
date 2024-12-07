@@ -8,29 +8,31 @@
     <title>Custom Element Kit</title>
     <link rel="stylesheet" href="./core/styles.css">
     <link rel="stylesheet" href="./docs/page-layout.css">
+    <script src="./docs/scroll-spy.js"></script>
 
     <script type="module">
         import autoDefineElements from './utils/auto-define-elements.mjs';
         document.addEventListener('DOMContentLoaded', () => {
-            (() => {
-                const page = window.location.pathname.split('/').pop().replace('.html', '') || 'welcome';
-                const path = ['welcome'].includes(page) ? `./docs/${page}.html` : `./components/${page}/${page}.html`;
-                fetch(path)
-                    .then(response => response.text())
-                    .then(data => {
-                        document.getElementById('main-content').innerHTML = data;
-                        autoDefineElements('development');
-                    })
-                    .catch(error => console.error(`Error loading ${page}:`, error));
-                const links = document.querySelectorAll('aside a');
-                links.forEach(link => {
-                    if (link.getAttribute('href').includes(page)) {
-                        link.classList.add('active');
-                    }
-                });
-            })();
+            const page = (window.location.pathname.split('/').pop().replace('.html', '')) || 'welcome';
+            const path = (page === 'welcome') ? `./docs/${page}.html` : `./components/${page}/${page}.html`;
 
+            fetch(path)
+                .then(r => r.text())
+                .then(data => {
+                    document.getElementById('main-content').innerHTML = data;
+                    autoDefineElements('development');
+                    setTimeout(generateTOC, 10);
+                })
+                .catch(e => console.error(`Error loading ${page}:`, e));
+
+            document.querySelectorAll('aside.main-nav a').forEach(link => {
+                if (link.getAttribute('href').includes(page)) {
+                    link.classList.add('active');
+                    link.setAttribute('aria-current', 'page');
+                }
+            });
         });
+
     </script>
 </head>
 
@@ -40,21 +42,32 @@
             <h1 class="cek-text-2">Custom Element Kit</h1>
         </header>
         <div class="content">
-            <aside>
-                <h2 class="cek-text-1 cek-text-bold">Getting Started</h2>
-                <ul>
-                    <li><a href="welcome.html">Getting Started</a></li>
-                </ul>
-                <h2 class="cek-text-1 cek-text-bold">Components</h2>
-                <ul>
-                    <li><a href="button.html">Button</a></li>
-                    <li><a href="input.html">Input</a></li>
-                    <li><a href="form.html">Form</a></li>
-                </ul>
+            <aside class="main-nav">
+                <nav aria-label="Main Navigation">
+                    <h2 class="cek-text-1 cek-text-bold">Getting Started</h2>
+                    <ul>
+                        <li><a href="welcome.html">Getting Started</a></li>
+                    </ul>
+                    <h2 class="cek-text-1 cek-text-bold">Components</h2>
+                    <ul>
+                        <li><a href="button.html">Button</a></li>
+                        <li><a href="input.html">Input</a></li>
+                        <li><a href="form.html">Form</a></li>
+                    </ul>
+                </nav>
             </aside>
-            <main id="main-content">
+
+            <main id="main-content" tabindex="-1">
                 <!-- Page-specific content will be loaded here -->
             </main>
+
+            <aside class="page-nav">
+                <nav aria-label="Page navigation">
+                    <h2 class="cek-text-1 cek-text-bold">On this page</h2>
+                    <!-- Dynamic table of contents will be loaded here -->
+                    <ul id="menu-list"></ul>
+                </nav>
+            </aside>
         </div>
     </div>
 </body>
