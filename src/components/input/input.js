@@ -61,7 +61,6 @@ const inputControlAttributes = [
 	"maxlength",
 	"pattern",
 	"step",
-	"autocomplete",
 	"autofocus",
 	"title",
 	"spellcheck",
