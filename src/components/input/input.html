@@ -89,7 +89,7 @@
     <p>Start and end slots will style kbd, cek-icon, cek-button elements. You can place any other HTML in these slots
         but will need to style them.</p>
 
-    <cek-input label="Icons and buttons">
+    <cek-input label="Icons & buttons">
         <cek-icon size="1.2em" slot="start" name="currency-dollar"></cek-icon>
         <cek-button size="small" slot="end" variant="text">Delete</cek-button>
     </cek-input>
@@ -101,7 +101,7 @@
 
     <cek-code-block lang="xml" theme="github-dark">
         <template>
-            <cek-input label="Price">
+            <cek-input label="Icons & buttons">
                 <cek-icon slot="start" name="currency-dollar"></cek-icon>
                 <cek-button slot="end" variant="text">Delete</cek-button>
             </cek-input>
@@ -115,7 +115,7 @@
         announce the field’s purpose, guidance, and validation state to users.</p>
 
     <p>If you provide a <span class="attribute">label</span> attribute or slot, it’s automatically linked to the
-        underlying <code>&lt;input&gt;</code> element. Similarly, <span class="attribute">help</span> and <span
+        underlying cek-input element. Similarly, <span class="attribute">help</span> and <span
             class="attribute">error</span> attributes or slots are referenced by <code>aria-describedby</code>,
         informing assistive technologies about any additional instructions or problems.</p>
 

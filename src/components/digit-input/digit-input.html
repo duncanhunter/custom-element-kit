@@ -1,0 +1,19 @@
+<h1>Digit Input (cek-digit-input)</h1>
+
+<h2>Form validation</h2>
+
+<p>When the cek-digit-input element is placed inside a form, it integrates with the form’s native
+    validation behavior and the component’s own validation logic. By default, validation messages appear only after
+    the form is submitted. However, you can use the <span class="attribute">validate-on-change</span> attribute to
+    trigger validation as soon as the input value changes, allowing users to see errors without submitting the form
+    first.</p>
+
+<p>Once a form has been submitted, the input element remembers this state. Subsequent changes to the input will
+    continue to show validation errors if the input remains invalid, even if you haven’t added <span
+        class="attribute">validate-on-change</span>. This ensures a consistent experience for users correcting their
+    input after an initial form submission.</p>
+
+<form novalidate>
+    <cek-digit-input required id="otp" name="otp" group-size="3" groups="2"></cek-digit-input>
+    <cek-button variant="primary" type="submit">Submit & validate</cek-button>
+</form>

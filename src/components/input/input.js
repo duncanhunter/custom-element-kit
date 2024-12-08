@@ -158,12 +158,6 @@ export const inputTemplate = /* html */ `
 </div>
 `;
 
-/*
-NEXT
-inline icon and button and dropdown
-sm, md,lg
-*/
-
 const controlAttributes = [
 	"required",
 	"type",
