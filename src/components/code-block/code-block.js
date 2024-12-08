@@ -197,7 +197,11 @@ export class CodeBlock extends HTMLElement {
 
 		codeElement.removeAttribute("data-highlighted");
 		codeElement.className = lang;
-		codeElement.textContent = formattedContent.replace(/(\b\w+\b)=""/g, "$1");
+		const formatContentAndBooleanAttributes = formattedContent.replace(
+			/(\b\w+\b)=""/g,
+			"$1",
+		);
+		codeElement.textContent = formatContentAndBooleanAttributes;
 
 		this.shadowRoot.querySelector("#hljs-theme").href =
 			`https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/${theme}.min.css`;

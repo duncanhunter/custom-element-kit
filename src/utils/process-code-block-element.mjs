@@ -39,6 +39,10 @@ export async function processCodeBlockElement(
 	}
 
 	const formattedContent = noTrim ? innerContent : formatContent(innerContent);
+	const formatContentAndBooleanAttributes = formattedContent.replace(
+		/(\b\w+\b)=""/g,
+		"$1",
+	);
 
 	try {
 		if (!languageModuleCache.has(lang)) {
@@ -51,7 +55,7 @@ export async function processCodeBlockElement(
 			registeredLanguages.add(lang);
 		}
 
-		const highlightedCode = hljs.highlight(formattedContent, {
+		const highlightedCode = hljs.highlight(formatContentAndBooleanAttributes, {
 			language: lang,
 		}).value;
 
