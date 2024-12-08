@@ -27,6 +27,7 @@ export const inputStyles = /* css */ `
 	font-family: inherit;
 	color: inherit;
 	margin-inline: var(--cek-space-2);
+	background-color: var(--cek-surface-color-0);
 }
 
 :host([size="small"]) #container {
