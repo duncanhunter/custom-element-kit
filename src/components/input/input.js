@@ -1,4 +1,4 @@
-const styles = /* css */ `
+export const inputStyles = /* css */ `
 <style>
 :host {
 	display: flex;
@@ -13,22 +13,57 @@ const styles = /* css */ `
 	align-items: center;
 	border: var(--cek-form-control-border);
 	border-radius: var(--cek-border-radius);
+	box-sizing: border-box;
 }
 
-#container:focus-within:not(:has(button:focus)) {
+#container:has(input:focus) {
 	outline: var(--cek-focus-ring);
 	outline-offset: var(--cek-focus-ring-offset);
 }
 
 #control {
 	border: none;
+	padding: 0;
 	outline: none;
 	flex: 1;
-	height: var(--cek-form-control-height-medium);
 	font-size: inherit;
 	font-family: inherit;
 	color: inherit;
 	margin-inline: var(--cek-space-2);
+}
+
+:host([size="small"]) #container {
+	min-height: var(--cek-height-small);
+}
+
+:host([label][size="small"]) #label,
+:host([help][size="small"]) #help,
+:host([error][size="small"]) #error,
+:host([size="small"]) #control::placeholder {
+	font-size: var(--cek-font-size-0);
+}
+
+:host(:not([size])) #container,
+:host([size="medium"]) #container {
+	min-height: var(--cek-height-medium);
+}
+
+:host([label][size="medium"]) #label,
+:host([help][size="medium"]) #help,
+:host([error][size="medium"]) #error,
+:host([size="medium"]) #control::placeholder {
+	font-size: var(--cek-font-size-1);
+}
+
+:host([size="large"]) #container {
+	min-height: var(--cek-height-large);
+}
+
+:host([label][size="large"]) #label,
+:host([help][size="large"]) #help,
+:host([error][size="large"]) #error,
+:host([size="large"]) #control::placeholder {
+	font-size: var(--cek-font-size-2);
 }
 
 #help {
@@ -49,17 +84,25 @@ const styles = /* css */ `
 	border-color: var(--cek-border-color-error);
 }
   
-:host([error]) #container:focus-within {
+:host([error]) #container:has(input:focus) {
 	outline-color: var(--cek-border-color-error);
 }
 
-[name="end"]::slotted(kbd) {
+[name="start"]::slotted(cek-icon),
+[name="end"]::slotted(cek-icon) {
+	margin: var(--cek-space-2);
+}
+[name="start"]::slotted(cek-button),
+[name="end"]::slotted(cek-button) {
+	margin: var(--cek-space-3);
+}
+
+[name="start"]::slotted(kbd), [name="end"]::slotted(kbd) {
 	padding: var(--cek-space-1) var(--cek-space-2);
 	margin: var(--cek-space-2);
 	border: var(--cek-border);
 	border-radius: var(--cek-border-radius);
-	color: var(--cek-text-color-2);
-	font-size: var(--cek-font-size-00);
+	color: var(--cek-text-color-3);
 }
 
 [part="password-button"], [part="clear-button"] {
@@ -88,7 +131,7 @@ const styles = /* css */ `
 }
 </style>`;
 
-const template = /* html */ `
+export const inputTemplate = /* html */ `
 <label for="control" id="label" part="label"><slot name="label"></slot></label>
 <div id="help" part="help"><slot name="help"></slot></div>
 <div id="error" part="error"><slot name="error"></slot></div>
@@ -151,7 +194,7 @@ class Input extends HTMLElement {
 
 		if (!this.shadowRoot) {
 			const root = this.attachShadow({ mode: "open", delegatesFocus: true });
-			root.innerHTML = `${styles}${template}`;
+			root.innerHTML = `${inputStyles}${inputTemplate}`;
 		}
 	}
 
@@ -208,7 +251,10 @@ class Input extends HTMLElement {
 		this.#input.removeEventListener("change", this.#onChange);
 		this.#internals.form.removeEventListener("submit", this.#onFormSubmit);
 		this.#input.removeEventListener("keyup", this.#onKeyUp);
-		this.#passwordButton.removeEventListener("click", this.#onPasswordButtonClick);
+		this.#passwordButton.removeEventListener(
+			"click",
+			this.#onPasswordButtonClick,
+		);
 		this.#clearButton.removeEventListener("click", this.#onClearButtonClick);
 	}
 
@@ -277,7 +323,7 @@ class Input extends HTMLElement {
 		if (this.hasAttribute("validate-on-change")) {
 			this.#validate(true);
 			this.dispatchEvent(new event.constructor(event.type, event));
-		};
+		}
 	};
 
 	#onFormSubmit = (event) => {
@@ -303,23 +349,31 @@ class Input extends HTMLElement {
 		this.#input.value = "";
 		this.#updateClearButtonVisibility();
 		setTimeout(() => this.#input.focus(), 200);
-	}
+	};
 
 	#onPasswordButtonClick = () => {
 		if (this.#input.type === "password") {
 			this.#input.type = "text";
-			this.shadowRoot.querySelector("[part='hide-password-icon']").style.display = "block";
-			this.shadowRoot.querySelector("[part='show-password-icon']").style.display = "none";
+			this.shadowRoot.querySelector(
+				"[part='hide-password-icon']",
+			).style.display = "block";
+			this.shadowRoot.querySelector(
+				"[part='show-password-icon']",
+			).style.display = "none";
 		} else {
 			this.#resetPasswordButton();
 		}
-	}
+	};
 
 	#resetPasswordButton() {
 		if (this.hasAttribute("password-button")) {
 			this.#input.type = "password";
-			this.shadowRoot.querySelector("[part='hide-password-icon']").style.display = "none";
-			this.shadowRoot.querySelector("[part='show-password-icon']").style.display = "block";
+			this.shadowRoot.querySelector(
+				"[part='hide-password-icon']",
+			).style.display = "none";
+			this.shadowRoot.querySelector(
+				"[part='show-password-icon']",
+			).style.display = "block";
 		}
 	}
 
@@ -355,7 +409,11 @@ class Input extends HTMLElement {
 					errorMessage,
 					this.#input,
 				);
-				if (this.#internals.form.hasAttribute("submitted") || (showError || this.hasAttribute("error"))) {
+				if (
+					this.#internals.form.hasAttribute("submitted") ||
+					showError ||
+					this.hasAttribute("error")
+				) {
 					this.setAttribute("error", errorMessage);
 				}
 				return false;

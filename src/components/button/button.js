@@ -18,7 +18,6 @@ button {
 	position: relative;
 	-webkit-appearance: none;
 	appearance: none;
-	border: var(--border);
 	background: transparent;
 	padding: 0;
 	margin: 0;
@@ -31,16 +30,14 @@ button {
 	justify-content: center;
 	align-items: center;
 	box-sizing: border-box;
-	min-height: var(--cek-height-medium);
 }
 
 :host([variant])::part(button) {
 	display: inline-flex;
 	align-items: center;
-	border: var(--border);
-	padding-block: var(--cek-padding-block);
-	padding-inline: var(--cek-padding-inline);
+	border:none;
 	border-radius: var(--cek-border-radius);
+	padding-inline: var(--cek-padding-inline);
 	cursor: pointer;
 }
 
@@ -59,19 +56,19 @@ button {
 }
 
 :host([size="small"])::part(button) {
+	min-height: var(--cek-height-small);
 	font-size: var(--cek-font-size-0);
-	line-height: var(--cek-line-height);
 }
 
 :host(:not([size]))::part(button),
 :host([size="medium"])::part(button) {
+	min-height: var(--cek-height-medium);
 	font-size: var(--cek-font-size-1);
-	line-height: var(--cek-line-height);
 }
 
 :host([size="large"])::part(button) {
+	min-height: var(--cek-height-large);
 	font-size: var(--cek-font-size-2);
-	line-height: var(--cek-line-height);
 }
 
 :host([variant="primary"])::part(button) {

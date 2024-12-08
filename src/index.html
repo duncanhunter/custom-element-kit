@@ -9,7 +9,11 @@
     <link rel="stylesheet" href="./core/styles.css">
     <link rel="stylesheet" href="./docs/page-layout.css">
     <script src="./docs/scroll-spy.js"></script>
-
+    <script>
+        window.cekConfig = () => ({
+            iconPath: 'http://localhost:8081'
+        })
+    </script>
     <script type="module">
         import autoDefineElements from './utils/auto-define-elements.mjs';
         document.addEventListener('DOMContentLoaded', () => {

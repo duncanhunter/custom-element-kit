@@ -44,7 +44,7 @@
         <cek-input required label="Email Address" type="email"></cek-input>
         <cek-input required label="Postal Code" pattern="\d{4}" help="Enter a 4-digit code"
             validate-on-change></cek-input>
-        <button type="submit">Submit</button>
+        <cek-button variant="primary" type="submit">Submit</cek-button>
     </form>
 
 
@@ -54,8 +54,57 @@
                 <cek-input required label="Email Address" type="email"></cek-input>
                 <cek-input required label="Postal Code" pattern="\d{4}" help="Enter a 4-digit code"
                     validate-on-change></cek-input>
-                <button type="submit">Submit</button>
+                <cek-button variant="primary" type="submit">Submit</cek-button>
             </form>
+        </template>
+    </cek-code-block>
+
+    <h2>Sizes</h2>
+
+    <p>Small, medium (default) and large sizes.</p>
+
+    <div class="horizontal">
+        <cek-input label="Small" placeholder="Small" size="small"></cek-input>
+        <cek-button variant="primary" type="submit" size="small">Submit</cek-button>
+    </div>
+    <div class="horizontal">
+        <cek-input label="Medium" placeholder="Medium"></cek-input>
+        <cek-button variant="primary" type="submit" size="medium">Submit</cek-button>
+    </div>
+    <div class="horizontal">
+        <cek-input label="Large" placeholder="Large" size="large"></cek-input>
+        <cek-button variant="primary" type="submit" size="large">Submit</cek-button>
+    </div>
+
+    <cek-code-block lang="xml" theme="github-dark">
+        <template>
+            <cek-input label="Small" placeholder="Small" size="small"></cek-input>
+            <cek-input label="Medium" placeholder="Medium"></cek-input>
+            <cek-input label="Large" placeholder="Large" size="large"></cek-input>
+        </template>
+    </cek-code-block>
+
+    <h2>Start and end slots</h2>
+
+    <p>Start and end slots will style kbd, cek-icon, cek-button elements. You can place any other HTML in these slots
+        but will need to style them.</p>
+
+    <cek-input label="Icons and buttons">
+        <cek-icon size="1.2em" slot="start" name="currency-dollar"></cek-icon>
+        <cek-button size="small" slot="end" variant="text">Submit</cek-button>
+    </cek-input>
+
+    <cek-input label="kbd">
+        <kbd slot="start">⌘K</kbd>
+        <kbd slot="end">⌘C</kbd>
+    </cek-input>
+
+    <cek-code-block lang="xml" theme="github-dark">
+        <template>
+            <cek-input label="Price">
+                <cek-icon slot="start" name="currency-dollar"></cek-icon>
+                <cek-button slot="end" variant="text">Submit</cek-button>
+            </cek-input>
         </template>
     </cek-code-block>
 

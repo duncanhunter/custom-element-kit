@@ -1,8 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 body {
 	background-color: var(--cek-surface-color-0);
 	color: var(--cek-text-color-1);
 	display: flex;
 	justify-content: center;
+	font-family: "Inter", sans-serif;
+	font-optical-sizing: auto;
+	font-style: normal;
 }
 
 .container {
@@ -21,33 +26,45 @@ header {
 	display: flex;
 }
 
+a:focus {
+	border: none;
+	border-radius: var(--cek-border-radius);
+	outline: var(--cek-focus-ring);
+	outline-offset: var(--cek-focus-ring-offset);
+}
+
 main {
 	flex-grow: 1;
 	padding: 1rem 2rem;
 	background-color: var(--cek-surface-color-0);
+	max-width: 720px;
 
 	section {
 		margin-bottom: 2rem;
 	}
 
 	h1 {
-		font-size: var(--cek-font-size-3);
+		font-size: var(--cek-font-size-4);
 		margin-block: 1rem;
 	}
 	
 	h2 {
-		font-size: var(--cek-font-size-2);
 		margin-block: 2rem 0.8rem;
+		line-height: var(--cek-line-height);
+		font-weight: 600;
+		font-size: var(--cek-font-size-3);
 	}
 	
 	h3 {
-		font-size: var(--cek-font-size-1);
+		font-size: var(--cek-font-size-2);
 		margin-block: 0.6rem;
 	}
 
 	p {
 		margin-block: 0.8rem;
+		font-weight: 400;
 		font-size: var(--cek-font-size-1);
+		line-height: var(--cek-line-height);
 	}
 
 	cek-code-block {
@@ -58,6 +75,18 @@ main {
 	cek-input {
 		margin-block: 1rem;
 	}
+
+	.horizontal {
+		cek-input {
+			margin-block: 0;
+		}
+
+		display: flex;
+		gap: 0.4rem;
+		align-items: flex-end;
+		margin-block: 1rem;
+	}
+
 }
 
 aside {
@@ -97,13 +126,6 @@ aside.main-nav {
 	a:hover {
 		text-decoration: underline;
 	}
-
-	a:focus {
-		border: none;
-		outline: var(--cek-focus-ring);
-		outline-offset: var(--cek-focus-ring-offset);
-	}
-
 }
 
 aside.page-nav nav {
@@ -115,7 +137,7 @@ aside.page-nav nav {
     overflow-y: auto;
 
 	li {
-		padding-block: var(--cek-space-4);
+		padding: var(--cek-space-4);
 	}
 
 	li a {
