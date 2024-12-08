@@ -1,1 +1,431 @@
-<!doctype html><html lang="en"><html lang="en"><head><base href="/custom-element-kit/fix-pages-2/"><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Custom Element Kit Docs"><title>Custom Element Kit</title><link rel="stylesheet" href="./assets/styles.css"><link rel="stylesheet" href="./assets/page-layout.css"></head><body><div class="container"><header><h1 class="cek-text-2">Custom Element Kit</h1></header><div class="content"><aside><h2 class="cek-text-1 cek-text-bold">Getting Started</h2><ul><li><a href="welcome.html">Getting Started</a></li></ul><h2 class="cek-text-1 cek-text-bold">Components</h2><ul><li><a href="button.html">Button</a></li><li><a href="input.html">Input</a></li><li><a href="form.html">Form</a></li></ul></aside><main id="main-content"><html><head></head><body><section><h1>Checkbox Group (cek-checkbox-group)</h1><h2 id="Validation">Validation</h2><h3 id="min-selections">Validate - Min Selections (min-selections)</h3><form novalidate><cek-checkbox-group help="Select all that apply." label="States and Territories the company operates in:" required name="states" min-selections="4" error="foo" server-rendered=""><template shadowrootmode="open"><style>:host{display:flex;flex-direction:column;font-size:var(--cek-font-size-1);font-family:var(--cek-font-family);color:var(--cek-text-color-0)}fieldset{border:none;margin:0;padding:0;min-inline-size:0;height:auto;display:contents}legend{margin:0;padding:0}#control{border:var(--cek-form-control-border);border-radius:var(--cek-border-radius);height:var(--cek-form-control-height-medium);font-size:inherit;color:inherit}#control:focus{outline:var(--cek-focus-ring);outline-offset:var(--cek-focus-ring-offset)}#error{color:var(--cek-text-color-error)}:host([error]) #error,:host([help]) #help{margin-block-start:var(--cek-space-2)}[part=container]{display:flex;flex-direction:column;margin-block:var(--cek-space-4);gap:var(--cek-space-4)}:host([error]) #control{border-color:var(--cek-border-color-error)}:host([error]) #control:focus{outline-color:var(--cek-border-color-error)}</style><fieldset><legend><label for="control" id="label" part="label"><slot name="label">States and Territories the company operates in:</slot></label><div id="help" part="help"><slot name="help">Select all that apply.</slot></div><div id="error" part="error"><slot name="error">foo</slot></div></legend><div part="container"><slot></slot></div></fieldset></template><cek-checkbox label="nsw" value="nsw" server-rendered=""><template shadowrootmode="open"><style>:host{display:flex;align-items:flex-start;font-size:var(--cek-font-size-1);font-family:var(--cek-font-family);color:var(--cek-text-color-0)}#control{border:none;outline:0;accent-color:var(--cek-color-primary-300);width:var(--cek-space-6);height:var(--cek-space-6)}#error{color:var(--cek-text-color-error)}:host([error]) #error,:host([help]) #help{margin-block-start:var(--cek-space-2)}:host([error]) #control{border-color:var(--cek-border-color-error)}:host([error]) #control:focus{outline-color:var(--cek-border-color-error)}</style><input type="checkbox" id="control" part="control" aria-describedby="help error" value="nsw"><div><label for="control" id="label" part="label"><slot name="label">nsw</slot></label><div id="help" part="help"><slot name="help"></slot></div><div id="error" part="error"><slot name="error"></slot></div></div></template></cek-checkbox><cek-checkbox label="qld" value="qld" server-rendered=""><template shadowrootmode="open"><style>:host{display:flex;align-items:flex-start;font-size:var(--cek-font-size-1);font-family:var(--cek-font-family);color:var(--cek-text-color-0)}#control{border:none;outline:0;accent-color:var(--cek-color-primary-300);width:var(--cek-space-6);height:var(--cek-space-6)}#error{color:var(--cek-text-color-error)}:host([error]) #error,:host([help]) #help{margin-block-start:var(--cek-space-2)}:host([error]) #control{border-color:var(--cek-border-color-error)}:host([error]) #control:focus{outline-color:var(--cek-border-color-error)}</style><input type="checkbox" id="control" part="control" aria-describedby="help error" value="qld"><div><label for="control" id="label" part="label"><slot name="label">qld</slot></label><div id="help" part="help"><slot name="help"></slot></div><div id="error" part="error"><slot name="error"></slot></div></div></template></cek-checkbox><cek-checkbox label="act" value="act" server-rendered=""><template shadowrootmode="open"><style>:host{display:flex;align-items:flex-start;font-size:var(--cek-font-size-1);font-family:var(--cek-font-family);color:var(--cek-text-color-0)}#control{border:none;outline:0;accent-color:var(--cek-color-primary-300);width:var(--cek-space-6);height:var(--cek-space-6)}#error{color:var(--cek-text-color-error)}:host([error]) #error,:host([help]) #help{margin-block-start:var(--cek-space-2)}:host([error]) #control{border-color:var(--cek-border-color-error)}:host([error]) #control:focus{outline-color:var(--cek-border-color-error)}</style><input type="checkbox" id="control" part="control" aria-describedby="help error" value="act"><div><label for="control" id="label" part="label"><slot name="label">act</slot></label><div id="help" part="help"><slot name="help"></slot></div><div id="error" part="error"><slot name="error"></slot></div></div></template></cek-checkbox><cek-checkbox label="tas" value="tas" server-rendered=""><template shadowrootmode="open"><style>:host{display:flex;align-items:flex-start;font-size:var(--cek-font-size-1);font-family:var(--cek-font-family);color:var(--cek-text-color-0)}#control{border:none;outline:0;accent-color:var(--cek-color-primary-300);width:var(--cek-space-6);height:var(--cek-space-6)}#error{color:var(--cek-text-color-error)}:host([error]) #error,:host([help]) #help{margin-block-start:var(--cek-space-2)}:host([error]) #control{border-color:var(--cek-border-color-error)}:host([error]) #control:focus{outline-color:var(--cek-border-color-error)}</style><input type="checkbox" id="control" part="control" aria-describedby="help error" value="tas"><div><label for="control" id="label" part="label"><slot name="label">tas</slot></label><div id="help" part="help"><slot name="help"></slot></div><div id="error" part="error"><slot name="error"></slot></div></div></template></cek-checkbox><cek-checkbox label="wa" value="wa" server-rendered=""><template shadowrootmode="open"><style>:host{display:flex;align-items:flex-start;font-size:var(--cek-font-size-1);font-family:var(--cek-font-family);color:var(--cek-text-color-0)}#control{border:none;outline:0;accent-color:var(--cek-color-primary-300);width:var(--cek-space-6);height:var(--cek-space-6)}#error{color:var(--cek-text-color-error)}:host([error]) #error,:host([help]) #help{margin-block-start:var(--cek-space-2)}:host([error]) #control{border-color:var(--cek-border-color-error)}:host([error]) #control:focus{outline-color:var(--cek-border-color-error)}</style><input type="checkbox" id="control" part="control" aria-describedby="help error" value="wa"><div><label for="control" id="label" part="label"><slot name="label">wa</slot></label><div id="help" part="help"><slot name="help"></slot></div><div id="error" part="error"><slot name="error"></slot></div></div></template></cek-checkbox><cek-checkbox label="nt" value="nt" server-rendered=""><template shadowrootmode="open"><style>:host{display:flex;align-items:flex-start;font-size:var(--cek-font-size-1);font-family:var(--cek-font-family);color:var(--cek-text-color-0)}#control{border:none;outline:0;accent-color:var(--cek-color-primary-300);width:var(--cek-space-6);height:var(--cek-space-6)}#error{color:var(--cek-text-color-error)}:host([error]) #error,:host([help]) #help{margin-block-start:var(--cek-space-2)}:host([error]) #control{border-color:var(--cek-border-color-error)}:host([error]) #control:focus{outline-color:var(--cek-border-color-error)}</style><input type="checkbox" id="control" part="control" aria-describedby="help error" value="nt"><div><label for="control" id="label" part="label"><slot name="label">nt</slot></label><div id="help" part="help"><slot name="help"></slot></div><div id="error" part="error"><slot name="error"></slot></div></div></template></cek-checkbox><cek-checkbox label="vic" value="vic" server-rendered=""><template shadowrootmode="open"><style>:host{display:flex;align-items:flex-start;font-size:var(--cek-font-size-1);font-family:var(--cek-font-family);color:var(--cek-text-color-0)}#control{border:none;outline:0;accent-color:var(--cek-color-primary-300);width:var(--cek-space-6);height:var(--cek-space-6)}#error{color:var(--cek-text-color-error)}:host([error]) #error,:host([help]) #help{margin-block-start:var(--cek-space-2)}:host([error]) #control{border-color:var(--cek-border-color-error)}:host([error]) #control:focus{outline-color:var(--cek-border-color-error)}</style><input type="checkbox" id="control" part="control" aria-describedby="help error" value="vic"><div><label for="control" id="label" part="label"><slot name="label">vic</slot></label><div id="help" part="help"><slot name="help"></slot></div><div id="error" part="error"><slot name="error"></slot></div></div></template></cek-checkbox></cek-checkbox-group><button type="submit">Submit</button> <button type="reset">Reset</button></form></section></body></html></main></div></div><script type="module">import autoDefineElements from"./assets/auto-define-elements.mjs";autoDefineElements("production")</script></body></html></html>
+<!DOCTYPE html><html lang="en"><html lang="en">
+
+<head><base href="/custom-element-kit/fix-pages-2/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Custom Element Kit Docs">
+    <title>Custom Element Kit</title>
+    <link rel="stylesheet" href="./assets/styles.css">
+    <link rel="stylesheet" href="./assets/page-layout.css">
+    <script src="./assets/scroll-spy.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1 class="cek-text-2">Custom Element Kit</h1>
+        </header>
+        <div class="content">
+            <aside class="main-nav">
+                <nav aria-label="Main Navigation">
+                    <h2 class="cek-text-1 cek-text-bold">Getting Started</h2>
+                    <ul>
+                        <li><a href="welcome.html">Getting Started</a></li>
+                    </ul>
+                    <h2 class="cek-text-1 cek-text-bold">Components</h2>
+                    <ul>
+                        <li><a href="button.html">Button</a></li>
+                        <li><a href="input.html">Input</a></li>
+                        <li><a href="form.html">Form</a></li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <main id="main-content" tabindex="-1">
+                <html><head></head><body><section>
+  <h1>Checkbox Group (cek-checkbox-group)</h1>
+  <h2 id="Validation">Validation</h2>
+  <h3 id="min-selections">Validate - Min Selections (min-selections)</h3>
+
+  <form novalidate>
+    <cek-checkbox-group help="Select all that apply." label="States and Territories the company operates in:" required name="states" min-selections="4" error="foo" server-rendered=""><template shadowrootmode="open"><style>
+:host {
+	display: flex;
+	flex-direction: column;
+	font-size: var(--cek-font-size-1);
+	font-family: var(--cek-font-family);
+	color: var(--cek-text-color-0);
+}
+
+fieldset {
+	border: none;
+	margin: 0;
+	padding: 0;
+	min-inline-size: 0;
+	height: auto;
+	display: contents;
+}
+
+legend {
+	margin: 0;
+    padding: 0;
+}
+
+#control {
+  border: var(--cek-form-control-border);
+  border-radius: var(--cek-border-radius);
+  height: var(--cek-form-control-height-medium);
+  font-size: inherit;
+  color: inherit;
+}
+
+#control:focus {
+	outline: var(--cek-focus-ring);
+	outline-offset: var(--cek-focus-ring-offset);
+}
+
+#error {
+	color: var(--cek-text-color-error);
+}
+
+:host([help]) #help,
+:host([error]) #error {
+	margin-block-start: var(--cek-space-2);
+}
+
+[part="container"] {
+  display: flex;
+  flex-direction: column;
+  margin-block: var(--cek-space-4);
+  gap: var(--cek-space-4);
+}
+
+:host([error])  #control {
+	border-color: var(--cek-border-color-error);
+}	
+
+:host([error])  #control:focus {
+	outline-color: var(--cek-border-color-error);
+}
+</style>
+<fieldset>
+	<legend>
+		<label for="control" id="label" part="label"><slot name="label">States and Territories the company operates in:</slot></label>
+		<div id="help" part="help"><slot name="help">Select all that apply.</slot></div>
+		<div id="error" part="error"><slot name="error">foo</slot></div>
+		</legend>
+	<div part="container">
+		<slot></slot>
+	</div>
+</fieldset>
+</template>
+      <cek-checkbox label="nsw" value="nsw" server-rendered=""><template shadowrootmode="open"><style>
+:host {
+	display: flex;
+	align-items: flex-start;
+	font-size: var(--cek-font-size-1);
+	font-family: var(--cek-font-family);
+	color: var(--cek-text-color-0);
+}
+
+#control {
+	border: none;
+	outline: none;
+	accent-color: var(--cek-color-primary-300);
+	width: var(--cek-space-6);
+	height: var(--cek-space-6);
+}
+  
+#error {
+	color: var(--cek-text-color-error);
+}
+  
+:host([help]) #help,
+:host([error]) #error {
+	margin-block-start: var(--cek-space-2);
+}
+
+:host([error]) #control {
+	border-color: var(--cek-border-color-error);
+}
+  
+:host([error]) #control:focus {
+	  outline-color: var(--cek-border-color-error);
+}
+</style>
+<input type="checkbox" id="control" part="control" aria-describedby="help error" value="nsw">
+<div>
+	<label for="control" id="label" part="label"><slot name="label">nsw</slot></label>
+	<div id="help" part="help"><slot name="help"></slot></div>
+	<div id="error" part="error"><slot name="error"></slot></div>
+</div>
+</template></cek-checkbox>
+      <cek-checkbox label="qld" value="qld" server-rendered=""><template shadowrootmode="open"><style>
+:host {
+	display: flex;
+	align-items: flex-start;
+	font-size: var(--cek-font-size-1);
+	font-family: var(--cek-font-family);
+	color: var(--cek-text-color-0);
+}
+
+#control {
+	border: none;
+	outline: none;
+	accent-color: var(--cek-color-primary-300);
+	width: var(--cek-space-6);
+	height: var(--cek-space-6);
+}
+  
+#error {
+	color: var(--cek-text-color-error);
+}
+  
+:host([help]) #help,
+:host([error]) #error {
+	margin-block-start: var(--cek-space-2);
+}
+
+:host([error]) #control {
+	border-color: var(--cek-border-color-error);
+}
+  
+:host([error]) #control:focus {
+	  outline-color: var(--cek-border-color-error);
+}
+</style>
+<input type="checkbox" id="control" part="control" aria-describedby="help error" value="qld">
+<div>
+	<label for="control" id="label" part="label"><slot name="label">qld</slot></label>
+	<div id="help" part="help"><slot name="help"></slot></div>
+	<div id="error" part="error"><slot name="error"></slot></div>
+</div>
+</template></cek-checkbox>
+      <cek-checkbox label="act" value="act" server-rendered=""><template shadowrootmode="open"><style>
+:host {
+	display: flex;
+	align-items: flex-start;
+	font-size: var(--cek-font-size-1);
+	font-family: var(--cek-font-family);
+	color: var(--cek-text-color-0);
+}
+
+#control {
+	border: none;
+	outline: none;
+	accent-color: var(--cek-color-primary-300);
+	width: var(--cek-space-6);
+	height: var(--cek-space-6);
+}
+  
+#error {
+	color: var(--cek-text-color-error);
+}
+  
+:host([help]) #help,
+:host([error]) #error {
+	margin-block-start: var(--cek-space-2);
+}
+
+:host([error]) #control {
+	border-color: var(--cek-border-color-error);
+}
+  
+:host([error]) #control:focus {
+	  outline-color: var(--cek-border-color-error);
+}
+</style>
+<input type="checkbox" id="control" part="control" aria-describedby="help error" value="act">
+<div>
+	<label for="control" id="label" part="label"><slot name="label">act</slot></label>
+	<div id="help" part="help"><slot name="help"></slot></div>
+	<div id="error" part="error"><slot name="error"></slot></div>
+</div>
+</template></cek-checkbox>
+      <cek-checkbox label="tas" value="tas" server-rendered=""><template shadowrootmode="open"><style>
+:host {
+	display: flex;
+	align-items: flex-start;
+	font-size: var(--cek-font-size-1);
+	font-family: var(--cek-font-family);
+	color: var(--cek-text-color-0);
+}
+
+#control {
+	border: none;
+	outline: none;
+	accent-color: var(--cek-color-primary-300);
+	width: var(--cek-space-6);
+	height: var(--cek-space-6);
+}
+  
+#error {
+	color: var(--cek-text-color-error);
+}
+  
+:host([help]) #help,
+:host([error]) #error {
+	margin-block-start: var(--cek-space-2);
+}
+
+:host([error]) #control {
+	border-color: var(--cek-border-color-error);
+}
+  
+:host([error]) #control:focus {
+	  outline-color: var(--cek-border-color-error);
+}
+</style>
+<input type="checkbox" id="control" part="control" aria-describedby="help error" value="tas">
+<div>
+	<label for="control" id="label" part="label"><slot name="label">tas</slot></label>
+	<div id="help" part="help"><slot name="help"></slot></div>
+	<div id="error" part="error"><slot name="error"></slot></div>
+</div>
+</template></cek-checkbox>
+      <cek-checkbox label="wa" value="wa" server-rendered=""><template shadowrootmode="open"><style>
+:host {
+	display: flex;
+	align-items: flex-start;
+	font-size: var(--cek-font-size-1);
+	font-family: var(--cek-font-family);
+	color: var(--cek-text-color-0);
+}
+
+#control {
+	border: none;
+	outline: none;
+	accent-color: var(--cek-color-primary-300);
+	width: var(--cek-space-6);
+	height: var(--cek-space-6);
+}
+  
+#error {
+	color: var(--cek-text-color-error);
+}
+  
+:host([help]) #help,
+:host([error]) #error {
+	margin-block-start: var(--cek-space-2);
+}
+
+:host([error]) #control {
+	border-color: var(--cek-border-color-error);
+}
+  
+:host([error]) #control:focus {
+	  outline-color: var(--cek-border-color-error);
+}
+</style>
+<input type="checkbox" id="control" part="control" aria-describedby="help error" value="wa">
+<div>
+	<label for="control" id="label" part="label"><slot name="label">wa</slot></label>
+	<div id="help" part="help"><slot name="help"></slot></div>
+	<div id="error" part="error"><slot name="error"></slot></div>
+</div>
+</template></cek-checkbox>
+      <cek-checkbox label="nt" value="nt" server-rendered=""><template shadowrootmode="open"><style>
+:host {
+	display: flex;
+	align-items: flex-start;
+	font-size: var(--cek-font-size-1);
+	font-family: var(--cek-font-family);
+	color: var(--cek-text-color-0);
+}
+
+#control {
+	border: none;
+	outline: none;
+	accent-color: var(--cek-color-primary-300);
+	width: var(--cek-space-6);
+	height: var(--cek-space-6);
+}
+  
+#error {
+	color: var(--cek-text-color-error);
+}
+  
+:host([help]) #help,
+:host([error]) #error {
+	margin-block-start: var(--cek-space-2);
+}
+
+:host([error]) #control {
+	border-color: var(--cek-border-color-error);
+}
+  
+:host([error]) #control:focus {
+	  outline-color: var(--cek-border-color-error);
+}
+</style>
+<input type="checkbox" id="control" part="control" aria-describedby="help error" value="nt">
+<div>
+	<label for="control" id="label" part="label"><slot name="label">nt</slot></label>
+	<div id="help" part="help"><slot name="help"></slot></div>
+	<div id="error" part="error"><slot name="error"></slot></div>
+</div>
+</template></cek-checkbox>
+      <cek-checkbox label="vic" value="vic" server-rendered=""><template shadowrootmode="open"><style>
+:host {
+	display: flex;
+	align-items: flex-start;
+	font-size: var(--cek-font-size-1);
+	font-family: var(--cek-font-family);
+	color: var(--cek-text-color-0);
+}
+
+#control {
+	border: none;
+	outline: none;
+	accent-color: var(--cek-color-primary-300);
+	width: var(--cek-space-6);
+	height: var(--cek-space-6);
+}
+  
+#error {
+	color: var(--cek-text-color-error);
+}
+  
+:host([help]) #help,
+:host([error]) #error {
+	margin-block-start: var(--cek-space-2);
+}
+
+:host([error]) #control {
+	border-color: var(--cek-border-color-error);
+}
+  
+:host([error]) #control:focus {
+	  outline-color: var(--cek-border-color-error);
+}
+</style>
+<input type="checkbox" id="control" part="control" aria-describedby="help error" value="vic">
+<div>
+	<label for="control" id="label" part="label"><slot name="label">vic</slot></label>
+	<div id="help" part="help"><slot name="help"></slot></div>
+	<div id="error" part="error"><slot name="error"></slot></div>
+</div>
+</template></cek-checkbox>
+    </cek-checkbox-group>
+    <button type="submit">Submit</button>
+    <button type="reset">Reset</button>
+  </form>
+</section></body></html>
+            </main>
+
+            <aside class="page-nav">
+                <nav aria-label="Page navigation">
+                    <h2 class="cek-text-1 cek-text-bold">On this page</h2>
+                    <!-- Dynamic table of contents will be loaded here -->
+                    <ul id="menu-list"></ul>
+                </nav>
+            </aside>
+        </div>
+    </div>
+    <script type="module">
+        import autoDefineElements from './assets/auto-define-elements.mjs';
+        autoDefineElements('production');
+        generateTOC();
+        document.addEventListener('DOMContentLoaded', () => {
+            const page = (window.location.pathname.split('/').pop().replace('.html', '')) || 'welcome';
+            document.querySelectorAll('aside.main-nav a').forEach(link => {
+                if (link.getAttribute('href').includes(page)) {
+                    link.classList.add('active');
+                    link.setAttribute('aria-current', 'page');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
