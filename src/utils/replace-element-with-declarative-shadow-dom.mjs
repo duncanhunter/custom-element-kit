@@ -16,6 +16,7 @@ const FORM_COMPONENTS = new Set([
 	"radio",
 	"date-picker",
 	"date-input",
+	"digit-input",
 	"calendar",
 	"select",
 	"combobox",
@@ -129,17 +130,36 @@ async function processElement(element, document) {
 	let { template, styles } = await getTemplateAndStyles(elementName);
 
 	if (FORM_COMPONENTS.has(elementName)) {
-		const propsToHandle = ["value", "label", "help", "error"];
+		const propsToHandle = ["value", "label", "help", "error", "type"];
 
 		for (const prop of propsToHandle) {
 			if (attributes[prop]) {
-				const id = prop === "value" ? "control" : prop;
+				const id = prop === "value" || prop === "type" ? "control" : prop;
 				if (prop === "value") {
 					template = template.replace(
 						new RegExp(`(<[^>]*id\\s*=\\s*["']${id}["'][^>]*?)\\s*(/?>)`, "i"),
 						(match, p1, closing) =>
 							`${p1} value="${attributes[prop]}"${closing}`,
 					);
+				} else if (prop === "type") {
+					template = template.replace(
+						new RegExp(`(<[^>]*id\\s*=\\s*["']${id}["'][^>]*?)\\s*(/?>)`, "i"),
+						(match, p1, closing) => {
+							if (p1.match(/type\s*=\s*["'][^"']*["']/i)) {
+								return (
+									p1.replace(
+										/type\s*=\s*["'][^"']*["']/i,
+										`type="${attributes[prop]}"`,
+									) + closing
+								);
+							}
+							return `${p1} type="${attributes[prop]}"${closing}`;
+						},
+					);
+					if (attributes[prop] === "password") {
+						console.log({ prop, id, elementName });
+						console.log({ template });
+					}
 				} else {
 					template = template.replace(
 						new RegExp(
