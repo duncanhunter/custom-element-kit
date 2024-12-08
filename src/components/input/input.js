@@ -7,7 +7,7 @@ export const inputStyles = /* css */ `
 
 #container {
 	display: flex;
-	align-items: center;
+	align-items: stretch;
 	border: var(--cek-form-control-border);
 	border-radius: var(--cek-border-radius);
 	box-sizing: border-box;
@@ -90,10 +90,12 @@ export const inputStyles = /* css */ `
 [name="start"]::slotted(cek-icon),
 [name="end"]::slotted(cek-icon) {
 	margin: var(--cek-space-2);
+	align-self: center;
 }
 [name="start"]::slotted(cek-button),
 [name="end"]::slotted(cek-button) {
 	margin: var(--cek-space-3);
+	align-self: center;
 }
 
 [name="start"]::slotted(kbd), [name="end"]::slotted(kbd) {
@@ -101,11 +103,12 @@ export const inputStyles = /* css */ `
 	margin: var(--cek-space-2);
 	border: var(--cek-border);
 	border-radius: var(--cek-border-radius);
-	color: var(--cek-text-color-3);
+	color: var(--cek-text-color-2);
+	align-self: center;
 }
 
 [part="password-button"] [part="hide-password-icon"] {
-		display: none;
+	display: none;
 }
 
 [part="password-button"], [part="clear-button"] {
@@ -115,6 +118,7 @@ export const inputStyles = /* css */ `
 	cursor: pointer;
 	padding: 0 var(--cek-space-1);
 	margin-inline: var(--cek-space-3);
+	align-self: center;
 
 	&:focus {
 		border-radius: var(--cek-border-radius);
@@ -128,6 +132,7 @@ export const inputStyles = /* css */ `
 
 	svg {
 		font-size: var(--cek-font-size-1);
+		color: var(--cek-text-color-1);
 		height: 1em;
 		width: 1em;
 	}
