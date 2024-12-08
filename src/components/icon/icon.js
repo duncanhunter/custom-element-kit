@@ -47,7 +47,7 @@ export class Icon extends HTMLElement {
 		try {
 			const iconPath = window?.cekConfig
 				? `${window?.cekConfig()?.iconPath}/${name}.svg`
-				: `./../icons/${name}.svg`;
+				: `./icons/${name}.svg`;
 			const response = await fetch(iconPath);
 			this.dispatchEvent(new Event("cek-load"));
 			const icon = await response.text();

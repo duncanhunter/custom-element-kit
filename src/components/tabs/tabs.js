@@ -1,4 +1,4 @@
-const tabsStyles = /* css */ `
+export const tabsStyles = /* css */ `
 <style>
 :host {
   display: flex;
@@ -115,7 +115,7 @@ const tabsStyles = /* css */ `
 </style>
 `;
 
-const tabsTemplate = /* html */ `
+export const tabsTemplate = /* html */ `
 <div id="container">
   <button id="scroll-prev" class="scroll-button" hidden aria-label="Scroll previous">
     <span>◀</span>
@@ -134,7 +134,7 @@ const tabsTemplate = /* html */ `
 </div>
 `;
 
-const tabStyles = /* css */ `
+export const tabStyles = /* css */ `
 <style>
 :host {
   display: inline-flex;
@@ -166,11 +166,11 @@ const tabStyles = /* css */ `
 </style>
 `;
 
-const tabTemplate = /* html */ `
+export const tabTemplate = /* html */ `
 <slot></slot>
 `;
 
-const panelStyles = /* css */ `
+export const tabPanelStyles = /* css */ `
 <style>
 :host {
   display: none;
@@ -184,7 +184,7 @@ const panelStyles = /* css */ `
 </style>
 `;
 
-const panelTemplate = /* html */ `
+export const tabPanelTemplate = /* html */ `
 <slot></slot>
 `;
 
@@ -577,7 +577,7 @@ class TabPanel extends HTMLElement {
 		super();
 		if (!this.shadowRoot) {
 			const root = this.attachShadow({ mode: "open" });
-			root.innerHTML = `${panelStyles}${panelTemplate}`;
+			root.innerHTML = `${tabPanelStyles}${tabPanelTemplate}`;
 		}
 	}
 }
@@ -585,35 +585,3 @@ class TabPanel extends HTMLElement {
 customElements.define("cek-tabs", Tabs);
 customElements.define("cek-tab", Tab);
 customElements.define("cek-tab-panel", TabPanel);
-
-/*
-Example Usage (in HTML):
-
-<cek-tabs direction="start" manual>
-  <cek-tab slot="tab" active>First</cek-tab>
-  <cek-tab slot="tab">Second</cek-tab>
-  <cek-tab slot="tab">Third</cek-tab>
-  <cek-tab slot="tab">Fourth</cek-tab>
-  <cek-tab slot="tab">Fifth</cek-tab>
-  <cek-tab slot="tab">Sixth</cek-tab>
-
-  <cek-tab-panel slot="panel">
-    <p>First panel content</p>
-  </cek-tab-panel>
-  <cek-tab-panel slot="panel">
-    <p>Second panel content</p>
-  </cek-tab-panel>
-  <cek-tab-panel slot="panel">
-    <p>Third panel content</p>
-  </cek-tab-panel>
-  <cek-tab-panel slot="panel">
-    <p>Fourth panel content</p>
-  </cek-tab-panel>
-  <cek-tab-panel slot="panel">
-    <p>Fifth panel content</p>
-  </cek-tab-panel>
-  <cek-tab-panel slot="panel">
-    <p>Sixth panel content</p>
-  </cek-tab-panel>
-</cek-tabs>
-*/

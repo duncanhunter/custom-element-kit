@@ -7,8 +7,8 @@ test("given input with  default value clering it and should submit with an error
 	const page = await context.newPage();
 
 	await page.goto("/input.html");
-	await page.getByText("Submit").click();
-	const inputElement = await page.locator("cek-input");
+	await page.getByText("Submit & validate").click();
+	const inputElement = await page.locator("cek-input[label='Email Address']");
 	await inputElement.evaluate((element) => {
 		element.value = "";
 	});
@@ -19,5 +19,5 @@ test("given input with  default value clering it and should submit with an error
 		(element) => element.validationMessage,
 	);
 
-	expect(validityMessage).toBe("nsw is required");
+	expect(validityMessage).toBe("Email address is required");
 });

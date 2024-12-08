@@ -27,7 +27,7 @@ export default {
 			input: "src/**/*.html",
 			exclude: ["src/docs/index-prod-template.html", "src/index.html"],
 			extractAssets: false,
-			minify: true,
+			minify: false,
 			transformHtml: [
 				(html, { htmlFileName }) => {
 					let wrappedContent = html;
@@ -59,6 +59,7 @@ export default {
 				{ src: "src/components/icons", dest: "dist" },
 				{ src: "src/core/styles.css", dest: "dist/assets" },
 				{ src: "src/docs/page-layout.css", dest: "dist/assets" },
+				{ src: "src/docs/scroll-spy.js", dest: "dist/assets" },
 				{ src: "src/utils/auto-define-elements.mjs", dest: "dist/assets" },
 			],
 		}),

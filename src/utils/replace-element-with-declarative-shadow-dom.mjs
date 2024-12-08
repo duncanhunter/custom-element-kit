@@ -31,20 +31,37 @@ const camelCase = (str) =>
 
 async function getIcon(element) {
 	const name = element.getAttribute("name");
+	const size = element.getAttribute("size");
+
 	if (!name) {
 		return;
 	}
 
 	if (moduleCache.has("icons")) {
-		return moduleCache.get("icons")[camelCase(name)] || "";
+		const icon = moduleCache.get("icons")[camelCase(name)] || "";
+		const updatedSVG = icon.replace(
+			"<svg",
+			`<svg height="${size}" width="${size}"`,
+		);
+
+		return updatedSVG;
 	}
 
 	try {
 		const { default: icons } = await import("../components/icons/icons.js");
 		moduleCache.set("icons", icons);
-		return icons[camelCase(name)] || "";
+		const icon = icons[camelCase(name)] || "";
+		const updatedSVG = icon.replace(
+			"<svg",
+			`<svg height="${size}" width="${size}"`,
+		);
+
+		return updatedSVG;
 	} catch (error) {
-		return null;
+		return console.error(
+			"Failed to load module '../components/icons/icons.js':",
+			error,
+		);
 	}
 }
 
@@ -53,9 +70,13 @@ async function getTemplateAndStyles(elementName) {
 		return moduleCache.get(elementName);
 	}
 
+	const parentElementName = elementName.startsWith("tab")
+		? "tabs"
+		: elementName;
+
 	try {
 		const module = await import(
-			`../components/${elementName}/${elementName}.js`
+			`../components/${parentElementName}/${parentElementName}.js`
 		);
 		const styles = module[`${camelCase(elementName)}Styles`] || "";
 		const template = module[`${camelCase(elementName)}Template`] || "";
@@ -65,7 +86,7 @@ async function getTemplateAndStyles(elementName) {
 		return templateAndStyles;
 	} catch (error) {
 		console.error(
-			`Failed to load module '../components/${elementName}/${elementName}.js':`,
+			`Failed to load module '../components/${parentElementName}/${parentElementName}.js':`,
 			error,
 		);
 		return null;

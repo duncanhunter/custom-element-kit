@@ -27,7 +27,7 @@
                     autoDefineElements('development');
                     setTimeout(generateTOC, 10);
                 })
-                .catch(e => console.error(`Error loading ${page}:`, e));
+                .catch(error => console.error(`Error loading ${page}:`, error));
 
             document.querySelectorAll('aside.main-nav a').forEach(link => {
                 if (link.getAttribute('href').includes(page)) {

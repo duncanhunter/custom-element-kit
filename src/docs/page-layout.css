@@ -1,13 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-
 body {
 	background-color: var(--cek-surface-color-0);
 	color: var(--cek-text-color-1);
 	display: flex;
 	justify-content: center;
-	font-family: "Inter", sans-serif;
-	font-optical-sizing: auto;
-	font-style: normal;
 }
 
 .container {
@@ -73,6 +68,8 @@ main {
 	}
 	
 	cek-input {
+		/* Need to change this to be a generic gap for other component docs */
+		display:block;
 		margin-block: 1rem;
 	}
 

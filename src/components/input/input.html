@@ -29,7 +29,7 @@
 
     <h2>Form validation</h2>
 
-    <p>When the <code>&lt;cek-input&gt;</code> element is placed inside a form, it integrates with the form’s native
+    <p>When the cek-input element is placed inside a form, it integrates with the form’s native
         validation behavior and the component’s own validation logic. By default, validation messages appear only after
         the form is submitted. However, you can use the <span class="attribute">validate-on-change</span> attribute to
         trigger validation as soon as the input value changes, allowing users to see errors without submitting the form
@@ -41,10 +41,10 @@
         input after an initial form submission.</p>
 
     <form novalidate>
-        <cek-input required label="Email Address" type="email"></cek-input>
+        <cek-input valuemissing="Email address is required" required label="Email Address" type="email"></cek-input>
         <cek-input required label="Postal Code" pattern="\d{4}" help="Enter a 4-digit code"
             validate-on-change></cek-input>
-        <cek-button variant="primary" type="submit">Submit</cek-button>
+        <cek-button variant="primary" type="submit">Submit & validate</cek-button>
     </form>
 
 
@@ -65,15 +65,15 @@
 
     <div class="horizontal">
         <cek-input label="Small" placeholder="Small" size="small"></cek-input>
-        <cek-button variant="primary" type="submit" size="small">Submit</cek-button>
+        <cek-button variant="primary" size="small">Save</cek-button>
     </div>
     <div class="horizontal">
         <cek-input label="Medium" placeholder="Medium"></cek-input>
-        <cek-button variant="primary" type="submit" size="medium">Submit</cek-button>
+        <cek-button variant="primary" size="medium">Save</cek-button>
     </div>
     <div class="horizontal">
         <cek-input label="Large" placeholder="Large" size="large"></cek-input>
-        <cek-button variant="primary" type="submit" size="large">Submit</cek-button>
+        <cek-button variant="primary" size="large">Save</cek-button>
     </div>
 
     <cek-code-block lang="xml" theme="github-dark">
@@ -91,7 +91,7 @@
 
     <cek-input label="Icons and buttons">
         <cek-icon size="1.2em" slot="start" name="currency-dollar"></cek-icon>
-        <cek-button size="small" slot="end" variant="text">Submit</cek-button>
+        <cek-button size="small" slot="end" variant="text">Delete</cek-button>
     </cek-input>
 
     <cek-input label="kbd">
@@ -103,14 +103,14 @@
         <template>
             <cek-input label="Price">
                 <cek-icon slot="start" name="currency-dollar"></cek-icon>
-                <cek-button slot="end" variant="text">Submit</cek-button>
+                <cek-button slot="end" variant="text">Delete</cek-button>
             </cek-input>
         </template>
     </cek-code-block>
 
     <h2>Accessibility</h2>
 
-    <p>The <code>&lt;cek-input&gt;</code> component is designed to be accessible by default. Each input is associated
+    <p>The cek-input component is designed to be accessible by default. Each input is associated
         with its label, help text, and error messages through the standard ARIA attributes, ensuring screen readers
         announce the field’s purpose, guidance, and validation state to users.</p>
 
@@ -136,7 +136,7 @@
                 <!-- Using input-aria-label for accessibility when no visible label is provided -->
                 <cek-input input-aria-label="Postal Code" pattern="\\d{4}" required validate-on-change></cek-input>
 
-                <button type="submit">Submit</button>
+                <button type="submit">Save</button>
             </form>
         </template>
     </cek-code-block>

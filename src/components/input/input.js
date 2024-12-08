@@ -1,11 +1,8 @@
 export const inputStyles = /* css */ `
 <style>
 :host {
-	display: flex;
-	flex-direction: column;
-	font-size: var(--cek-font-size-1);
+	display: block;
 	font-family: var(--cek-font-family);
-	color: var(--cek-text-color-0);
 }
 
 #container {
@@ -77,6 +74,7 @@ export const inputStyles = /* css */ `
 :host([label]) #label,
 :host([help]) #help,
 :host([error]) #error {
+	display: block;
 	margin-block-end: var(--cek-space-2);
 }
 
@@ -105,6 +103,10 @@ export const inputStyles = /* css */ `
 	color: var(--cek-text-color-3);
 }
 
+[part="password-button"] [part="hide-password-icon"] {
+		display: none;
+}
+
 [part="password-button"], [part="clear-button"] {
 	display: none;
 	border: none;
@@ -119,7 +121,7 @@ export const inputStyles = /* css */ `
 		outline-offset: var(--cek-focus-ring-offset);
 	}
 	
-	[part="hide-password-icon"] {
+	&[part="hide-password-icon"] {
 		display: none;
 	}
 
