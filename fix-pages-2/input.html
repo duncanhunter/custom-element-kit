@@ -2087,7 +2087,7 @@ pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5p
     <p>Start and end slots will style kbd, cek-icon, cek-button elements. You can place any other HTML in these slots
         but will need to style them.</p>
 
-    <cek-input label="Icons and buttons" server-rendered=""><template shadowrootmode="open"><style>
+    <cek-input label="Icons & buttons" server-rendered=""><template shadowrootmode="open"><style>
 <style>
 :host {
 	display: block;
@@ -2221,7 +2221,7 @@ pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5p
 	}
 }
 </style>
-<label for="control" id="label" part="label"><slot name="label">Icons and buttons</slot></label>
+<label for="control" id="label" part="label"><slot name="label">Icons &amp; buttons</slot></label>
 <div id="help" part="help"><slot name="help"></slot></div>
 <div id="error" part="error"><slot name="error"></slot></div>
 <div id="container" part="container">
@@ -2623,7 +2623,7 @@ pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5p
 */.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}</style>
 <div part="container">
 	<link id="hljs-theme" rel="stylesheet">
-	<pre><code part="code" class="xml hljs language-xml" data-highlighted="yes"><span class="hljs-tag">&lt;<span class="hljs-name">cek-input</span> <span class="hljs-attr">label</span>=<span class="hljs-string">"Price"</span>&gt;</span>
+	<pre><code part="code" class="xml hljs language-xml" data-highlighted="yes"><span class="hljs-tag">&lt;<span class="hljs-name">cek-input</span> <span class="hljs-attr">label</span>=<span class="hljs-string">"Icons &amp; buttons"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">cek-icon</span> <span class="hljs-attr">slot</span>=<span class="hljs-string">"start"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"currency-dollar"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">cek-icon</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">cek-button</span> <span class="hljs-attr">slot</span>=<span class="hljs-string">"end"</span> <span class="hljs-attr">variant</span>=<span class="hljs-string">"text"</span>&gt;</span>Delete<span class="hljs-tag">&lt;/<span class="hljs-name">cek-button</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">cek-input</span>&gt;</span>
@@ -2647,7 +2647,7 @@ pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5p
         announce the field’s purpose, guidance, and validation state to users.</p>
 
     <p>If you provide a <span class="attribute">label</span> attribute or slot, it’s automatically linked to the
-        underlying <code>&lt;input&gt;</code> element. Similarly, <span class="attribute">help</span> and <span class="attribute">error</span> attributes or slots are referenced by <code>aria-describedby</code>,
+        underlying cek-input element. Similarly, <span class="attribute">help</span> and <span class="attribute">error</span> attributes or slots are referenced by <code>aria-describedby</code>,
         informing assistive technologies about any additional instructions or problems.</p>
 
     <p>In scenarios without a visible label, you can use the <span class="attribute">input-aria-label</span> attribute
