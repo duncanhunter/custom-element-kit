@@ -155,6 +155,10 @@ aside.page-nav nav {
   	color: inherit;
 }
 
+.heading-link:hover {
+  	border-bottom: 2px solid var(--cek-color-primary-500);
+}
+
 .heading-link:hover::after {
   	content: "#";
   	position: absolute;
