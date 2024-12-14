@@ -1,0 +1,203 @@
+<!DOCTYPE html><html lang="en"><html lang="en">
+
+<head><base href="/custom-element-kit/main/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Custom Element Kit Docs">
+    <title>Custom Element Kit</title>
+    <link rel="stylesheet" href="./assets/styles.css">
+    <link rel="stylesheet" href="./assets/page-layout.css">
+    <script src="./assets/scroll-spy.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1 class="cek-text-2">Custom Element Kit</h1>
+        </header>
+        <div class="content">
+            <aside class="main-nav">
+                <nav aria-label="Main Navigation">
+                    <h2 class="cek-text-1 cek-text-bold">Getting Started</h2>
+                    <ul>
+                        <li><a href="welcome.html">Getting Started</a></li>
+                    </ul>
+                    <h2 class="cek-text-1 cek-text-bold">Components</h2>
+                    <ul>
+                        <li><a href="button.html">Button</a></li>
+                        <li><a href="input.html">Input</a></li>
+                        <li><a href="form.html">Form</a></li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <main id="main-content" tabindex="-1">
+                <html><head></head><body><section>
+    <h1>Button (cek-button)</h1>
+
+    <cek-button type="submit" variant="primary" server-rendered=""><template shadowrootmode="open"><style>
+:host {
+	display: inline-block;
+}
+
+button {
+	position: relative;
+	-webkit-appearance: none;
+	appearance: none;
+	background: transparent;
+	padding: 0;
+	margin: 0;
+	font: inherit;
+	color: inherit;
+	text-align: inherit;
+	font-family: var(--cek-font-family);
+	line-height: var(--cek-line-height);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-sizing: border-box;
+}
+
+:host([variant])::part(button) {
+	display: inline-flex;
+	align-items: center;
+	border:none;
+	border-radius: var(--cek-border-radius);
+	padding-inline: var(--cek-padding-inline);
+	cursor: pointer;
+}
+
+:host([variant])::part(button):where(:hover) {
+	filter: brightness(85%);
+}
+
+:host([variant])::part(button):focus {
+	outline: var(--cek-focus-ring);
+	outline-offset: var(--cek-focus-ring-offset);
+}
+	
+:host([loading])::part(button) {
+	background-color: lightgray;
+	color: rgba(0, 0, 0, 0.5);
+}
+
+:host([size="small"])::part(button) {
+	min-height: var(--cek-height-small);
+	font-size: var(--cek-font-size-0);
+}
+
+:host(:not([size]))::part(button),
+:host([size="medium"])::part(button) {
+	min-height: var(--cek-height-medium);
+	font-size: var(--cek-font-size-1);
+}
+
+:host([size="large"])::part(button) {
+	min-height: var(--cek-height-large);
+	font-size: var(--cek-font-size-2);
+}
+
+:host([variant="primary"])::part(button) {
+	background-color: var(--cek-color-primary-500);
+	color: white;
+}
+
+:host([variant="ascent"])::part(button) {
+	background-color: var(--cek-surface-color-3);
+	color: var(--cek-text-color-1);
+}
+
+:host([variant="outline"])::part(button) {
+	background-color: transparent;
+	border: 1px solid var(--cek-border-color-2);
+	color: var(--cek-text-color-1);
+}
+
+:host([variant="text"])::part(button) {
+	background-color: transparent;
+	color: var(--cek-text-color-1);
+}
+
+:host([variant="text"])::part(button):hover {
+	background-color: var(--cek-surface-color-2);
+}
+
+:host([variant="link"])::part(button) {
+	background-color: transparent;
+	color: var(--cek-color-primary-500);
+	text-decoration: underline;
+}
+
+:host([variant])::part(label) {
+	display: contents;
+}
+
+:host([icon-only])::part(button) {
+	padding-inline: 0.8ch;
+}
+
+:host([disabled])::part(button) {
+	background-color: #ccc;
+	color: rgba(0, 0, 0, 0.5);
+	cursor: not-allowed;
+}
+
+[name="end"]::slotted(*) {
+	margin-inline-start: 0.5ch;
+}
+
+[name="start"]::slotted(*) {
+	margin-inline-end: 0.5ch;
+}
+
+[part=loading-icon] {
+	position: absolute;
+	display: none;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+[part=arrow-icon] {
+	height: 1em;
+	width: 1em;
+	margin-inline-start: 0.5ch;
+}
+</style>
+  <button part="button">
+    <slot name="start"></slot>
+    <div part="label"><slot></slot></div>
+    <slot name="end"></slot>
+    <svg part="loading-icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25" /><path d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z"><animatetransform attributeName="transform" type="rotate" dur="0.75s" values="0 12 12;360 12 12" repeatCount="indefinite" /></path></svg>
+  </button>
+</template>Submit</cek-button>
+
+</section></body></html>
+            </main>
+
+            <aside class="page-nav">
+                <nav aria-label="Page navigation">
+                    <h2 class="cek-text-1 cek-text-bold">On this page</h2>
+                    <!-- Dynamic table of contents will be loaded here -->
+                    <ul id="menu-list"></ul>
+                </nav>
+            </aside>
+        </div>
+    </div>
+    <script type="module">
+        import autoDefineElements from './assets/auto-define-elements.mjs';
+        autoDefineElements('production');
+        generateTOC();
+        document.addEventListener('DOMContentLoaded', () => {
+            const page = (window.location.pathname.split('/').pop().replace('.html', '')) || 'welcome';
+            document.querySelectorAll('aside.main-nav a').forEach(link => {
+                if (link.getAttribute('href').includes(page)) {
+                    link.classList.add('active');
+                    link.setAttribute('aria-current', 'page');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

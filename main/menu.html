@@ -1,53 +1,40 @@
-<!DOCTYPE html><html lang="en"><html lang="en"><head><base href="/custom-element-kit/main/">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Menu component documentation.">
-  <title>Custom Element Kit</title>
-  <link rel="stylesheet" href="assets/styles-83e1211f.css">
-  <link rel="stylesheet" href="assets/page-layout-bd6a1c85.css">
-  
-  
-  
-  
-  
-  
-  
-  
-  
+<!DOCTYPE html><html lang="en"><html lang="en">
+
+<head><base href="/custom-element-kit/main/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Custom Element Kit Docs">
+    <title>Custom Element Kit</title>
+    <link rel="stylesheet" href="./assets/styles.css">
+    <link rel="stylesheet" href="./assets/page-layout.css">
+    <script src="./assets/scroll-spy.js"></script>
 </head>
 
 <body>
-  <div class="container">
-    <header>
-      <h1 class="cek-text-2">Custom Element Kit</h1>
-    </header>
-    <div class="content">
-      <aside>
-        <h2 class="cek-text-1 cek-text-bold">Getting Started</h2>
-        <ul>
-          <li><a href="index.html">Getting Started</a></li>
-        </ul>
-        <h2 class="cek-text-1 cek-text-bold">Components</h2>
-        <ul>
-          <li><a href="badge.html">Badge</a></li>
-          <li><a href="button.html">Button</a></li>
-          <li><a href="checkbox.html">Checkbox</a></li>
-          <li><a href="checkbox-group.html">Checkbox Group</a></li>
-          <li><a href="code-block.html">Code block</a></li>
-          <li><a href="details.html">Details</a></li>
-          <li><a href="icon.html">Icon</a></li>
-          <li><a href="input.html">Input</a></li>
-          <li><a href="form.html">Form</a></li>
-          <li><a href="menu.html">Menu</a></li>
-          <li><a href="select.html">Select</a></li>
-          <li><a href="separator.html">Separator</a></li>
-          <li><a href="textarea.html">Textarea</a></li>
-        </ul>
-      </aside>
-      <main>
-        <section>
-          <h1>Menu (cek-menu)</h1>
-          <cek-menu popover-width="content-width" server-rendered=""><template shadowrootmode="open"><style>
+    <div class="container">
+        <header>
+            <h1 class="cek-text-2">Custom Element Kit</h1>
+        </header>
+        <div class="content">
+            <aside class="main-nav">
+                <nav aria-label="Main Navigation">
+                    <h2 class="cek-text-1 cek-text-bold">Getting Started</h2>
+                    <ul>
+                        <li><a href="welcome.html">Getting Started</a></li>
+                    </ul>
+                    <h2 class="cek-text-1 cek-text-bold">Components</h2>
+                    <ul>
+                        <li><a href="button.html">Button</a></li>
+                        <li><a href="input.html">Input</a></li>
+                        <li><a href="form.html">Form</a></li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <main id="main-content" tabindex="-1">
+                <html><head></head><body><section>
+  <h1>Menu (cek-menu)</h1>
+  <cek-menu popover-width="content-width" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: inline-block;
 }
@@ -68,7 +55,7 @@ dialog {
 	<slot></slot>
 </dialog>
 </template>
-            <cek-button variant="primary" slot="trigger" server-rendered=""><template shadowrootmode="open"><style>
+    <cek-button variant="primary" slot="trigger" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: inline-block;
 }
@@ -77,7 +64,6 @@ button {
 	position: relative;
 	-webkit-appearance: none;
 	appearance: none;
-	border: var(--border);
 	background: transparent;
 	padding: 0;
 	margin: 0;
@@ -90,16 +76,14 @@ button {
 	justify-content: center;
 	align-items: center;
 	box-sizing: border-box;
-	min-height: var(--cek-height-medium);
 }
 
 :host([variant])::part(button) {
 	display: inline-flex;
 	align-items: center;
-	border: var(--border);
-	padding-block: var(--cek-padding-block);
-	padding-inline: var(--cek-padding-inline);
+	border:none;
 	border-radius: var(--cek-border-radius);
+	padding-inline: var(--cek-padding-inline);
 	cursor: pointer;
 }
 
@@ -118,19 +102,19 @@ button {
 }
 
 :host([size="small"])::part(button) {
+	min-height: var(--cek-height-small);
 	font-size: var(--cek-font-size-0);
-	line-height: var(--cek-line-height);
 }
 
 :host(:not([size]))::part(button),
 :host([size="medium"])::part(button) {
+	min-height: var(--cek-height-medium);
 	font-size: var(--cek-font-size-1);
-	line-height: var(--cek-line-height);
 }
 
 :host([size="large"])::part(button) {
+	min-height: var(--cek-height-large);
 	font-size: var(--cek-font-size-2);
-	line-height: var(--cek-line-height);
 }
 
 :host([variant="primary"])::part(button) {
@@ -207,7 +191,7 @@ button {
     <svg part="loading-icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25" /><path d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z"><animatetransform attributeName="transform" type="rotate" dur="0.75s" values="0 12 12;360 12 12" repeatCount="indefinite" /></path></svg>
   </button>
 </template>My Account</cek-button>
-            <cek-menu-label server-rendered=""><template shadowrootmode="open"><style>
+    <cek-menu-label server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	border-radius: var(--cek-border-radius);
 	background-color: var(--cek-surface-color-0);	
@@ -244,7 +228,7 @@ slot {
 <slot></slot>
 <slot name="end"></slot>
 </template>Account Details</cek-menu-label>
-            <cek-separator server-rendered=""><template shadowrootmode="open"><style>
+    <cek-separator server-rendered=""><template shadowrootmode="open"><style>
 :host(:not([vertical])) {
     display: block;
     border-top: solid var(--cek-space-0) var(--cek-border-color);
@@ -258,7 +242,7 @@ slot {
     margin-inline: var(--cek-space-2);
 }
 </style></template></cek-separator>
-            <cek-menu-item value="profile" server-rendered=""><template shadowrootmode="open"><style>
+    <cek-menu-item value="profile" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
 }
@@ -362,12 +346,12 @@ slot[name=submenu] {
 </button>
 <slot name="submenu"></slot>
 </template>
-              <cek-icon name="user" slot="start" server-rendered=""><template shadowrootmode="open"><style>
+      <cek-icon name="user" slot="start" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
-}</style><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" /></svg></template></cek-icon>
-              Profile <cek-visually-hidden server-rendered=""><template shadowrootmode="open"><style></style></template>337 notifications</cek-visually-hidden>
-              <cek-badge variant="danger" slot="end" server-rendered=""><template shadowrootmode="open"><style>
+}</style><svg height="null" width="null" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" /></svg></template></cek-icon>
+      Profile <cek-visually-hidden server-rendered=""><template shadowrootmode="open"><style></style></template>337 notifications</cek-visually-hidden>
+      <cek-badge variant="danger" slot="end" server-rendered=""><template shadowrootmode="open"><style>
 [part=wrapper] {
 	display: inline;
     border: none;
@@ -399,8 +383,8 @@ slot[name=submenu] {
 	<slot></slot>
 </div>
 </template>337</cek-badge>
-            </cek-menu-item>
-            <cek-menu-item value="keyboardShortcuts" server-rendered=""><template shadowrootmode="open"><style>
+    </cek-menu-item>
+    <cek-menu-item value="keyboardShortcuts" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
 }
@@ -504,14 +488,14 @@ slot[name=submenu] {
 </button>
 <slot name="submenu"></slot>
 </template>
-              <cek-icon name="user" slot="start" server-rendered=""><template shadowrootmode="open"><style>
+      <cek-icon name="user" slot="start" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
-}</style><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" /></svg></template></cek-icon>
-              Keyboard shortcuts
-              <div slot="end">⌘K</div>
-            </cek-menu-item>
-            <cek-menu-item server-rendered=""><template shadowrootmode="open"><style>
+}</style><svg height="null" width="null" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" /></svg></template></cek-icon>
+      Keyboard shortcuts
+      <div slot="end">⌘K</div>
+    </cek-menu-item>
+    <cek-menu-item server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
 }
@@ -615,12 +599,12 @@ slot[name=submenu] {
 </button>
 <slot name="submenu"></slot>
 </template>
-              <cek-icon name="user-plus" slot="start" server-rendered=""><template shadowrootmode="open"><style>
+      <cek-icon name="user-plus" slot="start" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
-}</style><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" /></svg></template></cek-icon>
-              Invite users
-              <cek-menu slot="submenu" placement="right-start" server-rendered=""><template shadowrootmode="open"><style>
+}</style><svg height="null" width="null" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" /></svg></template></cek-icon>
+      Invite users
+      <cek-menu slot="submenu" placement="right-start" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: inline-block;
 }
@@ -641,7 +625,7 @@ dialog {
 	<slot></slot>
 </dialog>
 </template>
-                <cek-menu-item value="email" server-rendered=""><template shadowrootmode="open"><style>
+        <cek-menu-item value="email" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
 }
@@ -745,13 +729,13 @@ slot[name=submenu] {
 </button>
 <slot name="submenu"></slot>
 </template>
-                  <cek-icon name="settings" slot="start" server-rendered=""><template shadowrootmode="open"><style>
+          <cek-icon name="settings" slot="start" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
-}</style><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /></svg></template></cek-icon>
-                  Email
-                </cek-menu-item>
-                <cek-menu-item value="message" server-rendered=""><template shadowrootmode="open"><style>
+}</style><svg height="null" width="null" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /></svg></template></cek-icon>
+          Email
+        </cek-menu-item>
+        <cek-menu-item value="message" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
 }
@@ -855,13 +839,13 @@ slot[name=submenu] {
 </button>
 <slot name="submenu"></slot>
 </template>
-                  <cek-icon name="chat-bubble-left" slot="start" server-rendered=""><template shadowrootmode="open"><style>
+          <cek-icon name="chat-bubble-left" slot="start" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
-}</style><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.76c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.076-4.076a1.526 1.526 0 0 1 1.037-.443 48.282 48.282 0 0 0 5.68-.494c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" /></svg></template></cek-icon>
-                  Message
-                </cek-menu-item>
-                <cek-separator server-rendered=""><template shadowrootmode="open"><style>
+}</style><svg height="null" width="null" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.76c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.076-4.076a1.526 1.526 0 0 1 1.037-.443 48.282 48.282 0 0 0 5.68-.494c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" /></svg></template></cek-icon>
+          Message
+        </cek-menu-item>
+        <cek-separator server-rendered=""><template shadowrootmode="open"><style>
 :host(:not([vertical])) {
     display: block;
     border-top: solid var(--cek-space-0) var(--cek-border-color);
@@ -875,7 +859,7 @@ slot[name=submenu] {
     margin-inline: var(--cek-space-2);
 }
 </style></template></cek-separator>
-                <cek-menu-item value="more" server-rendered=""><template shadowrootmode="open"><style>
+        <cek-menu-item value="more" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
 }
@@ -979,16 +963,16 @@ slot[name=submenu] {
 </button>
 <slot name="submenu"></slot>
 </template>
-                  <cek-icon name="plus-circle" slot="start" server-rendered=""><template shadowrootmode="open"><style>
+          <cek-icon name="plus-circle" slot="start" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
-}</style><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg></template></cek-icon>
-                  More...
-                </cek-menu-item>
-              </cek-menu>
-            </cek-menu-item>
-          </cek-menu>
-          <cek-menu offset="4" server-rendered=""><template shadowrootmode="open"><style>
+}</style><svg height="null" width="null" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg></template></cek-icon>
+          More...
+        </cek-menu-item>
+      </cek-menu>
+    </cek-menu-item>
+  </cek-menu>
+  <cek-menu offset="4" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: inline-block;
 }
@@ -1009,7 +993,7 @@ dialog {
 	<slot></slot>
 </dialog>
 </template>
-            <cek-button variant="primary" slot="trigger" arrow="" server-rendered=""><template shadowrootmode="open"><style>
+    <cek-button variant="primary" slot="trigger" arrow="" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: inline-block;
 }
@@ -1018,7 +1002,6 @@ button {
 	position: relative;
 	-webkit-appearance: none;
 	appearance: none;
-	border: var(--border);
 	background: transparent;
 	padding: 0;
 	margin: 0;
@@ -1031,16 +1014,14 @@ button {
 	justify-content: center;
 	align-items: center;
 	box-sizing: border-box;
-	min-height: var(--cek-height-medium);
 }
 
 :host([variant])::part(button) {
 	display: inline-flex;
 	align-items: center;
-	border: var(--border);
-	padding-block: var(--cek-padding-block);
-	padding-inline: var(--cek-padding-inline);
+	border:none;
 	border-radius: var(--cek-border-radius);
+	padding-inline: var(--cek-padding-inline);
 	cursor: pointer;
 }
 
@@ -1059,19 +1040,19 @@ button {
 }
 
 :host([size="small"])::part(button) {
+	min-height: var(--cek-height-small);
 	font-size: var(--cek-font-size-0);
-	line-height: var(--cek-line-height);
 }
 
 :host(:not([size]))::part(button),
 :host([size="medium"])::part(button) {
+	min-height: var(--cek-height-medium);
 	font-size: var(--cek-font-size-1);
-	line-height: var(--cek-line-height);
 }
 
 :host([size="large"])::part(button) {
+	min-height: var(--cek-height-large);
 	font-size: var(--cek-font-size-2);
-	line-height: var(--cek-line-height);
 }
 
 :host([variant="primary"])::part(button) {
@@ -1148,7 +1129,7 @@ button {
     <svg part="loading-icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25" /><path d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z"><animatetransform attributeName="transform" type="rotate" dur="0.75s" values="0 12 12;360 12 12" repeatCount="indefinite" /></path></svg>
   <svg aria-hidden="true" part="arrow-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg></button>
 </template>trigger a</cek-button>
-            <cek-menu-item value="a1" href="/test" checked type="checkbox" server-rendered=""><template shadowrootmode="open"><style>
+    <cek-menu-item value="a1" href="/test" checked type="checkbox" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
 }
@@ -1252,7 +1233,7 @@ slot[name=submenu] {
 </button>
 <slot name="submenu"></slot>
 </template>a1</cek-menu-item>
-            <cek-menu-item value="a2" checked type="radio" server-rendered=""><template shadowrootmode="open"><style>
+    <cek-menu-item value="a2" checked type="radio" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
 }
@@ -1356,7 +1337,7 @@ slot[name=submenu] {
 </button>
 <slot name="submenu"></slot>
 </template>a2</cek-menu-item>
-            <cek-menu-item value="a3" type="checkbox" server-rendered=""><template shadowrootmode="open"><style>
+    <cek-menu-item value="a3" type="checkbox" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
 }
@@ -1460,9 +1441,9 @@ slot[name=submenu] {
 </button>
 <slot name="submenu"></slot>
 </template>
-              <div slot="start">start</div>a3
-            </cek-menu-item>
-            <cek-menu-item value="a4" type="radio" server-rendered=""><template shadowrootmode="open"><style>
+      <div slot="start">start</div>a3
+    </cek-menu-item>
+    <cek-menu-item value="a4" type="radio" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
 }
@@ -1566,7 +1547,7 @@ slot[name=submenu] {
 </button>
 <slot name="submenu"></slot>
 </template>a4</cek-menu-item>
-            <cek-menu-item type="radio" server-rendered=""><template shadowrootmode="open"><style>
+    <cek-menu-item type="radio" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
 }
@@ -1670,8 +1651,8 @@ slot[name=submenu] {
 </button>
 <slot name="submenu"></slot>
 </template>
-              B05
-              <cek-menu offset="4" slot="submenu" placement="right-start" server-rendered=""><template shadowrootmode="open"><style>
+      B05
+      <cek-menu offset="4" slot="submenu" placement="right-start" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: inline-block;
 }
@@ -1692,7 +1673,7 @@ dialog {
 	<slot></slot>
 </dialog>
 </template>
-                <cek-menu-item value="b1" server-rendered=""><template shadowrootmode="open"><style>
+        <cek-menu-item value="b1" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
 }
@@ -1796,7 +1777,7 @@ slot[name=submenu] {
 </button>
 <slot name="submenu"></slot>
 </template>b1</cek-menu-item>
-                <cek-menu-item value="b2" server-rendered=""><template shadowrootmode="open"><style>
+        <cek-menu-item value="b2" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
 }
@@ -1900,7 +1881,7 @@ slot[name=submenu] {
 </button>
 <slot name="submenu"></slot>
 </template>b2</cek-menu-item>
-                <cek-menu-item server-rendered=""><template shadowrootmode="open"><style>
+        <cek-menu-item server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
 }
@@ -2004,8 +1985,8 @@ slot[name=submenu] {
 </button>
 <slot name="submenu"></slot>
 </template>
-                  c0
-                  <cek-menu offset="4" slot="submenu" placement="right-start" server-rendered=""><template shadowrootmode="open"><style>
+          c0
+          <cek-menu offset="4" slot="submenu" placement="right-start" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: inline-block;
 }
@@ -2026,7 +2007,7 @@ dialog {
 	<slot></slot>
 </dialog>
 </template>
-                    <cek-menu-item value="c1" server-rendered=""><template shadowrootmode="open"><style>
+            <cek-menu-item value="c1" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
 }
@@ -2130,7 +2111,7 @@ slot[name=submenu] {
 </button>
 <slot name="submenu"></slot>
 </template>c1</cek-menu-item>
-                    <cek-menu-item value="c2" server-rendered=""><template shadowrootmode="open"><style>
+            <cek-menu-item value="c2" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
 }
@@ -2234,7 +2215,7 @@ slot[name=submenu] {
 </button>
 <slot name="submenu"></slot>
 </template>c2</cek-menu-item>
-                    <cek-menu-item value="c3" server-rendered=""><template shadowrootmode="open"><style>
+            <cek-menu-item value="c3" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
 }
@@ -2338,9 +2319,9 @@ slot[name=submenu] {
 </button>
 <slot name="submenu"></slot>
 </template>c3</cek-menu-item>
-                  </cek-menu>
-                </cek-menu-item>
-                <cek-menu-item value="b5" server-rendered=""><template shadowrootmode="open"><style>
+          </cek-menu>
+        </cek-menu-item>
+        <cek-menu-item value="b5" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
 }
@@ -2444,9 +2425,9 @@ slot[name=submenu] {
 </button>
 <slot name="submenu"></slot>
 </template>b5</cek-menu-item>
-              </cek-menu>
-            </cek-menu-item>
-            <cek-separator server-rendered=""><template shadowrootmode="open"><style>
+      </cek-menu>
+    </cek-menu-item>
+    <cek-separator server-rendered=""><template shadowrootmode="open"><style>
 :host(:not([vertical])) {
     display: block;
     border-top: solid var(--cek-space-0) var(--cek-border-color);
@@ -2460,7 +2441,7 @@ slot[name=submenu] {
     margin-inline: var(--cek-space-2);
 }
 </style></template></cek-separator>
-            <cek-menu-item value="a6" type="radio" server-rendered=""><template shadowrootmode="open"><style>
+    <cek-menu-item value="a6" type="radio" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
 }
@@ -2564,7 +2545,7 @@ slot[name=submenu] {
 </button>
 <slot name="submenu"></slot>
 </template>a6</cek-menu-item>
-            <cek-menu-item value="a7" type="radio" server-rendered=""><template shadowrootmode="open"><style>
+    <cek-menu-item value="a7" type="radio" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
 }
@@ -2668,7 +2649,7 @@ slot[name=submenu] {
 </button>
 <slot name="submenu"></slot>
 </template>a7</cek-menu-item>
-            <cek-separator server-rendered=""><template shadowrootmode="open"><style>
+    <cek-separator server-rendered=""><template shadowrootmode="open"><style>
 :host(:not([vertical])) {
     display: block;
     border-top: solid var(--cek-space-0) var(--cek-border-color);
@@ -2682,7 +2663,7 @@ slot[name=submenu] {
     margin-inline: var(--cek-space-2);
 }
 </style></template></cek-separator>
-            <cek-menu-item value="a8" type="radio" server-rendered=""><template shadowrootmode="open"><style>
+    <cek-menu-item value="a8" type="radio" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
 }
@@ -2786,7 +2767,7 @@ slot[name=submenu] {
 </button>
 <slot name="submenu"></slot>
 </template>a8</cek-menu-item>
-            <cek-menu-item value="a9" type="radio" server-rendered=""><template shadowrootmode="open"><style>
+    <cek-menu-item value="a9" type="radio" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
 }
@@ -2890,7 +2871,7 @@ slot[name=submenu] {
 </button>
 <slot name="submenu"></slot>
 </template>a9</cek-menu-item>
-            <cek-menu-item value="a10" type="radio" server-rendered=""><template shadowrootmode="open"><style>
+    <cek-menu-item value="a10" type="radio" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
 }
@@ -2994,8 +2975,8 @@ slot[name=submenu] {
 </button>
 <slot name="submenu"></slot>
 </template>a10</cek-menu-item>
-          </cek-menu>
-          <cek-code-block server-rendered=""><template shadowrootmode="open"><style>
+  </cek-menu>
+  <cek-code-block server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	position: relative;
 }
@@ -3011,6 +2992,10 @@ pre {
 code {
     white-space: pre-wrap;
 	border-radius: var(--cek-border-radius);
+}
+
+[part=container] pre > code.hljs {
+	padding: 1.1em;
 }
 
 [part=copy-button] {
@@ -3068,7 +3053,7 @@ pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5p
 <div part="container">
 	<link id="hljs-theme" rel="stylesheet">
 	<pre><code part="code" class="xml hljs language-xml" data-highlighted="yes"><span class="hljs-tag">&lt;<span class="hljs-name">cek-menu</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">cek-button</span> <span class="hljs-attr">arrow</span>=<span class="hljs-string">""</span> <span class="hljs-attr">slot</span>=<span class="hljs-string">"trigger"</span> <span class="hljs-attr">variant</span>=<span class="hljs-string">"primary"</span>&gt;</span>My Account<span class="hljs-tag">&lt;/<span class="hljs-name">cek-button</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">cek-button</span> <span class="hljs-attr">arrow</span> <span class="hljs-attr">slot</span>=<span class="hljs-string">"trigger"</span> <span class="hljs-attr">variant</span>=<span class="hljs-string">"primary"</span>&gt;</span>My Account<span class="hljs-tag">&lt;/<span class="hljs-name">cek-button</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">cek-menu-item</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"email"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">cek-icon</span> <span class="hljs-attr">slot</span>=<span class="hljs-string">"start"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"settings"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">cek-icon</span>&gt;</span>
     Email
@@ -3094,10 +3079,32 @@ pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5p
 	<div id="aria-live-region" aria-live="polite" role="status"></div>
 </div>
 </template></cek-code-block>
-        </section>
-      </main>
+</section></body></html>
+            </main>
+
+            <aside class="page-nav">
+                <nav aria-label="Page navigation">
+                    <h2 class="cek-text-1 cek-text-bold">On this page</h2>
+                    <!-- Dynamic table of contents will be loaded here -->
+                    <ul id="menu-list"></ul>
+                </nav>
+            </aside>
+        </div>
     </div>
-  </div>
+    <script type="module">
+        import autoDefineElements from './assets/auto-define-elements.mjs';
+        autoDefineElements('production');
+        generateTOC();
+        document.addEventListener('DOMContentLoaded', () => {
+            const page = (window.location.pathname.split('/').pop().replace('.html', '')) || 'welcome';
+            document.querySelectorAll('aside.main-nav a').forEach(link => {
+                if (link.getAttribute('href').includes(page)) {
+                    link.classList.add('active');
+                    link.setAttribute('aria-current', 'page');
+                }
+            });
+        });
+    </script>
+</body>
 
-
-<script type="module" src="./popover.js"></script><script type="module" src="./button.js"></script><script type="module" src="./menu-item.js"></script><script type="module" src="./menu-label.js"></script><script type="module" src="./badge.js"></script><script type="module" src="./separator.js"></script><script type="module" src="./icon.js"></script><script type="module" src="./code-block.js"></script><script type="module" src="./menu.js"></script></body></html>
+</html>

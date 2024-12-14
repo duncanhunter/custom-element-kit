@@ -1,51 +1,44 @@
-<!DOCTYPE html><html lang="en"><html lang="en"><head><base href="/custom-element-kit/main/">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Checkbox group documentation.">
-  <title>Custom Element Kit</title>
-  <link rel="stylesheet" href="assets/styles-83e1211f.css">
-  <link rel="stylesheet" href="assets/page-layout-bd6a1c85.css">
-  
-  
-  
+<!DOCTYPE html><html lang="en"><html lang="en">
+
+<head><base href="/custom-element-kit/main/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Custom Element Kit Docs">
+    <title>Custom Element Kit</title>
+    <link rel="stylesheet" href="./assets/styles.css">
+    <link rel="stylesheet" href="./assets/page-layout.css">
+    <script src="./assets/scroll-spy.js"></script>
 </head>
 
 <body>
-  <div class="container">
-    <header>
-      <h1 class="cek-text-2">Custom Element Kit</h1>
-    </header>
-    <div class="content">
-      <aside>
-        <h2 class="cek-text-1 cek-text-bold">Getting Started</h2>
-        <ul>
-          <li><a href="index.html">Getting Started</a></li>
-        </ul>
-        <h2 class="cek-text-1 cek-text-bold">Components</h2>
-        <ul>
-          <li><a href="badge.html">Badge</a></li>
-          <li><a href="button.html">Button</a></li>
-          <li><a href="checkbox.html">Checkbox</a></li>
-          <li><a href="checkbox-group.html">Checkbox Group</a></li>
-          <li><a href="code-block.html">Code block</a></li>
-          <li><a href="details.html">Details</a></li>
-          <li><a href="icon.html">Icon</a></li>
-          <li><a href="input.html">Input</a></li>
-          <li><a href="form.html">Form</a></li>
-          <li><a href="menu.html">Menu</a></li>
-          <li><a href="select.html">Select</a></li>
-          <li><a href="separator.html">Separator</a></li>
-          <li><a href="textarea.html">Textarea</a></li>
-        </ul>
-      </aside>
-      <main>
-        <section>
-          <h1>Checkbox Group (cek-checkbox-group)</h1>
-          <h2 id="Validation">Validation</h2>
-          <h3 id="min-selections">Validate - Min Selections (min-selections)</h3>
+    <div class="container">
+        <header>
+            <h1 class="cek-text-2">Custom Element Kit</h1>
+        </header>
+        <div class="content">
+            <aside class="main-nav">
+                <nav aria-label="Main Navigation">
+                    <h2 class="cek-text-1 cek-text-bold">Getting Started</h2>
+                    <ul>
+                        <li><a href="welcome.html">Getting Started</a></li>
+                    </ul>
+                    <h2 class="cek-text-1 cek-text-bold">Components</h2>
+                    <ul>
+                        <li><a href="button.html">Button</a></li>
+                        <li><a href="input.html">Input</a></li>
+                        <li><a href="form.html">Form</a></li>
+                    </ul>
+                </nav>
+            </aside>
 
-          <form novalidate>
-            <cek-checkbox-group help="Select all that apply." label="States and Territories the company operates in:" required name="states" min-selections="4" error="foo" server-rendered=""><template shadowrootmode="open"><style>
+            <main id="main-content" tabindex="-1">
+                <html><head></head><body><section>
+  <h1>Checkbox Group (cek-checkbox-group)</h1>
+  <h2 id="Validation">Validation</h2>
+  <h3 id="min-selections">Validate - Min Selections (min-selections)</h3>
+
+  <form novalidate>
+    <cek-checkbox-group help="Select all that apply." label="States and Territories the company operates in:" required name="states" min-selections="4" error="foo" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
 	flex-direction: column;
@@ -116,7 +109,7 @@ legend {
 	</div>
 </fieldset>
 </template>
-              <cek-checkbox label="nsw" value="nsw" server-rendered=""><template shadowrootmode="open"><style>
+      <cek-checkbox label="nsw" value="nsw" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
 	align-items: flex-start;
@@ -157,7 +150,7 @@ legend {
 	<div id="error" part="error"><slot name="error"></slot></div>
 </div>
 </template></cek-checkbox>
-              <cek-checkbox label="qld" value="qld" server-rendered=""><template shadowrootmode="open"><style>
+      <cek-checkbox label="qld" value="qld" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
 	align-items: flex-start;
@@ -198,7 +191,7 @@ legend {
 	<div id="error" part="error"><slot name="error"></slot></div>
 </div>
 </template></cek-checkbox>
-              <cek-checkbox label="act" value="act" server-rendered=""><template shadowrootmode="open"><style>
+      <cek-checkbox label="act" value="act" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
 	align-items: flex-start;
@@ -239,7 +232,7 @@ legend {
 	<div id="error" part="error"><slot name="error"></slot></div>
 </div>
 </template></cek-checkbox>
-              <cek-checkbox label="tas" value="tas" server-rendered=""><template shadowrootmode="open"><style>
+      <cek-checkbox label="tas" value="tas" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
 	align-items: flex-start;
@@ -280,7 +273,7 @@ legend {
 	<div id="error" part="error"><slot name="error"></slot></div>
 </div>
 </template></cek-checkbox>
-              <cek-checkbox label="wa" value="wa" server-rendered=""><template shadowrootmode="open"><style>
+      <cek-checkbox label="wa" value="wa" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
 	align-items: flex-start;
@@ -321,7 +314,7 @@ legend {
 	<div id="error" part="error"><slot name="error"></slot></div>
 </div>
 </template></cek-checkbox>
-              <cek-checkbox label="nt" value="nt" server-rendered=""><template shadowrootmode="open"><style>
+      <cek-checkbox label="nt" value="nt" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
 	align-items: flex-start;
@@ -362,7 +355,7 @@ legend {
 	<div id="error" part="error"><slot name="error"></slot></div>
 </div>
 </template></cek-checkbox>
-              <cek-checkbox label="vic" value="vic" server-rendered=""><template shadowrootmode="open"><style>
+      <cek-checkbox label="vic" value="vic" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: flex;
 	align-items: flex-start;
@@ -403,14 +396,36 @@ legend {
 	<div id="error" part="error"><slot name="error"></slot></div>
 </div>
 </template></cek-checkbox>
-            </cek-checkbox-group>
-            <button type="submit">Submit</button>
-            <button type="reset">Reset</button>
-          </form>
-        </section>
-      </main>
+    </cek-checkbox-group>
+    <button type="submit">Submit</button>
+    <button type="reset">Reset</button>
+  </form>
+</section></body></html>
+            </main>
+
+            <aside class="page-nav">
+                <nav aria-label="Page navigation">
+                    <h2 class="cek-text-1 cek-text-bold">On this page</h2>
+                    <!-- Dynamic table of contents will be loaded here -->
+                    <ul id="menu-list"></ul>
+                </nav>
+            </aside>
+        </div>
     </div>
-  </div>
+    <script type="module">
+        import autoDefineElements from './assets/auto-define-elements.mjs';
+        autoDefineElements('production');
+        generateTOC();
+        document.addEventListener('DOMContentLoaded', () => {
+            const page = (window.location.pathname.split('/').pop().replace('.html', '')) || 'welcome';
+            document.querySelectorAll('aside.main-nav a').forEach(link => {
+                if (link.getAttribute('href').includes(page)) {
+                    link.classList.add('active');
+                    link.setAttribute('aria-current', 'page');
+                }
+            });
+        });
+    </script>
+</body>
 
-
-<script type="module" src="./form-element.js"></script><script type="module" src="./checkbox.js"></script><script type="module" src="./checkbox-group.js"></script></body></html>
+</html>
