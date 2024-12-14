@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { copyFileSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import terser from "@rollup/plugin-terser";
@@ -20,17 +20,14 @@ export default {
 	plugins: [
 		multiInput({
 			relative: "src/components",
-			transformOutputPath: (output, input) => {
-				console.log(output, input);
-				return output.split("/")[1];
-			},
+			transformOutputPath: (output, input) => output.split("/")[1],
 		}),
 		html({
 			rootDir: __dirname,
 			input: "src/**/*.html",
-			exclude: ["src/docs/index-prod-template.html"],
+			exclude: ["src/docs/index-prod-template.html", "src/index.html"],
 			extractAssets: false,
-			minify: true,
+			minify: false,
 			transformHtml: [
 				(html, { htmlFileName }) => {
 					let wrappedContent = html;
@@ -39,7 +36,6 @@ export default {
 							"src/docs/index-prod-template.html",
 							"utf-8",
 						);
-						console.log(htmlFileName);
 						wrappedContent = template.replace(
 							"<!-- Page-specific content will be loaded here -->",
 							html,
@@ -63,6 +59,7 @@ export default {
 				{ src: "src/components/icons", dest: "dist" },
 				{ src: "src/core/styles.css", dest: "dist/assets" },
 				{ src: "src/docs/page-layout.css", dest: "dist/assets" },
+				{ src: "src/docs/scroll-spy.js", dest: "dist/assets" },
 				{ src: "src/utils/auto-define-elements.mjs", dest: "dist/assets" },
 			],
 		}),
@@ -71,5 +68,13 @@ export default {
 		summary({
 			showGzippedSize: true,
 		}),
+		{
+			name: "duplicate-welcome-html",
+			writeBundle() {
+				const srcPath = path.join(__dirname, "dist", "welcome.html");
+				const destPath = path.join(__dirname, "dist", "index.html");
+				copyFileSync(srcPath, destPath);
+			},
+		},
 	],
 };

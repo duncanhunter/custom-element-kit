@@ -16,6 +16,7 @@ const FORM_COMPONENTS = new Set([
 	"radio",
 	"date-picker",
 	"date-input",
+	"digit-input",
 	"calendar",
 	"select",
 	"combobox",
@@ -31,20 +32,37 @@ const camelCase = (str) =>
 
 async function getIcon(element) {
 	const name = element.getAttribute("name");
+	const size = element.getAttribute("size");
+
 	if (!name) {
 		return;
 	}
 
 	if (moduleCache.has("icons")) {
-		return moduleCache.get("icons")[camelCase(name)] || "";
+		const icon = moduleCache.get("icons")[camelCase(name)] || "";
+		const updatedSVG = icon.replace(
+			"<svg",
+			`<svg height="${size}" width="${size}"`,
+		);
+
+		return updatedSVG;
 	}
 
 	try {
 		const { default: icons } = await import("../components/icons/icons.js");
 		moduleCache.set("icons", icons);
-		return icons[camelCase(name)] || "";
+		const icon = icons[camelCase(name)] || "";
+		const updatedSVG = icon.replace(
+			"<svg",
+			`<svg height="${size}" width="${size}"`,
+		);
+
+		return updatedSVG;
 	} catch (error) {
-		return null;
+		return console.error(
+			"Failed to load module '../components/icons/icons.js':",
+			error,
+		);
 	}
 }
 
@@ -53,9 +71,13 @@ async function getTemplateAndStyles(elementName) {
 		return moduleCache.get(elementName);
 	}
 
+	const parentElementName = elementName.startsWith("tab")
+		? "tabs"
+		: elementName;
+
 	try {
 		const module = await import(
-			`../components/${elementName}/${elementName}.js`
+			`../components/${parentElementName}/${parentElementName}.js`
 		);
 		const styles = module[`${camelCase(elementName)}Styles`] || "";
 		const template = module[`${camelCase(elementName)}Template`] || "";
@@ -65,7 +87,7 @@ async function getTemplateAndStyles(elementName) {
 		return templateAndStyles;
 	} catch (error) {
 		console.error(
-			`Failed to load module '../components/${elementName}/${elementName}.js':`,
+			`Failed to load module '../components/${parentElementName}/${parentElementName}.js':`,
 			error,
 		);
 		return null;
@@ -108,17 +130,36 @@ async function processElement(element, document) {
 	let { template, styles } = await getTemplateAndStyles(elementName);
 
 	if (FORM_COMPONENTS.has(elementName)) {
-		const propsToHandle = ["value", "label", "help", "error"];
+		const propsToHandle = ["value", "label", "help", "error", "type"];
 
 		for (const prop of propsToHandle) {
 			if (attributes[prop]) {
-				const id = prop === "value" ? "control" : prop;
+				const id = prop === "value" || prop === "type" ? "control" : prop;
 				if (prop === "value") {
 					template = template.replace(
 						new RegExp(`(<[^>]*id\\s*=\\s*["']${id}["'][^>]*?)\\s*(/?>)`, "i"),
 						(match, p1, closing) =>
 							`${p1} value="${attributes[prop]}"${closing}`,
 					);
+				} else if (prop === "type") {
+					template = template.replace(
+						new RegExp(`(<[^>]*id\\s*=\\s*["']${id}["'][^>]*?)\\s*(/?>)`, "i"),
+						(match, p1, closing) => {
+							if (p1.match(/type\s*=\s*["'][^"']*["']/i)) {
+								return (
+									p1.replace(
+										/type\s*=\s*["'][^"']*["']/i,
+										`type="${attributes[prop]}"`,
+									) + closing
+								);
+							}
+							return `${p1} type="${attributes[prop]}"${closing}`;
+						},
+					);
+					if (attributes[prop] === "password") {
+						console.log({ prop, id, elementName });
+						console.log({ template });
+					}
 				} else {
 					template = template.replace(
 						new RegExp(

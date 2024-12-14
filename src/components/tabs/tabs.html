@@ -1,0 +1,63 @@
+<section>
+    <h1>Tabs (cek-tabs, cek-tab, cek-tab-panel)</h1>
+
+    <cek-tabs>
+        <cek-tab slot="tab">Account</cek-tab>
+        <cek-tab slot="tab">Password</cek-tab>
+        <cek-tab slot="tab">Password1</cek-tab>
+        <cek-tab slot="tab" active>Password2</cek-tab>
+        <cek-tab slot="tab">Password3</cek-tab>
+        <cek-tab slot="tab">Password4</cek-tab>
+        <cek-tab slot="tab">Password5</cek-tab>
+        <cek-tab slot="tab">Password6</cek-tab>
+
+        <cek-tab-panel slot="panel">
+            <p>Account content goes here.</p>
+            <button class="cek-button">Save</button>
+        </cek-tab-panel>
+        <cek-tab-panel slot="panel">
+            <p>Password content goes here.</p>
+        </cek-tab-panel>
+    </cek-tabs>
+
+    <cek-tabs aria-orientation="vertical">
+        <cek-tab slot="tab" aria-selected="true">Account</cek-tab>
+        <cek-tab slot="tab">Password</cek-tab>
+      
+        <cek-tab-panel slot="panel">
+          <p>Account content goes here.</p>
+        </cek-tab-panel>
+        <cek-tab-panel slot="panel">
+          <p>Password content goes here.</p>
+        </cek-tab-panel>
+      </cek-tabs>
+
+      <cek-tabs direction="start" manual>
+        <cek-tab slot="tab" active>First</cek-tab>
+        <cek-tab slot="tab">Second</cek-tab>
+        <cek-tab slot="tab">Third</cek-tab>
+        <cek-tab slot="tab">Fourth</cek-tab>
+        <cek-tab slot="tab">Fifth</cek-tab>
+        <cek-tab slot="tab">Sixth</cek-tab>
+      
+        <cek-tab-panel slot="panel">
+          <p>First panel content</p>
+        </cek-tab-panel>
+        <cek-tab-panel slot="panel">
+          <p>Second panel content</p>
+        </cek-tab-panel>
+        <cek-tab-panel slot="panel">
+          <p>Third panel content</p>
+        </cek-tab-panel>
+        <cek-tab-panel slot="panel">
+          <p>Fourth panel content</p>
+        </cek-tab-panel>
+        <cek-tab-panel slot="panel">
+          <p>Fifth panel content</p>
+        </cek-tab-panel>
+        <cek-tab-panel slot="panel">
+          <p>Sixth panel content</p>
+        </cek-tab-panel>
+      </cek-tabs>
+
+</section>

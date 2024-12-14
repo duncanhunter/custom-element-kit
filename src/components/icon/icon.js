@@ -16,7 +16,13 @@ export class Icon extends HTMLElement {
 		}
 	}
 
-	get serverRendered() {
+	connectedCallback() {
+		if (!this.#serverRendered) {
+			this.fetchIcon(this.name);
+		}
+	}
+
+	get #serverRendered() {
 		return this.hasAttribute("server-rendered");
 	}
 
@@ -29,8 +35,8 @@ export class Icon extends HTMLElement {
 	}
 
 	async attributeChangedCallback(name, oldValue, newValue) {
-		if (["size", "name"].includes("name") && oldValue) {
-			if (!this.serverRendered) {
+		if (["size", "name"].includes(name) && oldValue) {
+			if (!this.#serverRendered) {
 				await this.fetchIcon(newValue);
 			}
 		}
@@ -41,7 +47,7 @@ export class Icon extends HTMLElement {
 		try {
 			const iconPath = window?.cekConfig
 				? `${window?.cekConfig()?.iconPath}/${name}.svg`
-				: `./../icons/${name}.svg`;
+				: `./icons/${name}.svg`;
 			const response = await fetch(iconPath);
 			this.dispatchEvent(new Event("cek-load"));
 			const icon = await response.text();

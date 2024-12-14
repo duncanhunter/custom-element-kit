@@ -1,4 +1,11 @@
-export class Form extends HTMLElement {
+export const formTemplate = /*css*/ `
+	<slot></slot>
+`;
+
+export const formStyles = /*css*/ `
+`;
+
+class Form extends HTMLElement {
 	static get observedAttributes() {
 		return [
 			"loading",
@@ -17,34 +24,23 @@ export class Form extends HTMLElement {
 
 	constructor() {
 		super();
-		const style = document.createElement("style");
-		style.innerHTML = /* css */ `
-			form {
-				display: grid;
-				grid-template-columns: 1fr;
-				grid-gap: var(--cek-space-4);
-				margin-block: var(--cek-space-4);
-			}`;
-		this.appendChild(style);
-		this.#form = document.createElement("form");
-		this.#form.setAttribute("novalidate", "");
+		if (!this.shadowRoot) {
+			this.attachShadow({ mode: "open" });
+			this.shadowRoot.innerHTML = `<style>${formStyles}</style>${formTemplate}`;
+		}
+		this.#form = this.shadowRoot.querySelector("form");
 	}
 
-	get showErrorSummary() {
-		const attribute = this.getAttribute("show-error-summary");
-		return attribute !== null && attribute !== "false";
-	}
-
-	get loading() {
-		return this.getAttribute("loading");
-	}
-	set loading(value) {
-		value ? this.setAttribute("loading", "") : this.removeAttribute("loading");
+	attributeChangedCallback(name, _oldValue, newValue) {
+		if (name === "orientation") {
+			this.setAttribute(
+				"aria-orientation",
+				newValue === "horizontal" ? "horizontal" : "vertical",
+			);
+		}
 	}
 
 	connectedCallback() {
-		this.#moveFormFieldsIntoForm();
-		// this.configureFormChangeEvents();
 		this.#form.addEventListener("submit", this.#handleSubmit);
 		this.#form.validateOnChange =
 			this.hasAttribute("validate-on-change") &&
@@ -60,141 +56,6 @@ export class Form extends HTMLElement {
 				: (this.#form.querySelector("cek-button[type='submit']") ?? null),
 			confirm: this.getAttribute("fetch-confirm"),
 		};
-	}
-
-	handleEvent() {
-		if (this.hasAttribute("disabled")) {
-			return;
-		}
-	}
-
-	attributeChangedCallback(name, oldValue, newValue) {
-		if (name === "disabled") {
-			this.#form.disabled = newValue !== null;
-		}
-		if (name === "id") {
-			this.#form.setAttribute("id", newValue);
-		}
-		if (name === "fetch") {
-			// this.fetchIfy();
-		}
-	}
-
-	formData() {
-		return new FormData(this.#form);
-	}
-
-	formValues() {
-		return Object.fromEntries(new FormData(this.#form).entries());
-	}
-
-	#fetchIfy() {
-		if (this.getAttribute("fetch")) {
-			const [method, ...rest] = this.getAttribute("fetch").split(":");
-			const path = rest.join(":");
-			this.#fetchConfig.path = path;
-			this.#fetchConfig.method = method;
-
-			const makeRequest = () => {
-				this.#fetchConfig.indicator.loading = true;
-				this.#fetchConfig.target = this.#getFetchTarget();
-				this.loading = true;
-				fetch(this.#fetchConfig.path, {
-					method: this.#fetchConfig.method,
-					body: this.formData(),
-				})
-					.then((response) => {
-						if (!response.ok) throw new Error("Fetch failed");
-						return response.text();
-					})
-					.then((html) => {
-						if (this.#fetchConfig.swap === "innerHTML") {
-							this.#fetchConfig.target.innerHTML = html;
-						} else if (this.#fetchConfig.swap === "outerHTML") {
-							this.#fetchConfig.target.outerHTML = html;
-						} else if (this.#fetchConfig.swap === "beforeend") {
-							this.#fetchConfig.target.insertAdjacentHTML("beforeend", html);
-						} else if (this.#fetchConfig.swap === "afterend") {
-							this.#fetchConfig.target.insertAdjacentHTML("afterend", html);
-						} else if (this.#fetchConfig.swap === "beforebegin") {
-							this.#fetchConfig.target.insertAdjacentHTML("beforebegin", html);
-						} else if (this.#fetchConfig.swap === "afterbegin") {
-							this.#fetchConfig.target.insertAdjacentHTML("afterbegin", html);
-						} else {
-							const swapTarget = document.querySelector(this.#fetchConfig.swap);
-							swapTarget.innerHTML = html;
-						}
-						this.#fetchConfig.indicator.loading = false;
-						this.loading = false;
-					})
-					.catch((error) => {
-						console.error(error);
-						this.#fetchConfig.indicator.loading = false;
-					});
-			};
-
-			this.#fetchConfig.data = this.formValues();
-
-			if (this.#fetchConfig.confirm) {
-				const confirmDialogHtml = `
-							<cek-dialog>
-								${this.#fetchConfig.confirm}
-								<button id="yes" type="button">Yes</button>
-							</cek-dialog>
-						`;
-				this.insertAdjacentHTML("beforeend", confirmDialogHtml);
-				const dialog = this.querySelector("cek-dialog");
-				const handleYes = () => {
-					dialog.close("yes");
-					dialog.remove();
-					makeRequest();
-				};
-				dialog.showModal();
-				const yesButtonElement = this.querySelector("#yes");
-				yesButtonElement.addEventListener("keydown", (event) => {
-					if (event.key === "Enter") {
-						event.preventDefault();
-						event.stopImmediatePropagation();
-						handleYes(event);
-					}
-				});
-				yesButtonElement.addEventListener("click", (event) => {
-					handleYes(event);
-				});
-			} else {
-				makeRequest();
-			}
-		}
-	}
-
-	#getFetchTarget() {
-		let target;
-		if (this.getAttribute("fetch-target")) {
-			if (this.querySelector(this.getAttribute("fetch-target"))) {
-				target = this.querySelector(this.getAttribute("fetch-target"));
-			} else {
-				target = document.querySelector(this.getAttribute("fetch-target"));
-			}
-		} else {
-			target = this;
-		}
-		return target;
-	}
-
-	// configureFormChangeEvents() {
-	// 	if (this.hasAttribute("validate-on-change")) {
-	// 		this.form.setAttribute("validate-on-change", "");
-	// 	}
-	// 	if (this.hasAttribute("validate-dirty-on-change")) {
-	// 		this.form.setAttribute("validate-dirty-on-change", "");
-	// 	}
-	// }
-
-	#moveFormFieldsIntoForm() {
-		for (const element of Array.from(this.querySelectorAll(":scope > *"))) {
-			this.#form.appendChild(element);
-		}
-		this.appendChild(this.#form);
 	}
 
 	#handleSubmit = (event) => {
@@ -285,7 +146,7 @@ export class Form extends HTMLElement {
 		// console.log('this.form.checkValidity()',this.form.checkValidity())
 		if (this.#form.checkValidity()) {
 			// this.form.requestSubmit();
-			this.#fetchIfy();
+			// this.#fetchIfy();
 		}
 	};
 }
