@@ -25,6 +25,7 @@
                     <h2 class="cek-text-1 cek-text-bold">Components</h2>
                     <ul>
                         <li><a href="button.html">Button</a></li>
+                        <li><a href="icon.html">Icon</a></li>
                         <li><a href="input.html">Input</a></li>
                         <li><a href="form.html">Form</a></li>
                     </ul>
@@ -35,144 +36,2234 @@
                 <html><head></head><body><section>
     <h1>Button (cek-button)</h1>
 
-    <cek-button type="submit" variant="primary" server-rendered=""><template shadowrootmode="open"><style>
+    <h2>Variants</h2>
+    <p>The button component supports several variants for different styles and use cases. Use the <span class="attribute">variant</span> attribute to change the visual style of the button.</p>
+
+    <cek-button variant="primary" server-rendered=""><template shadowrootmode="open"><style>
 :host {
-	display: inline-block;
+  display: inline-block;
+  font-family: var(--cek-font-family);
+  line-height: var(--cek-line-height);
+  box-sizing: border-box;
 }
 
-button {
-	position: relative;
-	-webkit-appearance: none;
-	appearance: none;
-	background: transparent;
-	padding: 0;
-	margin: 0;
-	font: inherit;
-	color: inherit;
-	text-align: inherit;
-	font-family: var(--cek-font-family);
-	line-height: var(--cek-line-height);
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	box-sizing: border-box;
+#button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  box-sizing: border-box;
+  text-decoration: none;
 }
 
-:host([variant])::part(button) {
-	display: inline-flex;
-	align-items: center;
-	border:none;
-	border-radius: var(--cek-border-radius);
-	padding-inline: var(--cek-padding-inline);
-	cursor: pointer;
+:host([variant]) #button {
+  border-radius: var(--cek-border-radius);
+  padding-inline: var(--cek-padding-inline);
 }
 
-:host([variant])::part(button):where(:hover) {
-	filter: brightness(85%);
+:host([variant]) #button:hover {
+  filter: brightness(85%);
 }
 
-:host([variant])::part(button):focus {
-	outline: var(--cek-focus-ring);
-	outline-offset: var(--cek-focus-ring-offset);
-}
-	
-:host([loading])::part(button) {
-	background-color: lightgray;
-	color: rgba(0, 0, 0, 0.5);
+:host([variant]) #button:focus {
+  outline: var(--cek-focus-ring);
+  outline-offset: var(--cek-focus-ring-offset);
 }
 
-:host([size="small"])::part(button) {
-	min-height: var(--cek-height-small);
-	font-size: var(--cek-font-size-0);
+:host([loading]) #button,
+:host([disabled]) #button {
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
-:host(:not([size]))::part(button),
-:host([size="medium"])::part(button) {
-	min-height: var(--cek-height-medium);
-	font-size: var(--cek-font-size-1);
+:host([loading]) #button {
+  background-color: lightgray;
+  color: rgba(0, 0, 0, 0.5);
 }
 
-:host([size="large"])::part(button) {
-	min-height: var(--cek-height-large);
-	font-size: var(--cek-font-size-2);
+:host([disabled][variant]) #button {
+  background-color: #ccc;
+  color: rgba(0, 0, 0, 0.5);
 }
 
-:host([variant="primary"])::part(button) {
-	background-color: var(--cek-color-primary-500);
-	color: white;
+:host([size="small"]) #button {
+  min-height: var(--cek-height-small);
+  font-size: var(--cek-font-size-0);
 }
 
-:host([variant="ascent"])::part(button) {
-	background-color: var(--cek-surface-color-3);
-	color: var(--cek-text-color-1);
+:host(:not([size])) #button, 
+:host([size="medium"]) #button {
+  min-height: var(--cek-height-medium);
+  font-size: var(--cek-font-size-1);
 }
 
-:host([variant="outline"])::part(button) {
-	background-color: transparent;
-	border: 1px solid var(--cek-border-color-2);
-	color: var(--cek-text-color-1);
+:host([size="large"]) #button {
+  min-height: var(--cek-height-large);
+  font-size: var(--cek-font-size-2);
 }
 
-:host([variant="text"])::part(button) {
-	background-color: transparent;
-	color: var(--cek-text-color-1);
+:host([variant="primary"]) #button {
+  background-color: var(--cek-color-primary-500);
+  color: white;
 }
 
-:host([variant="text"])::part(button):hover {
-	background-color: var(--cek-surface-color-2);
+:host([variant="ascent"]) #button {
+  background-color: var(--cek-surface-color-3);
+  color: var(--cek-text-color-1);
 }
 
-:host([variant="link"])::part(button) {
-	background-color: transparent;
-	color: var(--cek-color-primary-500);
-	text-decoration: underline;
+:host([variant="outline"]) #button {
+  background-color: transparent;
+  border: 1px solid var(--cek-border-color-2);
+  color: var(--cek-text-color-1);
 }
 
-:host([variant])::part(label) {
-	display: contents;
+:host([variant="text"]) #button {
+  background: transparent;
+  color: var(--cek-text-color-1);
 }
 
-:host([icon-only])::part(button) {
-	padding-inline: 0.8ch;
+:host([variant="text"]) #button:hover {
+  background-color: var(--cek-surface-color-2);
 }
 
-:host([disabled])::part(button) {
-	background-color: #ccc;
-	color: rgba(0, 0, 0, 0.5);
-	cursor: not-allowed;
+:host([variant="link"]) #button {
+  background-color: transparent;
+  color: var(--cek-color-primary-500);
+  text-decoration: underline;
 }
 
 [name="end"]::slotted(*) {
-	margin-inline-start: 0.5ch;
+  margin-inline-start: 0.5ch;
 }
 
 [name="start"]::slotted(*) {
-	margin-inline-end: 0.5ch;
+  margin-inline-end: 0.5ch;
 }
 
-[part=loading-icon] {
-	position: absolute;
-	display: none;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+#loading-icon {
+  position: absolute;
+  display: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-[part=arrow-icon] {
-	height: 1em;
-	width: 1em;
-	margin-inline-start: 0.5ch;
+:host([loading]) #loading-icon {
+  display: block;
+}
+
+:host([icon-only]) #button {
+  padding-inline: 0.8ch;
+}
+
+#arrow-icon {
+  display: none;
+  height: 1em;
+  width: 1em;
+  margin-inline-start: 0.5ch;
+}
+
+:host([arrow]) #arrow-icon {
+  display: block;
 }
 </style>
-  <button part="button">
-    <slot name="start"></slot>
-    <div part="label"><slot></slot></div>
-    <slot name="end"></slot>
-    <svg part="loading-icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25" /><path d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z"><animatetransform attributeName="transform" type="rotate" dur="0.75s" values="0 12 12;360 12 12" repeatCount="indefinite" /></path></svg>
-  </button>
-</template>Submit</cek-button>
+		<a id="button" part="button">
+		<slot name="start"></slot>
+		<div id="label" part="label"><slot></slot></div>
+		<slot name="end"></slot>
+		<svg id="loading-icon" part="loading-icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25" />
+			<path d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7
+			a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z">
+			<animatetransform attributeName="transform" type="rotate" dur="0.75s" values="0 12 12;360 12 12" repeatCount="indefinite" />
+			</path>
+		</svg>
+		<svg id="arrow-icon" part="arrow-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">  
+			<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+		</svg>
+		</a>
+	</template>Primary Button</cek-button>
+    <cek-button variant="ascent" server-rendered=""><template shadowrootmode="open"><style>
+:host {
+  display: inline-block;
+  font-family: var(--cek-font-family);
+  line-height: var(--cek-line-height);
+  box-sizing: border-box;
+}
 
-</section></body></html>
+#button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+:host([variant]) #button {
+  border-radius: var(--cek-border-radius);
+  padding-inline: var(--cek-padding-inline);
+}
+
+:host([variant]) #button:hover {
+  filter: brightness(85%);
+}
+
+:host([variant]) #button:focus {
+  outline: var(--cek-focus-ring);
+  outline-offset: var(--cek-focus-ring-offset);
+}
+
+:host([loading]) #button,
+:host([disabled]) #button {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+:host([loading]) #button {
+  background-color: lightgray;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+:host([disabled][variant]) #button {
+  background-color: #ccc;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+:host([size="small"]) #button {
+  min-height: var(--cek-height-small);
+  font-size: var(--cek-font-size-0);
+}
+
+:host(:not([size])) #button, 
+:host([size="medium"]) #button {
+  min-height: var(--cek-height-medium);
+  font-size: var(--cek-font-size-1);
+}
+
+:host([size="large"]) #button {
+  min-height: var(--cek-height-large);
+  font-size: var(--cek-font-size-2);
+}
+
+:host([variant="primary"]) #button {
+  background-color: var(--cek-color-primary-500);
+  color: white;
+}
+
+:host([variant="ascent"]) #button {
+  background-color: var(--cek-surface-color-3);
+  color: var(--cek-text-color-1);
+}
+
+:host([variant="outline"]) #button {
+  background-color: transparent;
+  border: 1px solid var(--cek-border-color-2);
+  color: var(--cek-text-color-1);
+}
+
+:host([variant="text"]) #button {
+  background: transparent;
+  color: var(--cek-text-color-1);
+}
+
+:host([variant="text"]) #button:hover {
+  background-color: var(--cek-surface-color-2);
+}
+
+:host([variant="link"]) #button {
+  background-color: transparent;
+  color: var(--cek-color-primary-500);
+  text-decoration: underline;
+}
+
+[name="end"]::slotted(*) {
+  margin-inline-start: 0.5ch;
+}
+
+[name="start"]::slotted(*) {
+  margin-inline-end: 0.5ch;
+}
+
+#loading-icon {
+  position: absolute;
+  display: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+:host([loading]) #loading-icon {
+  display: block;
+}
+
+:host([icon-only]) #button {
+  padding-inline: 0.8ch;
+}
+
+#arrow-icon {
+  display: none;
+  height: 1em;
+  width: 1em;
+  margin-inline-start: 0.5ch;
+}
+
+:host([arrow]) #arrow-icon {
+  display: block;
+}
+</style>
+		<a id="button" part="button">
+		<slot name="start"></slot>
+		<div id="label" part="label"><slot></slot></div>
+		<slot name="end"></slot>
+		<svg id="loading-icon" part="loading-icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25" />
+			<path d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7
+			a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z">
+			<animatetransform attributeName="transform" type="rotate" dur="0.75s" values="0 12 12;360 12 12" repeatCount="indefinite" />
+			</path>
+		</svg>
+		<svg id="arrow-icon" part="arrow-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">  
+			<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+		</svg>
+		</a>
+	</template>Ascent Button</cek-button>
+    <cek-button variant="outline" server-rendered=""><template shadowrootmode="open"><style>
+:host {
+  display: inline-block;
+  font-family: var(--cek-font-family);
+  line-height: var(--cek-line-height);
+  box-sizing: border-box;
+}
+
+#button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+:host([variant]) #button {
+  border-radius: var(--cek-border-radius);
+  padding-inline: var(--cek-padding-inline);
+}
+
+:host([variant]) #button:hover {
+  filter: brightness(85%);
+}
+
+:host([variant]) #button:focus {
+  outline: var(--cek-focus-ring);
+  outline-offset: var(--cek-focus-ring-offset);
+}
+
+:host([loading]) #button,
+:host([disabled]) #button {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+:host([loading]) #button {
+  background-color: lightgray;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+:host([disabled][variant]) #button {
+  background-color: #ccc;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+:host([size="small"]) #button {
+  min-height: var(--cek-height-small);
+  font-size: var(--cek-font-size-0);
+}
+
+:host(:not([size])) #button, 
+:host([size="medium"]) #button {
+  min-height: var(--cek-height-medium);
+  font-size: var(--cek-font-size-1);
+}
+
+:host([size="large"]) #button {
+  min-height: var(--cek-height-large);
+  font-size: var(--cek-font-size-2);
+}
+
+:host([variant="primary"]) #button {
+  background-color: var(--cek-color-primary-500);
+  color: white;
+}
+
+:host([variant="ascent"]) #button {
+  background-color: var(--cek-surface-color-3);
+  color: var(--cek-text-color-1);
+}
+
+:host([variant="outline"]) #button {
+  background-color: transparent;
+  border: 1px solid var(--cek-border-color-2);
+  color: var(--cek-text-color-1);
+}
+
+:host([variant="text"]) #button {
+  background: transparent;
+  color: var(--cek-text-color-1);
+}
+
+:host([variant="text"]) #button:hover {
+  background-color: var(--cek-surface-color-2);
+}
+
+:host([variant="link"]) #button {
+  background-color: transparent;
+  color: var(--cek-color-primary-500);
+  text-decoration: underline;
+}
+
+[name="end"]::slotted(*) {
+  margin-inline-start: 0.5ch;
+}
+
+[name="start"]::slotted(*) {
+  margin-inline-end: 0.5ch;
+}
+
+#loading-icon {
+  position: absolute;
+  display: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+:host([loading]) #loading-icon {
+  display: block;
+}
+
+:host([icon-only]) #button {
+  padding-inline: 0.8ch;
+}
+
+#arrow-icon {
+  display: none;
+  height: 1em;
+  width: 1em;
+  margin-inline-start: 0.5ch;
+}
+
+:host([arrow]) #arrow-icon {
+  display: block;
+}
+</style>
+		<a id="button" part="button">
+		<slot name="start"></slot>
+		<div id="label" part="label"><slot></slot></div>
+		<slot name="end"></slot>
+		<svg id="loading-icon" part="loading-icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25" />
+			<path d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7
+			a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z">
+			<animatetransform attributeName="transform" type="rotate" dur="0.75s" values="0 12 12;360 12 12" repeatCount="indefinite" />
+			</path>
+		</svg>
+		<svg id="arrow-icon" part="arrow-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">  
+			<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+		</svg>
+		</a>
+	</template>Outline Button</cek-button>
+    <cek-button variant="text" server-rendered=""><template shadowrootmode="open"><style>
+:host {
+  display: inline-block;
+  font-family: var(--cek-font-family);
+  line-height: var(--cek-line-height);
+  box-sizing: border-box;
+}
+
+#button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+:host([variant]) #button {
+  border-radius: var(--cek-border-radius);
+  padding-inline: var(--cek-padding-inline);
+}
+
+:host([variant]) #button:hover {
+  filter: brightness(85%);
+}
+
+:host([variant]) #button:focus {
+  outline: var(--cek-focus-ring);
+  outline-offset: var(--cek-focus-ring-offset);
+}
+
+:host([loading]) #button,
+:host([disabled]) #button {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+:host([loading]) #button {
+  background-color: lightgray;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+:host([disabled][variant]) #button {
+  background-color: #ccc;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+:host([size="small"]) #button {
+  min-height: var(--cek-height-small);
+  font-size: var(--cek-font-size-0);
+}
+
+:host(:not([size])) #button, 
+:host([size="medium"]) #button {
+  min-height: var(--cek-height-medium);
+  font-size: var(--cek-font-size-1);
+}
+
+:host([size="large"]) #button {
+  min-height: var(--cek-height-large);
+  font-size: var(--cek-font-size-2);
+}
+
+:host([variant="primary"]) #button {
+  background-color: var(--cek-color-primary-500);
+  color: white;
+}
+
+:host([variant="ascent"]) #button {
+  background-color: var(--cek-surface-color-3);
+  color: var(--cek-text-color-1);
+}
+
+:host([variant="outline"]) #button {
+  background-color: transparent;
+  border: 1px solid var(--cek-border-color-2);
+  color: var(--cek-text-color-1);
+}
+
+:host([variant="text"]) #button {
+  background: transparent;
+  color: var(--cek-text-color-1);
+}
+
+:host([variant="text"]) #button:hover {
+  background-color: var(--cek-surface-color-2);
+}
+
+:host([variant="link"]) #button {
+  background-color: transparent;
+  color: var(--cek-color-primary-500);
+  text-decoration: underline;
+}
+
+[name="end"]::slotted(*) {
+  margin-inline-start: 0.5ch;
+}
+
+[name="start"]::slotted(*) {
+  margin-inline-end: 0.5ch;
+}
+
+#loading-icon {
+  position: absolute;
+  display: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+:host([loading]) #loading-icon {
+  display: block;
+}
+
+:host([icon-only]) #button {
+  padding-inline: 0.8ch;
+}
+
+#arrow-icon {
+  display: none;
+  height: 1em;
+  width: 1em;
+  margin-inline-start: 0.5ch;
+}
+
+:host([arrow]) #arrow-icon {
+  display: block;
+}
+</style>
+		<a id="button" part="button">
+		<slot name="start"></slot>
+		<div id="label" part="label"><slot></slot></div>
+		<slot name="end"></slot>
+		<svg id="loading-icon" part="loading-icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25" />
+			<path d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7
+			a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z">
+			<animatetransform attributeName="transform" type="rotate" dur="0.75s" values="0 12 12;360 12 12" repeatCount="indefinite" />
+			</path>
+		</svg>
+		<svg id="arrow-icon" part="arrow-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">  
+			<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+		</svg>
+		</a>
+	</template>Text Button</cek-button>
+    <cek-button variant="link" server-rendered=""><template shadowrootmode="open"><style>
+:host {
+  display: inline-block;
+  font-family: var(--cek-font-family);
+  line-height: var(--cek-line-height);
+  box-sizing: border-box;
+}
+
+#button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+:host([variant]) #button {
+  border-radius: var(--cek-border-radius);
+  padding-inline: var(--cek-padding-inline);
+}
+
+:host([variant]) #button:hover {
+  filter: brightness(85%);
+}
+
+:host([variant]) #button:focus {
+  outline: var(--cek-focus-ring);
+  outline-offset: var(--cek-focus-ring-offset);
+}
+
+:host([loading]) #button,
+:host([disabled]) #button {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+:host([loading]) #button {
+  background-color: lightgray;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+:host([disabled][variant]) #button {
+  background-color: #ccc;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+:host([size="small"]) #button {
+  min-height: var(--cek-height-small);
+  font-size: var(--cek-font-size-0);
+}
+
+:host(:not([size])) #button, 
+:host([size="medium"]) #button {
+  min-height: var(--cek-height-medium);
+  font-size: var(--cek-font-size-1);
+}
+
+:host([size="large"]) #button {
+  min-height: var(--cek-height-large);
+  font-size: var(--cek-font-size-2);
+}
+
+:host([variant="primary"]) #button {
+  background-color: var(--cek-color-primary-500);
+  color: white;
+}
+
+:host([variant="ascent"]) #button {
+  background-color: var(--cek-surface-color-3);
+  color: var(--cek-text-color-1);
+}
+
+:host([variant="outline"]) #button {
+  background-color: transparent;
+  border: 1px solid var(--cek-border-color-2);
+  color: var(--cek-text-color-1);
+}
+
+:host([variant="text"]) #button {
+  background: transparent;
+  color: var(--cek-text-color-1);
+}
+
+:host([variant="text"]) #button:hover {
+  background-color: var(--cek-surface-color-2);
+}
+
+:host([variant="link"]) #button {
+  background-color: transparent;
+  color: var(--cek-color-primary-500);
+  text-decoration: underline;
+}
+
+[name="end"]::slotted(*) {
+  margin-inline-start: 0.5ch;
+}
+
+[name="start"]::slotted(*) {
+  margin-inline-end: 0.5ch;
+}
+
+#loading-icon {
+  position: absolute;
+  display: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+:host([loading]) #loading-icon {
+  display: block;
+}
+
+:host([icon-only]) #button {
+  padding-inline: 0.8ch;
+}
+
+#arrow-icon {
+  display: none;
+  height: 1em;
+  width: 1em;
+  margin-inline-start: 0.5ch;
+}
+
+:host([arrow]) #arrow-icon {
+  display: block;
+}
+</style>
+		<a id="button" part="button">
+		<slot name="start"></slot>
+		<div id="label" part="label"><slot></slot></div>
+		<slot name="end"></slot>
+		<svg id="loading-icon" part="loading-icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25" />
+			<path d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7
+			a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z">
+			<animatetransform attributeName="transform" type="rotate" dur="0.75s" values="0 12 12;360 12 12" repeatCount="indefinite" />
+			</path>
+		</svg>
+		<svg id="arrow-icon" part="arrow-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">  
+			<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+		</svg>
+		</a>
+	</template>Link Button</cek-button>
+
+    <cek-code-block lang="xml" theme="github-dark">
+        <template>
+            <cek-button variant="primary">Primary Button</cek-button>
+            <cek-button variant="ascent">Ascent Button</cek-button>
+            <cek-button variant="outline">Outline Button</cek-button>
+            <cek-button variant="text">Text Button</cek-button>
+            <cek-button variant="link">Link Button</cek-button>
+        </template>
+    </cek-code-block>
+
+    <h2>Sizes</h2>
+    <p>Small, medium (default), and large sizes are available. Use the <span class="attribute">size</span> attribute to
+        adjust the size of the button.</p>
+
+    <div class="horizontal">
+        <cek-button size="small" variant="primary" server-rendered=""><template shadowrootmode="open"><style>
+:host {
+  display: inline-block;
+  font-family: var(--cek-font-family);
+  line-height: var(--cek-line-height);
+  box-sizing: border-box;
+}
+
+#button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+:host([variant]) #button {
+  border-radius: var(--cek-border-radius);
+  padding-inline: var(--cek-padding-inline);
+}
+
+:host([variant]) #button:hover {
+  filter: brightness(85%);
+}
+
+:host([variant]) #button:focus {
+  outline: var(--cek-focus-ring);
+  outline-offset: var(--cek-focus-ring-offset);
+}
+
+:host([loading]) #button,
+:host([disabled]) #button {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+:host([loading]) #button {
+  background-color: lightgray;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+:host([disabled][variant]) #button {
+  background-color: #ccc;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+:host([size="small"]) #button {
+  min-height: var(--cek-height-small);
+  font-size: var(--cek-font-size-0);
+}
+
+:host(:not([size])) #button, 
+:host([size="medium"]) #button {
+  min-height: var(--cek-height-medium);
+  font-size: var(--cek-font-size-1);
+}
+
+:host([size="large"]) #button {
+  min-height: var(--cek-height-large);
+  font-size: var(--cek-font-size-2);
+}
+
+:host([variant="primary"]) #button {
+  background-color: var(--cek-color-primary-500);
+  color: white;
+}
+
+:host([variant="ascent"]) #button {
+  background-color: var(--cek-surface-color-3);
+  color: var(--cek-text-color-1);
+}
+
+:host([variant="outline"]) #button {
+  background-color: transparent;
+  border: 1px solid var(--cek-border-color-2);
+  color: var(--cek-text-color-1);
+}
+
+:host([variant="text"]) #button {
+  background: transparent;
+  color: var(--cek-text-color-1);
+}
+
+:host([variant="text"]) #button:hover {
+  background-color: var(--cek-surface-color-2);
+}
+
+:host([variant="link"]) #button {
+  background-color: transparent;
+  color: var(--cek-color-primary-500);
+  text-decoration: underline;
+}
+
+[name="end"]::slotted(*) {
+  margin-inline-start: 0.5ch;
+}
+
+[name="start"]::slotted(*) {
+  margin-inline-end: 0.5ch;
+}
+
+#loading-icon {
+  position: absolute;
+  display: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+:host([loading]) #loading-icon {
+  display: block;
+}
+
+:host([icon-only]) #button {
+  padding-inline: 0.8ch;
+}
+
+#arrow-icon {
+  display: none;
+  height: 1em;
+  width: 1em;
+  margin-inline-start: 0.5ch;
+}
+
+:host([arrow]) #arrow-icon {
+  display: block;
+}
+</style>
+		<a id="button" part="button">
+		<slot name="start"></slot>
+		<div id="label" part="label"><slot></slot></div>
+		<slot name="end"></slot>
+		<svg id="loading-icon" part="loading-icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25" />
+			<path d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7
+			a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z">
+			<animatetransform attributeName="transform" type="rotate" dur="0.75s" values="0 12 12;360 12 12" repeatCount="indefinite" />
+			</path>
+		</svg>
+		<svg id="arrow-icon" part="arrow-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">  
+			<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+		</svg>
+		</a>
+	</template>Small Button</cek-button>
+        <cek-button size="medium" variant="primary" server-rendered=""><template shadowrootmode="open"><style>
+:host {
+  display: inline-block;
+  font-family: var(--cek-font-family);
+  line-height: var(--cek-line-height);
+  box-sizing: border-box;
+}
+
+#button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+:host([variant]) #button {
+  border-radius: var(--cek-border-radius);
+  padding-inline: var(--cek-padding-inline);
+}
+
+:host([variant]) #button:hover {
+  filter: brightness(85%);
+}
+
+:host([variant]) #button:focus {
+  outline: var(--cek-focus-ring);
+  outline-offset: var(--cek-focus-ring-offset);
+}
+
+:host([loading]) #button,
+:host([disabled]) #button {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+:host([loading]) #button {
+  background-color: lightgray;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+:host([disabled][variant]) #button {
+  background-color: #ccc;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+:host([size="small"]) #button {
+  min-height: var(--cek-height-small);
+  font-size: var(--cek-font-size-0);
+}
+
+:host(:not([size])) #button, 
+:host([size="medium"]) #button {
+  min-height: var(--cek-height-medium);
+  font-size: var(--cek-font-size-1);
+}
+
+:host([size="large"]) #button {
+  min-height: var(--cek-height-large);
+  font-size: var(--cek-font-size-2);
+}
+
+:host([variant="primary"]) #button {
+  background-color: var(--cek-color-primary-500);
+  color: white;
+}
+
+:host([variant="ascent"]) #button {
+  background-color: var(--cek-surface-color-3);
+  color: var(--cek-text-color-1);
+}
+
+:host([variant="outline"]) #button {
+  background-color: transparent;
+  border: 1px solid var(--cek-border-color-2);
+  color: var(--cek-text-color-1);
+}
+
+:host([variant="text"]) #button {
+  background: transparent;
+  color: var(--cek-text-color-1);
+}
+
+:host([variant="text"]) #button:hover {
+  background-color: var(--cek-surface-color-2);
+}
+
+:host([variant="link"]) #button {
+  background-color: transparent;
+  color: var(--cek-color-primary-500);
+  text-decoration: underline;
+}
+
+[name="end"]::slotted(*) {
+  margin-inline-start: 0.5ch;
+}
+
+[name="start"]::slotted(*) {
+  margin-inline-end: 0.5ch;
+}
+
+#loading-icon {
+  position: absolute;
+  display: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+:host([loading]) #loading-icon {
+  display: block;
+}
+
+:host([icon-only]) #button {
+  padding-inline: 0.8ch;
+}
+
+#arrow-icon {
+  display: none;
+  height: 1em;
+  width: 1em;
+  margin-inline-start: 0.5ch;
+}
+
+:host([arrow]) #arrow-icon {
+  display: block;
+}
+</style>
+		<a id="button" part="button">
+		<slot name="start"></slot>
+		<div id="label" part="label"><slot></slot></div>
+		<slot name="end"></slot>
+		<svg id="loading-icon" part="loading-icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25" />
+			<path d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7
+			a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z">
+			<animatetransform attributeName="transform" type="rotate" dur="0.75s" values="0 12 12;360 12 12" repeatCount="indefinite" />
+			</path>
+		</svg>
+		<svg id="arrow-icon" part="arrow-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">  
+			<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+		</svg>
+		</a>
+	</template>Medium Button</cek-button>
+        <cek-button size="large" variant="primary" server-rendered=""><template shadowrootmode="open"><style>
+:host {
+  display: inline-block;
+  font-family: var(--cek-font-family);
+  line-height: var(--cek-line-height);
+  box-sizing: border-box;
+}
+
+#button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+:host([variant]) #button {
+  border-radius: var(--cek-border-radius);
+  padding-inline: var(--cek-padding-inline);
+}
+
+:host([variant]) #button:hover {
+  filter: brightness(85%);
+}
+
+:host([variant]) #button:focus {
+  outline: var(--cek-focus-ring);
+  outline-offset: var(--cek-focus-ring-offset);
+}
+
+:host([loading]) #button,
+:host([disabled]) #button {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+:host([loading]) #button {
+  background-color: lightgray;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+:host([disabled][variant]) #button {
+  background-color: #ccc;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+:host([size="small"]) #button {
+  min-height: var(--cek-height-small);
+  font-size: var(--cek-font-size-0);
+}
+
+:host(:not([size])) #button, 
+:host([size="medium"]) #button {
+  min-height: var(--cek-height-medium);
+  font-size: var(--cek-font-size-1);
+}
+
+:host([size="large"]) #button {
+  min-height: var(--cek-height-large);
+  font-size: var(--cek-font-size-2);
+}
+
+:host([variant="primary"]) #button {
+  background-color: var(--cek-color-primary-500);
+  color: white;
+}
+
+:host([variant="ascent"]) #button {
+  background-color: var(--cek-surface-color-3);
+  color: var(--cek-text-color-1);
+}
+
+:host([variant="outline"]) #button {
+  background-color: transparent;
+  border: 1px solid var(--cek-border-color-2);
+  color: var(--cek-text-color-1);
+}
+
+:host([variant="text"]) #button {
+  background: transparent;
+  color: var(--cek-text-color-1);
+}
+
+:host([variant="text"]) #button:hover {
+  background-color: var(--cek-surface-color-2);
+}
+
+:host([variant="link"]) #button {
+  background-color: transparent;
+  color: var(--cek-color-primary-500);
+  text-decoration: underline;
+}
+
+[name="end"]::slotted(*) {
+  margin-inline-start: 0.5ch;
+}
+
+[name="start"]::slotted(*) {
+  margin-inline-end: 0.5ch;
+}
+
+#loading-icon {
+  position: absolute;
+  display: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+:host([loading]) #loading-icon {
+  display: block;
+}
+
+:host([icon-only]) #button {
+  padding-inline: 0.8ch;
+}
+
+#arrow-icon {
+  display: none;
+  height: 1em;
+  width: 1em;
+  margin-inline-start: 0.5ch;
+}
+
+:host([arrow]) #arrow-icon {
+  display: block;
+}
+</style>
+		<a id="button" part="button">
+		<slot name="start"></slot>
+		<div id="label" part="label"><slot></slot></div>
+		<slot name="end"></slot>
+		<svg id="loading-icon" part="loading-icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25" />
+			<path d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7
+			a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z">
+			<animatetransform attributeName="transform" type="rotate" dur="0.75s" values="0 12 12;360 12 12" repeatCount="indefinite" />
+			</path>
+		</svg>
+		<svg id="arrow-icon" part="arrow-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">  
+			<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+		</svg>
+		</a>
+	</template>Large Button</cek-button>
+    </div>
+
+    <cek-code-block lang="xml" theme="github-dark">
+        <template>
+            <cek-button variant="primary" size="small">Small Button</cek-button>
+            <cek-button variant="primary" size="medium">Medium Button</cek-button>
+            <cek-button variant="primary" size="large">Large Button</cek-button>
+        </template>
+    </cek-code-block>
+
+    <h2>Icons and Slots</h2>
+    <p>Use the <span class="attribute">start</span> and <span class="attribute">end</span> slots to add icons or other
+        content before or after the button's text.</p>
+
+    <div class="horizontal">
+        <cek-button variant="primary" server-rendered=""><template shadowrootmode="open"><style>
+:host {
+  display: inline-block;
+  font-family: var(--cek-font-family);
+  line-height: var(--cek-line-height);
+  box-sizing: border-box;
+}
+
+#button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+:host([variant]) #button {
+  border-radius: var(--cek-border-radius);
+  padding-inline: var(--cek-padding-inline);
+}
+
+:host([variant]) #button:hover {
+  filter: brightness(85%);
+}
+
+:host([variant]) #button:focus {
+  outline: var(--cek-focus-ring);
+  outline-offset: var(--cek-focus-ring-offset);
+}
+
+:host([loading]) #button,
+:host([disabled]) #button {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+:host([loading]) #button {
+  background-color: lightgray;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+:host([disabled][variant]) #button {
+  background-color: #ccc;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+:host([size="small"]) #button {
+  min-height: var(--cek-height-small);
+  font-size: var(--cek-font-size-0);
+}
+
+:host(:not([size])) #button, 
+:host([size="medium"]) #button {
+  min-height: var(--cek-height-medium);
+  font-size: var(--cek-font-size-1);
+}
+
+:host([size="large"]) #button {
+  min-height: var(--cek-height-large);
+  font-size: var(--cek-font-size-2);
+}
+
+:host([variant="primary"]) #button {
+  background-color: var(--cek-color-primary-500);
+  color: white;
+}
+
+:host([variant="ascent"]) #button {
+  background-color: var(--cek-surface-color-3);
+  color: var(--cek-text-color-1);
+}
+
+:host([variant="outline"]) #button {
+  background-color: transparent;
+  border: 1px solid var(--cek-border-color-2);
+  color: var(--cek-text-color-1);
+}
+
+:host([variant="text"]) #button {
+  background: transparent;
+  color: var(--cek-text-color-1);
+}
+
+:host([variant="text"]) #button:hover {
+  background-color: var(--cek-surface-color-2);
+}
+
+:host([variant="link"]) #button {
+  background-color: transparent;
+  color: var(--cek-color-primary-500);
+  text-decoration: underline;
+}
+
+[name="end"]::slotted(*) {
+  margin-inline-start: 0.5ch;
+}
+
+[name="start"]::slotted(*) {
+  margin-inline-end: 0.5ch;
+}
+
+#loading-icon {
+  position: absolute;
+  display: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+:host([loading]) #loading-icon {
+  display: block;
+}
+
+:host([icon-only]) #button {
+  padding-inline: 0.8ch;
+}
+
+#arrow-icon {
+  display: none;
+  height: 1em;
+  width: 1em;
+  margin-inline-start: 0.5ch;
+}
+
+:host([arrow]) #arrow-icon {
+  display: block;
+}
+</style>
+		<a id="button" part="button">
+		<slot name="start"></slot>
+		<div id="label" part="label"><slot></slot></div>
+		<slot name="end"></slot>
+		<svg id="loading-icon" part="loading-icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25" />
+			<path d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7
+			a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z">
+			<animatetransform attributeName="transform" type="rotate" dur="0.75s" values="0 12 12;360 12 12" repeatCount="indefinite" />
+			</path>
+		</svg>
+		<svg id="arrow-icon" part="arrow-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">  
+			<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+		</svg>
+		</a>
+	</template>
+            <cek-icon name="plus-circle" slot="start" server-rendered=""><template shadowrootmode="open"><style>:host{display:flex;}</style><svg height="24" width="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+</svg>
+</template></cek-icon>
+            Add Item
+        </cek-button>
+
+        <cek-button variant="primary" server-rendered=""><template shadowrootmode="open"><style>
+:host {
+  display: inline-block;
+  font-family: var(--cek-font-family);
+  line-height: var(--cek-line-height);
+  box-sizing: border-box;
+}
+
+#button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+:host([variant]) #button {
+  border-radius: var(--cek-border-radius);
+  padding-inline: var(--cek-padding-inline);
+}
+
+:host([variant]) #button:hover {
+  filter: brightness(85%);
+}
+
+:host([variant]) #button:focus {
+  outline: var(--cek-focus-ring);
+  outline-offset: var(--cek-focus-ring-offset);
+}
+
+:host([loading]) #button,
+:host([disabled]) #button {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+:host([loading]) #button {
+  background-color: lightgray;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+:host([disabled][variant]) #button {
+  background-color: #ccc;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+:host([size="small"]) #button {
+  min-height: var(--cek-height-small);
+  font-size: var(--cek-font-size-0);
+}
+
+:host(:not([size])) #button, 
+:host([size="medium"]) #button {
+  min-height: var(--cek-height-medium);
+  font-size: var(--cek-font-size-1);
+}
+
+:host([size="large"]) #button {
+  min-height: var(--cek-height-large);
+  font-size: var(--cek-font-size-2);
+}
+
+:host([variant="primary"]) #button {
+  background-color: var(--cek-color-primary-500);
+  color: white;
+}
+
+:host([variant="ascent"]) #button {
+  background-color: var(--cek-surface-color-3);
+  color: var(--cek-text-color-1);
+}
+
+:host([variant="outline"]) #button {
+  background-color: transparent;
+  border: 1px solid var(--cek-border-color-2);
+  color: var(--cek-text-color-1);
+}
+
+:host([variant="text"]) #button {
+  background: transparent;
+  color: var(--cek-text-color-1);
+}
+
+:host([variant="text"]) #button:hover {
+  background-color: var(--cek-surface-color-2);
+}
+
+:host([variant="link"]) #button {
+  background-color: transparent;
+  color: var(--cek-color-primary-500);
+  text-decoration: underline;
+}
+
+[name="end"]::slotted(*) {
+  margin-inline-start: 0.5ch;
+}
+
+[name="start"]::slotted(*) {
+  margin-inline-end: 0.5ch;
+}
+
+#loading-icon {
+  position: absolute;
+  display: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+:host([loading]) #loading-icon {
+  display: block;
+}
+
+:host([icon-only]) #button {
+  padding-inline: 0.8ch;
+}
+
+#arrow-icon {
+  display: none;
+  height: 1em;
+  width: 1em;
+  margin-inline-start: 0.5ch;
+}
+
+:host([arrow]) #arrow-icon {
+  display: block;
+}
+</style>
+		<a id="button" part="button">
+		<slot name="start"></slot>
+		<div id="label" part="label"><slot></slot></div>
+		<slot name="end"></slot>
+		<svg id="loading-icon" part="loading-icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25" />
+			<path d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7
+			a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z">
+			<animatetransform attributeName="transform" type="rotate" dur="0.75s" values="0 12 12;360 12 12" repeatCount="indefinite" />
+			</path>
+		</svg>
+		<svg id="arrow-icon" part="arrow-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">  
+			<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+		</svg>
+		</a>
+	</template>
+            Next
+            <cek-icon name="user" slot="end" server-rendered=""><template shadowrootmode="open"><style>:host{display:flex;}</style><svg height="24" width="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+</svg>
+</template></cek-icon>
+        </cek-button>
+    </div>
+
+    <cek-code-block lang="xml" theme="github-dark">
+        <template>
+            <cek-button variant="primary">
+                <cek-icon slot="start" name="plus-circle"></cek-icon>
+                Add Item
+            </cek-button>
+
+            <cek-button variant="primary">
+                Next
+                <cek-icon slot="end" name="user"></cek-icon>
+            </cek-button>
+        </template>
+    </cek-code-block>
+
+    <h2>Loading State</h2>
+    <p>Add the <span class="attribute">loading</span> attribute to display a loading indicator inside the button.</p>
+
+    <cek-button loading="" variant="primary" server-rendered=""><template shadowrootmode="open"><style>
+:host {
+  display: inline-block;
+  font-family: var(--cek-font-family);
+  line-height: var(--cek-line-height);
+  box-sizing: border-box;
+}
+
+#button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+:host([variant]) #button {
+  border-radius: var(--cek-border-radius);
+  padding-inline: var(--cek-padding-inline);
+}
+
+:host([variant]) #button:hover {
+  filter: brightness(85%);
+}
+
+:host([variant]) #button:focus {
+  outline: var(--cek-focus-ring);
+  outline-offset: var(--cek-focus-ring-offset);
+}
+
+:host([loading]) #button,
+:host([disabled]) #button {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+:host([loading]) #button {
+  background-color: lightgray;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+:host([disabled][variant]) #button {
+  background-color: #ccc;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+:host([size="small"]) #button {
+  min-height: var(--cek-height-small);
+  font-size: var(--cek-font-size-0);
+}
+
+:host(:not([size])) #button, 
+:host([size="medium"]) #button {
+  min-height: var(--cek-height-medium);
+  font-size: var(--cek-font-size-1);
+}
+
+:host([size="large"]) #button {
+  min-height: var(--cek-height-large);
+  font-size: var(--cek-font-size-2);
+}
+
+:host([variant="primary"]) #button {
+  background-color: var(--cek-color-primary-500);
+  color: white;
+}
+
+:host([variant="ascent"]) #button {
+  background-color: var(--cek-surface-color-3);
+  color: var(--cek-text-color-1);
+}
+
+:host([variant="outline"]) #button {
+  background-color: transparent;
+  border: 1px solid var(--cek-border-color-2);
+  color: var(--cek-text-color-1);
+}
+
+:host([variant="text"]) #button {
+  background: transparent;
+  color: var(--cek-text-color-1);
+}
+
+:host([variant="text"]) #button:hover {
+  background-color: var(--cek-surface-color-2);
+}
+
+:host([variant="link"]) #button {
+  background-color: transparent;
+  color: var(--cek-color-primary-500);
+  text-decoration: underline;
+}
+
+[name="end"]::slotted(*) {
+  margin-inline-start: 0.5ch;
+}
+
+[name="start"]::slotted(*) {
+  margin-inline-end: 0.5ch;
+}
+
+#loading-icon {
+  position: absolute;
+  display: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+:host([loading]) #loading-icon {
+  display: block;
+}
+
+:host([icon-only]) #button {
+  padding-inline: 0.8ch;
+}
+
+#arrow-icon {
+  display: none;
+  height: 1em;
+  width: 1em;
+  margin-inline-start: 0.5ch;
+}
+
+:host([arrow]) #arrow-icon {
+  display: block;
+}
+</style>
+		<a id="button" part="button">
+		<slot name="start"></slot>
+		<div id="label" part="label"><slot></slot></div>
+		<slot name="end"></slot>
+		<svg id="loading-icon" part="loading-icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25" />
+			<path d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7
+			a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z">
+			<animatetransform attributeName="transform" type="rotate" dur="0.75s" values="0 12 12;360 12 12" repeatCount="indefinite" />
+			</path>
+		</svg>
+		<svg id="arrow-icon" part="arrow-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">  
+			<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+		</svg>
+		</a>
+	</template>Loading...</cek-button>
+
+    <cek-code-block lang="xml" theme="github-dark">
+        <template>
+            <cek-button variant="primary" loading="">Loading...</cek-button>
+        </template>
+    </cek-code-block>
+
+    <h2>Disabled State</h2>
+    <p>Add the <span class="attribute">disabled</span> attribute to disable the button, preventing user interaction.</p>
+
+    <cek-button disabled variant="" server-rendered=""><template shadowrootmode="open"><style>
+:host {
+  display: inline-block;
+  font-family: var(--cek-font-family);
+  line-height: var(--cek-line-height);
+  box-sizing: border-box;
+}
+
+#button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+:host([variant]) #button {
+  border-radius: var(--cek-border-radius);
+  padding-inline: var(--cek-padding-inline);
+}
+
+:host([variant]) #button:hover {
+  filter: brightness(85%);
+}
+
+:host([variant]) #button:focus {
+  outline: var(--cek-focus-ring);
+  outline-offset: var(--cek-focus-ring-offset);
+}
+
+:host([loading]) #button,
+:host([disabled]) #button {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+:host([loading]) #button {
+  background-color: lightgray;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+:host([disabled][variant]) #button {
+  background-color: #ccc;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+:host([size="small"]) #button {
+  min-height: var(--cek-height-small);
+  font-size: var(--cek-font-size-0);
+}
+
+:host(:not([size])) #button, 
+:host([size="medium"]) #button {
+  min-height: var(--cek-height-medium);
+  font-size: var(--cek-font-size-1);
+}
+
+:host([size="large"]) #button {
+  min-height: var(--cek-height-large);
+  font-size: var(--cek-font-size-2);
+}
+
+:host([variant="primary"]) #button {
+  background-color: var(--cek-color-primary-500);
+  color: white;
+}
+
+:host([variant="ascent"]) #button {
+  background-color: var(--cek-surface-color-3);
+  color: var(--cek-text-color-1);
+}
+
+:host([variant="outline"]) #button {
+  background-color: transparent;
+  border: 1px solid var(--cek-border-color-2);
+  color: var(--cek-text-color-1);
+}
+
+:host([variant="text"]) #button {
+  background: transparent;
+  color: var(--cek-text-color-1);
+}
+
+:host([variant="text"]) #button:hover {
+  background-color: var(--cek-surface-color-2);
+}
+
+:host([variant="link"]) #button {
+  background-color: transparent;
+  color: var(--cek-color-primary-500);
+  text-decoration: underline;
+}
+
+[name="end"]::slotted(*) {
+  margin-inline-start: 0.5ch;
+}
+
+[name="start"]::slotted(*) {
+  margin-inline-end: 0.5ch;
+}
+
+#loading-icon {
+  position: absolute;
+  display: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+:host([loading]) #loading-icon {
+  display: block;
+}
+
+:host([icon-only]) #button {
+  padding-inline: 0.8ch;
+}
+
+#arrow-icon {
+  display: none;
+  height: 1em;
+  width: 1em;
+  margin-inline-start: 0.5ch;
+}
+
+:host([arrow]) #arrow-icon {
+  display: block;
+}
+</style>
+		<a id="button" part="button">
+		<slot name="start"></slot>
+		<div id="label" part="label"><slot></slot></div>
+		<slot name="end"></slot>
+		<svg id="loading-icon" part="loading-icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25" />
+			<path d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7
+			a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z">
+			<animatetransform attributeName="transform" type="rotate" dur="0.75s" values="0 12 12;360 12 12" repeatCount="indefinite" />
+			</path>
+		</svg>
+		<svg id="arrow-icon" part="arrow-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">  
+			<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+		</svg>
+		</a>
+	</template>Disabled Button</cek-button>
+
+    <cek-code-block lang="xml" theme="github-dark">
+        <template>
+            <cek-button variant="primary" disabled>Disabled Button</cek-button>
+        </template>
+    </cek-code-block>
+
+    <h2>Anchor Functionality</h2>
+    <p>The button component can also function as a link. Use the <span class="attribute">href</span> attribute to transform the button into an anchor element. Optionally, you can use the <span class="attribute">target</span> attribute to specify where to open the linked document.</p>
+
+    <cek-button variant="link" target="_blank" href="https://example.com" server-rendered=""><template shadowrootmode="open"><style>
+:host {
+  display: inline-block;
+  font-family: var(--cek-font-family);
+  line-height: var(--cek-line-height);
+  box-sizing: border-box;
+}
+
+#button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+:host([variant]) #button {
+  border-radius: var(--cek-border-radius);
+  padding-inline: var(--cek-padding-inline);
+}
+
+:host([variant]) #button:hover {
+  filter: brightness(85%);
+}
+
+:host([variant]) #button:focus {
+  outline: var(--cek-focus-ring);
+  outline-offset: var(--cek-focus-ring-offset);
+}
+
+:host([loading]) #button,
+:host([disabled]) #button {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+:host([loading]) #button {
+  background-color: lightgray;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+:host([disabled][variant]) #button {
+  background-color: #ccc;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+:host([size="small"]) #button {
+  min-height: var(--cek-height-small);
+  font-size: var(--cek-font-size-0);
+}
+
+:host(:not([size])) #button, 
+:host([size="medium"]) #button {
+  min-height: var(--cek-height-medium);
+  font-size: var(--cek-font-size-1);
+}
+
+:host([size="large"]) #button {
+  min-height: var(--cek-height-large);
+  font-size: var(--cek-font-size-2);
+}
+
+:host([variant="primary"]) #button {
+  background-color: var(--cek-color-primary-500);
+  color: white;
+}
+
+:host([variant="ascent"]) #button {
+  background-color: var(--cek-surface-color-3);
+  color: var(--cek-text-color-1);
+}
+
+:host([variant="outline"]) #button {
+  background-color: transparent;
+  border: 1px solid var(--cek-border-color-2);
+  color: var(--cek-text-color-1);
+}
+
+:host([variant="text"]) #button {
+  background: transparent;
+  color: var(--cek-text-color-1);
+}
+
+:host([variant="text"]) #button:hover {
+  background-color: var(--cek-surface-color-2);
+}
+
+:host([variant="link"]) #button {
+  background-color: transparent;
+  color: var(--cek-color-primary-500);
+  text-decoration: underline;
+}
+
+[name="end"]::slotted(*) {
+  margin-inline-start: 0.5ch;
+}
+
+[name="start"]::slotted(*) {
+  margin-inline-end: 0.5ch;
+}
+
+#loading-icon {
+  position: absolute;
+  display: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+:host([loading]) #loading-icon {
+  display: block;
+}
+
+:host([icon-only]) #button {
+  padding-inline: 0.8ch;
+}
+
+#arrow-icon {
+  display: none;
+  height: 1em;
+  width: 1em;
+  margin-inline-start: 0.5ch;
+}
+
+:host([arrow]) #arrow-icon {
+  display: block;
+}
+</style>
+		<a id="button" part="button">
+		<slot name="start"></slot>
+		<div id="label" part="label"><slot></slot></div>
+		<slot name="end"></slot>
+		<svg id="loading-icon" part="loading-icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25" />
+			<path d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7
+			a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z">
+			<animatetransform attributeName="transform" type="rotate" dur="0.75s" values="0 12 12;360 12 12" repeatCount="indefinite" />
+			</path>
+		</svg>
+		<svg id="arrow-icon" part="arrow-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">  
+			<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+		</svg>
+		</a>
+	</template>
+        Go to Example
+        <cek-icon name="arrow-up-right" slot="end" server-rendered=""><template shadowrootmode="open"><style>:host{display:flex;}</style><svg height="24" width="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+</svg>
+</template>
+    </cek-icon></cek-button>
+
+    <cek-code-block lang="xml" theme="github-dark">
+        <template>
+            <cek-button href="https://example.com" target="_blank" variant="link">
+                Go to Example
+                <cek-icon slot="end" name="arrow-up-right">
+            </cek-icon></cek-button>
+        </template>
+    </cek-code-block>
+
+</section>
+
+<h2>Attributes</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Attribute</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>type</td>
+            <td>Sets the button type. Possible values are <code>button</code>, <code>submit</code>, and
+                <code>reset</code>. Defaults to <code>button</code>.
+            </td>
+        </tr>
+        <tr>
+            <td>disabled</td>
+            <td>Disables the button when present.</td>
+        </tr>
+        <tr>
+            <td>loading</td>
+            <td>Shows a loading indicator when present.</td>
+        </tr>
+        <tr>
+            <td>arrow</td>
+            <td>Displays an arrow icon when present.</td>
+        </tr>
+        <tr>
+            <td>variant</td>
+            <td>Sets the styling variant of the button. Possible values are <code>primary</code>, <code>ascent</code>,
+                <code>outline</code>, <code>text</code>, and <code>link</code>.
+            </td>
+        </tr>
+        <tr>
+            <td>size</td>
+            <td>Sets the size of the button. Possible values are <code>small</code>, <code>medium</code>, and
+                <code>large</code>.
+            </td>
+        </tr>
+        <tr>
+            <td>icon-only</td>
+            <td>If present, styles the button for icon-only display without text.</td>
+        </tr>
+        <tr>
+            <td>button-aria-label</td>
+            <td>Sets an ARIA label for accessibility.</td>
+        </tr>
+        <tr>
+            <td>href</td>
+            <td>Transforms the button into an anchor element with this <code>href</code>.</td>
+        </tr>
+        <tr>
+            <td>target</td>
+            <td>Sets the <code>target</code> attribute of the anchor when <code>href</code> is present. Defaults to <code>_self</code>.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Slots</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Slot Name</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>(default)</td>
+            <td>The text content of the button.</td>
+        </tr>
+        <tr>
+            <td>start</td>
+            <td>Content to display before the button's text (e.g., icons).</td>
+        </tr>
+        <tr>
+            <td>end</td>
+            <td>Content to display after the button's text (e.g., icons).</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>CSS Parts</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Part Name</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>button</td>
+            <td>The native button or anchor element.</td>
+        </tr>
+        <tr>
+            <td>label</td>
+            <td>The label element inside the button.</td>
+        </tr>
+        <tr>
+            <td>loading-icon</td>
+            <td>The loading spinner displayed when <code>loading</code> is present.</td>
+        </tr>
+        <tr>
+            <td>arrow-icon</td>
+            <td>The arrow icon displayed when <code>arrow</code> is present.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Events</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Event</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>click</td>
+            <td>Dispatched when the button is activated. For a link, dispatched upon navigation activation.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Methods</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Method</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>focus()</td>
+            <td>Moves keyboard focus to the button or anchor.</td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- ...existing code... --></body></html>
             </main>
 
             <aside class="page-nav">

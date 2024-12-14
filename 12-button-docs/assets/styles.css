@@ -131,16 +131,6 @@ fieldset {
 	--cek-z-index-300: 300;
 	--cek-z-index-important: 2147483647;
 
-	/* --cek-line-height: calc(2px + 2ex + 2px);
-	--cek-font-size-6: clamp(2.4883rem, -1.0705rem + 8.897vi, 4.7348rem);
-	--cek-font-size-5: clamp(2.0736rem, -0.2684rem + 5.8551vi, 3.552rem);
-	--cek-font-size-4: clamp(1.728rem, 0.2442rem + 3.7096vi, 2.6647rem);
-	--cek-font-size-3: clamp(1.44rem, 0.5545rem + 2.2139vi, 1.999rem);
-	--cek-font-size-2: clamp(1.2rem, 0.7253rem + 1.1866vi, 1.4996rem);
-	--cek-font-size-1: clamp(1rem, 0.802rem + 0.495vi, 1.125rem);
-	--cek-font-size-0: clamp(0.8333rem, 0.8165rem + 0.0421vi, 0.844rem);
-	--cek-font-size-00: clamp(0.625rem, 0.4531rem + 0.4167vi, 0.75rem); */
-
 	/* 
     Each clamp() uses:
     - A minimum size to ensure legibility on very small screens
@@ -180,9 +170,13 @@ fieldset {
 	--cek-height-small: var(--cek-space-8);
 	--cek-height-medium: var(--cek-space-10);
 	--cek-height-large: var(--cek-space-11);
+	--cek-text-color-disabled: light-dark(
+		var(--cek-color-gray-900),
+		var(--cek-color-gray-100)
+	);
 	--cek-text-color-0: light-dark(
 		var(--cek-color-gray-900),
-		var(--cek-color-gray-50)
+		var(--cek-color-gray-100)
 	);
 	--cek-text-color-1: light-dark(
 		var(--cek-color-gray-800),
@@ -195,6 +189,10 @@ fieldset {
 	--cek-text-color-3: light-dark(
 		var(--cek-color-gray-400),
 		var(--cek-color-gray-300)
+	);
+	--cek-surface-color-disabled: light-dark(
+		var(--cek-color-gray-300),
+		var(--cek-color-gray-900)
 	);
 	--cek-surface-color-0: light-dark(white, var(--cek-color-gray-900));
 	--cek-surface-color-1: light-dark(
