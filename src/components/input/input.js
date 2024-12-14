@@ -181,6 +181,7 @@ const controlAttributes = [
 	"title",
 	"spellcheck",
 	"input-aria-label",
+	"value"
 ];
 
 /**
@@ -222,6 +223,7 @@ class Input extends HTMLElement {
 		return ["input-aria-label", "label", "help", "error", ...controlAttributes];
 	}
 	static formAssociated = true;
+	
 	#internals = null;
 
 	constructor() {
@@ -232,18 +234,6 @@ class Input extends HTMLElement {
 			const root = this.attachShadow({ mode: "open", delegatesFocus: true });
 			root.innerHTML = `${inputStyles}${inputTemplate}`;
 		}
-	}
-
-	get #input() {
-		return this.shadowRoot.querySelector("input");
-	}
-
-	get #passwordButton() {
-		return this.shadowRoot.querySelector("[part=password-button]");
-	}
-
-	get #clearButton() {
-		return this.shadowRoot.querySelector("[part=clear-button]");
 	}
 
 	/**
@@ -287,8 +277,20 @@ class Input extends HTMLElement {
 		return this.#internals.validationMessage;
 	}
 
+	get #input() {
+		return this.shadowRoot.querySelector("input");
+	}
+
+	get #passwordButton() {
+		return this.shadowRoot.querySelector("[part=password-button]");
+	}
+
+	get #clearButton() {
+		return this.shadowRoot.querySelector("[part=clear-button]");
+	}
+
 	connectedCallback() {
-		this.#input.value = this.getAttribute("value") || "";
+		this.#copyControlAttributes();
 		if (this.hasAttribute("password-button")) {
 			this.#passwordButton.style.display = "flex";
 		}

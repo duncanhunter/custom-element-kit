@@ -1,6 +1,235 @@
 <section>
     <h1>Button (cek-button)</h1>
 
-    <cek-button variant="primary" type="submit">Submit</cek-button>
+    <h2>Variants</h2>
+    <p>The button component supports several variants for different styles and use cases. Use the <span
+            class="attribute">variant</span> attribute to change the visual style of the button.</p>
+
+    <cek-button variant="primary">Primary Button</cek-button>
+    <cek-button variant="ascent">Ascent Button</cek-button>
+    <cek-button variant="outline">Outline Button</cek-button>
+    <cek-button variant="text">Text Button</cek-button>
+    <cek-button variant="link">Link Button</cek-button>
+
+    <cek-code-block lang="xml" theme="github-dark">
+        <template>
+            <cek-button variant="primary">Primary Button</cek-button>
+            <cek-button variant="ascent">Ascent Button</cek-button>
+            <cek-button variant="outline">Outline Button</cek-button>
+            <cek-button variant="text">Text Button</cek-button>
+            <cek-button variant="link">Link Button</cek-button>
+        </template>
+    </cek-code-block>
+
+    <h2>Sizes</h2>
+    <p>Small, medium (default), and large sizes are available. Use the <span class="attribute">size</span> attribute to
+        adjust the size of the button.</p>
+
+    <div class="horizontal">
+        <cek-button variant="primary" size="small">Small Button</cek-button>
+        <cek-button variant="primary" size="medium">Medium Button</cek-button>
+        <cek-button variant="primary" size="large">Large Button</cek-button>
+    </div>
+
+    <cek-code-block lang="xml" theme="github-dark">
+        <template>
+            <cek-button variant="primary" size="small">Small Button</cek-button>
+            <cek-button variant="primary" size="medium">Medium Button</cek-button>
+            <cek-button variant="primary" size="large">Large Button</cek-button>
+        </template>
+    </cek-code-block>
+
+    <h2>Icons and Slots</h2>
+    <p>Use the <span class="attribute">start</span> and <span class="attribute">end</span> slots to add icons or other
+        content before or after the button's text.</p>
+
+    <div class="horizontal">
+        <cek-button variant="primary">
+            <cek-icon slot="start" name="plus-circle"></cek-icon>
+            Add Item
+        </cek-button>
+
+        <cek-button variant="primary">
+            Next
+            <cek-icon slot="end" name="user"></cek-icon>
+        </cek-button>
+    </div>
+
+    <cek-code-block lang="xml" theme="github-dark">
+        <template>
+            <cek-button variant="primary">
+                <cek-icon slot="start" name="plus-circle"></cek-icon>
+                Add Item
+            </cek-button>
+
+            <cek-button variant="primary">
+                Next
+                <cek-icon slot="end" name="user"></cek-icon>
+            </cek-button>
+        </template>
+    </cek-code-block>
+
+    <h2>Loading State</h2>
+    <p>Add the <span class="attribute">loading</span> attribute to display a loading indicator inside the button.</p>
+
+    <cek-button variant="primary" loading>Loading...</cek-button>
+
+    <cek-code-block lang="xml" theme="github-dark">
+        <template>
+            <cek-button variant="primary" loading>Loading...</cek-button>
+        </template>
+    </cek-code-block>
+
+    <h2>Disabled State</h2>
+    <p>Add the <span class="attribute">disabled</span> attribute to disable the button, preventing user interaction.</p>
+
+    <cek-button variant="primary" disabled>Disabled Button</cek-button>
+
+    <cek-code-block lang="xml" theme="github-dark">
+        <template>
+            <cek-button variant="primary" disabled>Disabled Button</cek-button>
+        </template>
+    </cek-code-block>
 
 </section>
+
+<h2>Attributes</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Attribute</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>type</td>
+            <td>Sets the button type. Possible values are <code>button</code>, <code>submit</code>, and
+                <code>reset</code>. Defaults to <code>button</code>.
+            </td>
+        </tr>
+        <tr>
+            <td>disabled</td>
+            <td>Disables the button when present.</td>
+        </tr>
+        <tr>
+            <td>loading</td>
+            <td>Shows a loading indicator when present.</td>
+        </tr>
+        <tr>
+            <td>arrow</td>
+            <td>Displays an arrow icon when present.</td>
+        </tr>
+        <tr>
+            <td>variant</td>
+            <td>Sets the styling variant of the button. Possible values are <code>primary</code>, <code>ascent</code>,
+                <code>outline</code>, <code>text</code>, and <code>link</code>.
+            </td>
+        </tr>
+        <tr>
+            <td>size</td>
+            <td>Sets the size of the button. Possible values are <code>small</code>, <code>medium</code>, and
+                <code>large</code>.
+            </td>
+        </tr>
+        <tr>
+            <td>icon-only</td>
+            <td>If present, styles the button for icon-only display without text.</td>
+        </tr>
+        <tr>
+            <td>button-aria-label</td>
+            <td>Sets an ARIA label for accessibility.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Slots</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Slot Name</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>(default)</td>
+            <td>The text content of the button.</td>
+        </tr>
+        <tr>
+            <td>start</td>
+            <td>Content to display before the button's text (e.g., icons).</td>
+        </tr>
+        <tr>
+            <td>end</td>
+            <td>Content to display after the button's text (e.g., icons).</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>CSS Parts</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Part Name</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>button</td>
+            <td>The native button element.</td>
+        </tr>
+        <tr>
+            <td>label</td>
+            <td>The label element inside the button.</td>
+        </tr>
+        <tr>
+            <td>loading-icon</td>
+            <td>The loading spinner displayed when <code>loading</code> is present.</td>
+        </tr>
+        <tr>
+            <td>arrow-icon</td>
+            <td>The arrow icon displayed when <code>arrow</code> is present.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Events</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Event</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>click</td>
+            <td>Dispatched when the button is activated.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Methods</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Method</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>focus()</td>
+            <td>Moves keyboard focus to the button.</td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- ...existing code... -->
