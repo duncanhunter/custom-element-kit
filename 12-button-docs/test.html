@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><base href="/custom-element-kit/12-button-docs/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Custom Element Kit Docs">
+    <title>Custom Element Kit</title>
+    <link rel="stylesheet" href="./assets/styles.css">
+    <link rel="stylesheet" href="./assets/page-layout.css">
+    <script src="./assets/scroll-spy.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1 class="cek-text-2">Custom Element Kit</h1>
+        </header>
+        <div class="content">
+            <aside class="main-nav">
+                <nav aria-label="Main Navigation">
+                    <h2 class="cek-text-1 cek-text-bold">Getting Started</h2>
+                    <ul>
+                        <li><a href="welcome.html">Getting Started</a></li>
+                    </ul>
+                    <h2 class="cek-text-1 cek-text-bold">Components</h2>
+                    <ul>
+                        <li><a href="button.html">Button</a></li>
+                        <li><a href="input.html">Input</a></li>
+                        <li><a href="form.html">Form</a></li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <main id="main-content" tabindex="-1">
+                <!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  /* Basic layout styles */
+  body {
+    margin: 0;
+    font-family: sans-serif;
+    display: flex;
+    min-height: 200vh; /* Just to illustrate scrolling */
+  }
+
+  #main-content {
+    flex: 1;
+    padding: 2rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  nav#right-menu {
+    width: 200px;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    align-self: flex-start;
+    border-left: 1px solid #ccc;
+    background: #f9f9f9;
+    padding: 1rem;
+    height: 100vh;
+    overflow-y: auto;
+  }
+
+  nav#right-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  nav#right-menu li a {
+    display: block;
+    text-decoration: none;
+    color: #333;
+    padding: 0.5rem 0;
+  }
+
+  nav#right-menu li a.active {
+    font-weight: bold;
+    color: #000;
+  }
+
+  /* Style headings so that when hovered, a # link appears */
+  .heading-link {
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .heading-link:hover::after {
+    content: "#";
+    position: absolute;
+    right: -1.5em;
+    color: #0077cc;
+    opacity: 0.7;
+  }
+
+  h2, h3 {
+    margin: 2rem 0 1rem;
+  }
+</style>
+</head>
+<body>
+
+<nav id="right-menu">
+  <!-- Dynamically generated menu will be inserted here -->
+  <ul id="menu-list"></ul>
+</nav>
+
+<div id="main-content">
+  <h2>Introduction</h2>
+  <p>Some introduction text here...</p>
+
+  <h2>Section One</h2>
+  <p>Details about section one...</p>
+  
+  <h3>Subsection A</h3>
+  <p>Content under subsection A...</p>
+
+  <h3>Subsection B</h3>
+  <p>Content under subsection B...</p>
+
+  <h2>Section Two</h2>
+  <p>Details about section two...</p>
+  
+  <h3>Subsection C</h3>
+  <p>Content under subsection C...</p>
+  
+  <h2>Conclusion</h2>
+  <p>Final thoughts...</p>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const mainContent = document.getElementById('main-content');
+  const headings = mainContent.querySelectorAll('h2, h3');
+  const menuList = document.getElementById('menu-list');
+  const rightMenu = document.getElementById('right-menu');
+
+  // Create ID from text, lowercase and hyphenated
+  function generateId(str) {
+    return str.toLowerCase().replace(/[^\w]+/g, '-');
+  }
+
+  // Build the menu and modify headings
+  headings.forEach((heading) => {
+    const text = heading.textContent;
+    const id = generateId(text);
+    heading.id = id;
+
+    // Wrap heading text in a link
+    const link = document.createElement('a');
+    link.className = 'heading-link';
+    link.href = '#' + id;
+    link.textContent = text;
+    heading.textContent = '';
+    heading.appendChild(link);
+
+    // Create corresponding menu entry
+    const li = document.createElement('li');
+    const menuLink = document.createElement('a');
+    menuLink.href = '#' + id;
+    menuLink.textContent = text;
+    li.appendChild(menuLink);
+
+    // Indent h3 in the menu for clarity
+    if (heading.tagName.toLowerCase() === 'h3') {
+      li.style.paddingLeft = '1rem';
+    }
+
+    menuList.appendChild(li);
+  });
+
+  // Scroll spy logic
+  const headingSections = Array.from(headings).map((h) => {
+    return {
+      id: h.id,
+      offsetTop: h.offsetTop
+    };
+  });
+
+  function onScroll() {
+    const scrollPos = window.scrollY + 10; // Slight offset for highlight
+    let currentId = null;
+
+    for (let i = headingSections.length - 1; i >= 0; i--) {
+      if (scrollPos >= headingSections[i].offsetTop) {
+        currentId = headingSections[i].id;
+        break;
+      }
+    }
+
+    const menuLinks = menuList.querySelectorAll('a');
+    menuLinks.forEach(link => {
+      link.classList.toggle('active', link.getAttribute('href') === '#' + currentId);
+    });
+  }
+
+  window.addEventListener('scroll', onScroll);
+
+  // On load, if there's a hash, scroll to it
+  if (window.location.hash) {
+    const target = document.querySelector(window.location.hash);
+    if (target) {
+      window.scrollTo({
+        top: target.offsetTop,
+        behavior: 'smooth'
+      });
+    }
+  }
+});
+</script>
+
+</body></html>
+            </main>
+
+            <aside class="page-nav">
+                <nav aria-label="Page navigation">
+                    <h2 class="cek-text-1 cek-text-bold">On this page</h2>
+                    <!-- Dynamic table of contents will be loaded here -->
+                    <ul id="menu-list"></ul>
+                </nav>
+            </aside>
+        </div>
+    </div>
+    <script type="module">
+        import autoDefineElements from './assets/auto-define-elements.mjs';
+        autoDefineElements('production');
+        generateTOC();
+        document.addEventListener('DOMContentLoaded', () => {
+            const page = (window.location.pathname.split('/').pop().replace('.html', '')) || 'welcome';
+            document.querySelectorAll('aside.main-nav a').forEach(link => {
+                if (link.getAttribute('href').includes(page)) {
+                    link.classList.add('active');
+                    link.setAttribute('aria-current', 'page');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,213 @@
+body {
+	background-color: var(--cek-surface-color-0);
+	color: var(--cek-text-color-1);
+	display: flex;
+	justify-content: center;
+}
+
+.container {
+	max-width: 1329px;
+	width: 100%;
+	padding-inline: 1rem;
+}
+
+header {
+	padding: 1rem 0;
+	border-bottom: 1px solid var(--cek-border-color-4);
+	width: 100%;
+}
+
+.content {
+	display: flex;
+}
+
+a:focus {
+	border: none;
+	border-radius: var(--cek-border-radius);
+	outline: var(--cek-focus-ring);
+	outline-offset: var(--cek-focus-ring-offset);
+}
+
+main {
+	flex-grow: 1;
+	padding: 1rem 0;
+	background-color: var(--cek-surface-color-0);
+
+	section {
+		margin-bottom: 2rem;
+	}
+
+	h1 {
+		font-size: var(--cek-font-size-4);
+		line-height: var(--cek-line-height);
+		font-weight: 700;
+	}
+	
+	h2 {
+		margin-block: 1.6rem 0.8rem;
+		line-height: var(--cek-line-height);
+		font-weight: 600;
+		font-size: var(--cek-font-size-3);
+	}
+	
+	h3 {
+		font-size: var(--cek-font-size-2);
+		margin-block: 0.6rem;
+	}
+
+	p {
+		margin-block: 0.8rem;
+		font-weight: 400;
+		font-size: var(--cek-font-size-1);
+		line-height: var(--cek-line-height);
+	}
+
+	cek-code-block {
+		margin-block: 1rem;
+		display: block;
+	}
+	
+	cek-input {
+		/* Need to change this to be a generic gap for other component docs */
+		display:block;
+		margin-block: 1rem;
+	}
+
+	.horizontal {
+		cek-input {
+			margin-block: 0;
+		}
+
+		display: flex;
+		gap: 0.4rem;
+		align-items: flex-end;
+		margin-block: 1rem;
+	}
+
+}
+
+aside {
+	min-width: 12rem;
+
+	h2 {
+		padding-block: 0.8rem;
+	}
+
+	ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	li {
+		padding-block: 0.6rem;
+	}
+}
+
+aside.main-nav {
+	padding-inline-end: 1rem;
+
+	a.active {
+		font-weight: bold;
+		color: var(--cek-color-primary-500);
+	}
+
+	a {
+		color: var(--cek-text-color-2);
+		text-decoration: none;
+		border-radius: var(--cek-border-radius);
+	}
+
+	a:hover {
+		text-decoration: underline;
+	}
+}
+
+aside.page-nav nav {
+	padding-inline-start: 1rem;
+	position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    align-self: flex-start;
+    height: 100vh;
+    overflow-y: auto;
+
+	li {
+		padding: var(--cek-space-4) 0;
+	}
+
+	li a {
+		display: block;
+		text-decoration: none;
+		color: var(--cek-text-color-1);
+  	}
+
+   	li a.active {
+    	font-weight: bold;
+		color: var(--cek-color-primary-500);
+  	}
+}
+
+.heading-link {
+  	position: relative;
+  	text-decoration: none;
+  	color: inherit;
+}
+
+.heading-link:hover {
+  	border-bottom: 2px solid var(--cek-color-primary-500);
+}
+
+.heading-link:hover::after {
+  	content: "#";
+  	position: absolute;
+  	right: -1em;
+  	color: var(--cek-color-primary-500);
+  	opacity: 0.7;
+}
+
+span.attribute {
+	color: var(--cek-text-color-2);
+	background-color: var(--cek-surface-color-1);
+	border-radius: var(--cek-border-radius);
+	padding: 0.1rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    color: var(--cek-text-color);
+}
+
+td:first-child {
+    white-space: nowrap;
+}
+
+th {
+    text-align: left;
+    padding: 12px;
+    background-color: var(--cek-background-color);
+    border-bottom: 2px solid var(--cek-border-color);
+}
+
+td {
+    padding: 12px;
+    border-bottom: 1px solid var(--cek-border-color);
+}
+
+tr:hover {
+    background-color: var(--cek-surface-color-1);
+}
+
+@media screen and (max-width: 1024px) {
+	aside.page-nav {
+		display: none;
+	}
+}
+
+@media screen and (max-width: 820px) {
+	aside.main-nav {
+		display: none;
+	}
+}
