@@ -9,47 +9,46 @@ export const buttonTemplate = /*html*/ `
 export const buttonStyles = /*css*/ `
 :host {
 	display: inline-block;
-}`
+}`;
 
 export class Button extends HTMLElement {
-    static get observedAttributes() {
-        return [];
-    }
-    static formAssociated = true;
+	static get observedAttributes() {
+		return [];
+	}
+	static formAssociated = true;
 
-    constructor() {
-        super();
+	constructor() {
+		super();
 
-        if (!this.shadowRoot) {
-            this.attachShadow({ mode: "open", delegatesFocus: true });
-            this.shadowRoot.innerHTML = `<style>${buttonStyles}</style>${buttonTemplate}`;
-        }
+		if (!this.shadowRoot) {
+			this.attachShadow({ mode: "open", delegatesFocus: true });
+			this.shadowRoot.innerHTML = `<style>${buttonStyles}</style>${buttonTemplate}`;
+		}
 
-        this.internals = this.attachInternals();
-    }
+		this.internals = this.attachInternals();
+	}
 
-    get #type() {
-        return this.getAttribute("type");
-    }
+	get #type() {
+		return this.getAttribute("type");
+	}
 
-    connectedCallback() {
-        this.buttonElement.addEventListener("click", this.onClick);
-    }
+	connectedCallback() {
+		this.buttonElement.addEventListener("click", this.onClick);
+	}
 
-    attributeChangedCallback(name, oldValue, newValue) {
-        if (newValue === oldValue) return;
-    }
+	attributeChangedCallback(name, oldValue, newValue) {
+		if (newValue === oldValue) return;
+	}
 
-    onClick = (event) => {
-        event.stopImmediatePropagation();
-        event.stopPropagation();
-        if (this.hasAttribute("loading") || this.hasAttribute("disabled")) {
-            return;
-        }
-        const clone = new event.constructor(event.type, event);
-        this.dispatchEvent(clone);
-    };
-
+	onClick = (event) => {
+		event.stopImmediatePropagation();
+		event.stopPropagation();
+		if (this.hasAttribute("loading") || this.hasAttribute("disabled")) {
+			return;
+		}
+		const clone = new event.constructor(event.type, event);
+		this.dispatchEvent(clone);
+	};
 }
 
 customElements.define("cek-button", Button);

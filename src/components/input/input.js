@@ -183,6 +183,40 @@ const controlAttributes = [
 	"input-aria-label",
 ];
 
+/**
+ * A custom input element that can be used as a form-associated custom element.
+ *
+ * @element cek-input
+ * @attribute {string} name - The name of the control, used for form submission.
+ * @attribute {string} label - Label text for the input.
+ * @attribute {string} help - Help text or description for the input.
+ * @attribute {string} error - Error message displayed when the input is invalid.
+ * @attribute {string} required - Marks the input as required.
+ * @attribute {string} type - The type of the input. Defaults to `text`. Can be `text`, `password`, `number` etc.
+ * @attribute {boolean} disabled - Disables the input.
+ * @attribute {string} inputmode - A hint to the browser for which keyboard to display.
+ * @attribute {string} placeholder - The placeholder text.
+ * @attribute {string} min - Minimum value (used for date, number inputs).
+ * @attribute {string} max - Maximum value (used for date, number inputs).
+ * @attribute {number} minlength - Minimum length of the input value.
+ * @attribute {number} maxlength - Maximum length of the input value.
+ * @attribute {string} pattern - A regex pattern the input's value must match.
+ * @attribute {string|number} step - Step value for numeric or date-time inputs.
+ * @attribute {string} autocomplete - Autocomplete attribute for the input.
+ * @attribute {boolean} autofocus - Focuses the input automatically when the page loads.
+ * @attribute {string} title - Advisory information for the input.
+ * @attribute {boolean} spellcheck - Whether spell checking is enabled for the input.
+ * @attribute {string} input-aria-label - Aria-label attribute for the input control.
+ * @attribute {boolean} password-button - If present, toggles a show/hide password button.
+ * @attribute {boolean} clear-button - If present, shows a clear button when the input has a value.
+ * @attribute {boolean} validate-on-change - If present, the input is validated on change events.
+ *
+ * @slot label - The label text node.
+ * @slot help - The help or description text node.
+ * @slot error - The error message text node.
+ * @slot start - Content to display before the input (e.g., icons).
+ * @slot end - Content to display after the input (e.g., icons).
+ */
 class Input extends HTMLElement {
 	static get observedAttributes() {
 		return ["input-aria-label", "label", "help", "error", ...controlAttributes];
@@ -212,26 +246,43 @@ class Input extends HTMLElement {
 		return this.shadowRoot.querySelector("[part=clear-button]");
 	}
 
+	/**
+	 * The current value of the input.
+	 * @type {string}
+	 */
 	get value() {
 		return this.#input.value;
 	}
 
 	set value(value) {
-		console.log("set value", value);
 		if (this.#input.value !== value) {
 			this.#input.value = value;
 		}
 		this.#internals.setFormValue(value);
 	}
 
+	/**
+	 * The name of the input, used during form submission.
+	 * @type {string|null}
+	 */
 	get name() {
 		return this.getAttribute("name");
 	}
 
+	/**
+	 * The validity state of the input.
+	 * @type {ValidityState}
+	 * @readonly
+	 */
 	get validity() {
 		return this.#input.validity;
 	}
 
+	/**
+	 * The validation message of the input if invalid.
+	 * @type {string}
+	 * @readonly
+	 */
 	get validationMessage() {
 		return this.#internals.validationMessage;
 	}
@@ -251,7 +302,7 @@ class Input extends HTMLElement {
 	disconnectedCallback() {
 		this.#input.removeEventListener("input", this.#onInput);
 		this.#input.removeEventListener("change", this.#onChange);
-		this.#internals.form.removeEventListener("submit", this.#onFormSubmit);
+		this.#internals.form?.removeEventListener("submit", this.#onFormSubmit);
 		this.#input.removeEventListener("keyup", this.#onKeyUp);
 		this.#passwordButton.removeEventListener(
 			"click",
@@ -260,6 +311,10 @@ class Input extends HTMLElement {
 		this.#clearButton.removeEventListener("click", this.#onClearButtonClick);
 	}
 
+	/**
+	 * Form-associated callback when the element is associated with a form.
+	 * @param {HTMLFormElement|null} form The form element or null if disassociated.
+	 */
 	formAssociatedCallback(form) {
 		if (form) {
 			form.addEventListener("submit", this.#onFormSubmit);
@@ -267,6 +322,10 @@ class Input extends HTMLElement {
 		}
 	}
 
+	/**
+	 * Form-associated callback when the form is disabled or enabled.
+	 * @param {boolean} disabled Whether the form is disabled.
+	 */
 	formDisabledCallback(disabled) {
 		if (disabled) {
 			this.setAttribute("disabled", "");
@@ -275,6 +334,9 @@ class Input extends HTMLElement {
 		}
 	}
 
+	/**
+	 * Form-associated callback when the form is reset.
+	 */
 	formResetCallback() {
 		this.value = this.getAttribute("value") || "";
 		this.removeAttribute("error");
@@ -294,8 +356,11 @@ class Input extends HTMLElement {
 		}
 	}
 
+	/**
+	 * Sets focus to the input control.
+	 */
 	focus() {
-		this.controlElement.focus();
+		this.#input.focus();
 	}
 
 	#copyControlAttributes() {
@@ -412,7 +477,7 @@ class Input extends HTMLElement {
 					this.#input,
 				);
 				if (
-					this.#internals.form.hasAttribute("submitted") ||
+					this.#internals.form?.hasAttribute("submitted") ||
 					showError ||
 					this.hasAttribute("error")
 				) {
