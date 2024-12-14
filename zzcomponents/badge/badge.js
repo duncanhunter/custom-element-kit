@@ -1,4 +1,4 @@
-export const badgeTemplate = /*html*/ `
+export const badgeTemplate = () => /*html*/ `
 <div part="wrapper" role="status">
 	<slot></slot>
 </div>
@@ -38,7 +38,7 @@ class Badge extends HTMLElement {
 		super();
 		if (!this.shadowRoot) {
 			this.attachShadow({ mode: "open" });
-			this.shadowRoot.innerHTML = `<style>${badgeStyles}</style>${badgeTemplate}`;
+			this.shadowRoot.innerHTML = `<style>${badgeStyles}</style>${badgeTemplate()}`;
 		}
 	}
 }

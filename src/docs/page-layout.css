@@ -137,7 +137,7 @@ aside.page-nav nav {
 	}
 
 	li a {
-		display: block;
+		display: inline-block;
 		text-decoration: none;
 		color: var(--cek-text-color-1);
   	}

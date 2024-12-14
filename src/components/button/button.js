@@ -1,12 +1,26 @@
-export const buttonTemplate = /*html*/ `
-  <button id="button" part="button">
-    <slot name="start"></slot>
-    <div id="label" part="label"><slot></slot></div>
-    <slot name="end"></slot>
-    <svg id="loading-icon" part="loading-icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25"/><path d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z"><animateTransform attributeName="transform" type="rotate" dur="0.75s" values="0 12 12;360 12 12" repeatCount="indefinite"/></path></svg>
-	<svg id="arrow-icon" part="arrow-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
-  </button>
-`;
+export const buttonTemplate = (isLink) => {
+	const tag = isLink ? "a" : "button";
+	return /*html*/ `
+		<${tag} id="button" part="button">
+		<slot name="start"></slot>
+		<div id="label" part="label"><slot></slot></div>
+		<slot name="end"></slot>
+		<svg id="loading-icon" part="loading-icon" width="24" height="24" viewBox="0 0 24 24" 
+			xmlns="http://www.w3.org/2000/svg">
+			<path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25"/>
+			<path d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7
+			a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z">
+			<animateTransform attributeName="transform" type="rotate" dur="0.75s" 
+				values="0 12 12;360 12 12" repeatCount="indefinite"/>
+			</path>
+		</svg>
+		<svg id="arrow-icon" part="arrow-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" 
+			fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">  
+			<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+		</svg>
+		</${tag}>
+	`;
+};
 
 export const buttonStyles = /*css*/ `
 :host {
@@ -29,6 +43,7 @@ export const buttonStyles = /*css*/ `
   color: inherit;
   cursor: pointer;
   box-sizing: border-box;
+  text-decoration: none;
 }
 
 :host([variant]) #button {
@@ -48,6 +63,7 @@ export const buttonStyles = /*css*/ `
 :host([loading]) #button,
 :host([disabled]) #button {
   cursor: not-allowed;
+  pointer-events: none;
 }
 
 :host([loading]) #button {
@@ -143,53 +159,31 @@ export const buttonStyles = /*css*/ `
 }
 `;
 
-const controlAttributes = [
+const buttonAttributes = [
 	"required",
 	"type",
 	"disabled",
 	"button-aria-label",
-	"value"
+	"value",
+	"href",
+	"target",
 ];
 
-/**
- * A custom button element that can be used as a form-associated custom element.
- *
- * @element cek-button
- * @attribute {string} type - The type of the button. Defaults to `button`. Can be `button`, `submit`, or `reset`.
- * @attribute {boolean} disabled - Disables the button.
- * @attribute {boolean} loading - Shows a loading indicator when present.
- * @attribute {boolean} arrow - Displays an arrow icon when present.
- * @attribute {string} variant - Sets the styling variant of the button. Possible values are `primary`, `ascent`, `outline`, `text`, `link`.
- * @attribute {string} size - Sets the size of the button. Possible values are `small`, `medium`, `large`.
- * @attribute {boolean} icon-only - If present, styles the button for icon-only display.
- * @attribute {string} button-aria-label - ARIA label for accessibility.
- *
- * @slot default - The text content of the button.
- * @slot start - Content to display before the button's text (e.g., icons).
- * @slot end - Content to display after the button's text (e.g., icons).
- *
- * @csspart button - The native button element.
- * @csspart label - The label element inside the button.
- * @csspart loading-icon - The loading spinner displayed when `loading` is present.
- * @csspart arrow-icon - The arrow icon displayed when `arrow` is present.
- *
- * @event click - Dispatched when the button is activated.
- *
- * @method focus() - Moves keyboard focus to the button.
- */
 export class Button extends HTMLElement {
-	static get observedAttributes() {
-		return ["loading", ...controlAttributes];
-	}
 	static formAssociated = true;
+	static get observedAttributes() {
+		return ["loading", ...buttonAttributes];
+	}
 
 	#internals;
 
 	constructor() {
 		super();
 		this.#internals = this.attachInternals();
-		this.attachShadow({ mode: "open", delegatesFocus: true });
-		this.shadowRoot.innerHTML = `<style>${buttonStyles}</style>${buttonTemplate}`;
+		if (!this.shadowRoot) {
+			this.attachShadow({ mode: "open", delegatesFocus: true });
+			this.shadowRoot.innerHTML = `<style>${buttonStyles}</style>${buttonTemplate(this.hasAttribute("href"))}`;
+		}
 	}
 
 	get type() {
@@ -203,7 +197,7 @@ export class Button extends HTMLElement {
 	get loading() {
 		return this.hasAttribute("loading");
 	}
-	
+
 	set loading(value) {
 		value ? this.setAttribute("loading", "") : this.removeAttribute("loading");
 	}
@@ -213,7 +207,9 @@ export class Button extends HTMLElement {
 	}
 
 	set disabled(value) {
-		value ? this.setAttribute("disabled", "") : this.removeAttribute("disabled");
+		value
+			? this.setAttribute("disabled", "")
+			: this.removeAttribute("disabled");
 	}
 
 	get #button() {
@@ -221,29 +217,27 @@ export class Button extends HTMLElement {
 	}
 
 	connectedCallback() {
-		this.#button.addEventListener("click", this.#onClick);
+		this.#maybeTransformToAnchor();
+		// For button only, since anchor doesn't need the form submission logic
+		if (!this.hasAttribute("href")) {
+			this.#button.addEventListener("click", this.#onClick);
+		}
+		this.#copyButtonAttributes();
 	}
 
 	disconnectedCallback() {
-		this.#button.removeEventListener("click", this.#onClick);
+		this.#button?.removeEventListener("click", this.#onClick);
 	}
 
 	attributeChangedCallback(name, oldValue, newValue) {
-		if (controlAttributes.includes(name)) {
-			this.#copyControlAttributes();
+		if (buttonAttributes.includes(name) || name === "loading") {
+			this.#maybeTransformToAnchor();
+			this.#copyButtonAttributes();
 		}
 	}
 
-	/**
-	 * Form-associated callback when the form is disabled or enabled.
-	 * @param {boolean} disabled Whether the form is disabled.
-	 */
 	formDisabledCallback(disabled) {
-		if (disabled) {
-			this.setAttribute("disabled", "");
-		} else {
-			this.removeAttribute("disabled");
-		}
+		this.disabled = disabled;
 	}
 
 	formResetCallback() {
@@ -254,17 +248,64 @@ export class Button extends HTMLElement {
 		this.#button.focus();
 	}
 
-	#copyControlAttributes() {
-		for (const attribute of controlAttributes) {
-			const newAttribute =
-				attribute === "button-aria-label" ? "aria-label" : attribute;
-			if (this.hasAttribute(attribute)) {
-				this.#button.setAttribute(newAttribute, this.getAttribute(attribute));
-			} else if (attribute === "type") {
-				this.#button.type = "text";
+	#copyButtonAttributes() {
+		const button = this.#button;
+		const isLink = this.hasAttribute("href");
+
+		if (this.hasAttribute("button-aria-label")) {
+			button.setAttribute("aria-label", this.getAttribute("button-aria-label"));
+		} else {
+			button.removeAttribute("aria-label");
+		}
+
+		if (isLink) {
+			button.removeAttribute("type");
+			button.removeAttribute("disabled");
+
+			const hrefValue = this.getAttribute("href");
+			button.setAttribute("href", hrefValue);
+
+			const targetValue = this.getAttribute("target") || "_self";
+			button.setAttribute("target", targetValue);
+		} else {
+			button.removeAttribute("href");
+			button.removeAttribute("target");
+
+			button.setAttribute("type", this.getAttribute("type") || "button");
+
+			if (this.disabled) {
+				button.setAttribute("disabled", "");
 			} else {
-				this.#button.removeAttribute(newAttribute);
+				button.removeAttribute("disabled");
 			}
+		}
+	}
+
+	#maybeTransformToAnchor() {
+		const button = this.#button;
+		const shouldBeLink = this.hasAttribute("href");
+
+		if (shouldBeLink && button.tagName.toLowerCase() === "button") {
+			const anchor = document.createElement("a");
+			anchor.id = "button";
+			anchor.part.add("button");
+
+			while (button.firstChild) {
+				anchor.appendChild(button.firstChild);
+			}
+
+			button.replaceWith(anchor);
+		} else if (!shouldBeLink && button.tagName.toLowerCase() === "a") {
+			const button = document.createElement("button");
+			button.id = "button";
+			button.part.add("button");
+
+			while (button.firstChild) {
+				button.appendChild(button.firstChild);
+			}
+
+			button.replaceWith(button);
+			button.addEventListener("click", this.#onClick);
 		}
 	}
 
@@ -278,7 +319,9 @@ export class Button extends HTMLElement {
 		} else if (this.type === "reset") {
 			this.#internals.form?.reset();
 		}
-		this.dispatchEvent(new CustomEvent("click", { bubbles: true, composed: true }));
+		this.dispatchEvent(
+			new CustomEvent("click", { bubbles: true, composed: true }),
+		);
 	};
 }
 

@@ -1,4 +1,4 @@
-export const dialogTemplate = /* html */ `
+export const dialogTemplate = () => /* html */ `
   <dialog part="dialog" id="dialog">
     <button part="close-button" type="button" id="close" autofocus>Close</button>
     <slot></slot>
@@ -19,7 +19,7 @@ class Dialog extends HTMLElement {
 
 		if (!this.shadowRoot) {
 			this.attachShadow({ mode: "open", delegatesFocus: true });
-			this.shadowRoot.innerHTML = `<style>${dialogStyles}</style>${dialogTemplate}`;
+			this.shadowRoot.innerHTML = `<style>${dialogStyles}</style>${dialogTemplate()}`;
 		}
 
 		this.#closeButtonElement = this.shadowRoot.getElementById("close");

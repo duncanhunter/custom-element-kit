@@ -1,4 +1,4 @@
-export const formTemplate = /*css*/ `
+export const formTemplate = () => /*css*/ `
 	<slot></slot>
 `;
 
@@ -26,7 +26,7 @@ class Form extends HTMLElement {
 		super();
 		if (!this.shadowRoot) {
 			this.attachShadow({ mode: "open" });
-			this.shadowRoot.innerHTML = `<style>${formStyles}</style>${formTemplate}`;
+			this.shadowRoot.innerHTML = `<style>${formStyles}</style>${formTemplate()}`;
 		}
 		this.#form = this.shadowRoot.querySelector("form");
 	}

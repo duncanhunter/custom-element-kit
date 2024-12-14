@@ -40,20 +40,31 @@
             class="attribute">validate-on-change</span>. This ensures a consistent experience for users correcting their
         input after an initial form submission.</p>
 
+    <p>You can also provide custom validation messages using the following attributes:</p>
+    <ul>
+        <li><span class="attribute">value-missing-message</span> - Custom message for value missing validation.</li>
+        <li><span class="attribute">too-short-message</span> - Custom message for too short validation.</li>
+        <li><span class="attribute">too-long-message</span> - Custom message for too long validation.</li>
+        <li><span class="attribute">type-mismatch-message</span> - Custom message for type mismatch validation.</li>
+        <li><span class="attribute">pattern-mismatch-message</span> - Custom message for pattern mismatch validation.</li>
+        <li><span class="attribute">range-underflow-message</span> - Custom message for range underflow validation.</li>
+    </ul>
+
     <form novalidate>
-        <cek-input valuemissing="Email address is required" required label="Email Address" type="email"></cek-input>
+        <cek-input value-missing-message="Email address is required" required label="Email Address" type="email"></cek-input>
         <cek-input required label="Postal Code" pattern="\d{4}" help="Enter a 4-digit code"
-            validate-on-change></cek-input>
+            validate-on-change pattern-mismatch-message="Please enter a valid 4-digit postal code"></cek-input>
+        <cek-input type="number" min="18" range-underflow-message="You must be at least 18 years old" label="Age"></cek-input>
         <cek-button variant="primary" type="submit">Submit & validate</cek-button>
     </form>
-
 
     <cek-code-block lang="xml" theme="github-dark">
         <template>
             <form novalidate>
-                <cek-input required label="Email Address" type="email"></cek-input>
+                <cek-input value-missing-message="Email address is required" required label="Email Address" type="email"></cek-input>
                 <cek-input required label="Postal Code" pattern="\d{4}" help="Enter a 4-digit code"
-                    validate-on-change></cek-input>
+                    validate-on-change pattern-mismatch-message="Please enter a valid 4-digit postal code"></cek-input>
+                <cek-input type="number" min="18" range-underflow-message="You must be at least 18 years old" label="Age"></cek-input>
                 <cek-button variant="primary" type="submit">Submit</cek-button>
             </form>
         </template>
@@ -241,6 +252,34 @@
         <tr>
             <td>validate-on-change</td>
             <td>Triggers validation when the input’s value changes (on change event) rather than just on submit.</td>
+        </tr>
+        <tr>
+            <td>value-missing-message</td>
+            <td>Custom message for value missing validation.</td>
+        </tr>
+        <tr>
+            <td>too-short-message</td>
+            <td>Custom message for too short validation.</td>
+        </tr>
+        <tr>
+            <td>too-long-message</td>
+            <td>Custom message for too long validation.</td>
+        </tr>
+        <tr>
+            <td>type-mismatch-message</td>
+            <td>Custom message for type mismatch validation.</td>
+        </tr>
+        <tr>
+            <td>range-underflow-message</td>
+            <td>Custom message for range underflow validation.</td>
+        </tr>
+        <tr>
+            <td>range-overflow-message</td>
+            <td>Custom message for range overflow validation.</td>
+        </tr>
+        <tr>
+            <td>pattern-mismatch-message</td>
+            <td>Custom message for pattern mismatch validation.</td>
         </tr>
     </tbody>
 </table>

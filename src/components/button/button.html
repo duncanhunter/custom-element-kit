@@ -83,11 +83,28 @@
     <h2>Disabled State</h2>
     <p>Add the <span class="attribute">disabled</span> attribute to disable the button, preventing user interaction.</p>
 
-    <cek-button variant="primary" disabled>Disabled Button</cek-button>
+    <cek-button variant="" disabled>Disabled Button</cek-button>
 
     <cek-code-block lang="xml" theme="github-dark">
         <template>
             <cek-button variant="primary" disabled>Disabled Button</cek-button>
+        </template>
+    </cek-code-block>
+
+    <h2>Anchor Functionality</h2>
+    <p>The button component can also function as a link. Use the <span class="attribute">href</span> attribute to transform the button into an anchor element. Optionally, you can use the <span class="attribute">target</span> attribute to specify where to open the linked document.</p>
+
+    <cek-button href="https://example.com" target="_blank" variant="link">
+        Go to Example
+        <cek-icon slot="end" name="arrow-up-right">
+    </cek-icon></cek-button>
+
+    <cek-code-block lang="xml" theme="github-dark">
+        <template>
+            <cek-button href="https://example.com" target="_blank" variant="link">
+                Go to Example
+                <cek-icon slot="end" name="arrow-up-right">
+            </cek-icon></cek-button>
         </template>
     </cek-code-block>
 
@@ -141,6 +158,14 @@
             <td>button-aria-label</td>
             <td>Sets an ARIA label for accessibility.</td>
         </tr>
+        <tr>
+            <td>href</td>
+            <td>Transforms the button into an anchor element with this <code>href</code>.</td>
+        </tr>
+        <tr>
+            <td>target</td>
+            <td>Sets the <code>target</code> attribute of the anchor when <code>href</code> is present. Defaults to <code>_self</code>.</td>
+        </tr>
     </tbody>
 </table>
 
@@ -181,7 +206,7 @@
     <tbody>
         <tr>
             <td>button</td>
-            <td>The native button element.</td>
+            <td>The native button or anchor element.</td>
         </tr>
         <tr>
             <td>label</td>
@@ -210,7 +235,7 @@
     <tbody>
         <tr>
             <td>click</td>
-            <td>Dispatched when the button is activated.</td>
+            <td>Dispatched when the button is activated. For a link, dispatched upon navigation activation.</td>
         </tr>
     </tbody>
 </table>
@@ -227,7 +252,7 @@
     <tbody>
         <tr>
             <td>focus()</td>
-            <td>Moves keyboard focus to the button.</td>
+            <td>Moves keyboard focus to the button or anchor.</td>
         </tr>
     </tbody>
 </table>

@@ -1,4 +1,4 @@
-export const digitInputStyles = /* css */ `
+export const digitInputStyles = () => /* css */ `
 [part="container"] {
     display: flex;
     align-items: center;

@@ -1,4 +1,4 @@
-export const codeBlockTemplate = `
+export const codeBlockTemplate = () => `
 <div part="container">
 	<link id="hljs-theme" rel="stylesheet">
 	<pre><code part="code"></code></pre>
@@ -100,7 +100,7 @@ export class CodeBlock extends HTMLElement {
 
 		if (!this.shadowRoot) {
 			this.attachShadow({ mode: "open" });
-			this.shadowRoot.innerHTML = `<style>${codeBlockStyles}</style>${codeBlockTemplate}`;
+			this.shadowRoot.innerHTML = `<style>${codeBlockStyles}</style>${codeBlockTemplate()}`;
 		}
 
 		this.#observer = new MutationObserver(() => this.#handleMutations());

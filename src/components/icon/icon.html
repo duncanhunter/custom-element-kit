@@ -1,0 +1,86 @@
+<section>
+    <h1>Icon (cek-icon)</h1>
+
+    <h2>Basic Usage</h2>
+    <p>The icon component is used to display SVG icons. Use the <span class="attribute">name</span> attribute to specify
+        the icon to display.</p>
+
+    <cek-icon name="plus-circle"></cek-icon>
+    <cek-icon name="user"></cek-icon>
+
+    <cek-code-block lang="xml" theme="github-dark">
+        <template>
+            <cek-icon name="plus-circle"></cek-icon>
+            <cek-icon name="user"></cek-icon>
+        </template>
+    </cek-code-block>
+
+    <h2>Sizes</h2>
+    <p>Use the <span class="attribute">size</span> attribute to adjust the size of the icon.</p>
+
+    <cek-icon name="plus-circle" size="1em"></cek-icon>
+    <cek-icon name="plus-circle" size="2em"></cek-icon>
+    <cek-icon name="plus-circle" size="3em"></cek-icon>
+
+    <cek-code-block lang="xml" theme="github-dark">
+        <template>
+            <cek-icon name="plus-circle" size="1em"></cek-icon>
+            <cek-icon name="plus-circle" size="2em"></cek-icon>
+            <cek-icon name="plus-circle" size="3em"></cek-icon>
+        </template>
+    </cek-code-block>
+
+    <h2>Colors</h2>
+    <p>Use CSS to style the color of the icon.</p>
+
+    <cek-icon name="plus-circle" style="color: red;"></cek-icon>
+    <cek-icon name="plus-circle" style="color: green;"></cek-icon>
+    <cek-icon name="plus-circle" style="color: blue;"></cek-icon>
+
+    <cek-code-block lang="xml" theme="github-dark">
+        <template>
+            <cek-icon name="plus-circle" style="color: red;"></cek-icon>
+            <cek-icon name="plus-circle" style="color: green;"></cek-icon>
+            <cek-icon name="plus-circle" style="color: blue;"></cek-icon>
+        </template>
+    </cek-code-block>
+
+</section>
+
+<h2>Attributes</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Attribute</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>name</td>
+            <td>Specifies the name of the icon to display.</td>
+        </tr>
+        <tr>
+            <td>size</td>
+            <td>Specifies the size of the icon. Accepts any valid CSS size value (e.g., 1em, 24px).</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>CSS Parts</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Part Name</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>icon</td>
+            <td>The SVG element representing the icon.</td>
+        </tr>
+    </tbody>
+</table>
