@@ -40,7 +40,7 @@
     <h2>Variants</h2>
     <p>The button component supports several variants for different styles and use cases. Use the <span class="attribute">variant</span> attribute to change the visual style of the button.</p>
 
-    <div class="flex flex-column gap-3">
+    <div class="flex flex-column gap-4">
         <cek-button variant="primary" server-rendered=""><template shadowrootmode="open"><style>
 :host {
   	display: inline-block;
@@ -77,7 +77,6 @@
 :host([loading]) #button,
 :host([disabled]) #button {
   	cursor: not-allowed;
-  	pointer-events: none;
 }
 
 :host([loading]) #button {
@@ -86,8 +85,12 @@
 }
 
 :host([disabled][variant]) #button {
-  	background-color: #ccc;
-  	color: rgba(0, 0, 0, 0.5);
+  	background-color: var(--cek-surface-color-disabled);
+  	color: var(--cek-text-color-disabled);
+
+	&:focus {
+		outline-color: var(--cek-surface-color-disabled);
+	}
 }
 
 :host([size="small"]) #button {
@@ -178,6 +181,10 @@
 
 	&:hover {
 		filter: brightness(85%);
+  	}
+
+	&:focus {
+		outline-color: var(--cek-color-neutral);
   	}
 }
 
@@ -290,7 +297,6 @@
 :host([loading]) #button,
 :host([disabled]) #button {
   	cursor: not-allowed;
-  	pointer-events: none;
 }
 
 :host([loading]) #button {
@@ -299,8 +305,12 @@
 }
 
 :host([disabled][variant]) #button {
-  	background-color: #ccc;
-  	color: rgba(0, 0, 0, 0.5);
+  	background-color: var(--cek-surface-color-disabled);
+  	color: var(--cek-text-color-disabled);
+
+	&:focus {
+		outline-color: var(--cek-surface-color-disabled);
+	}
 }
 
 :host([size="small"]) #button {
@@ -391,6 +401,10 @@
 
 	&:hover {
 		filter: brightness(85%);
+  	}
+
+	&:focus {
+		outline-color: var(--cek-color-neutral);
   	}
 }
 
@@ -503,7 +517,6 @@
 :host([loading]) #button,
 :host([disabled]) #button {
   	cursor: not-allowed;
-  	pointer-events: none;
 }
 
 :host([loading]) #button {
@@ -512,8 +525,12 @@
 }
 
 :host([disabled][variant]) #button {
-  	background-color: #ccc;
-  	color: rgba(0, 0, 0, 0.5);
+  	background-color: var(--cek-surface-color-disabled);
+  	color: var(--cek-text-color-disabled);
+
+	&:focus {
+		outline-color: var(--cek-surface-color-disabled);
+	}
 }
 
 :host([size="small"]) #button {
@@ -604,6 +621,10 @@
 
 	&:hover {
 		filter: brightness(85%);
+  	}
+
+	&:focus {
+		outline-color: var(--cek-color-neutral);
   	}
 }
 
@@ -716,7 +737,6 @@
 :host([loading]) #button,
 :host([disabled]) #button {
   	cursor: not-allowed;
-  	pointer-events: none;
 }
 
 :host([loading]) #button {
@@ -725,8 +745,12 @@
 }
 
 :host([disabled][variant]) #button {
-  	background-color: #ccc;
-  	color: rgba(0, 0, 0, 0.5);
+  	background-color: var(--cek-surface-color-disabled);
+  	color: var(--cek-text-color-disabled);
+
+	&:focus {
+		outline-color: var(--cek-surface-color-disabled);
+	}
 }
 
 :host([size="small"]) #button {
@@ -817,6 +841,10 @@
 
 	&:hover {
 		filter: brightness(85%);
+  	}
+
+	&:focus {
+		outline-color: var(--cek-color-neutral);
   	}
 }
 
@@ -929,7 +957,6 @@
 :host([loading]) #button,
 :host([disabled]) #button {
   	cursor: not-allowed;
-  	pointer-events: none;
 }
 
 :host([loading]) #button {
@@ -938,8 +965,12 @@
 }
 
 :host([disabled][variant]) #button {
-  	background-color: #ccc;
-  	color: rgba(0, 0, 0, 0.5);
+  	background-color: var(--cek-surface-color-disabled);
+  	color: var(--cek-text-color-disabled);
+
+	&:focus {
+		outline-color: var(--cek-surface-color-disabled);
+	}
 }
 
 :host([size="small"]) #button {
@@ -1030,6 +1061,10 @@
 
 	&:hover {
 		filter: brightness(85%);
+  	}
+
+	&:focus {
+		outline-color: var(--cek-color-neutral);
   	}
 }
 
@@ -1142,7 +1177,6 @@
 :host([loading]) #button,
 :host([disabled]) #button {
   	cursor: not-allowed;
-  	pointer-events: none;
 }
 
 :host([loading]) #button {
@@ -1151,8 +1185,12 @@
 }
 
 :host([disabled][variant]) #button {
-  	background-color: #ccc;
-  	color: rgba(0, 0, 0, 0.5);
+  	background-color: var(--cek-surface-color-disabled);
+  	color: var(--cek-text-color-disabled);
+
+	&:focus {
+		outline-color: var(--cek-surface-color-disabled);
+	}
 }
 
 :host([size="small"]) #button {
@@ -1243,6 +1281,10 @@
 
 	&:hover {
 		filter: brightness(85%);
+  	}
+
+	&:focus {
+		outline-color: var(--cek-color-neutral);
   	}
 }
 
@@ -1355,7 +1397,6 @@
 :host([loading]) #button,
 :host([disabled]) #button {
   	cursor: not-allowed;
-  	pointer-events: none;
 }
 
 :host([loading]) #button {
@@ -1364,8 +1405,12 @@
 }
 
 :host([disabled][variant]) #button {
-  	background-color: #ccc;
-  	color: rgba(0, 0, 0, 0.5);
+  	background-color: var(--cek-surface-color-disabled);
+  	color: var(--cek-text-color-disabled);
+
+	&:focus {
+		outline-color: var(--cek-surface-color-disabled);
+	}
 }
 
 :host([size="small"]) #button {
@@ -1456,6 +1501,10 @@
 
 	&:hover {
 		filter: brightness(85%);
+  	}
+
+	&:focus {
+		outline-color: var(--cek-color-neutral);
   	}
 }
 
@@ -1568,7 +1617,6 @@
 :host([loading]) #button,
 :host([disabled]) #button {
   	cursor: not-allowed;
-  	pointer-events: none;
 }
 
 :host([loading]) #button {
@@ -1577,8 +1625,12 @@
 }
 
 :host([disabled][variant]) #button {
-  	background-color: #ccc;
-  	color: rgba(0, 0, 0, 0.5);
+  	background-color: var(--cek-surface-color-disabled);
+  	color: var(--cek-text-color-disabled);
+
+	&:focus {
+		outline-color: var(--cek-surface-color-disabled);
+	}
 }
 
 :host([size="small"]) #button {
@@ -1669,6 +1721,10 @@
 
 	&:hover {
 		filter: brightness(85%);
+  	}
+
+	&:focus {
+		outline-color: var(--cek-color-neutral);
   	}
 }
 
@@ -1781,7 +1837,6 @@
 :host([loading]) #button,
 :host([disabled]) #button {
   	cursor: not-allowed;
-  	pointer-events: none;
 }
 
 :host([loading]) #button {
@@ -1790,8 +1845,12 @@
 }
 
 :host([disabled][variant]) #button {
-  	background-color: #ccc;
-  	color: rgba(0, 0, 0, 0.5);
+  	background-color: var(--cek-surface-color-disabled);
+  	color: var(--cek-text-color-disabled);
+
+	&:focus {
+		outline-color: var(--cek-surface-color-disabled);
+	}
 }
 
 :host([size="small"]) #button {
@@ -1882,6 +1941,10 @@
 
 	&:hover {
 		filter: brightness(85%);
+  	}
+
+	&:focus {
+		outline-color: var(--cek-color-neutral);
   	}
 }
 
@@ -2000,7 +2063,6 @@
 :host([loading]) #button,
 :host([disabled]) #button {
   	cursor: not-allowed;
-  	pointer-events: none;
 }
 
 :host([loading]) #button {
@@ -2009,8 +2071,12 @@
 }
 
 :host([disabled][variant]) #button {
-  	background-color: #ccc;
-  	color: rgba(0, 0, 0, 0.5);
+  	background-color: var(--cek-surface-color-disabled);
+  	color: var(--cek-text-color-disabled);
+
+	&:focus {
+		outline-color: var(--cek-surface-color-disabled);
+	}
 }
 
 :host([size="small"]) #button {
@@ -2101,6 +2167,10 @@
 
 	&:hover {
 		filter: brightness(85%);
+  	}
+
+	&:focus {
+		outline-color: var(--cek-color-neutral);
   	}
 }
 
@@ -2219,7 +2289,6 @@
 :host([loading]) #button,
 :host([disabled]) #button {
   	cursor: not-allowed;
-  	pointer-events: none;
 }
 
 :host([loading]) #button {
@@ -2228,8 +2297,12 @@
 }
 
 :host([disabled][variant]) #button {
-  	background-color: #ccc;
-  	color: rgba(0, 0, 0, 0.5);
+  	background-color: var(--cek-surface-color-disabled);
+  	color: var(--cek-text-color-disabled);
+
+	&:focus {
+		outline-color: var(--cek-surface-color-disabled);
+	}
 }
 
 :host([size="small"]) #button {
@@ -2320,6 +2393,10 @@
 
 	&:hover {
 		filter: brightness(85%);
+  	}
+
+	&:focus {
+		outline-color: var(--cek-color-neutral);
   	}
 }
 
@@ -2469,7 +2546,6 @@
 :host([loading]) #button,
 :host([disabled]) #button {
   	cursor: not-allowed;
-  	pointer-events: none;
 }
 
 :host([loading]) #button {
@@ -2478,8 +2554,12 @@
 }
 
 :host([disabled][variant]) #button {
-  	background-color: #ccc;
-  	color: rgba(0, 0, 0, 0.5);
+  	background-color: var(--cek-surface-color-disabled);
+  	color: var(--cek-text-color-disabled);
+
+	&:focus {
+		outline-color: var(--cek-surface-color-disabled);
+	}
 }
 
 :host([size="small"]) #button {
@@ -2570,6 +2650,10 @@
 
 	&:hover {
 		filter: brightness(85%);
+  	}
+
+	&:focus {
+		outline-color: var(--cek-color-neutral);
   	}
 }
 
@@ -2682,7 +2766,6 @@
 :host([loading]) #button,
 :host([disabled]) #button {
   	cursor: not-allowed;
-  	pointer-events: none;
 }
 
 :host([loading]) #button {
@@ -2691,8 +2774,12 @@
 }
 
 :host([disabled][variant]) #button {
-  	background-color: #ccc;
-  	color: rgba(0, 0, 0, 0.5);
+  	background-color: var(--cek-surface-color-disabled);
+  	color: var(--cek-text-color-disabled);
+
+	&:focus {
+		outline-color: var(--cek-surface-color-disabled);
+	}
 }
 
 :host([size="small"]) #button {
@@ -2783,6 +2870,10 @@
 
 	&:hover {
 		filter: brightness(85%);
+  	}
+
+	&:focus {
+		outline-color: var(--cek-color-neutral);
   	}
 }
 
@@ -2895,7 +2986,6 @@
 :host([loading]) #button,
 :host([disabled]) #button {
   	cursor: not-allowed;
-  	pointer-events: none;
 }
 
 :host([loading]) #button {
@@ -2904,8 +2994,12 @@
 }
 
 :host([disabled][variant]) #button {
-  	background-color: #ccc;
-  	color: rgba(0, 0, 0, 0.5);
+  	background-color: var(--cek-surface-color-disabled);
+  	color: var(--cek-text-color-disabled);
+
+	&:focus {
+		outline-color: var(--cek-surface-color-disabled);
+	}
 }
 
 :host([size="small"]) #button {
@@ -2996,6 +3090,10 @@
 
 	&:hover {
 		filter: brightness(85%);
+  	}
+
+	&:focus {
+		outline-color: var(--cek-color-neutral);
   	}
 }
 
@@ -3123,7 +3221,6 @@
 :host([loading]) #button,
 :host([disabled]) #button {
   	cursor: not-allowed;
-  	pointer-events: none;
 }
 
 :host([loading]) #button {
@@ -3132,8 +3229,12 @@
 }
 
 :host([disabled][variant]) #button {
-  	background-color: #ccc;
-  	color: rgba(0, 0, 0, 0.5);
+  	background-color: var(--cek-surface-color-disabled);
+  	color: var(--cek-text-color-disabled);
+
+	&:focus {
+		outline-color: var(--cek-surface-color-disabled);
+	}
 }
 
 :host([size="small"]) #button {
@@ -3224,6 +3325,10 @@
 
 	&:hover {
 		filter: brightness(85%);
+  	}
+
+	&:focus {
+		outline-color: var(--cek-color-neutral);
   	}
 }
 
@@ -3342,7 +3447,6 @@
 :host([loading]) #button,
 :host([disabled]) #button {
   	cursor: not-allowed;
-  	pointer-events: none;
 }
 
 :host([loading]) #button {
@@ -3351,8 +3455,12 @@
 }
 
 :host([disabled][variant]) #button {
-  	background-color: #ccc;
-  	color: rgba(0, 0, 0, 0.5);
+  	background-color: var(--cek-surface-color-disabled);
+  	color: var(--cek-text-color-disabled);
+
+	&:focus {
+		outline-color: var(--cek-surface-color-disabled);
+	}
 }
 
 :host([size="small"]) #button {
@@ -3443,6 +3551,10 @@
 
 	&:hover {
 		filter: brightness(85%);
+  	}
+
+	&:focus {
+		outline-color: var(--cek-color-neutral);
   	}
 }
 
@@ -3561,7 +3673,6 @@
 :host([loading]) #button,
 :host([disabled]) #button {
   	cursor: not-allowed;
-  	pointer-events: none;
 }
 
 :host([loading]) #button {
@@ -3570,8 +3681,12 @@
 }
 
 :host([disabled][variant]) #button {
-  	background-color: #ccc;
-  	color: rgba(0, 0, 0, 0.5);
+  	background-color: var(--cek-surface-color-disabled);
+  	color: var(--cek-text-color-disabled);
+
+	&:focus {
+		outline-color: var(--cek-surface-color-disabled);
+	}
 }
 
 :host([size="small"]) #button {
@@ -3662,6 +3777,10 @@
 
 	&:hover {
 		filter: brightness(85%);
+  	}
+
+	&:focus {
+		outline-color: var(--cek-color-neutral);
   	}
 }
 
@@ -3800,7 +3919,6 @@
 :host([loading]) #button,
 :host([disabled]) #button {
   	cursor: not-allowed;
-  	pointer-events: none;
 }
 
 :host([loading]) #button {
@@ -3809,8 +3927,12 @@
 }
 
 :host([disabled][variant]) #button {
-  	background-color: #ccc;
-  	color: rgba(0, 0, 0, 0.5);
+  	background-color: var(--cek-surface-color-disabled);
+  	color: var(--cek-text-color-disabled);
+
+	&:focus {
+		outline-color: var(--cek-surface-color-disabled);
+	}
 }
 
 :host([size="small"]) #button {
@@ -3901,6 +4023,10 @@
 
 	&:hover {
 		filter: brightness(85%);
+  	}
+
+	&:focus {
+		outline-color: var(--cek-color-neutral);
   	}
 }
 
@@ -4023,7 +4149,6 @@
 :host([loading]) #button,
 :host([disabled]) #button {
   	cursor: not-allowed;
-  	pointer-events: none;
 }
 
 :host([loading]) #button {
@@ -4032,8 +4157,12 @@
 }
 
 :host([disabled][variant]) #button {
-  	background-color: #ccc;
-  	color: rgba(0, 0, 0, 0.5);
+  	background-color: var(--cek-surface-color-disabled);
+  	color: var(--cek-text-color-disabled);
+
+	&:focus {
+		outline-color: var(--cek-surface-color-disabled);
+	}
 }
 
 :host([size="small"]) #button {
@@ -4125,6 +4254,10 @@
 	&:hover {
 		filter: brightness(85%);
   	}
+
+	&:focus {
+		outline-color: var(--cek-color-neutral);
+  	}
 }
 
 :host([variant="icon"]) #button {
@@ -4184,7 +4317,7 @@
 	--width: 1.4em;
 }
 </style>
-		<button id="button" part="button" disabled>
+		<button id="button" part="button" aria-disabled="false">
 		<slot name="start"></slot>
 		<div id="label" part="label"><slot></slot></div>
 		<slot name="end"></slot>
@@ -4248,7 +4381,6 @@
 :host([loading]) #button,
 :host([disabled]) #button {
   	cursor: not-allowed;
-  	pointer-events: none;
 }
 
 :host([loading]) #button {
@@ -4257,8 +4389,12 @@
 }
 
 :host([disabled][variant]) #button {
-  	background-color: #ccc;
-  	color: rgba(0, 0, 0, 0.5);
+  	background-color: var(--cek-surface-color-disabled);
+  	color: var(--cek-text-color-disabled);
+
+	&:focus {
+		outline-color: var(--cek-surface-color-disabled);
+	}
 }
 
 :host([size="small"]) #button {
@@ -4349,6 +4485,10 @@
 
 	&:hover {
 		filter: brightness(85%);
+  	}
+
+	&:focus {
+		outline-color: var(--cek-color-neutral);
   	}
 }
 
@@ -4441,168 +4581,662 @@
         </template>
     </cek-code-block>
 
-</section>
+    <h2>Commands</h2>
 
-<h2>Attributes</h2>
+    <p>The button component supports executing commands on other elements. Use the <span class="attribute">command</span> attribute to specify the command to execute and the <span class="attribute">commandfor</span> attribute to specify the target element. The command should match a
+        public method name of the target element.</p>
 
-<table>
-    <thead>
-        <tr>
-            <th>Attribute</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>type</td>
-            <td>Sets the button type. Possible values are <code>button</code>, <code>submit</code>, and
-                <code>reset</code>. Defaults to <code>button</code>.
-            </td>
-        </tr>
-        <tr>
-            <td>disabled</td>
-            <td>Disables the button when present.</td>
-        </tr>
-        <tr>
-            <td>loading</td>
-            <td>Shows a loading indicator when present.</td>
-        </tr>
-        <tr>
-            <td>arrow</td>
-            <td>Displays an arrow icon when present.</td>
-        </tr>
-        <tr>
-            <td>variant</td>
-            <td>Sets the styling variant of the button. Possible values are <code>primary</code>,
-                <code>secondary</code>,
-                <code>outline</code>, <code>ghost</code>, <code>link</code>, <code>destructive</code>,
-                <code>neutral</code>.
-            </td>
-        </tr>
-        <tr>
-            <td>size</td>
-            <td>Sets the size of the button. Possible values are <code>small</code>, <code>medium</code>, and
-                <code>large</code>.
-            </td>
-        </tr>
-        <tr>
-            <td>icon-only</td>
-            <td>If present, styles the button for icon-only display without text.</td>
-        </tr>
-        <tr>
-            <td>pill</td>
-            <td>If present, styles the button with a pill shape.</td>
-        </tr>
-        <tr>
-            <td>circle</td>
-            <td>If present, styles the button with a circle shape.</td>
-        </tr>
-        <tr>
-            <td>button-aria-label</td>
-            <td>Sets an ARIA label for accessibility.</td>
-        </tr>
-        <tr>
-            <td>href</td>
-            <td>Transforms the button into an anchor element with this <code>href</code>.</td>
-        </tr>
-        <tr>
-            <td>target</td>
-            <td>Sets the <code>target</code> attribute of the anchor when <code>href</code> is present. Defaults to
-                <code>_self</code>.
-            </td>
-        </tr>
-    </tbody>
-</table>
+    <p>If the <span class="attribute">commandfor</span> attribute is set to <code>parent</code>, the command will be
+        executed on the parent element. If the button is in the slot of another <code>cek-*</code> element, the command
+        will be executed on the element without needing the <span class="attribute">commandfor</span> to be an ID.</p>
 
-<h2>Slots</h2>
+    <cek-button commandfor="my-dialog" command="show-modal" variant="neutral" server-rendered=""><template shadowrootmode="open"><style>
+:host {
+  	display: inline-block;
+  	font-family: var(--cek-font-family);
+  	box-sizing: border-box;
+}
 
-<table>
-    <thead>
-        <tr>
-            <th>Slot Name</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>(default)</td>
-            <td>The text content of the button.</td>
-        </tr>
-        <tr>
-            <td>start</td>
-            <td>Content to display before the button's text (e.g., icons).</td>
-        </tr>
-        <tr>
-            <td>end</td>
-            <td>Content to display after the button's text (e.g., icons).</td>
-        </tr>
-    </tbody>
-</table>
+#button {
+  	display: inline-flex;
+  	align-items: center;
+  	justify-content: center;
+  	position: relative;
+  	background: transparent;
+  	border: none;
+  	padding: 0;
+  	margin: 0;
+  	font: inherit;
+  	color: inherit;
+  	cursor: pointer;
+  	box-sizing: border-box;
+  	text-decoration: none;
+}
 
-<h2>CSS Parts</h2>
+:host([variant]) #button {
+  	border-radius: var(--cek-border-radius);
+  	padding-inline: var(--cek-padding-inline);
+}
 
-<table>
-    <thead>
-        <tr>
-            <th>Part Name</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>button</td>
-            <td>The native button or anchor element.</td>
-        </tr>
-        <tr>
-            <td>label</td>
-            <td>The label element inside the button.</td>
-        </tr>
-        <tr>
-            <td>loading-icon</td>
-            <td>The loading spinner displayed when <code>loading</code> is present.</td>
-        </tr>
-        <tr>
-            <td>arrow-icon</td>
-            <td>The arrow icon displayed when <code>arrow</code> is present.</td>
-        </tr>
-    </tbody>
-</table>
+:host([variant]) #button:focus {
+  	outline: var(--cek-focus-ring);
+  	outline-offset: var(--cek-focus-ring-offset);
+}
 
-<h2>Events</h2>
+:host([loading]) #button,
+:host([disabled]) #button {
+  	cursor: not-allowed;
+}
 
-<table>
-    <thead>
-        <tr>
-            <th>Event</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>click</td>
-            <td>Dispatched when the button is activated. For a link, dispatched upon navigation activation.</td>
-        </tr>
-    </tbody>
-</table>
+:host([loading]) #button {
+  	background-color: lightgray;
+  	color: rgba(0, 0, 0, 0.5);
+}
 
-<h2>Methods</h2>
+:host([disabled][variant]) #button {
+  	background-color: var(--cek-surface-color-disabled);
+  	color: var(--cek-text-color-disabled);
 
-<table>
-    <thead>
-        <tr>
-            <th>Method</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>focus()</td>
-            <td>Moves keyboard focus to the button or anchor.</td>
-        </tr>
-    </tbody>
-</table>
+	&:focus {
+		outline-color: var(--cek-surface-color-disabled);
+	}
+}
 
-<!-- ...existing code... --></body></html>
+:host([size="small"]) #button {
+  	min-height: var(--cek-height-small);
+  	min-width: var(--cek-height-small);
+  	font-size: var(--cek-font-size-0);
+}
+
+:host(:not([size])) #button, 
+:host([size="medium"]) #button {
+  	min-height: var(--cek-height-medium);
+  	min-width: var(--cek-height-medium);
+  	font-size: var(--cek-font-size-1);
+}
+
+:host([size="large"]) #button {
+  	min-height: var(--cek-height-large);
+  	min-width: var(--cek-height-large);
+  	font-size: var(--cek-font-size-2);
+}
+
+:host([variant="primary"]) #button {
+  	background-color: var(--cek-color-primary-500);
+  	color: white;
+
+  	&:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="secondary"]) #button {
+ 	background-color: var(--cek-surface-color-1);
+ 	 color: var(--cek-text-color-1);
+
+ 	 &:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="outline"]) #button {
+	background-color: transparent;
+	border: 1px solid var(--cek-border-color-2);
+	color: var(--cek-text-color-1);
+
+  	&:hover {
+		text-decoration: underline;
+	}
+}
+
+:host([variant="ghost"]) #button {
+	background: transparent;
+	color: var(--cek-text-color-1);
+}
+
+:host([variant="ghost"]) #button:hover {
+	background-color: var(--cek-surface-color-1);
+}
+
+:host([variant="link"]) #button {
+	background-color: transparent;
+	color: var(--cek-color-primary-500);
+	padding: 0;
+	margin: 0;
+	min-height: 0;
+	min-width: 0;
+
+  	&:hover {
+  		text-decoration: underline;
+  	}
+}
+
+:host([variant="destructive"]) #button {
+ 	background-color: var(--cek-color-red-600);
+  	color: white;
+
+	 &:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="destructive"]) #button:focus {
+  	outline: 2px solid var(--cek-color-red-600);
+}
+
+:host([variant="neutral"]) #button {
+  	background-color: var(--cek-color-neutral);
+  	color: var(--cek-text-color-neutral);
+
+	&:hover {
+		filter: brightness(85%);
+  	}
+
+	&:focus {
+		outline-color: var(--cek-color-neutral);
+  	}
+}
+
+:host([variant="icon"]) #button {
+  	padding: var(--cek-space-2);
+  	margin: 0;
+}
+
+:host([pill]) #button {
+  border-radius: 50px;
+}
+
+:host([circle]) #button {
+  border-radius: 50%;
+  padding: 0;
+  width: var(--cek-height-medium);
+  height: var(--cek-height-medium);
+}
+
+[name="end"]::slotted(*) {
+  	margin-inline-start: 0.5ch;
+}
+
+[name="start"]::slotted(*) {
+  	margin-inline-end: 0.5ch;
+}
+
+#loading-icon {
+  	position: absolute;
+  	display: none;
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+}
+
+:host([loading]) #loading-icon {
+  display: block;
+}
+
+:host([icon-only]) #button {
+  padding: var(--cek-space-2);
+  margin: 0;
+}
+
+#arrow-icon {
+  	display: none;
+  	height: 1em;
+  	width: 1em;
+  	margin-inline-start: 0.5ch;
+}
+
+:host([arrow]) #arrow-icon {
+  	display: block;
+}
+
+::slotted(cek-icon) {
+	--height: 1.4em;
+	--width: 1.4em;
+}
+</style>
+		<button id="button" part="button" command="show-modal" commandfor="my-dialog">
+		<slot name="start"></slot>
+		<div id="label" part="label"><slot></slot></div>
+		<slot name="end"></slot>
+		<svg id="loading-icon" part="loading-icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25" />
+			<path d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7
+			a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z">
+			<animatetransform attributeName="transform" type="rotate" dur="0.75s" values="0 12 12;360 12 12" repeatCount="indefinite" />
+			</path>
+		</svg>
+		<svg id="arrow-icon" part="arrow-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">  
+			<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+		</svg>
+		</button>
+	</template>Open Dialog</cek-button>
+    <cek-dialog id="my-dialog" server-rendered=""><template shadowrootmode="open"><style>
+dialog {
+	z-index: 1;
+}
+</style>
+		<dialog id="dialog" part="dialog" aria-modal="true">
+			<header part="header" id="header">
+				<slot name="header"></slot>
+				<slot name="header-actions"></slot>
+			</header>
+			<div id="content" part="content">
+				<slot></slot>
+			</div>
+			<footer part="footer">
+				<slot name="footer"></slot>
+			</footer>
+		</dialog>
+	</template>
+        <p>This is a dialog content.</p>
+        <div slot="footer">
+            <cek-button commandfor="parent" command="close" variant="primary" autofocus server-rendered=""><template shadowrootmode="open"><style>
+:host {
+  	display: inline-block;
+  	font-family: var(--cek-font-family);
+  	box-sizing: border-box;
+}
+
+#button {
+  	display: inline-flex;
+  	align-items: center;
+  	justify-content: center;
+  	position: relative;
+  	background: transparent;
+  	border: none;
+  	padding: 0;
+  	margin: 0;
+  	font: inherit;
+  	color: inherit;
+  	cursor: pointer;
+  	box-sizing: border-box;
+  	text-decoration: none;
+}
+
+:host([variant]) #button {
+  	border-radius: var(--cek-border-radius);
+  	padding-inline: var(--cek-padding-inline);
+}
+
+:host([variant]) #button:focus {
+  	outline: var(--cek-focus-ring);
+  	outline-offset: var(--cek-focus-ring-offset);
+}
+
+:host([loading]) #button,
+:host([disabled]) #button {
+  	cursor: not-allowed;
+}
+
+:host([loading]) #button {
+  	background-color: lightgray;
+  	color: rgba(0, 0, 0, 0.5);
+}
+
+:host([disabled][variant]) #button {
+  	background-color: var(--cek-surface-color-disabled);
+  	color: var(--cek-text-color-disabled);
+
+	&:focus {
+		outline-color: var(--cek-surface-color-disabled);
+	}
+}
+
+:host([size="small"]) #button {
+  	min-height: var(--cek-height-small);
+  	min-width: var(--cek-height-small);
+  	font-size: var(--cek-font-size-0);
+}
+
+:host(:not([size])) #button, 
+:host([size="medium"]) #button {
+  	min-height: var(--cek-height-medium);
+  	min-width: var(--cek-height-medium);
+  	font-size: var(--cek-font-size-1);
+}
+
+:host([size="large"]) #button {
+  	min-height: var(--cek-height-large);
+  	min-width: var(--cek-height-large);
+  	font-size: var(--cek-font-size-2);
+}
+
+:host([variant="primary"]) #button {
+  	background-color: var(--cek-color-primary-500);
+  	color: white;
+
+  	&:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="secondary"]) #button {
+ 	background-color: var(--cek-surface-color-1);
+ 	 color: var(--cek-text-color-1);
+
+ 	 &:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="outline"]) #button {
+	background-color: transparent;
+	border: 1px solid var(--cek-border-color-2);
+	color: var(--cek-text-color-1);
+
+  	&:hover {
+		text-decoration: underline;
+	}
+}
+
+:host([variant="ghost"]) #button {
+	background: transparent;
+	color: var(--cek-text-color-1);
+}
+
+:host([variant="ghost"]) #button:hover {
+	background-color: var(--cek-surface-color-1);
+}
+
+:host([variant="link"]) #button {
+	background-color: transparent;
+	color: var(--cek-color-primary-500);
+	padding: 0;
+	margin: 0;
+	min-height: 0;
+	min-width: 0;
+
+  	&:hover {
+  		text-decoration: underline;
+  	}
+}
+
+:host([variant="destructive"]) #button {
+ 	background-color: var(--cek-color-red-600);
+  	color: white;
+
+	 &:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="destructive"]) #button:focus {
+  	outline: 2px solid var(--cek-color-red-600);
+}
+
+:host([variant="neutral"]) #button {
+  	background-color: var(--cek-color-neutral);
+  	color: var(--cek-text-color-neutral);
+
+	&:hover {
+		filter: brightness(85%);
+  	}
+
+	&:focus {
+		outline-color: var(--cek-color-neutral);
+  	}
+}
+
+:host([variant="icon"]) #button {
+  	padding: var(--cek-space-2);
+  	margin: 0;
+}
+
+:host([pill]) #button {
+  border-radius: 50px;
+}
+
+:host([circle]) #button {
+  border-radius: 50%;
+  padding: 0;
+  width: var(--cek-height-medium);
+  height: var(--cek-height-medium);
+}
+
+[name="end"]::slotted(*) {
+  	margin-inline-start: 0.5ch;
+}
+
+[name="start"]::slotted(*) {
+  	margin-inline-end: 0.5ch;
+}
+
+#loading-icon {
+  	position: absolute;
+  	display: none;
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+}
+
+:host([loading]) #loading-icon {
+  display: block;
+}
+
+:host([icon-only]) #button {
+  padding: var(--cek-space-2);
+  margin: 0;
+}
+
+#arrow-icon {
+  	display: none;
+  	height: 1em;
+  	width: 1em;
+  	margin-inline-start: 0.5ch;
+}
+
+:host([arrow]) #arrow-icon {
+  	display: block;
+}
+
+::slotted(cek-icon) {
+	--height: 1.4em;
+	--width: 1.4em;
+}
+</style>
+		<button id="button" part="button" autofocus command="close" commandfor="parent">
+		<slot name="start"></slot>
+		<div id="label" part="label"><slot></slot></div>
+		<slot name="end"></slot>
+		<svg id="loading-icon" part="loading-icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25" />
+			<path d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7
+			a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z">
+			<animatetransform attributeName="transform" type="rotate" dur="0.75s" values="0 12 12;360 12 12" repeatCount="indefinite" />
+			</path>
+		</svg>
+		<svg id="arrow-icon" part="arrow-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">  
+			<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+		</svg>
+		</button>
+	</template>Close Dialog</cek-button>
+        </div>
+    </cek-dialog>
+
+    <cek-code-block lang="xml" theme="github-dark">
+        <template>
+            <cek-button variant="neutral" command="show-modal" commandfor="my-dialog">Open Dialog</cek-button>
+            <cek-dialog id="my-dialog">
+                <p>This is a dialog content.</p>
+                <div slot="footer">
+                    <cek-button autofocus variant="primary" command="close" commandfor="parent">Close
+                        Dialog</cek-button>
+                </div>
+            </cek-dialog>
+        </template>
+    </cek-code-block>
+
+    <h2>Attributes</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Attribute</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>type</td>
+                <td>Sets the button type. Possible values are <code>button</code>, <code>submit</code>, and
+                    <code>reset</code>. Defaults to <code>button</code>.
+                </td>
+            </tr>
+            <tr>
+                <td>disabled</td>
+                <td>Disables the button when present.</td>
+            </tr>
+            <tr>
+                <td>loading</td>
+                <td>Shows a loading indicator when present.</td>
+            </tr>
+            <tr>
+                <td>arrow</td>
+                <td>Displays an arrow icon when present.</td>
+            </tr>
+            <tr>
+                <td>variant</td>
+                <td>Sets the styling variant of the button. Possible values are <code>primary</code>,
+                    <code>secondary</code>,
+                    <code>outline</code>, <code>ghost</code>, <code>link</code>, <code>destructive</code>,
+                    <code>neutral</code>.
+                </td>
+            </tr>
+            <tr>
+                <td>size</td>
+                <td>Sets the size of the button. Possible values are <code>small</code>, <code>medium</code>, and
+                    <code>large</code>.
+                </td>
+            </tr>
+            <tr>
+                <td>icon-only</td>
+                <td>If present, styles the button for icon-only display without text.</td>
+            </tr>
+            <tr>
+                <td>pill</td>
+                <td>If present, styles the button with a pill shape.</td>
+            </tr>
+            <tr>
+                <td>circle</td>
+                <td>If present, styles the button with a circle shape.</td>
+            </tr>
+            <tr>
+                <td>button-aria-label</td>
+                <td>Sets an ARIA label for accessibility.</td>
+            </tr>
+            <tr>
+                <td>href</td>
+                <td>Transforms the button into an anchor element with this <code>href</code>.</td>
+            </tr>
+            <tr>
+                <td>target</td>
+                <td>Sets the <code>target</code> attribute of the anchor when <code>href</code> is present. Defaults to
+                    <code>_self</code>.
+                </td>
+            </tr>
+            <tr>
+                <td>command</td>
+                <td>The command to execute when the button is clicked. The command should match a public method name of
+                    the
+                    target element.</td>
+            </tr>
+            <tr>
+                <td>commandfor</td>
+                <td>The ID of the element to execute the command on. If set to <code>parent</code>, the command will be
+                    executed on the parent element.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Slots</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Slot Name</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>(default)</td>
+                <td>The text content of the button.</td>
+            </tr>
+            <tr>
+                <td>start</td>
+                <td>Content to display before the button's text (e.g., icons).</td>
+            </tr>
+            <tr>
+                <td>end</td>
+                <td>Content to display after the button's text (e.g., icons).</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>CSS Parts</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Part Name</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>button</td>
+                <td>The native button or anchor element.</td>
+            </tr>
+            <tr>
+                <td>label</td>
+                <td>The label element inside the button.</td>
+            </tr>
+            <tr>
+                <td>loading-icon</td>
+                <td>The loading spinner displayed when <code>loading</code> is present.</td>
+            </tr>
+            <tr>
+                <td>arrow-icon</td>
+                <td>The arrow icon displayed when <code>arrow</code> is present.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Events</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Event</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>click</td>
+                <td>Dispatched when the button is activated. For a link, dispatched upon navigation activation.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Methods</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Method</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>focus()</td>
+                <td>Moves keyboard focus to the button or anchor.</td>
+            </tr>
+        </tbody>
+    </table>
+
+</section></body></html>
             </main>
 
             <aside class="page-nav">

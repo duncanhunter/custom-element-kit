@@ -150,7 +150,6 @@ border-top-left-radius: 6px;
 :host([loading]) #button,
 :host([disabled]) #button {
   	cursor: not-allowed;
-  	pointer-events: none;
 }
 
 :host([loading]) #button {
@@ -159,8 +158,12 @@ border-top-left-radius: 6px;
 }
 
 :host([disabled][variant]) #button {
-  	background-color: #ccc;
-  	color: rgba(0, 0, 0, 0.5);
+  	background-color: var(--cek-surface-color-disabled);
+  	color: var(--cek-text-color-disabled);
+
+	&:focus {
+		outline-color: var(--cek-surface-color-disabled);
+	}
 }
 
 :host([size="small"]) #button {
@@ -251,6 +254,10 @@ border-top-left-radius: 6px;
 
 	&:hover {
 		filter: brightness(85%);
+  	}
+
+	&:focus {
+		outline-color: var(--cek-color-neutral);
   	}
 }
 

@@ -37,363 +37,6 @@
                 <html><head></head><body><section>
     <h1>Input (cek-input)</h1>
 
-    <h2>Clear button</h2>
-
-    <p>This input includes a <span class="attribute">clear-button</span> attribute, which displays a clear button when
-        the input field contains a value.</p>
-    <cek-input label="State" value="nsw" clear-button="" server-rendered=""><template shadowrootmode="open"><style>
-:host {
-	display: block;
-	font-family: var(--cek-font-family);
-}
-
-#container {
-	display: flex;
-	align-items: stretch;
-	border: var(--cek-form-control-border);
-	border-radius: var(--cek-border-radius);
-	box-sizing: border-box;
-}
-
-#container:has(#input:focus) {
-	outline: var(--cek-focus-ring);
-	outline-offset: var(--cek-focus-ring-offset);
-}
-
-#input {
-	border: none;
-	padding: 0;
-	outline: none;
-	flex: 1;
-	font-size: inherit;
-	font-family: inherit;
-	color: inherit;
-	margin-inline: var(--cek-space-2);
-	background-color: var(--cek-surface-color-0);
-}
-
-:host([size="small"]) #container {
-	min-height: var(--cek-height-small);
-}
-
-:host([label][size="small"]) #label,
-:host([help][size="small"]) #help,
-:host([error][size="small"]) #error,
-:host([size="small"]) #input::placeholder {
-	font-size: var(--cek-font-size-0);
-}
-
-:host(:not([size])) #container,
-:host([size="medium"]) #container {
-	min-height: var(--cek-height-medium);
-}
-
-:host([label][size="medium"]) #label,
-:host([help][size="medium"]) #help,
-:host([error][size="medium"]) #error,
-:host([size="medium"]) #input::placeholder {
-	font-size: var(--cek-font-size-1);
-}
-
-:host([size="large"]) #container {
-	min-height: var(--cek-height-large);
-}
-
-:host([label][size="large"]) #label,
-:host([help][size="large"]) #help,
-:host([error][size="large"]) #error,
-:host([size="large"]) #input::placeholder {
-	font-size: var(--cek-font-size-2);
-}
-
-#help {
-	color: var(--cek-text-color-3);
-}
-
-#error {
-	color: var(--cek-text-color-error);
-}
-  
-:host([label]) #label,
-:host([help]) #help,
-:host([error]) #error {
-	display: block;
-	margin-block-end: var(--cek-space-2);
-}
-
-:host([error]) #container {
-	border-color: var(--cek-border-color-error);
-}
-  
-:host([error]) #container:has(#input:focus) {
-	outline-color: var(--cek-border-color-error);
-}
-
-[name="start"]::slotted(cek-icon),
-[name="end"]::slotted(cek-icon) {
-	margin: var(--cek-space-2);
-	align-self: center;
-}
-[name="start"]::slotted(cek-button),
-[name="end"]::slotted(cek-button) {
-	margin: var(--cek-space-3);
-	align-self: center;
-}
-
-[name="start"]::slotted(kbd), [name="end"]::slotted(kbd) {
-	padding: var(--cek-space-1) var(--cek-space-2);
-	margin: var(--cek-space-2);
-	border: var(--cek-border);
-	border-radius: var(--cek-border-radius);
-	color: var(--cek-text-color-2);
-	align-self: center;
-}
-
-#password-button #hide-password-icon {
-	display: none;
-}
-
-#password-button, #clear-button {
-	display: none;
-	border: none;
-	background: none;
-	cursor: pointer;
-	padding: 0 var(--cek-space-1);
-	margin-inline: var(--cek-space-3);
-	align-self: center;
-}
-
-#password-button:focus, #clear-button:focus {
-	border-radius: var(--cek-border-radius);
-	outline: var(--cek-focus-ring);
-	outline-offset: var(--cek-focus-ring-offset);
-}
-
-#password-button #hide-password-icon {
-	display: none;
-}
-
-#password-button svg, #clear-button svg {
-	font-size: var(--cek-font-size-1);
-	color: var(--cek-text-color-1);
-	height: 1em;
-	width: 1em;
-}</style>
-		<label for="input" id="label" part="label">
-			<slot name="label">State</slot>
-		</label>
-		<div id="help" part="help">
-			<slot name="help"></slot>
-		</div>
-		<div id="error" part="error">
-			<slot name="error"></slot>
-		</div>
-		<div id="container" part="container">
-			<slot name="start"></slot>
-			<input part="input" id="input" value="nsw" aria-describedby="help error">
-			<button part="password-button" id="password-button" aria-label="show password toggle" style="display:none;">
-				<svg part="hide-password-icon" id="hide-password-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88" />
-				</svg>
-				<svg part="show-password-icon" id="show-password-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-					<path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-				</svg>
-			</button>
-			<button part="clear-button" id="clear-button" aria-label="clear" style="display:flex;">
-				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-				</svg>
-			</button>
-			<slot name="end"></slot>
-		</div>
-		</template></cek-input>
-
-    <cek-code-block lang="xml" theme="github-dark">
-        <template>
-            <cek-input clear-button="" value="nsw" label="State"></cek-input>
-        </template>
-    </cek-code-block>
-
-    <h2>Password button</h2>
-
-    <p>This input includes a <span class="attribute">password-button</span> and <span class="attribute">type="password"</span> attribute, which displays a password button that toggles the
-        password type attribute on and off.</p>
-
-    <cek-input label="Password" value="12345" password-button="" type="password" server-rendered=""><template shadowrootmode="open"><style>
-:host {
-	display: block;
-	font-family: var(--cek-font-family);
-}
-
-#container {
-	display: flex;
-	align-items: stretch;
-	border: var(--cek-form-control-border);
-	border-radius: var(--cek-border-radius);
-	box-sizing: border-box;
-}
-
-#container:has(#input:focus) {
-	outline: var(--cek-focus-ring);
-	outline-offset: var(--cek-focus-ring-offset);
-}
-
-#input {
-	border: none;
-	padding: 0;
-	outline: none;
-	flex: 1;
-	font-size: inherit;
-	font-family: inherit;
-	color: inherit;
-	margin-inline: var(--cek-space-2);
-	background-color: var(--cek-surface-color-0);
-}
-
-:host([size="small"]) #container {
-	min-height: var(--cek-height-small);
-}
-
-:host([label][size="small"]) #label,
-:host([help][size="small"]) #help,
-:host([error][size="small"]) #error,
-:host([size="small"]) #input::placeholder {
-	font-size: var(--cek-font-size-0);
-}
-
-:host(:not([size])) #container,
-:host([size="medium"]) #container {
-	min-height: var(--cek-height-medium);
-}
-
-:host([label][size="medium"]) #label,
-:host([help][size="medium"]) #help,
-:host([error][size="medium"]) #error,
-:host([size="medium"]) #input::placeholder {
-	font-size: var(--cek-font-size-1);
-}
-
-:host([size="large"]) #container {
-	min-height: var(--cek-height-large);
-}
-
-:host([label][size="large"]) #label,
-:host([help][size="large"]) #help,
-:host([error][size="large"]) #error,
-:host([size="large"]) #input::placeholder {
-	font-size: var(--cek-font-size-2);
-}
-
-#help {
-	color: var(--cek-text-color-3);
-}
-
-#error {
-	color: var(--cek-text-color-error);
-}
-  
-:host([label]) #label,
-:host([help]) #help,
-:host([error]) #error {
-	display: block;
-	margin-block-end: var(--cek-space-2);
-}
-
-:host([error]) #container {
-	border-color: var(--cek-border-color-error);
-}
-  
-:host([error]) #container:has(#input:focus) {
-	outline-color: var(--cek-border-color-error);
-}
-
-[name="start"]::slotted(cek-icon),
-[name="end"]::slotted(cek-icon) {
-	margin: var(--cek-space-2);
-	align-self: center;
-}
-[name="start"]::slotted(cek-button),
-[name="end"]::slotted(cek-button) {
-	margin: var(--cek-space-3);
-	align-self: center;
-}
-
-[name="start"]::slotted(kbd), [name="end"]::slotted(kbd) {
-	padding: var(--cek-space-1) var(--cek-space-2);
-	margin: var(--cek-space-2);
-	border: var(--cek-border);
-	border-radius: var(--cek-border-radius);
-	color: var(--cek-text-color-2);
-	align-self: center;
-}
-
-#password-button #hide-password-icon {
-	display: none;
-}
-
-#password-button, #clear-button {
-	display: none;
-	border: none;
-	background: none;
-	cursor: pointer;
-	padding: 0 var(--cek-space-1);
-	margin-inline: var(--cek-space-3);
-	align-self: center;
-}
-
-#password-button:focus, #clear-button:focus {
-	border-radius: var(--cek-border-radius);
-	outline: var(--cek-focus-ring);
-	outline-offset: var(--cek-focus-ring-offset);
-}
-
-#password-button #hide-password-icon {
-	display: none;
-}
-
-#password-button svg, #clear-button svg {
-	font-size: var(--cek-font-size-1);
-	color: var(--cek-text-color-1);
-	height: 1em;
-	width: 1em;
-}</style>
-		<label for="input" id="label" part="label">
-			<slot name="label">Password</slot>
-		</label>
-		<div id="help" part="help">
-			<slot name="help"></slot>
-		</div>
-		<div id="error" part="error">
-			<slot name="error"></slot>
-		</div>
-		<div id="container" part="container">
-			<slot name="start"></slot>
-			<input part="input" id="input" type="password" value="12345" aria-describedby="help error">
-			<button part="password-button" id="password-button" aria-label="show password toggle" style="display:flex;">
-				<svg part="hide-password-icon" id="hide-password-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88" />
-				</svg>
-				<svg part="show-password-icon" id="show-password-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-					<path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-				</svg>
-			</button>
-			<button part="clear-button" id="clear-button" aria-label="clear" style="display:none;">
-				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-				</svg>
-			</button>
-			<slot name="end"></slot>
-		</div>
-		</template></cek-input>
-
-    <cek-code-block lang="xml" theme="github-dark">
-        <template>
-            <cek-input type="password" password-button="" value="12345" label="Password"></cek-input>
-        </template>
-    </cek-code-block>
-
     <h2>Form validation</h2>
 
     <p>When the cek-input element is placed inside a form, it integrates with the form’s native
@@ -525,37 +168,7 @@
 	color: var(--cek-text-color-2);
 	align-self: center;
 }
-
-#password-button #hide-password-icon {
-	display: none;
-}
-
-#password-button, #clear-button {
-	display: none;
-	border: none;
-	background: none;
-	cursor: pointer;
-	padding: 0 var(--cek-space-1);
-	margin-inline: var(--cek-space-3);
-	align-self: center;
-}
-
-#password-button:focus, #clear-button:focus {
-	border-radius: var(--cek-border-radius);
-	outline: var(--cek-focus-ring);
-	outline-offset: var(--cek-focus-ring-offset);
-}
-
-#password-button #hide-password-icon {
-	display: none;
-}
-
-#password-button svg, #clear-button svg {
-	font-size: var(--cek-font-size-1);
-	color: var(--cek-text-color-1);
-	height: 1em;
-	width: 1em;
-}</style>
+</style>
 		<label for="input" id="label" part="label">
 			<slot name="label">Email Address</slot>
 		</label>
@@ -568,20 +181,6 @@
 		<div id="container" part="container">
 			<slot name="start"></slot>
 			<input part="input" id="input" required type="email" aria-describedby="help error">
-			<button part="password-button" id="password-button" aria-label="show password toggle" style="display:none;">
-				<svg part="hide-password-icon" id="hide-password-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88" />
-				</svg>
-				<svg part="show-password-icon" id="show-password-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-					<path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-				</svg>
-			</button>
-			<button part="clear-button" id="clear-button" aria-label="clear" style="display:none;">
-				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-				</svg>
-			</button>
 			<slot name="end"></slot>
 		</div>
 		</template></cek-input>
@@ -692,37 +291,7 @@
 	color: var(--cek-text-color-2);
 	align-self: center;
 }
-
-#password-button #hide-password-icon {
-	display: none;
-}
-
-#password-button, #clear-button {
-	display: none;
-	border: none;
-	background: none;
-	cursor: pointer;
-	padding: 0 var(--cek-space-1);
-	margin-inline: var(--cek-space-3);
-	align-self: center;
-}
-
-#password-button:focus, #clear-button:focus {
-	border-radius: var(--cek-border-radius);
-	outline: var(--cek-focus-ring);
-	outline-offset: var(--cek-focus-ring-offset);
-}
-
-#password-button #hide-password-icon {
-	display: none;
-}
-
-#password-button svg, #clear-button svg {
-	font-size: var(--cek-font-size-1);
-	color: var(--cek-text-color-1);
-	height: 1em;
-	width: 1em;
-}</style>
+</style>
 		<label for="input" id="label" part="label">
 			<slot name="label">Postal Code</slot>
 		</label>
@@ -735,20 +304,6 @@
 		<div id="container" part="container">
 			<slot name="start"></slot>
 			<input part="input" id="input" required pattern="\d{4}" aria-describedby="help error">
-			<button part="password-button" id="password-button" aria-label="show password toggle" style="display:none;">
-				<svg part="hide-password-icon" id="hide-password-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88" />
-				</svg>
-				<svg part="show-password-icon" id="show-password-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-					<path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-				</svg>
-			</button>
-			<button part="clear-button" id="clear-button" aria-label="clear" style="display:none;">
-				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-				</svg>
-			</button>
 			<slot name="end"></slot>
 		</div>
 		</template></cek-input>
@@ -859,37 +414,7 @@
 	color: var(--cek-text-color-2);
 	align-self: center;
 }
-
-#password-button #hide-password-icon {
-	display: none;
-}
-
-#password-button, #clear-button {
-	display: none;
-	border: none;
-	background: none;
-	cursor: pointer;
-	padding: 0 var(--cek-space-1);
-	margin-inline: var(--cek-space-3);
-	align-self: center;
-}
-
-#password-button:focus, #clear-button:focus {
-	border-radius: var(--cek-border-radius);
-	outline: var(--cek-focus-ring);
-	outline-offset: var(--cek-focus-ring-offset);
-}
-
-#password-button #hide-password-icon {
-	display: none;
-}
-
-#password-button svg, #clear-button svg {
-	font-size: var(--cek-font-size-1);
-	color: var(--cek-text-color-1);
-	height: 1em;
-	width: 1em;
-}</style>
+</style>
 		<label for="input" id="label" part="label">
 			<slot name="label">Age</slot>
 		</label>
@@ -902,20 +427,6 @@
 		<div id="container" part="container">
 			<slot name="start"></slot>
 			<input part="input" id="input" type="number" min="18" aria-describedby="help error">
-			<button part="password-button" id="password-button" aria-label="show password toggle" style="display:none;">
-				<svg part="hide-password-icon" id="hide-password-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88" />
-				</svg>
-				<svg part="show-password-icon" id="show-password-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-					<path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-				</svg>
-			</button>
-			<button part="clear-button" id="clear-button" aria-label="clear" style="display:none;">
-				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-				</svg>
-			</button>
 			<slot name="end"></slot>
 		</div>
 		</template></cek-input>
@@ -955,7 +466,6 @@
 :host([loading]) #button,
 :host([disabled]) #button {
   	cursor: not-allowed;
-  	pointer-events: none;
 }
 
 :host([loading]) #button {
@@ -964,8 +474,12 @@
 }
 
 :host([disabled][variant]) #button {
-  	background-color: #ccc;
-  	color: rgba(0, 0, 0, 0.5);
+  	background-color: var(--cek-surface-color-disabled);
+  	color: var(--cek-text-color-disabled);
+
+	&:focus {
+		outline-color: var(--cek-surface-color-disabled);
+	}
 }
 
 :host([size="small"]) #button {
@@ -1056,6 +570,10 @@
 
 	&:hover {
 		filter: brightness(85%);
+  	}
+
+	&:focus {
+		outline-color: var(--cek-color-neutral);
   	}
 }
 
@@ -1259,37 +777,7 @@
 	color: var(--cek-text-color-2);
 	align-self: center;
 }
-
-#password-button #hide-password-icon {
-	display: none;
-}
-
-#password-button, #clear-button {
-	display: none;
-	border: none;
-	background: none;
-	cursor: pointer;
-	padding: 0 var(--cek-space-1);
-	margin-inline: var(--cek-space-3);
-	align-self: center;
-}
-
-#password-button:focus, #clear-button:focus {
-	border-radius: var(--cek-border-radius);
-	outline: var(--cek-focus-ring);
-	outline-offset: var(--cek-focus-ring-offset);
-}
-
-#password-button #hide-password-icon {
-	display: none;
-}
-
-#password-button svg, #clear-button svg {
-	font-size: var(--cek-font-size-1);
-	color: var(--cek-text-color-1);
-	height: 1em;
-	width: 1em;
-}</style>
+</style>
 		<label for="input" id="label" part="label">
 			<slot name="label">Small</slot>
 		</label>
@@ -1302,20 +790,6 @@
 		<div id="container" part="container">
 			<slot name="start"></slot>
 			<input part="input" id="input" placeholder="Small" aria-describedby="help error">
-			<button part="password-button" id="password-button" aria-label="show password toggle" style="display:none;">
-				<svg part="hide-password-icon" id="hide-password-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88" />
-				</svg>
-				<svg part="show-password-icon" id="show-password-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-					<path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-				</svg>
-			</button>
-			<button part="clear-button" id="clear-button" aria-label="clear" style="display:none;">
-				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-				</svg>
-			</button>
 			<slot name="end"></slot>
 		</div>
 		</template></cek-input>
@@ -1355,7 +829,6 @@
 :host([loading]) #button,
 :host([disabled]) #button {
   	cursor: not-allowed;
-  	pointer-events: none;
 }
 
 :host([loading]) #button {
@@ -1364,8 +837,12 @@
 }
 
 :host([disabled][variant]) #button {
-  	background-color: #ccc;
-  	color: rgba(0, 0, 0, 0.5);
+  	background-color: var(--cek-surface-color-disabled);
+  	color: var(--cek-text-color-disabled);
+
+	&:focus {
+		outline-color: var(--cek-surface-color-disabled);
+	}
 }
 
 :host([size="small"]) #button {
@@ -1456,6 +933,10 @@
 
 	&:hover {
 		filter: brightness(85%);
+  	}
+
+	&:focus {
+		outline-color: var(--cek-color-neutral);
   	}
 }
 
@@ -1647,37 +1128,7 @@
 	color: var(--cek-text-color-2);
 	align-self: center;
 }
-
-#password-button #hide-password-icon {
-	display: none;
-}
-
-#password-button, #clear-button {
-	display: none;
-	border: none;
-	background: none;
-	cursor: pointer;
-	padding: 0 var(--cek-space-1);
-	margin-inline: var(--cek-space-3);
-	align-self: center;
-}
-
-#password-button:focus, #clear-button:focus {
-	border-radius: var(--cek-border-radius);
-	outline: var(--cek-focus-ring);
-	outline-offset: var(--cek-focus-ring-offset);
-}
-
-#password-button #hide-password-icon {
-	display: none;
-}
-
-#password-button svg, #clear-button svg {
-	font-size: var(--cek-font-size-1);
-	color: var(--cek-text-color-1);
-	height: 1em;
-	width: 1em;
-}</style>
+</style>
 		<label for="input" id="label" part="label">
 			<slot name="label">Medium</slot>
 		</label>
@@ -1690,20 +1141,6 @@
 		<div id="container" part="container">
 			<slot name="start"></slot>
 			<input part="input" id="input" placeholder="Medium" aria-describedby="help error">
-			<button part="password-button" id="password-button" aria-label="show password toggle" style="display:none;">
-				<svg part="hide-password-icon" id="hide-password-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88" />
-				</svg>
-				<svg part="show-password-icon" id="show-password-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-					<path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-				</svg>
-			</button>
-			<button part="clear-button" id="clear-button" aria-label="clear" style="display:none;">
-				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-				</svg>
-			</button>
 			<slot name="end"></slot>
 		</div>
 		</template></cek-input>
@@ -1743,7 +1180,6 @@
 :host([loading]) #button,
 :host([disabled]) #button {
   	cursor: not-allowed;
-  	pointer-events: none;
 }
 
 :host([loading]) #button {
@@ -1752,8 +1188,12 @@
 }
 
 :host([disabled][variant]) #button {
-  	background-color: #ccc;
-  	color: rgba(0, 0, 0, 0.5);
+  	background-color: var(--cek-surface-color-disabled);
+  	color: var(--cek-text-color-disabled);
+
+	&:focus {
+		outline-color: var(--cek-surface-color-disabled);
+	}
 }
 
 :host([size="small"]) #button {
@@ -1844,6 +1284,10 @@
 
 	&:hover {
 		filter: brightness(85%);
+  	}
+
+	&:focus {
+		outline-color: var(--cek-color-neutral);
   	}
 }
 
@@ -2035,37 +1479,7 @@
 	color: var(--cek-text-color-2);
 	align-self: center;
 }
-
-#password-button #hide-password-icon {
-	display: none;
-}
-
-#password-button, #clear-button {
-	display: none;
-	border: none;
-	background: none;
-	cursor: pointer;
-	padding: 0 var(--cek-space-1);
-	margin-inline: var(--cek-space-3);
-	align-self: center;
-}
-
-#password-button:focus, #clear-button:focus {
-	border-radius: var(--cek-border-radius);
-	outline: var(--cek-focus-ring);
-	outline-offset: var(--cek-focus-ring-offset);
-}
-
-#password-button #hide-password-icon {
-	display: none;
-}
-
-#password-button svg, #clear-button svg {
-	font-size: var(--cek-font-size-1);
-	color: var(--cek-text-color-1);
-	height: 1em;
-	width: 1em;
-}</style>
+</style>
 		<label for="input" id="label" part="label">
 			<slot name="label">Large</slot>
 		</label>
@@ -2078,20 +1492,6 @@
 		<div id="container" part="container">
 			<slot name="start"></slot>
 			<input part="input" id="input" placeholder="Large" aria-describedby="help error">
-			<button part="password-button" id="password-button" aria-label="show password toggle" style="display:none;">
-				<svg part="hide-password-icon" id="hide-password-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88" />
-				</svg>
-				<svg part="show-password-icon" id="show-password-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-					<path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-				</svg>
-			</button>
-			<button part="clear-button" id="clear-button" aria-label="clear" style="display:none;">
-				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-				</svg>
-			</button>
 			<slot name="end"></slot>
 		</div>
 		</template></cek-input>
@@ -2131,7 +1531,6 @@
 :host([loading]) #button,
 :host([disabled]) #button {
   	cursor: not-allowed;
-  	pointer-events: none;
 }
 
 :host([loading]) #button {
@@ -2140,8 +1539,12 @@
 }
 
 :host([disabled][variant]) #button {
-  	background-color: #ccc;
-  	color: rgba(0, 0, 0, 0.5);
+  	background-color: var(--cek-surface-color-disabled);
+  	color: var(--cek-text-color-disabled);
+
+	&:focus {
+		outline-color: var(--cek-surface-color-disabled);
+	}
 }
 
 :host([size="small"]) #button {
@@ -2232,6 +1635,10 @@
 
 	&:hover {
 		filter: brightness(85%);
+  	}
+
+	&:focus {
+		outline-color: var(--cek-color-neutral);
   	}
 }
 
@@ -2458,37 +1865,7 @@
 	color: var(--cek-text-color-2);
 	align-self: center;
 }
-
-#password-button #hide-password-icon {
-	display: none;
-}
-
-#password-button, #clear-button {
-	display: none;
-	border: none;
-	background: none;
-	cursor: pointer;
-	padding: 0 var(--cek-space-1);
-	margin-inline: var(--cek-space-3);
-	align-self: center;
-}
-
-#password-button:focus, #clear-button:focus {
-	border-radius: var(--cek-border-radius);
-	outline: var(--cek-focus-ring);
-	outline-offset: var(--cek-focus-ring-offset);
-}
-
-#password-button #hide-password-icon {
-	display: none;
-}
-
-#password-button svg, #clear-button svg {
-	font-size: var(--cek-font-size-1);
-	color: var(--cek-text-color-1);
-	height: 1em;
-	width: 1em;
-}</style>
+</style>
 		<label for="input" id="label" part="label">
 			<slot name="label">Icons &amp; buttons</slot>
 		</label>
@@ -2501,20 +1878,6 @@
 		<div id="container" part="container">
 			<slot name="start"></slot>
 			<input part="input" id="input" aria-describedby="help error">
-			<button part="password-button" id="password-button" aria-label="show password toggle" style="display:none;">
-				<svg part="hide-password-icon" id="hide-password-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88" />
-				</svg>
-				<svg part="show-password-icon" id="show-password-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-					<path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-				</svg>
-			</button>
-			<button part="clear-button" id="clear-button" aria-label="clear" style="display:none;">
-				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-				</svg>
-			</button>
 			<slot name="end"></slot>
 		</div>
 		</template>
@@ -2558,7 +1921,6 @@
 :host([loading]) #button,
 :host([disabled]) #button {
   	cursor: not-allowed;
-  	pointer-events: none;
 }
 
 :host([loading]) #button {
@@ -2567,8 +1929,12 @@
 }
 
 :host([disabled][variant]) #button {
-  	background-color: #ccc;
-  	color: rgba(0, 0, 0, 0.5);
+  	background-color: var(--cek-surface-color-disabled);
+  	color: var(--cek-text-color-disabled);
+
+	&:focus {
+		outline-color: var(--cek-surface-color-disabled);
+	}
 }
 
 :host([size="small"]) #button {
@@ -2659,6 +2025,10 @@
 
 	&:hover {
 		filter: brightness(85%);
+  	}
+
+	&:focus {
+		outline-color: var(--cek-color-neutral);
   	}
 }
 
@@ -2843,37 +2213,7 @@
 	color: var(--cek-text-color-2);
 	align-self: center;
 }
-
-#password-button #hide-password-icon {
-	display: none;
-}
-
-#password-button, #clear-button {
-	display: none;
-	border: none;
-	background: none;
-	cursor: pointer;
-	padding: 0 var(--cek-space-1);
-	margin-inline: var(--cek-space-3);
-	align-self: center;
-}
-
-#password-button:focus, #clear-button:focus {
-	border-radius: var(--cek-border-radius);
-	outline: var(--cek-focus-ring);
-	outline-offset: var(--cek-focus-ring-offset);
-}
-
-#password-button #hide-password-icon {
-	display: none;
-}
-
-#password-button svg, #clear-button svg {
-	font-size: var(--cek-font-size-1);
-	color: var(--cek-text-color-1);
-	height: 1em;
-	width: 1em;
-}</style>
+</style>
 		<label for="input" id="label" part="label">
 			<slot name="label">kbd</slot>
 		</label>
@@ -2886,20 +2226,6 @@
 		<div id="container" part="container">
 			<slot name="start"></slot>
 			<input part="input" id="input" aria-describedby="help error">
-			<button part="password-button" id="password-button" aria-label="show password toggle" style="display:none;">
-				<svg part="hide-password-icon" id="hide-password-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88" />
-				</svg>
-				<svg part="show-password-icon" id="show-password-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-					<path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-				</svg>
-			</button>
-			<button part="clear-button" id="clear-button" aria-label="clear" style="display:none;">
-				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-				</svg>
-			</button>
 			<slot name="end"></slot>
 		</div>
 		</template>
@@ -2948,287 +2274,1044 @@
         </template>
     </cek-code-block>
 
-</section>
+    <h2>Command buttons</h2>
 
-<h2>Attributes</h2>
+    <p>You can use slotted cek-button's with commands for clear and close. This example also uses CSS to toggle the
+        password icon based on the input's type attribute.</p>
 
-<table>
-    <thead>
-        <tr>
-            <th>Attribute</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>label</td>
-            <td>Sets the text content of the label element. Shown above the input field.</td>
-        </tr>
-        <tr>
-            <td>help</td>
-            <td>Sets the help text displayed above the input field, typically used for guidance.</td>
-        </tr>
-        <tr>
-            <td>error</td>
-            <td>When present, displays an error message. Also styles the input container to indicate an error state.
-            </td>
-        </tr>
-        <tr>
-            <td>required</td>
-            <td>Marks the input as required. If missing, the user can submit a form without providing a value.</td>
-        </tr>
-        <tr>
-            <td>type</td>
-            <td>Sets the input type (e.g. text, password, number). Defaults to text if not provided.</td>
-        </tr>
-        <tr>
-            <td>disabled</td>
-            <td>Disables the input. User cannot interact with the field when disabled.</td>
-        </tr>
-        <tr>
-            <td>inputmode</td>
-            <td>Provides a hint to virtual keyboards about what type of data might be entered.</td>
-        </tr>
-        <tr>
-            <td>placeholder</td>
-            <td>Sets placeholder text displayed when the input is empty and unfocused.</td>
-        </tr>
-        <tr>
-            <td>min</td>
-            <td>Minimum value for types like number/date.</td>
-        </tr>
-        <tr>
-            <td>max</td>
-            <td>Maximum value for types like number/date.</td>
-        </tr>
-        <tr>
-            <td>minlength</td>
-            <td>Minimum length for text input validation.</td>
-        </tr>
-        <tr>
-            <td>maxlength</td>
-            <td>Maximum length for text input validation.</td>
-        </tr>
-        <tr>
-            <td>pattern</td>
-            <td>Defines a regular expression the input’s value must match for validation.</td>
-        </tr>
-        <tr>
-            <td>step</td>
-            <td>Specifies the numeric intervals for numeric or date-based inputs.</td>
-        </tr>
-        <tr>
-            <td>autocomplete</td>
-            <td>Hints to the browser’s autofill feature whether or how the input should be autocompleted.</td>
-        </tr>
-        <tr>
-            <td>autofocus</td>
-            <td>If present, the input will automatically focus when the page loads.</td>
-        </tr>
-        <tr>
-            <td>title</td>
-            <td>Displays a tooltip when hovered if provided. Also used for accessibility.</td>
-        </tr>
-        <tr>
-            <td>spellcheck</td>
-            <td>Whether the input should be checked for spelling errors.</td>
-        </tr>
-        <tr>
-            <td>input-aria-label</td>
-            <td>Sets an ARIA label on the input for accessibility. Reflected as `aria-label` internally.</td>
-        </tr>
-        <tr>
-            <td>password-button</td>
-            <td>Enables a button to toggle password visibility if the input type is password.</td>
-        </tr>
-        <tr>
-            <td>clear-button</td>
-            <td>Enables a button to clear the input value.</td>
-        </tr>
-        <tr>
-            <td>validate-on-change</td>
-            <td>Triggers validation when the input’s value changes (on change event) rather than just on submit.</td>
-        </tr>
-        <tr>
-            <td>value-missing-message</td>
-            <td>Custom message for value missing validation.</td>
-        </tr>
-        <tr>
-            <td>too-short-message</td>
-            <td>Custom message for too short validation.</td>
-        </tr>
-        <tr>
-            <td>too-long-message</td>
-            <td>Custom message for too long validation.</td>
-        </tr>
-        <tr>
-            <td>type-mismatch-message</td>
-            <td>Custom message for type mismatch validation.</td>
-        </tr>
-        <tr>
-            <td>range-underflow-message</td>
-            <td>Custom message for range underflow validation.</td>
-        </tr>
-        <tr>
-            <td>range-overflow-message</td>
-            <td>Custom message for range overflow validation.</td>
-        </tr>
-        <tr>
-            <td>pattern-mismatch-message</td>
-            <td>Custom message for pattern mismatch validation.</td>
-        </tr>
-    </tbody>
-</table>
+    <style>
+        cek-input#password-input[type="password"] {
+            #show-password-icon {
+                display: none;
+            }
 
-<h2>Slots</h2>
+            #hide-password-icon {
+                display: flex;
+            }
+        }
 
-<table>
-    <thead>
-        <tr>
-            <th>Slot Name</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>label</td>
-            <td>Replaces the text inside the label element.</td>
-        </tr>
-        <tr>
-            <td>help</td>
-            <td>Replaces the help text content displayed above the input.</td>
-        </tr>
-        <tr>
-            <td>error</td>
-            <td>Replaces the error message content displayed above the input when in error state.</td>
-        </tr>
-        <tr>
-            <td>start</td>
-            <td>Content inserted at the start (left side) of the input container, such as an icon.</td>
-        </tr>
-        <tr>
-            <td>end</td>
-            <td>Content inserted at the end (right side) of the input container, such as an icon or keyboard hint.</td>
-        </tr>
-    </tbody>
-</table>
+        cek-input#password-input:not([type="password"]) {
+            #show-password-icon {
+                display: flex;
+            }
 
-<h2>CSS parts</h2>
+            #hide-password-icon {
+                display: none;
+            }
+        }
+    </style>
+    <div class="flex flex-column gap-4">
+        <cek-input type="password" label="Password" value="123" id="password-input" server-rendered=""><template shadowrootmode="open"><style>
+:host {
+	display: block;
+	font-family: var(--cek-font-family);
+}
 
-<table>
-    <thead>
-        <tr>
-            <th>Part Name</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>label</td>
-            <td>The label element that shows the field’s label text.</td>
-        </tr>
-        <tr>
-            <td>help</td>
-            <td>The element containing help text.</td>
-        </tr>
-        <tr>
-            <td>error</td>
-            <td>The element containing error message text.</td>
-        </tr>
-        <tr>
-            <td>container</td>
-            <td>The wrapper element around the input and any start/end slots.</td>
-        </tr>
-        <tr>
-            <td>control</td>
-            <td>The actual input element.</td>
-        </tr>
-        <tr>
-            <td>password-button</td>
-            <td>The toggle button to show/hide password characters.</td>
-        </tr>
-        <tr>
-            <td>hide-password-icon</td>
-            <td>The icon displayed on the password button when the input type is password.</td>
-        </tr>
-        <tr>
-            <td>show-password-icon</td>
-            <td>The icon displayed on the password button when the input type is text.</td>
-        </tr>
-        <tr>
-            <td>clear-button</td>
-            <td>The button to clear the input’s value.</td>
-        </tr>
-    </tbody>
-</table>
+#container {
+	display: flex;
+	align-items: stretch;
+	border: var(--cek-form-control-border);
+	border-radius: var(--cek-border-radius);
+	box-sizing: border-box;
+}
 
-<h2>Events</h2>
+#container:has(#input:focus) {
+	outline: var(--cek-focus-ring);
+	outline-offset: var(--cek-focus-ring-offset);
+}
 
-<table>
-    <thead>
-        <tr>
-            <th>Event</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>input</td>
-            <td>Fired when the input's value changes (on each keystroke or value change).</td>
-        </tr>
-        <tr>
-            <td>change</td>
-            <td>Fired when the input's value is committed (on blur or form submission), mirroring native input behavior.
-            </td>
-        </tr>
-    </tbody>
-</table>
+#input {
+	border: none;
+	padding: 0;
+	outline: none;
+	flex: 1;
+	font-size: inherit;
+	font-family: inherit;
+	color: inherit;
+	margin-inline: var(--cek-space-2);
+	background-color: var(--cek-surface-color-0);
+}
 
-<h2>Methods</h2>
+:host([size="small"]) #container {
+	min-height: var(--cek-height-small);
+}
 
-<table>
-    <thead>
-        <tr>
-            <th>Method</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>focus()</td>
-            <td>Moves keyboard focus to the internal input element.</td>
-        </tr>
-    </tbody>
-</table>
+:host([label][size="small"]) #label,
+:host([help][size="small"]) #help,
+:host([error][size="small"]) #error,
+:host([size="small"]) #input::placeholder {
+	font-size: var(--cek-font-size-0);
+}
 
-<h2>Properties</h2>
+:host(:not([size])) #container,
+:host([size="medium"]) #container {
+	min-height: var(--cek-height-medium);
+}
 
-<table>
-    <thead>
-        <tr>
-            <th>Property</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>value</td>
-            <td>The current value of the input.</td>
-        </tr>
-        <tr>
-            <td>name</td>
-            <td>The name of the form control, if assigned.</td>
-        </tr>
-        <tr>
-            <td>validity</td>
-            <td>Reflects the validation state of the input.</td>
-        </tr>
-        <tr>
-            <td>validationMessage</td>
-            <td>The validation message if the input is invalid, otherwise an empty string.</td>
-        </tr>
-    </tbody>
-</table></body></html>
+:host([label][size="medium"]) #label,
+:host([help][size="medium"]) #help,
+:host([error][size="medium"]) #error,
+:host([size="medium"]) #input::placeholder {
+	font-size: var(--cek-font-size-1);
+}
+
+:host([size="large"]) #container {
+	min-height: var(--cek-height-large);
+}
+
+:host([label][size="large"]) #label,
+:host([help][size="large"]) #help,
+:host([error][size="large"]) #error,
+:host([size="large"]) #input::placeholder {
+	font-size: var(--cek-font-size-2);
+}
+
+#help {
+	color: var(--cek-text-color-3);
+}
+
+#error {
+	color: var(--cek-text-color-error);
+}
+  
+:host([label]) #label,
+:host([help]) #help,
+:host([error]) #error {
+	display: block;
+	margin-block-end: var(--cek-space-2);
+}
+
+:host([error]) #container {
+	border-color: var(--cek-border-color-error);
+}
+  
+:host([error]) #container:has(#input:focus) {
+	outline-color: var(--cek-border-color-error);
+}
+
+[name="start"]::slotted(cek-icon),
+[name="end"]::slotted(cek-icon) {
+	margin: var(--cek-space-2);
+	align-self: center;
+}
+[name="start"]::slotted(cek-button),
+[name="end"]::slotted(cek-button) {
+	margin: var(--cek-space-3);
+	align-self: center;
+}
+
+[name="start"]::slotted(kbd), [name="end"]::slotted(kbd) {
+	padding: var(--cek-space-1) var(--cek-space-2);
+	margin: var(--cek-space-2);
+	border: var(--cek-border);
+	border-radius: var(--cek-border-radius);
+	color: var(--cek-text-color-2);
+	align-self: center;
+}
+</style>
+		<label for="input" id="label" part="label">
+			<slot name="label">Password</slot>
+		</label>
+		<div id="help" part="help">
+			<slot name="help"></slot>
+		</div>
+		<div id="error" part="error">
+			<slot name="error"></slot>
+		</div>
+		<div id="container" part="container">
+			<slot name="start"></slot>
+			<input part="input" id="input" type="password" value="123" aria-describedby="help error">
+			<slot name="end"></slot>
+		</div>
+		</template>
+            <cek-button commandfor="parent" command="toggle-password" size="small" icon-only="" variant="ghost" slot="end" button-aria-label="toggle password visibility" server-rendered=""><template shadowrootmode="open"><style>
+:host {
+  	display: inline-block;
+  	font-family: var(--cek-font-family);
+  	box-sizing: border-box;
+}
+
+#button {
+  	display: inline-flex;
+  	align-items: center;
+  	justify-content: center;
+  	position: relative;
+  	background: transparent;
+  	border: none;
+  	padding: 0;
+  	margin: 0;
+  	font: inherit;
+  	color: inherit;
+  	cursor: pointer;
+  	box-sizing: border-box;
+  	text-decoration: none;
+}
+
+:host([variant]) #button {
+  	border-radius: var(--cek-border-radius);
+  	padding-inline: var(--cek-padding-inline);
+}
+
+:host([variant]) #button:focus {
+  	outline: var(--cek-focus-ring);
+  	outline-offset: var(--cek-focus-ring-offset);
+}
+
+:host([loading]) #button,
+:host([disabled]) #button {
+  	cursor: not-allowed;
+}
+
+:host([loading]) #button {
+  	background-color: lightgray;
+  	color: rgba(0, 0, 0, 0.5);
+}
+
+:host([disabled][variant]) #button {
+  	background-color: var(--cek-surface-color-disabled);
+  	color: var(--cek-text-color-disabled);
+
+	&:focus {
+		outline-color: var(--cek-surface-color-disabled);
+	}
+}
+
+:host([size="small"]) #button {
+  	min-height: var(--cek-height-small);
+  	min-width: var(--cek-height-small);
+  	font-size: var(--cek-font-size-0);
+}
+
+:host(:not([size])) #button, 
+:host([size="medium"]) #button {
+  	min-height: var(--cek-height-medium);
+  	min-width: var(--cek-height-medium);
+  	font-size: var(--cek-font-size-1);
+}
+
+:host([size="large"]) #button {
+  	min-height: var(--cek-height-large);
+  	min-width: var(--cek-height-large);
+  	font-size: var(--cek-font-size-2);
+}
+
+:host([variant="primary"]) #button {
+  	background-color: var(--cek-color-primary-500);
+  	color: white;
+
+  	&:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="secondary"]) #button {
+ 	background-color: var(--cek-surface-color-1);
+ 	 color: var(--cek-text-color-1);
+
+ 	 &:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="outline"]) #button {
+	background-color: transparent;
+	border: 1px solid var(--cek-border-color-2);
+	color: var(--cek-text-color-1);
+
+  	&:hover {
+		text-decoration: underline;
+	}
+}
+
+:host([variant="ghost"]) #button {
+	background: transparent;
+	color: var(--cek-text-color-1);
+}
+
+:host([variant="ghost"]) #button:hover {
+	background-color: var(--cek-surface-color-1);
+}
+
+:host([variant="link"]) #button {
+	background-color: transparent;
+	color: var(--cek-color-primary-500);
+	padding: 0;
+	margin: 0;
+	min-height: 0;
+	min-width: 0;
+
+  	&:hover {
+  		text-decoration: underline;
+  	}
+}
+
+:host([variant="destructive"]) #button {
+ 	background-color: var(--cek-color-red-600);
+  	color: white;
+
+	 &:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="destructive"]) #button:focus {
+  	outline: 2px solid var(--cek-color-red-600);
+}
+
+:host([variant="neutral"]) #button {
+  	background-color: var(--cek-color-neutral);
+  	color: var(--cek-text-color-neutral);
+
+	&:hover {
+		filter: brightness(85%);
+  	}
+
+	&:focus {
+		outline-color: var(--cek-color-neutral);
+  	}
+}
+
+:host([variant="icon"]) #button {
+  	padding: var(--cek-space-2);
+  	margin: 0;
+}
+
+:host([pill]) #button {
+  border-radius: 50px;
+}
+
+:host([circle]) #button {
+  border-radius: 50%;
+  padding: 0;
+  width: var(--cek-height-medium);
+  height: var(--cek-height-medium);
+}
+
+[name="end"]::slotted(*) {
+  	margin-inline-start: 0.5ch;
+}
+
+[name="start"]::slotted(*) {
+  	margin-inline-end: 0.5ch;
+}
+
+#loading-icon {
+  	position: absolute;
+  	display: none;
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+}
+
+:host([loading]) #loading-icon {
+  display: block;
+}
+
+:host([icon-only]) #button {
+  padding: var(--cek-space-2);
+  margin: 0;
+}
+
+#arrow-icon {
+  	display: none;
+  	height: 1em;
+  	width: 1em;
+  	margin-inline-start: 0.5ch;
+}
+
+:host([arrow]) #arrow-icon {
+  	display: block;
+}
+
+::slotted(cek-icon) {
+	--height: 1.4em;
+	--width: 1.4em;
+}
+</style>
+		<button id="button" part="button" aria-label="toggle password visibility" command="toggle-password" commandfor="parent">
+		<slot name="start"></slot>
+		<div id="label" part="label"><slot></slot></div>
+		<slot name="end"></slot>
+		<svg id="loading-icon" part="loading-icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25" />
+			<path d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7
+			a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z">
+			<animatetransform attributeName="transform" type="rotate" dur="0.75s" values="0 12 12;360 12 12" repeatCount="indefinite" />
+			</path>
+		</svg>
+		<svg id="arrow-icon" part="arrow-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">  
+			<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+		</svg>
+		</button>
+	</template>
+                <cek-icon name="eye-slash" id="show-password-icon" server-rendered=""><template shadowrootmode="open"><style>:host{display:flex;}</style><svg height="24" width="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88" />
+</svg>
+</template></cek-icon>
+                <cek-icon name="eye" id="hide-password-icon" server-rendered=""><template shadowrootmode="open"><style>:host{display:flex;}</style><svg height="24" width="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+  <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+</svg>
+</template></cek-icon>
+            </cek-button>
+        </cek-input>
+        <cek-input label="State" value="nsw" server-rendered=""><template shadowrootmode="open"><style>
+:host {
+	display: block;
+	font-family: var(--cek-font-family);
+}
+
+#container {
+	display: flex;
+	align-items: stretch;
+	border: var(--cek-form-control-border);
+	border-radius: var(--cek-border-radius);
+	box-sizing: border-box;
+}
+
+#container:has(#input:focus) {
+	outline: var(--cek-focus-ring);
+	outline-offset: var(--cek-focus-ring-offset);
+}
+
+#input {
+	border: none;
+	padding: 0;
+	outline: none;
+	flex: 1;
+	font-size: inherit;
+	font-family: inherit;
+	color: inherit;
+	margin-inline: var(--cek-space-2);
+	background-color: var(--cek-surface-color-0);
+}
+
+:host([size="small"]) #container {
+	min-height: var(--cek-height-small);
+}
+
+:host([label][size="small"]) #label,
+:host([help][size="small"]) #help,
+:host([error][size="small"]) #error,
+:host([size="small"]) #input::placeholder {
+	font-size: var(--cek-font-size-0);
+}
+
+:host(:not([size])) #container,
+:host([size="medium"]) #container {
+	min-height: var(--cek-height-medium);
+}
+
+:host([label][size="medium"]) #label,
+:host([help][size="medium"]) #help,
+:host([error][size="medium"]) #error,
+:host([size="medium"]) #input::placeholder {
+	font-size: var(--cek-font-size-1);
+}
+
+:host([size="large"]) #container {
+	min-height: var(--cek-height-large);
+}
+
+:host([label][size="large"]) #label,
+:host([help][size="large"]) #help,
+:host([error][size="large"]) #error,
+:host([size="large"]) #input::placeholder {
+	font-size: var(--cek-font-size-2);
+}
+
+#help {
+	color: var(--cek-text-color-3);
+}
+
+#error {
+	color: var(--cek-text-color-error);
+}
+  
+:host([label]) #label,
+:host([help]) #help,
+:host([error]) #error {
+	display: block;
+	margin-block-end: var(--cek-space-2);
+}
+
+:host([error]) #container {
+	border-color: var(--cek-border-color-error);
+}
+  
+:host([error]) #container:has(#input:focus) {
+	outline-color: var(--cek-border-color-error);
+}
+
+[name="start"]::slotted(cek-icon),
+[name="end"]::slotted(cek-icon) {
+	margin: var(--cek-space-2);
+	align-self: center;
+}
+[name="start"]::slotted(cek-button),
+[name="end"]::slotted(cek-button) {
+	margin: var(--cek-space-3);
+	align-self: center;
+}
+
+[name="start"]::slotted(kbd), [name="end"]::slotted(kbd) {
+	padding: var(--cek-space-1) var(--cek-space-2);
+	margin: var(--cek-space-2);
+	border: var(--cek-border);
+	border-radius: var(--cek-border-radius);
+	color: var(--cek-text-color-2);
+	align-self: center;
+}
+</style>
+		<label for="input" id="label" part="label">
+			<slot name="label">State</slot>
+		</label>
+		<div id="help" part="help">
+			<slot name="help"></slot>
+		</div>
+		<div id="error" part="error">
+			<slot name="error"></slot>
+		</div>
+		<div id="container" part="container">
+			<slot name="start"></slot>
+			<input part="input" id="input" value="nsw" aria-describedby="help error">
+			<slot name="end"></slot>
+		</div>
+		</template>
+            <cek-button commandfor="parent" command="clear" size="small" icon-only="" variant="ghost" slot="end" button-aria-label="clear input value" server-rendered=""><template shadowrootmode="open"><style>
+:host {
+  	display: inline-block;
+  	font-family: var(--cek-font-family);
+  	box-sizing: border-box;
+}
+
+#button {
+  	display: inline-flex;
+  	align-items: center;
+  	justify-content: center;
+  	position: relative;
+  	background: transparent;
+  	border: none;
+  	padding: 0;
+  	margin: 0;
+  	font: inherit;
+  	color: inherit;
+  	cursor: pointer;
+  	box-sizing: border-box;
+  	text-decoration: none;
+}
+
+:host([variant]) #button {
+  	border-radius: var(--cek-border-radius);
+  	padding-inline: var(--cek-padding-inline);
+}
+
+:host([variant]) #button:focus {
+  	outline: var(--cek-focus-ring);
+  	outline-offset: var(--cek-focus-ring-offset);
+}
+
+:host([loading]) #button,
+:host([disabled]) #button {
+  	cursor: not-allowed;
+}
+
+:host([loading]) #button {
+  	background-color: lightgray;
+  	color: rgba(0, 0, 0, 0.5);
+}
+
+:host([disabled][variant]) #button {
+  	background-color: var(--cek-surface-color-disabled);
+  	color: var(--cek-text-color-disabled);
+
+	&:focus {
+		outline-color: var(--cek-surface-color-disabled);
+	}
+}
+
+:host([size="small"]) #button {
+  	min-height: var(--cek-height-small);
+  	min-width: var(--cek-height-small);
+  	font-size: var(--cek-font-size-0);
+}
+
+:host(:not([size])) #button, 
+:host([size="medium"]) #button {
+  	min-height: var(--cek-height-medium);
+  	min-width: var(--cek-height-medium);
+  	font-size: var(--cek-font-size-1);
+}
+
+:host([size="large"]) #button {
+  	min-height: var(--cek-height-large);
+  	min-width: var(--cek-height-large);
+  	font-size: var(--cek-font-size-2);
+}
+
+:host([variant="primary"]) #button {
+  	background-color: var(--cek-color-primary-500);
+  	color: white;
+
+  	&:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="secondary"]) #button {
+ 	background-color: var(--cek-surface-color-1);
+ 	 color: var(--cek-text-color-1);
+
+ 	 &:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="outline"]) #button {
+	background-color: transparent;
+	border: 1px solid var(--cek-border-color-2);
+	color: var(--cek-text-color-1);
+
+  	&:hover {
+		text-decoration: underline;
+	}
+}
+
+:host([variant="ghost"]) #button {
+	background: transparent;
+	color: var(--cek-text-color-1);
+}
+
+:host([variant="ghost"]) #button:hover {
+	background-color: var(--cek-surface-color-1);
+}
+
+:host([variant="link"]) #button {
+	background-color: transparent;
+	color: var(--cek-color-primary-500);
+	padding: 0;
+	margin: 0;
+	min-height: 0;
+	min-width: 0;
+
+  	&:hover {
+  		text-decoration: underline;
+  	}
+}
+
+:host([variant="destructive"]) #button {
+ 	background-color: var(--cek-color-red-600);
+  	color: white;
+
+	 &:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="destructive"]) #button:focus {
+  	outline: 2px solid var(--cek-color-red-600);
+}
+
+:host([variant="neutral"]) #button {
+  	background-color: var(--cek-color-neutral);
+  	color: var(--cek-text-color-neutral);
+
+	&:hover {
+		filter: brightness(85%);
+  	}
+
+	&:focus {
+		outline-color: var(--cek-color-neutral);
+  	}
+}
+
+:host([variant="icon"]) #button {
+  	padding: var(--cek-space-2);
+  	margin: 0;
+}
+
+:host([pill]) #button {
+  border-radius: 50px;
+}
+
+:host([circle]) #button {
+  border-radius: 50%;
+  padding: 0;
+  width: var(--cek-height-medium);
+  height: var(--cek-height-medium);
+}
+
+[name="end"]::slotted(*) {
+  	margin-inline-start: 0.5ch;
+}
+
+[name="start"]::slotted(*) {
+  	margin-inline-end: 0.5ch;
+}
+
+#loading-icon {
+  	position: absolute;
+  	display: none;
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+}
+
+:host([loading]) #loading-icon {
+  display: block;
+}
+
+:host([icon-only]) #button {
+  padding: var(--cek-space-2);
+  margin: 0;
+}
+
+#arrow-icon {
+  	display: none;
+  	height: 1em;
+  	width: 1em;
+  	margin-inline-start: 0.5ch;
+}
+
+:host([arrow]) #arrow-icon {
+  	display: block;
+}
+
+::slotted(cek-icon) {
+	--height: 1.4em;
+	--width: 1.4em;
+}
+</style>
+		<button id="button" part="button" aria-label="clear input value" command="clear" commandfor="parent">
+		<slot name="start"></slot>
+		<div id="label" part="label"><slot></slot></div>
+		<slot name="end"></slot>
+		<svg id="loading-icon" part="loading-icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25" />
+			<path d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7
+			a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z">
+			<animatetransform attributeName="transform" type="rotate" dur="0.75s" values="0 12 12;360 12 12" repeatCount="indefinite" />
+			</path>
+		</svg>
+		<svg id="arrow-icon" part="arrow-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">  
+			<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+		</svg>
+		</button>
+	</template>
+                <cek-icon name="x-mark" server-rendered=""><template shadowrootmode="open"><style>:host{display:flex;}</style><svg height="24" width="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+</svg>
+</template></cek-icon>
+            </cek-button>
+        </cek-input>
+    </div>
+
+    <cek-code-block lang="xml" theme="github-dark">
+        <template>
+            <style>
+                cek-input#password-input[type="password"] {
+                    #show-password-icon {
+                        display: none;
+                    }
+
+                    #hide-password-icon {
+                        display: block;
+                    }
+                }
+
+                cek-input#password-input:not([type="password"]) {
+                    #show-password-icon {
+                        display: block;
+                    }
+
+                    #hide-password-icon {
+                        display: none;
+                    }
+                }
+            </style>
+            <div class="flex flex-column gap-4">
+                <cek-input id="password-input" value="123" label="Password" type="password">
+                    <cek-button button-aria-label="toggle password visibility" slot="end" variant="ghost" icon-only="" size="small" command="toggle-password" commandfor="parent">
+                        <cek-icon id="show-password-icon" name="eye-slash"></cek-icon>
+                        <cek-icon id="hide-password-icon" name="eye"></cek-icon>
+                    </cek-button>
+                </cek-input>
+                <cek-input value="nsw" label="State">
+                    <cek-button button-aria-label="clear input value" slot="end" variant="ghost" icon-only="" size="small" command="clear" commandfor="parent">
+                        <cek-icon name="x-mark"></cek-icon>
+                    </cek-button>
+                </cek-input>
+            </div>
+        </template>
+    </cek-code-block>
+
+    <h2>Attributes</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Attribute</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>label</td>
+                <td>Sets the text content of the label element. Shown above the input field.</td>
+            </tr>
+            <tr>
+                <td>help</td>
+                <td>Sets the help text displayed above the input field, typically used for guidance.</td>
+            </tr>
+            <tr>
+                <td>error</td>
+                <td>When present, displays an error message. Also styles the input container to indicate an error state.
+                </td>
+            </tr>
+            <tr>
+                <td>required</td>
+                <td>Marks the input as required. If missing, the user can submit a form without providing a value.</td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>Sets the input type (e.g. text, password, number). Defaults to text if not provided.</td>
+            </tr>
+            <tr>
+                <td>disabled</td>
+                <td>Disables the input. User cannot interact with the field when disabled.</td>
+            </tr>
+            <tr>
+                <td>inputmode</td>
+                <td>Provides a hint to virtual keyboards about what type of data might be entered.</td>
+            </tr>
+            <tr>
+                <td>placeholder</td>
+                <td>Sets placeholder text displayed when the input is empty and unfocused.</td>
+            </tr>
+            <tr>
+                <td>min</td>
+                <td>Minimum value for types like number/date.</td>
+            </tr>
+            <tr>
+                <td>max</td>
+                <td>Maximum value for types like number/date.</td>
+            </tr>
+            <tr>
+                <td>minlength</td>
+                <td>Minimum length for text input validation.</td>
+            </tr>
+            <tr>
+                <td>maxlength</td>
+                <td>Maximum length for text input validation.</td>
+            </tr>
+            <tr>
+                <td>pattern</td>
+                <td>Defines a regular expression the input’s value must match for validation.</td>
+            </tr>
+            <tr>
+                <td>step</td>
+                <td>Specifies the numeric intervals for numeric or date-based inputs.</td>
+            </tr>
+            <tr>
+                <td>autocomplete</td>
+                <td>Hints to the browser’s autofill feature whether or how the input should be autocompleted.</td>
+            </tr>
+            <tr>
+                <td>autofocus</td>
+                <td>If present, the input will automatically focus when the page loads.</td>
+            </tr>
+            <tr>
+                <td>title</td>
+                <td>Displays a tooltip when hovered if provided. Also used for accessibility.</td>
+            </tr>
+            <tr>
+                <td>spellcheck</td>
+                <td>Whether the input should be checked for spelling errors.</td>
+            </tr>
+            <tr>
+                <td>input-aria-label</td>
+                <td>Sets an ARIA label on the input for accessibility. Reflected as `aria-label` internally.</td>
+            </tr>
+            <tr>
+                <td>validate-on-change</td>
+                <td>Triggers validation when the input’s value changes (on change event) rather than just on submit.
+                </td>
+            </tr>
+            <tr>
+                <td>value-missing-message</td>
+                <td>Custom message for value missing validation.</td>
+            </tr>
+            <tr>
+                <td>too-short-message</td>
+                <td>Custom message for too short validation.</td>
+            </tr>
+            <tr>
+                <td>too-long-message</td>
+                <td>Custom message for too long validation.</td>
+            </tr>
+            <tr>
+                <td>type-mismatch-message</td>
+                <td>Custom message for type mismatch validation.</td>
+            </tr>
+            <tr>
+                <td>range-underflow-message</td>
+                <td>Custom message for range underflow validation.</td>
+            </tr>
+            <tr>
+                <td>range-overflow-message</td>
+                <td>Custom message for range overflow validation.</td>
+            </tr>
+            <tr>
+                <td>pattern-mismatch-message</td>
+                <td>Custom message for pattern mismatch validation.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Slots</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Slot Name</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>label</td>
+                <td>Replaces the text inside the label element.</td>
+            </tr>
+            <tr>
+                <td>help</td>
+                <td>Replaces the help text content displayed above the input.</td>
+            </tr>
+            <tr>
+                <td>error</td>
+                <td>Replaces the error message content displayed above the input when in error state.</td>
+            </tr>
+            <tr>
+                <td>start</td>
+                <td>Content inserted at the start (left side) of the input container, such as an icon.</td>
+            </tr>
+            <tr>
+                <td>end</td>
+                <td>Content inserted at the end (right side) of the input container, such as an icon or keyboard hint.
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>CSS parts</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Part Name</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>label</td>
+                <td>The label element that shows the field’s label text.</td>
+            </tr>
+            <tr>
+                <td>help</td>
+                <td>The element containing help text.</td>
+            </tr>
+            <tr>
+                <td>error</td>
+                <td>The element containing error message text.</td>
+            </tr>
+            <tr>
+                <td>container</td>
+                <td>The wrapper element around the input and any start/end slots.</td>
+            </tr>
+            <tr>
+                <td>control</td>
+                <td>The actual input element.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Events</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Event</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>input</td>
+                <td>Fired when the input's value changes (on each keystroke or value change).</td>
+            </tr>
+            <tr>
+                <td>change</td>
+                <td>Fired when the input's value is committed (on blur or form submission), mirroring native input
+                    behavior.
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Methods</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Method</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>focus()</td>
+                <td>Moves keyboard focus to the internal input element.</td>
+            </tr>
+            <tr>
+                <td>togglePassword()</td>
+                <td>Toggles the input type between password and text.</td>
+            </tr>
+            <tr>
+                <td>clear()</td>
+                <td>Clears the input value.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Properties</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Property</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>value</td>
+                <td>The current value of the input.</td>
+            </tr>
+            <tr>
+                <td>name</td>
+                <td>The name of the form control, if assigned.</td>
+            </tr>
+            <tr>
+                <td>validity</td>
+                <td>Reflects the validation state of the input.</td>
+            </tr>
+            <tr>
+                <td>validationMessage</td>
+                <td>The validation message if the input is invalid, otherwise an empty string.</td>
+            </tr>
+        </tbody>
+    </table>
+</section></body></html>
             </main>
 
             <aside class="page-nav">

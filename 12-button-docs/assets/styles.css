@@ -284,6 +284,14 @@ fieldset {
 	caret-color: var(--cek-color-primary-600);
 }
 
+[data-theme="light"] {
+	color-scheme: light;
+}
+
+[data-theme="dark"] {
+	color-scheme: dark;
+}
+
 [class^="cek-text-"] {
 	line-height: var(--cek-line-height);
 }
