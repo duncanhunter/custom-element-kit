@@ -7,6 +7,7 @@
     <title>Custom Element Kit</title>
     <link rel="stylesheet" href="./assets/styles.css">
     <link rel="stylesheet" href="./assets/page-layout.css">
+    <link rel="stylesheet" href="./assets/utilities.css">
     <script src="./assets/scroll-spy.js"></script>
 </head>
 
@@ -411,11 +412,12 @@
         <li><span class="attribute">too-short-message</span> - Custom message for too short validation.</li>
         <li><span class="attribute">too-long-message</span> - Custom message for too long validation.</li>
         <li><span class="attribute">type-mismatch-message</span> - Custom message for type mismatch validation.</li>
-        <li><span class="attribute">pattern-mismatch-message</span> - Custom message for pattern mismatch validation.</li>
+        <li><span class="attribute">pattern-mismatch-message</span> - Custom message for pattern mismatch validation.
+        </li>
         <li><span class="attribute">range-underflow-message</span> - Custom message for range underflow validation.</li>
     </ul>
 
-    <form novalidate>
+    <form novalidate class="flex flex-column gap-4">
         <cek-input type="email" label="Email Address" required value-missing-message="Email address is required" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: block;
@@ -919,119 +921,174 @@
 		</template></cek-input>
         <cek-button type="submit" variant="primary" server-rendered=""><template shadowrootmode="open"><style>
 :host {
-  display: inline-block;
-  font-family: var(--cek-font-family);
-  line-height: var(--cek-line-height);
-  box-sizing: border-box;
+  	display: inline-block;
+  	font-family: var(--cek-font-family);
+  	box-sizing: border-box;
 }
 
 #button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  background: transparent;
-  border: none;
-  padding: 0;
-  margin: 0;
-  font: inherit;
-  color: inherit;
-  cursor: pointer;
-  box-sizing: border-box;
-  text-decoration: none;
+  	display: inline-flex;
+  	align-items: center;
+  	justify-content: center;
+  	position: relative;
+  	background: transparent;
+  	border: none;
+  	padding: 0;
+  	margin: 0;
+  	font: inherit;
+  	color: inherit;
+  	cursor: pointer;
+  	box-sizing: border-box;
+  	text-decoration: none;
 }
 
 :host([variant]) #button {
-  border-radius: var(--cek-border-radius);
-  padding-inline: var(--cek-padding-inline);
-}
-
-:host([variant]) #button:hover {
-  filter: brightness(85%);
+  	border-radius: var(--cek-border-radius);
+  	padding-inline: var(--cek-padding-inline);
 }
 
 :host([variant]) #button:focus {
-  outline: var(--cek-focus-ring);
-  outline-offset: var(--cek-focus-ring-offset);
+  	outline: var(--cek-focus-ring);
+  	outline-offset: var(--cek-focus-ring-offset);
 }
 
 :host([loading]) #button,
 :host([disabled]) #button {
-  cursor: not-allowed;
-  pointer-events: none;
+  	cursor: not-allowed;
+  	pointer-events: none;
 }
 
 :host([loading]) #button {
-  background-color: lightgray;
-  color: rgba(0, 0, 0, 0.5);
+  	background-color: lightgray;
+  	color: rgba(0, 0, 0, 0.5);
 }
 
 :host([disabled][variant]) #button {
-  background-color: #ccc;
-  color: rgba(0, 0, 0, 0.5);
+  	background-color: #ccc;
+  	color: rgba(0, 0, 0, 0.5);
 }
 
 :host([size="small"]) #button {
-  min-height: var(--cek-height-small);
-  font-size: var(--cek-font-size-0);
+  	min-height: var(--cek-height-small);
+  	min-width: var(--cek-height-small);
+  	font-size: var(--cek-font-size-0);
 }
 
 :host(:not([size])) #button, 
 :host([size="medium"]) #button {
-  min-height: var(--cek-height-medium);
-  font-size: var(--cek-font-size-1);
+  	min-height: var(--cek-height-medium);
+  	min-width: var(--cek-height-medium);
+  	font-size: var(--cek-font-size-1);
 }
 
 :host([size="large"]) #button {
-  min-height: var(--cek-height-large);
-  font-size: var(--cek-font-size-2);
+  	min-height: var(--cek-height-large);
+  	min-width: var(--cek-height-large);
+  	font-size: var(--cek-font-size-2);
 }
 
 :host([variant="primary"]) #button {
-  background-color: var(--cek-color-primary-500);
-  color: white;
+  	background-color: var(--cek-color-primary-500);
+  	color: white;
+
+  	&:hover {
+		filter: brightness(85%);
+  	}
 }
 
-:host([variant="ascent"]) #button {
-  background-color: var(--cek-surface-color-3);
-  color: var(--cek-text-color-1);
+:host([variant="secondary"]) #button {
+ 	background-color: var(--cek-surface-color-1);
+ 	 color: var(--cek-text-color-1);
+
+ 	 &:hover {
+		filter: brightness(85%);
+  	}
 }
 
 :host([variant="outline"]) #button {
-  background-color: transparent;
-  border: 1px solid var(--cek-border-color-2);
-  color: var(--cek-text-color-1);
+	background-color: transparent;
+	border: 1px solid var(--cek-border-color-2);
+	color: var(--cek-text-color-1);
+
+  	&:hover {
+		text-decoration: underline;
+	}
 }
 
-:host([variant="text"]) #button {
-  background: transparent;
-  color: var(--cek-text-color-1);
+:host([variant="ghost"]) #button {
+	background: transparent;
+	color: var(--cek-text-color-1);
 }
 
-:host([variant="text"]) #button:hover {
-  background-color: var(--cek-surface-color-2);
+:host([variant="ghost"]) #button:hover {
+	background-color: var(--cek-surface-color-1);
 }
 
 :host([variant="link"]) #button {
-  background-color: transparent;
-  color: var(--cek-color-primary-500);
-  text-decoration: underline;
+	background-color: transparent;
+	color: var(--cek-color-primary-500);
+	padding: 0;
+	margin: 0;
+	min-height: 0;
+	min-width: 0;
+
+  	&:hover {
+  		text-decoration: underline;
+  	}
+}
+
+:host([variant="destructive"]) #button {
+ 	background-color: var(--cek-color-red-600);
+  	color: white;
+
+	 &:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="destructive"]) #button:focus {
+  	outline: 2px solid var(--cek-color-red-600);
+}
+
+:host([variant="neutral"]) #button {
+  	background-color: var(--cek-color-neutral);
+  	color: var(--cek-text-color-neutral);
+
+	&:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="icon"]) #button {
+  	padding: var(--cek-space-2);
+  	margin: 0;
+}
+
+:host([pill]) #button {
+  border-radius: 50px;
+}
+
+:host([circle]) #button {
+  border-radius: 50%;
+  padding: 0;
+  width: var(--cek-height-medium);
+  height: var(--cek-height-medium);
 }
 
 [name="end"]::slotted(*) {
-  margin-inline-start: 0.5ch;
+  	margin-inline-start: 0.5ch;
 }
 
 [name="start"]::slotted(*) {
-  margin-inline-end: 0.5ch;
+  	margin-inline-end: 0.5ch;
 }
 
 #loading-icon {
-  position: absolute;
-  display: none;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  	position: absolute;
+  	display: none;
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
 }
 
 :host([loading]) #loading-icon {
@@ -1039,21 +1096,27 @@
 }
 
 :host([icon-only]) #button {
-  padding-inline: 0.8ch;
+  padding: var(--cek-space-2);
+  margin: 0;
 }
 
 #arrow-icon {
-  display: none;
-  height: 1em;
-  width: 1em;
-  margin-inline-start: 0.5ch;
+  	display: none;
+  	height: 1em;
+  	width: 1em;
+  	margin-inline-start: 0.5ch;
 }
 
 :host([arrow]) #arrow-icon {
-  display: block;
+  	display: block;
+}
+
+::slotted(cek-icon) {
+	--height: 1.4em;
+	--width: 1.4em;
 }
 </style>
-		<a id="button" part="button">
+		<button id="button" part="button" type="submit">
 		<slot name="start"></slot>
 		<div id="label" part="label"><slot></slot></div>
 		<slot name="end"></slot>
@@ -1067,7 +1130,7 @@
 		<svg id="arrow-icon" part="arrow-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">  
 			<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
 		</svg>
-		</a>
+		</button>
 	</template>Submit &amp; validate</cek-button>
     </form>
 
@@ -1086,8 +1149,10 @@
 
     <p>Small, medium (default) and large sizes.</p>
 
-    <div class="horizontal">
-        <cek-input size="small" placeholder="Small" label="Small" server-rendered=""><template shadowrootmode="open"><style>
+
+    <div class="flex flex-column gap-4">
+        <div class="flex gap-3 items-end">
+            <cek-input size="small" placeholder="Small" label="Small" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: block;
 	font-family: var(--cek-font-family);
@@ -1254,121 +1319,176 @@
 			<slot name="end"></slot>
 		</div>
 		</template></cek-input>
-        <cek-button size="small" variant="primary" server-rendered=""><template shadowrootmode="open"><style>
+            <cek-button size="small" variant="primary" server-rendered=""><template shadowrootmode="open"><style>
 :host {
-  display: inline-block;
-  font-family: var(--cek-font-family);
-  line-height: var(--cek-line-height);
-  box-sizing: border-box;
+  	display: inline-block;
+  	font-family: var(--cek-font-family);
+  	box-sizing: border-box;
 }
 
 #button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  background: transparent;
-  border: none;
-  padding: 0;
-  margin: 0;
-  font: inherit;
-  color: inherit;
-  cursor: pointer;
-  box-sizing: border-box;
-  text-decoration: none;
+  	display: inline-flex;
+  	align-items: center;
+  	justify-content: center;
+  	position: relative;
+  	background: transparent;
+  	border: none;
+  	padding: 0;
+  	margin: 0;
+  	font: inherit;
+  	color: inherit;
+  	cursor: pointer;
+  	box-sizing: border-box;
+  	text-decoration: none;
 }
 
 :host([variant]) #button {
-  border-radius: var(--cek-border-radius);
-  padding-inline: var(--cek-padding-inline);
-}
-
-:host([variant]) #button:hover {
-  filter: brightness(85%);
+  	border-radius: var(--cek-border-radius);
+  	padding-inline: var(--cek-padding-inline);
 }
 
 :host([variant]) #button:focus {
-  outline: var(--cek-focus-ring);
-  outline-offset: var(--cek-focus-ring-offset);
+  	outline: var(--cek-focus-ring);
+  	outline-offset: var(--cek-focus-ring-offset);
 }
 
 :host([loading]) #button,
 :host([disabled]) #button {
-  cursor: not-allowed;
-  pointer-events: none;
+  	cursor: not-allowed;
+  	pointer-events: none;
 }
 
 :host([loading]) #button {
-  background-color: lightgray;
-  color: rgba(0, 0, 0, 0.5);
+  	background-color: lightgray;
+  	color: rgba(0, 0, 0, 0.5);
 }
 
 :host([disabled][variant]) #button {
-  background-color: #ccc;
-  color: rgba(0, 0, 0, 0.5);
+  	background-color: #ccc;
+  	color: rgba(0, 0, 0, 0.5);
 }
 
 :host([size="small"]) #button {
-  min-height: var(--cek-height-small);
-  font-size: var(--cek-font-size-0);
+  	min-height: var(--cek-height-small);
+  	min-width: var(--cek-height-small);
+  	font-size: var(--cek-font-size-0);
 }
 
 :host(:not([size])) #button, 
 :host([size="medium"]) #button {
-  min-height: var(--cek-height-medium);
-  font-size: var(--cek-font-size-1);
+  	min-height: var(--cek-height-medium);
+  	min-width: var(--cek-height-medium);
+  	font-size: var(--cek-font-size-1);
 }
 
 :host([size="large"]) #button {
-  min-height: var(--cek-height-large);
-  font-size: var(--cek-font-size-2);
+  	min-height: var(--cek-height-large);
+  	min-width: var(--cek-height-large);
+  	font-size: var(--cek-font-size-2);
 }
 
 :host([variant="primary"]) #button {
-  background-color: var(--cek-color-primary-500);
-  color: white;
+  	background-color: var(--cek-color-primary-500);
+  	color: white;
+
+  	&:hover {
+		filter: brightness(85%);
+  	}
 }
 
-:host([variant="ascent"]) #button {
-  background-color: var(--cek-surface-color-3);
-  color: var(--cek-text-color-1);
+:host([variant="secondary"]) #button {
+ 	background-color: var(--cek-surface-color-1);
+ 	 color: var(--cek-text-color-1);
+
+ 	 &:hover {
+		filter: brightness(85%);
+  	}
 }
 
 :host([variant="outline"]) #button {
-  background-color: transparent;
-  border: 1px solid var(--cek-border-color-2);
-  color: var(--cek-text-color-1);
+	background-color: transparent;
+	border: 1px solid var(--cek-border-color-2);
+	color: var(--cek-text-color-1);
+
+  	&:hover {
+		text-decoration: underline;
+	}
 }
 
-:host([variant="text"]) #button {
-  background: transparent;
-  color: var(--cek-text-color-1);
+:host([variant="ghost"]) #button {
+	background: transparent;
+	color: var(--cek-text-color-1);
 }
 
-:host([variant="text"]) #button:hover {
-  background-color: var(--cek-surface-color-2);
+:host([variant="ghost"]) #button:hover {
+	background-color: var(--cek-surface-color-1);
 }
 
 :host([variant="link"]) #button {
-  background-color: transparent;
-  color: var(--cek-color-primary-500);
-  text-decoration: underline;
+	background-color: transparent;
+	color: var(--cek-color-primary-500);
+	padding: 0;
+	margin: 0;
+	min-height: 0;
+	min-width: 0;
+
+  	&:hover {
+  		text-decoration: underline;
+  	}
+}
+
+:host([variant="destructive"]) #button {
+ 	background-color: var(--cek-color-red-600);
+  	color: white;
+
+	 &:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="destructive"]) #button:focus {
+  	outline: 2px solid var(--cek-color-red-600);
+}
+
+:host([variant="neutral"]) #button {
+  	background-color: var(--cek-color-neutral);
+  	color: var(--cek-text-color-neutral);
+
+	&:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="icon"]) #button {
+  	padding: var(--cek-space-2);
+  	margin: 0;
+}
+
+:host([pill]) #button {
+  border-radius: 50px;
+}
+
+:host([circle]) #button {
+  border-radius: 50%;
+  padding: 0;
+  width: var(--cek-height-medium);
+  height: var(--cek-height-medium);
 }
 
 [name="end"]::slotted(*) {
-  margin-inline-start: 0.5ch;
+  	margin-inline-start: 0.5ch;
 }
 
 [name="start"]::slotted(*) {
-  margin-inline-end: 0.5ch;
+  	margin-inline-end: 0.5ch;
 }
 
 #loading-icon {
-  position: absolute;
-  display: none;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  	position: absolute;
+  	display: none;
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
 }
 
 :host([loading]) #loading-icon {
@@ -1376,21 +1496,27 @@
 }
 
 :host([icon-only]) #button {
-  padding-inline: 0.8ch;
+  padding: var(--cek-space-2);
+  margin: 0;
 }
 
 #arrow-icon {
-  display: none;
-  height: 1em;
-  width: 1em;
-  margin-inline-start: 0.5ch;
+  	display: none;
+  	height: 1em;
+  	width: 1em;
+  	margin-inline-start: 0.5ch;
 }
 
 :host([arrow]) #arrow-icon {
-  display: block;
+  	display: block;
+}
+
+::slotted(cek-icon) {
+	--height: 1.4em;
+	--width: 1.4em;
 }
 </style>
-		<a id="button" part="button">
+		<button id="button" part="button">
 		<slot name="start"></slot>
 		<div id="label" part="label"><slot></slot></div>
 		<slot name="end"></slot>
@@ -1404,11 +1530,17 @@
 		<svg id="arrow-icon" part="arrow-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">  
 			<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
 		</svg>
-		</a>
-	</template>Save</cek-button>
-    </div>
-    <div class="horizontal">
-        <cek-input placeholder="Medium" label="Medium" server-rendered=""><template shadowrootmode="open"><style>
+		</button>
+	</template>
+                Save
+                <cek-icon name="plus-circle" slot="end" server-rendered=""><template shadowrootmode="open"><style>:host{display:flex;}</style><svg height="24" width="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+</svg>
+</template></cek-icon>
+            </cek-button>
+        </div>
+        <div class="flex gap-3 items-end">
+            <cek-input placeholder="Medium" label="Medium" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: block;
 	font-family: var(--cek-font-family);
@@ -1575,121 +1707,176 @@
 			<slot name="end"></slot>
 		</div>
 		</template></cek-input>
-        <cek-button size="medium" variant="primary" server-rendered=""><template shadowrootmode="open"><style>
+            <cek-button size="medium" variant="primary" server-rendered=""><template shadowrootmode="open"><style>
 :host {
-  display: inline-block;
-  font-family: var(--cek-font-family);
-  line-height: var(--cek-line-height);
-  box-sizing: border-box;
+  	display: inline-block;
+  	font-family: var(--cek-font-family);
+  	box-sizing: border-box;
 }
 
 #button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  background: transparent;
-  border: none;
-  padding: 0;
-  margin: 0;
-  font: inherit;
-  color: inherit;
-  cursor: pointer;
-  box-sizing: border-box;
-  text-decoration: none;
+  	display: inline-flex;
+  	align-items: center;
+  	justify-content: center;
+  	position: relative;
+  	background: transparent;
+  	border: none;
+  	padding: 0;
+  	margin: 0;
+  	font: inherit;
+  	color: inherit;
+  	cursor: pointer;
+  	box-sizing: border-box;
+  	text-decoration: none;
 }
 
 :host([variant]) #button {
-  border-radius: var(--cek-border-radius);
-  padding-inline: var(--cek-padding-inline);
-}
-
-:host([variant]) #button:hover {
-  filter: brightness(85%);
+  	border-radius: var(--cek-border-radius);
+  	padding-inline: var(--cek-padding-inline);
 }
 
 :host([variant]) #button:focus {
-  outline: var(--cek-focus-ring);
-  outline-offset: var(--cek-focus-ring-offset);
+  	outline: var(--cek-focus-ring);
+  	outline-offset: var(--cek-focus-ring-offset);
 }
 
 :host([loading]) #button,
 :host([disabled]) #button {
-  cursor: not-allowed;
-  pointer-events: none;
+  	cursor: not-allowed;
+  	pointer-events: none;
 }
 
 :host([loading]) #button {
-  background-color: lightgray;
-  color: rgba(0, 0, 0, 0.5);
+  	background-color: lightgray;
+  	color: rgba(0, 0, 0, 0.5);
 }
 
 :host([disabled][variant]) #button {
-  background-color: #ccc;
-  color: rgba(0, 0, 0, 0.5);
+  	background-color: #ccc;
+  	color: rgba(0, 0, 0, 0.5);
 }
 
 :host([size="small"]) #button {
-  min-height: var(--cek-height-small);
-  font-size: var(--cek-font-size-0);
+  	min-height: var(--cek-height-small);
+  	min-width: var(--cek-height-small);
+  	font-size: var(--cek-font-size-0);
 }
 
 :host(:not([size])) #button, 
 :host([size="medium"]) #button {
-  min-height: var(--cek-height-medium);
-  font-size: var(--cek-font-size-1);
+  	min-height: var(--cek-height-medium);
+  	min-width: var(--cek-height-medium);
+  	font-size: var(--cek-font-size-1);
 }
 
 :host([size="large"]) #button {
-  min-height: var(--cek-height-large);
-  font-size: var(--cek-font-size-2);
+  	min-height: var(--cek-height-large);
+  	min-width: var(--cek-height-large);
+  	font-size: var(--cek-font-size-2);
 }
 
 :host([variant="primary"]) #button {
-  background-color: var(--cek-color-primary-500);
-  color: white;
+  	background-color: var(--cek-color-primary-500);
+  	color: white;
+
+  	&:hover {
+		filter: brightness(85%);
+  	}
 }
 
-:host([variant="ascent"]) #button {
-  background-color: var(--cek-surface-color-3);
-  color: var(--cek-text-color-1);
+:host([variant="secondary"]) #button {
+ 	background-color: var(--cek-surface-color-1);
+ 	 color: var(--cek-text-color-1);
+
+ 	 &:hover {
+		filter: brightness(85%);
+  	}
 }
 
 :host([variant="outline"]) #button {
-  background-color: transparent;
-  border: 1px solid var(--cek-border-color-2);
-  color: var(--cek-text-color-1);
+	background-color: transparent;
+	border: 1px solid var(--cek-border-color-2);
+	color: var(--cek-text-color-1);
+
+  	&:hover {
+		text-decoration: underline;
+	}
 }
 
-:host([variant="text"]) #button {
-  background: transparent;
-  color: var(--cek-text-color-1);
+:host([variant="ghost"]) #button {
+	background: transparent;
+	color: var(--cek-text-color-1);
 }
 
-:host([variant="text"]) #button:hover {
-  background-color: var(--cek-surface-color-2);
+:host([variant="ghost"]) #button:hover {
+	background-color: var(--cek-surface-color-1);
 }
 
 :host([variant="link"]) #button {
-  background-color: transparent;
-  color: var(--cek-color-primary-500);
-  text-decoration: underline;
+	background-color: transparent;
+	color: var(--cek-color-primary-500);
+	padding: 0;
+	margin: 0;
+	min-height: 0;
+	min-width: 0;
+
+  	&:hover {
+  		text-decoration: underline;
+  	}
+}
+
+:host([variant="destructive"]) #button {
+ 	background-color: var(--cek-color-red-600);
+  	color: white;
+
+	 &:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="destructive"]) #button:focus {
+  	outline: 2px solid var(--cek-color-red-600);
+}
+
+:host([variant="neutral"]) #button {
+  	background-color: var(--cek-color-neutral);
+  	color: var(--cek-text-color-neutral);
+
+	&:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="icon"]) #button {
+  	padding: var(--cek-space-2);
+  	margin: 0;
+}
+
+:host([pill]) #button {
+  border-radius: 50px;
+}
+
+:host([circle]) #button {
+  border-radius: 50%;
+  padding: 0;
+  width: var(--cek-height-medium);
+  height: var(--cek-height-medium);
 }
 
 [name="end"]::slotted(*) {
-  margin-inline-start: 0.5ch;
+  	margin-inline-start: 0.5ch;
 }
 
 [name="start"]::slotted(*) {
-  margin-inline-end: 0.5ch;
+  	margin-inline-end: 0.5ch;
 }
 
 #loading-icon {
-  position: absolute;
-  display: none;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  	position: absolute;
+  	display: none;
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
 }
 
 :host([loading]) #loading-icon {
@@ -1697,21 +1884,27 @@
 }
 
 :host([icon-only]) #button {
-  padding-inline: 0.8ch;
+  padding: var(--cek-space-2);
+  margin: 0;
 }
 
 #arrow-icon {
-  display: none;
-  height: 1em;
-  width: 1em;
-  margin-inline-start: 0.5ch;
+  	display: none;
+  	height: 1em;
+  	width: 1em;
+  	margin-inline-start: 0.5ch;
 }
 
 :host([arrow]) #arrow-icon {
-  display: block;
+  	display: block;
+}
+
+::slotted(cek-icon) {
+	--height: 1.4em;
+	--width: 1.4em;
 }
 </style>
-		<a id="button" part="button">
+		<button id="button" part="button">
 		<slot name="start"></slot>
 		<div id="label" part="label"><slot></slot></div>
 		<slot name="end"></slot>
@@ -1725,11 +1918,17 @@
 		<svg id="arrow-icon" part="arrow-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">  
 			<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
 		</svg>
-		</a>
-	</template>Save</cek-button>
-    </div>
-    <div class="horizontal">
-        <cek-input size="large" placeholder="Large" label="Large" server-rendered=""><template shadowrootmode="open"><style>
+		</button>
+	</template>
+                Save
+                <cek-icon name="plus-circle" slot="end" server-rendered=""><template shadowrootmode="open"><style>:host{display:flex;}</style><svg height="24" width="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+</svg>
+</template></cek-icon>
+            </cek-button>
+        </div>
+        <div class="flex gap-3 items-end">
+            <cek-input size="large" placeholder="Large" label="Large" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: block;
 	font-family: var(--cek-font-family);
@@ -1896,121 +2095,176 @@
 			<slot name="end"></slot>
 		</div>
 		</template></cek-input>
-        <cek-button size="large" variant="primary" server-rendered=""><template shadowrootmode="open"><style>
+            <cek-button size="large" variant="primary" server-rendered=""><template shadowrootmode="open"><style>
 :host {
-  display: inline-block;
-  font-family: var(--cek-font-family);
-  line-height: var(--cek-line-height);
-  box-sizing: border-box;
+  	display: inline-block;
+  	font-family: var(--cek-font-family);
+  	box-sizing: border-box;
 }
 
 #button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  background: transparent;
-  border: none;
-  padding: 0;
-  margin: 0;
-  font: inherit;
-  color: inherit;
-  cursor: pointer;
-  box-sizing: border-box;
-  text-decoration: none;
+  	display: inline-flex;
+  	align-items: center;
+  	justify-content: center;
+  	position: relative;
+  	background: transparent;
+  	border: none;
+  	padding: 0;
+  	margin: 0;
+  	font: inherit;
+  	color: inherit;
+  	cursor: pointer;
+  	box-sizing: border-box;
+  	text-decoration: none;
 }
 
 :host([variant]) #button {
-  border-radius: var(--cek-border-radius);
-  padding-inline: var(--cek-padding-inline);
-}
-
-:host([variant]) #button:hover {
-  filter: brightness(85%);
+  	border-radius: var(--cek-border-radius);
+  	padding-inline: var(--cek-padding-inline);
 }
 
 :host([variant]) #button:focus {
-  outline: var(--cek-focus-ring);
-  outline-offset: var(--cek-focus-ring-offset);
+  	outline: var(--cek-focus-ring);
+  	outline-offset: var(--cek-focus-ring-offset);
 }
 
 :host([loading]) #button,
 :host([disabled]) #button {
-  cursor: not-allowed;
-  pointer-events: none;
+  	cursor: not-allowed;
+  	pointer-events: none;
 }
 
 :host([loading]) #button {
-  background-color: lightgray;
-  color: rgba(0, 0, 0, 0.5);
+  	background-color: lightgray;
+  	color: rgba(0, 0, 0, 0.5);
 }
 
 :host([disabled][variant]) #button {
-  background-color: #ccc;
-  color: rgba(0, 0, 0, 0.5);
+  	background-color: #ccc;
+  	color: rgba(0, 0, 0, 0.5);
 }
 
 :host([size="small"]) #button {
-  min-height: var(--cek-height-small);
-  font-size: var(--cek-font-size-0);
+  	min-height: var(--cek-height-small);
+  	min-width: var(--cek-height-small);
+  	font-size: var(--cek-font-size-0);
 }
 
 :host(:not([size])) #button, 
 :host([size="medium"]) #button {
-  min-height: var(--cek-height-medium);
-  font-size: var(--cek-font-size-1);
+  	min-height: var(--cek-height-medium);
+  	min-width: var(--cek-height-medium);
+  	font-size: var(--cek-font-size-1);
 }
 
 :host([size="large"]) #button {
-  min-height: var(--cek-height-large);
-  font-size: var(--cek-font-size-2);
+  	min-height: var(--cek-height-large);
+  	min-width: var(--cek-height-large);
+  	font-size: var(--cek-font-size-2);
 }
 
 :host([variant="primary"]) #button {
-  background-color: var(--cek-color-primary-500);
-  color: white;
+  	background-color: var(--cek-color-primary-500);
+  	color: white;
+
+  	&:hover {
+		filter: brightness(85%);
+  	}
 }
 
-:host([variant="ascent"]) #button {
-  background-color: var(--cek-surface-color-3);
-  color: var(--cek-text-color-1);
+:host([variant="secondary"]) #button {
+ 	background-color: var(--cek-surface-color-1);
+ 	 color: var(--cek-text-color-1);
+
+ 	 &:hover {
+		filter: brightness(85%);
+  	}
 }
 
 :host([variant="outline"]) #button {
-  background-color: transparent;
-  border: 1px solid var(--cek-border-color-2);
-  color: var(--cek-text-color-1);
+	background-color: transparent;
+	border: 1px solid var(--cek-border-color-2);
+	color: var(--cek-text-color-1);
+
+  	&:hover {
+		text-decoration: underline;
+	}
 }
 
-:host([variant="text"]) #button {
-  background: transparent;
-  color: var(--cek-text-color-1);
+:host([variant="ghost"]) #button {
+	background: transparent;
+	color: var(--cek-text-color-1);
 }
 
-:host([variant="text"]) #button:hover {
-  background-color: var(--cek-surface-color-2);
+:host([variant="ghost"]) #button:hover {
+	background-color: var(--cek-surface-color-1);
 }
 
 :host([variant="link"]) #button {
-  background-color: transparent;
-  color: var(--cek-color-primary-500);
-  text-decoration: underline;
+	background-color: transparent;
+	color: var(--cek-color-primary-500);
+	padding: 0;
+	margin: 0;
+	min-height: 0;
+	min-width: 0;
+
+  	&:hover {
+  		text-decoration: underline;
+  	}
+}
+
+:host([variant="destructive"]) #button {
+ 	background-color: var(--cek-color-red-600);
+  	color: white;
+
+	 &:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="destructive"]) #button:focus {
+  	outline: 2px solid var(--cek-color-red-600);
+}
+
+:host([variant="neutral"]) #button {
+  	background-color: var(--cek-color-neutral);
+  	color: var(--cek-text-color-neutral);
+
+	&:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="icon"]) #button {
+  	padding: var(--cek-space-2);
+  	margin: 0;
+}
+
+:host([pill]) #button {
+  border-radius: 50px;
+}
+
+:host([circle]) #button {
+  border-radius: 50%;
+  padding: 0;
+  width: var(--cek-height-medium);
+  height: var(--cek-height-medium);
 }
 
 [name="end"]::slotted(*) {
-  margin-inline-start: 0.5ch;
+  	margin-inline-start: 0.5ch;
 }
 
 [name="start"]::slotted(*) {
-  margin-inline-end: 0.5ch;
+  	margin-inline-end: 0.5ch;
 }
 
 #loading-icon {
-  position: absolute;
-  display: none;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  	position: absolute;
+  	display: none;
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
 }
 
 :host([loading]) #loading-icon {
@@ -2018,21 +2272,27 @@
 }
 
 :host([icon-only]) #button {
-  padding-inline: 0.8ch;
+  padding: var(--cek-space-2);
+  margin: 0;
 }
 
 #arrow-icon {
-  display: none;
-  height: 1em;
-  width: 1em;
-  margin-inline-start: 0.5ch;
+  	display: none;
+  	height: 1em;
+  	width: 1em;
+  	margin-inline-start: 0.5ch;
 }
 
 :host([arrow]) #arrow-icon {
-  display: block;
+  	display: block;
+}
+
+::slotted(cek-icon) {
+	--height: 1.4em;
+	--width: 1.4em;
 }
 </style>
-		<a id="button" part="button">
+		<button id="button" part="button">
 		<slot name="start"></slot>
 		<div id="label" part="label"><slot></slot></div>
 		<slot name="end"></slot>
@@ -2046,15 +2306,42 @@
 		<svg id="arrow-icon" part="arrow-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">  
 			<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
 		</svg>
-		</a>
-	</template>Save</cek-button>
+		</button>
+	</template>
+                Save
+                <cek-icon name="plus-circle" slot="end" server-rendered=""><template shadowrootmode="open"><style>:host{display:flex;}</style><svg height="24" width="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+</svg>
+</template></cek-icon>
+            </cek-button>
+        </div>
     </div>
 
     <cek-code-block lang="xml" theme="github-dark">
         <template>
-            <cek-input label="Small" placeholder="Small" size="small"></cek-input>
-            <cek-input label="Medium" placeholder="Medium"></cek-input>
-            <cek-input label="Large" placeholder="Large" size="large"></cek-input>
+            <div class="flex flex-column gap-4">
+                <div class="flex gap-3 items-end">
+                    <cek-input label="Small" placeholder="Small" size="small"></cek-input>
+                    <cek-button variant="primary" size="small">
+                        Save
+                        <cek-icon slot="end" name="plus-circle"></cek-icon>
+                    </cek-button>
+                </div>
+                <div class="flex gap-3 items-end">
+                    <cek-input label="Medium" placeholder="Medium"></cek-input>
+                    <cek-button variant="primary" size="medium">
+                        Save
+                        <cek-icon slot="end" name="plus-circle"></cek-icon>
+                    </cek-button>
+                </div>
+                <div class="flex gap-3 items-end">
+                    <cek-input label="Large" placeholder="Large" size="large"></cek-input>
+                    <cek-button variant="primary" size="large">
+                        Save
+                        <cek-icon slot="end" name="plus-circle"></cek-icon>
+                    </cek-button>
+                </div>
+            </div>
         </template>
     </cek-code-block>
 
@@ -2063,7 +2350,8 @@
     <p>Start and end slots will style kbd, cek-icon, cek-button elements. You can place any other HTML in these slots
         but will need to style them.</p>
 
-    <cek-input label="Icons & buttons" server-rendered=""><template shadowrootmode="open"><style>
+    <div class="flex flex-column gap-4">
+        <cek-input label="Icons & buttons" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: block;
 	font-family: var(--cek-font-family);
@@ -2230,125 +2518,180 @@
 			<slot name="end"></slot>
 		</div>
 		</template>
-        <cek-icon name="currency-dollar" slot="start" size="1.2em" server-rendered=""><template shadowrootmode="open"><style>:host{display:flex;}</style><svg height="1.2em" width="1.2em" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <cek-icon name="currency-dollar" slot="start" size="1.2em" server-rendered=""><template shadowrootmode="open"><style>:host{display:flex;}</style><svg height="1.2em" width="1.2em" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
 </svg>
 </template></cek-icon>
-        <cek-button variant="text" slot="end" size="small" server-rendered=""><template shadowrootmode="open"><style>
+            <cek-button variant="text" slot="end" size="small" server-rendered=""><template shadowrootmode="open"><style>
 :host {
-  display: inline-block;
-  font-family: var(--cek-font-family);
-  line-height: var(--cek-line-height);
-  box-sizing: border-box;
+  	display: inline-block;
+  	font-family: var(--cek-font-family);
+  	box-sizing: border-box;
 }
 
 #button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  background: transparent;
-  border: none;
-  padding: 0;
-  margin: 0;
-  font: inherit;
-  color: inherit;
-  cursor: pointer;
-  box-sizing: border-box;
-  text-decoration: none;
+  	display: inline-flex;
+  	align-items: center;
+  	justify-content: center;
+  	position: relative;
+  	background: transparent;
+  	border: none;
+  	padding: 0;
+  	margin: 0;
+  	font: inherit;
+  	color: inherit;
+  	cursor: pointer;
+  	box-sizing: border-box;
+  	text-decoration: none;
 }
 
 :host([variant]) #button {
-  border-radius: var(--cek-border-radius);
-  padding-inline: var(--cek-padding-inline);
-}
-
-:host([variant]) #button:hover {
-  filter: brightness(85%);
+  	border-radius: var(--cek-border-radius);
+  	padding-inline: var(--cek-padding-inline);
 }
 
 :host([variant]) #button:focus {
-  outline: var(--cek-focus-ring);
-  outline-offset: var(--cek-focus-ring-offset);
+  	outline: var(--cek-focus-ring);
+  	outline-offset: var(--cek-focus-ring-offset);
 }
 
 :host([loading]) #button,
 :host([disabled]) #button {
-  cursor: not-allowed;
-  pointer-events: none;
+  	cursor: not-allowed;
+  	pointer-events: none;
 }
 
 :host([loading]) #button {
-  background-color: lightgray;
-  color: rgba(0, 0, 0, 0.5);
+  	background-color: lightgray;
+  	color: rgba(0, 0, 0, 0.5);
 }
 
 :host([disabled][variant]) #button {
-  background-color: #ccc;
-  color: rgba(0, 0, 0, 0.5);
+  	background-color: #ccc;
+  	color: rgba(0, 0, 0, 0.5);
 }
 
 :host([size="small"]) #button {
-  min-height: var(--cek-height-small);
-  font-size: var(--cek-font-size-0);
+  	min-height: var(--cek-height-small);
+  	min-width: var(--cek-height-small);
+  	font-size: var(--cek-font-size-0);
 }
 
 :host(:not([size])) #button, 
 :host([size="medium"]) #button {
-  min-height: var(--cek-height-medium);
-  font-size: var(--cek-font-size-1);
+  	min-height: var(--cek-height-medium);
+  	min-width: var(--cek-height-medium);
+  	font-size: var(--cek-font-size-1);
 }
 
 :host([size="large"]) #button {
-  min-height: var(--cek-height-large);
-  font-size: var(--cek-font-size-2);
+  	min-height: var(--cek-height-large);
+  	min-width: var(--cek-height-large);
+  	font-size: var(--cek-font-size-2);
 }
 
 :host([variant="primary"]) #button {
-  background-color: var(--cek-color-primary-500);
-  color: white;
+  	background-color: var(--cek-color-primary-500);
+  	color: white;
+
+  	&:hover {
+		filter: brightness(85%);
+  	}
 }
 
-:host([variant="ascent"]) #button {
-  background-color: var(--cek-surface-color-3);
-  color: var(--cek-text-color-1);
+:host([variant="secondary"]) #button {
+ 	background-color: var(--cek-surface-color-1);
+ 	 color: var(--cek-text-color-1);
+
+ 	 &:hover {
+		filter: brightness(85%);
+  	}
 }
 
 :host([variant="outline"]) #button {
-  background-color: transparent;
-  border: 1px solid var(--cek-border-color-2);
-  color: var(--cek-text-color-1);
+	background-color: transparent;
+	border: 1px solid var(--cek-border-color-2);
+	color: var(--cek-text-color-1);
+
+  	&:hover {
+		text-decoration: underline;
+	}
 }
 
-:host([variant="text"]) #button {
-  background: transparent;
-  color: var(--cek-text-color-1);
+:host([variant="ghost"]) #button {
+	background: transparent;
+	color: var(--cek-text-color-1);
 }
 
-:host([variant="text"]) #button:hover {
-  background-color: var(--cek-surface-color-2);
+:host([variant="ghost"]) #button:hover {
+	background-color: var(--cek-surface-color-1);
 }
 
 :host([variant="link"]) #button {
-  background-color: transparent;
-  color: var(--cek-color-primary-500);
-  text-decoration: underline;
+	background-color: transparent;
+	color: var(--cek-color-primary-500);
+	padding: 0;
+	margin: 0;
+	min-height: 0;
+	min-width: 0;
+
+  	&:hover {
+  		text-decoration: underline;
+  	}
+}
+
+:host([variant="destructive"]) #button {
+ 	background-color: var(--cek-color-red-600);
+  	color: white;
+
+	 &:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="destructive"]) #button:focus {
+  	outline: 2px solid var(--cek-color-red-600);
+}
+
+:host([variant="neutral"]) #button {
+  	background-color: var(--cek-color-neutral);
+  	color: var(--cek-text-color-neutral);
+
+	&:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="icon"]) #button {
+  	padding: var(--cek-space-2);
+  	margin: 0;
+}
+
+:host([pill]) #button {
+  border-radius: 50px;
+}
+
+:host([circle]) #button {
+  border-radius: 50%;
+  padding: 0;
+  width: var(--cek-height-medium);
+  height: var(--cek-height-medium);
 }
 
 [name="end"]::slotted(*) {
-  margin-inline-start: 0.5ch;
+  	margin-inline-start: 0.5ch;
 }
 
 [name="start"]::slotted(*) {
-  margin-inline-end: 0.5ch;
+  	margin-inline-end: 0.5ch;
 }
 
 #loading-icon {
-  position: absolute;
-  display: none;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  	position: absolute;
+  	display: none;
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
 }
 
 :host([loading]) #loading-icon {
@@ -2356,21 +2699,27 @@
 }
 
 :host([icon-only]) #button {
-  padding-inline: 0.8ch;
+  padding: var(--cek-space-2);
+  margin: 0;
 }
 
 #arrow-icon {
-  display: none;
-  height: 1em;
-  width: 1em;
-  margin-inline-start: 0.5ch;
+  	display: none;
+  	height: 1em;
+  	width: 1em;
+  	margin-inline-start: 0.5ch;
 }
 
 :host([arrow]) #arrow-icon {
-  display: block;
+  	display: block;
+}
+
+::slotted(cek-icon) {
+	--height: 1.4em;
+	--width: 1.4em;
 }
 </style>
-		<a id="button" part="button">
+		<button id="button" part="button">
 		<slot name="start"></slot>
 		<div id="label" part="label"><slot></slot></div>
 		<slot name="end"></slot>
@@ -2384,11 +2733,10 @@
 		<svg id="arrow-icon" part="arrow-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">  
 			<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
 		</svg>
-		</a>
+		</button>
 	</template>Delete</cek-button>
-    </cek-input>
-
-    <cek-input label="kbd" server-rendered=""><template shadowrootmode="open"><style>
+        </cek-input>
+        <cek-input label="kbd" server-rendered=""><template shadowrootmode="open"><style>
 :host {
 	display: block;
 	font-family: var(--cek-font-family);
@@ -2555,9 +2903,10 @@
 			<slot name="end"></slot>
 		</div>
 		</template>
-        <kbd slot="start">⌘K</kbd>
-        <kbd slot="end">⌘C</kbd>
-    </cek-input>
+            <kbd slot="start">⌘K</kbd>
+            <kbd slot="end">⌘C</kbd>
+        </cek-input>
+    </div>
 
     <cek-code-block lang="xml" theme="github-dark">
         <template>
