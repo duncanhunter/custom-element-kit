@@ -5,21 +5,31 @@
     <p>The dialog component is used to display modal or non-modal dialog.</p>
 
     <cek-button variant="primary" command="show-modal" commandfor="my-dialog">Open dialog</cek-button>
-    <cek-dialog id="my-dialog">
-        <h2 slot="header">Dialog Title</h2>
-        <cek-button autofocus variant="primary" slot="header-actions" command="close" commandfor="parent">Close
-            Dialog</cek-button>
+    <cek-dialog id="my-dialog" size="medium">
+        <div slot="header" class="flex justify-between items-center">
+            <h2 slot="header" class="cek-text-5">Dialog Title</h2>
+            <cek-button button-aria-label="close" autofocus variant="ghost" icon-only command="close"
+                commandfor="parent">
+                <cek-icon name="x-mark"></cek-icon>
+            </cek-button>
+        </div>
         <p>Dialog content</p>
+        <cek-button slot="footer" variant="primary" command="close" commandfor="parent">Close</cek-button>
     </cek-dialog>
 
     <cek-code-block lang="xml" theme="github-dark">
         <template>
             <cek-button variant="primary" command="show-modal" commandfor="my-dialog">Open Dialog</cek-button>
-            <cek-dialog id="my-dialog">
-                <h2 slot="header">Dialog Title</h2>
-                <cek-button autofocus variant="primary" slot="header-actions" command="close" commandfor="parent">Close
-                    Dialog</cek-button>
+            <cek-dialog id="my-dialog" size="medium">
+                <div slot="header" class="flex justify-between items-center">
+                    <h2 slot="header" class="cek-text-5">Dialog Title</h2>
+                    <cek-button button-aria-label="close" autofocus variant="ghost" icon-only command="close"
+                        commandfor="parent">
+                        <cek-icon name="x-mark"></cek-icon>
+                    </cek-button>
+                </div>
                 <p>Dialog content</p>
+                <cek-button slot="footer" variant="primary" command="close" commandfor="parent">Close</cek-button>
             </cek-dialog>
         </template>
     </cek-code-block>
@@ -28,21 +38,30 @@
     <p>Use the show method to open as a non-modal.</p>
 
     <cek-button variant="primary" command="show" commandfor="non-modal">Open non modal dialog</cek-button>
-    <cek-dialog id="non-modal">
-        <h2 slot="header">Dialog Title</h2>
-        <cek-button autofocus variant="primary" slot="header-actions" command="close" commandfor="parent">Close
-            Dialog</cek-button>
-        <p>Dialog content</p>
+    <cek-dialog id="non-modal" size="small">
+        <div slot="header" class="flex justify-between items-center">
+            <h2 slot="header" class="cek-text-5">Dialog Title</h2>
+            <cek-button button-aria-label="close" autofocus variant="ghost" icon-only command="close"
+                commandfor="parent">
+                <cek-icon name="x-mark"></cek-icon>
+            </cek-button>
+        </div>
+        <cek-button slot="footer" variant="primary" command="close" commandfor="parent">Close</cek-button>
     </cek-dialog>
 
     <cek-code-block lang="xml" theme="github-dark">
         <template>
             <cek-button variant="primary" command="show" commandfor="non-modal">Open non modal dialog</cek-button>
-            <cek-dialog id="non-modal">
-                <h2 slot="header">Dialog Title</h2>
-                <cek-button autofocus variant="primary" slot="header-actions" command="close" commandfor="parent">Close
-                    Dialog</cek-button>
+            <cek-dialog id="non-modal" size="small">
+                <div slot="header" class="flex justify-between items-center">
+                    <h2 slot="header" class="cek-text-5">Dialog Title</h2>
+                    <cek-button button-aria-label="close" autofocus variant="ghost" icon-only command="close"
+                        commandfor="parent">
+                        <cek-icon name="x-mark"></cek-icon>
+                    </cek-button>
+                </div>
                 <p>Dialog content</p>
+                <cek-button slot="footer" variant="primary" command="close" commandfor="parent">Close</cek-button>
             </cek-dialog>
         </template>
     </cek-code-block>
@@ -52,10 +71,14 @@
 
     <cek-button variant="primary" command="show-modal" commandfor="custom-slots-dialog">Open custom slots
         dialog</cek-button>
-    <cek-dialog id="custom-slots-dialog">
-        <span slot="header">Custom Header</span>
-        <cek-button autofocus slot="header-actions" variant="text" command="close" commandfor="parent">Action
-            close</cek-button>
+    <cek-dialog id="custom-slots-dialog" size="large">
+        <div slot="header" class="flex justify-between items-center">
+            <h2 slot="header" class="cek-text-5">Dialog Title</h2>
+            <cek-button button-aria-label="close" autofocus variant="ghost" icon-only command="close"
+                commandfor="parent">
+                <cek-icon name="x-mark"></cek-icon>
+            </cek-button>
+        </div>
         <p>This dialog has custom header and header actions.</p>
         <cek-button slot="footer" variant="primary" command="close" commandfor="parent">Close</cek-button>
     </cek-dialog>
@@ -64,10 +87,14 @@
         <template>
             <cek-button variant="primary" command="show-modal" commandfor="custom-slots-dialog">Open custom slots
                 dialog</cek-button>
-            <cek-dialog id="custom-slots-dialog">
-                <span slot="header">Custom Header</span>
-                <cek-button autofocus slot="header-actions" variant="text" command="close" commandfor="parent">Action
-                    close</cek-button>
+            <cek-dialog id="custom-slots-dialog" size="large">
+                <div slot="header" class="flex justify-between items-center">
+                    <h2 slot="header" class="cek-text-5">Dialog Title</h2>
+                    <cek-button button-aria-label="close" autofocus variant="ghost" icon-only command="close"
+                        commandfor="parent">
+                        <cek-icon name="x-mark"></cek-icon>
+                    </cek-button>
+                </div>
                 <p>This dialog has custom header and header actions.</p>
                 <cek-button slot="footer" variant="primary" command="close" commandfor="parent">Close</cek-button>
             </cek-dialog>
@@ -79,8 +106,8 @@
 
     <cek-code-block lang="xml" theme="github-dark">
         <template>
-            <cek-dialog open>
-                <h2 slot="header">Dialog Opened with Attribute</h2>
+            <cek-dialog open size="medium">
+                <h2 slot="header" class="cek-text-5">Dialog Opened with Attribute</h2>
                 <p>This dialog is opened using the <code>open</code> attribute.</p>
                 <cek-button slot="footer" variant="primary" command="close" commandfor="parent">Close</cek-button>
             </cek-dialog>
@@ -92,9 +119,273 @@
 
     <cek-code-block lang="xml" theme="github-dark">
         <template>
-            <cek-dialog open modal>
-                <h2 slot="header">Modal Dialog Opened with Attribute</h2>
+            <cek-dialog open modal size="large">
+                <h2 slot="header" class="cek-text-5">Modal Dialog Opened with Attribute</h2>
                 <p>This dialog is opened using the <code>open</code> and <code>modal</code> attributes.</p>
+                <cek-button slot="footer" variant="primary" command="close" commandfor="parent">Close</cek-button>
+            </cek-dialog>
+        </template>
+    </cek-code-block>
+
+    <h2>Sizes</h2>
+    <p>The dialog component supports different sizes using the <code>size</code> attribute. Available sizes are "small",
+        "medium", and "large".</p>
+
+    <div class="flex gap-4">
+        <div>
+            <cek-button variant="primary" command="show-modal" commandfor="small-dialog">Open small dialog</cek-button>
+            <cek-dialog id="small-dialog" size="small">
+                <div slot="header" class="flex justify-between items-center">
+                    <h2 slot="header" class="cek-text-5">Small Dialog</h2>
+                    <cek-button button-aria-label="close" autofocus variant="ghost" icon-only command="close"
+                        commandfor="parent">
+                        <cek-icon name="x-mark"></cek-icon>
+                    </cek-button>
+                </div>
+                <p>Small dialog content</p>
+                <cek-button slot="footer" variant="primary" command="close" commandfor="parent">Close</cek-button>
+            </cek-dialog>
+        </div>
+        <div>
+            <cek-button variant="primary" command="show-modal" commandfor="medium-dialog">Open medium
+                dialog</cek-button>
+            <cek-dialog id="medium-dialog" size="medium">
+                <div slot="header" class="flex justify-between items-center">
+                    <h2 slot="header" class="cek-text-5">Medium Dialog</h2>
+                    <cek-button button-aria-label="close" autofocus variant="ghost" icon-only command="close"
+                        commandfor="parent">
+                        <cek-icon name="x-mark"></cek-icon>
+                    </cek-button>
+                </div>
+                <p>Medium dialog content</p>
+                <cek-button slot="footer" variant="primary" command="close" commandfor="parent">Close</cek-button>
+            </cek-dialog>
+        </div>
+        <div>
+            <cek-button variant="primary" command="show-modal" commandfor="large-dialog">Open large dialog</cek-button>
+            <cek-dialog id="large-dialog" size="large">
+                <div slot="header" class="flex justify-between items-center">
+                    <h2 slot="header" class="cek-text-5">Large Dialog</h2>
+                    <cek-button button-aria-label="close" autofocus variant="ghost" icon-only command="close"
+                        commandfor="parent">
+                        <cek-icon name="x-mark"></cek-icon>
+                    </cek-button>
+                </div>
+                <div id="lipsum">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam felis metus, pharetra a mattis a,
+                        aliquet nec tortor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
+                        cubilia curae; Nulla accumsan sem accumsan tristique pharetra. In hac habitasse platea dictumst.
+                        Nulla ut libero lorem. Donec maximus tincidunt libero in feugiat. Vivamus tempus ligula pulvinar
+                        feugiat sodales. Praesent pulvinar velit sit amet enim sodales, ut efficitur arcu rhoncus. Sed
+                        dapibus leo non quam accumsan lobortis. Ut malesuada in nisl et vestibulum. Vestibulum molestie
+                        at mauris sit amet sodales. Aliquam vitae sapien accumsan, congue arcu bibendum, tempus nisi.
+                        Duis vitae dolor eros. Sed viverra quam vel quam fermentum, vitae hendrerit ipsum vulputate.
+                    </p>
+                    <p>
+                        Aenean euismod interdum arcu nec pulvinar. Duis iaculis porttitor commodo. Duis vel finibus
+                        metus. Nullam scelerisque lacus non mauris venenatis, non ornare lacus scelerisque. Nullam eget
+                        vehicula justo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia
+                        curae; Mauris eu felis ornare, tristique nulla et, pulvinar est. Praesent gravida ut odio vitae
+                        congue. Nulla sed commodo odio. Pellentesque velit odio, finibus at convallis ac, cursus vitae
+                        tellus. Suspendisse eu aliquam massa, sed finibus justo. Vestibulum sed ex quam.
+                    </p>
+                    <p>
+                        Mauris ullamcorper, neque a ultrices fringilla, odio nulla viverra arcu, nec vestibulum lorem
+                        nibh tincidunt turpis. Quisque ac vulputate massa. Ut lectus lorem, finibus at est nec,
+                        tincidunt placerat velit. Sed rhoncus odio non mi euismod, id auctor massa malesuada. Ut congue,
+                        ante ut sollicitudin facilisis, est turpis vestibulum turpis, quis semper felis eros sed sem.
+                        Praesent dictum magna accumsan ex feugiat, in bibendum odio bibendum. Curabitur non sapien dui.
+                        Donec mattis posuere justo, vitae viverra nisi. Donec felis ligula, dictum ac turpis eget,
+                        gravida vehicula enim. Nam metus lectus, feugiat id porttitor in, consequat vel metus.
+                    </p>
+                    <p>
+                        Nam ac dolor ex. Ut sit amet lectus nisi. Nullam lobortis tellus id viverra congue. Donec
+                        iaculis nec eros sed suscipit. Vestibulum eu pharetra ex, id hendrerit diam. Proin varius, nunc
+                        et posuere pharetra, neque elit suscipit ante, sed dapibus felis diam id mauris. Aliquam eu elit
+                        convallis, eleifend lacus efficitur, sollicitudin ligula. Suspendisse commodo leo non ipsum
+                        interdum, et tincidunt nunc mollis. In at eros scelerisque, porttitor dolor porttitor, tristique
+                        lorem. Curabitur vel eros in odio tempus tristique. Integer condimentum, neque eget luctus
+                        iaculis, sem quam suscipit dolor, ac euismod mauris turpis at lacus.
+                    </p>
+                    <p>
+                        Aliquam tristique tincidunt leo in condimentum. Nunc eu finibus nibh. Integer vulputate ex
+                        ultrices turpis sodales, vitae lacinia tellus fermentum. Suspendisse lacinia molestie lacus, in
+                        ultrices tellus tempus non. Curabitur libero mauris, lacinia nec ex sit amet, ornare tempus
+                        dolor. Sed rhoncus ante est, vel sagittis ligula rhoncus non. Etiam sed euismod arcu. Ut eget
+                        nunc ex.
+                    </p>
+                    <p>
+                        In molestie hendrerit nisl, id suscipit lorem eleifend nec. Quisque felis arcu, pulvinar ac
+                        efficitur sed, vehicula ut tortor. Nulla vitae efficitur quam, quis ullamcorper orci. Proin
+                        ornare tellus non elit sagittis, et consectetur mauris pulvinar. Nullam a blandit metus.
+                        Pellentesque commodo suscipit mi, eget sagittis augue luctus vel. Nam pulvinar feugiat tortor,
+                        sit amet vestibulum augue aliquam ut. Suspendisse id arcu sed sapien lacinia feugiat non sit
+                        amet massa. Interdum et malesuada fames ac ante ipsum primis in faucibus. Praesent non libero
+                        laoreet, ornare lectus at, efficitur nisl. Duis luctus lacus non felis facilisis pretium. Cras
+                        nibh turpis, dignissim eu nisi sed, sagittis pretium leo. Aenean vel aliquet nibh, ac tincidunt
+                        velit. Nulla facilisis leo in libero lacinia, eget venenatis tortor blandit.
+                    </p>
+                    <p>
+                        Suspendisse maximus est non sodales tincidunt. Donec et consectetur urna. Donec ac justo sit
+                        amet neque feugiat hendrerit. Phasellus quis odio nulla. Donec vitae tempor purus, vel elementum
+                        nisi. Fusce non ultricies turpis. Phasellus nec odio purus. Integer nisi leo, euismod posuere
+                        erat sit amet, imperdiet efficitur sem. Nulla tincidunt ante eros, at eleifend sapien pharetra
+                        non. Etiam finibus lacus sed eros egestas lobortis.
+                    </p>
+                    <p>
+                        Cras mattis lacinia nulla vel convallis. In efficitur tortor urna, interdum iaculis est iaculis
+                        nec. Aliquam dictum turpis sit amet justo lobortis maximus. Suspendisse bibendum magna faucibus
+                        mi fringilla dictum. Morbi ut vulputate felis, volutpat tempor est. Pellentesque maximus justo
+                        et nisl scelerisque sollicitudin. Vivamus consequat, mauris in rutrum lobortis, nulla sem
+                        dignissim turpis, ac auctor urna felis id nisi. Aenean eleifend arcu magna, at efficitur tellus
+                        faucibus eget.
+                    </p>
+                    <p>
+                        Pellentesque in libero a leo sollicitudin tempor eu vitae elit. Morbi semper sapien id nibh
+                        auctor, ac feugiat nisl scelerisque. Nullam imperdiet ante finibus ultrices blandit. Donec
+                        imperdiet hendrerit hendrerit. Nulla ac sapien vel orci elementum commodo id et nisi. Proin
+                        auctor egestas nulla in ultricies. Donec turpis ex, pretium a tellus et, feugiat finibus mi.
+                    </p>
+                    <p>
+                        Etiam sit amet euismod lectus. Morbi vel libero tempor, pretium erat a, dictum enim. Phasellus
+                        pharetra purus at ullamcorper fermentum. Aenean vehicula lacus in maximus posuere. Nunc
+                        vestibulum dui quis lacinia luctus. Nunc laoreet vulputate maximus. Nunc sagittis posuere urna,
+                        a pretium quam consectetur vel. Duis pellentesque accumsan mauris, eu suscipit eros aliquet
+                        eget. Quisque lacinia ligula sit amet posuere tincidunt. Nullam suscipit, erat non imperdiet
+                        facilisis, ex diam molestie orci, eu rutrum massa erat eu purus. Duis ornare ante et urna
+                        blandit cursus.
+                    </p>
+                </div>
+                <cek-button slot="footer" variant="primary" command="close" commandfor="parent">Close</cek-button>
+            </cek-dialog>
+        </div>
+    </div>
+
+    <cek-code-block lang="xml" theme="github-dark">
+        <template>
+            <cek-button variant="primary" command="show-modal" commandfor="small-dialog">Open small dialog</cek-button>
+            <cek-dialog id="small-dialog" size="small">
+                <div slot="header" class="flex justify-between items-center">
+                    <h2 slot="header" class="cek-text-5">Small Dialog</h2>
+                    <cek-button button-aria-label="close" autofocus variant="ghost" icon-only command="close"
+                        commandfor="parent">
+                        <cek-icon name="x-mark"></cek-icon>
+                    </cek-button>
+                </div>
+                <p>Small dialog content</p>
+                <cek-button slot="footer" variant="primary" command="close" commandfor="parent">Close</cek-button>
+            </cek-dialog>
+
+            <cek-button variant="primary" command="show-modal" commandfor="medium-dialog">Open medium
+                dialog</cek-button>
+            <cek-dialog id="medium-dialog" size="medium">
+                <div slot="header" class="flex justify-between items-center">
+                    <h2 slot="header" class="cek-text-5">Medium Dialog</h2>
+                    <cek-button button-aria-label="close" autofocus variant="ghost" icon-only command="close"
+                        commandfor="parent">
+                        <cek-icon name="x-mark"></cek-icon>
+                    </cek-button>
+                </div>
+                <p>Medium dialog content</p>
+                <cek-button slot="footer" variant="primary" command="close" commandfor="parent">Close</cek-button>
+            </cek-dialog>
+
+            <cek-button variant="primary" command="show-modal" commandfor="large-dialog">Open large dialog</cek-button>
+            <cek-dialog id="large-dialog" size="large">
+                <div slot="header" class="flex justify-between items-center">
+                    <h2 slot="header" class="cek-text-5">Large Dialog</h2>
+                    <cek-button button-aria-label="close" autofocus variant="ghost" icon-only command="close"
+                        commandfor="parent">
+                        <cek-icon name="x-mark"></cek-icon>
+                    </cek-button>
+                </div>
+                <div id="lipsum">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam felis metus, pharetra a mattis a,
+                        aliquet nec tortor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
+                        cubilia curae; Nulla accumsan sem accumsan tristique pharetra. In hac habitasse platea dictumst.
+                        Nulla ut libero lorem. Donec maximus tincidunt libero in feugiat. Vivamus tempus ligula pulvinar
+                        feugiat sodales. Praesent pulvinar velit sit amet enim sodales, ut efficitur arcu rhoncus. Sed
+                        dapibus leo non quam accumsan lobortis. Ut malesuada in nisl et vestibulum. Vestibulum molestie
+                        at mauris sit amet sodales. Aliquam vitae sapien accumsan, congue arcu bibendum, tempus nisi.
+                        Duis vitae dolor eros. Sed viverra quam vel quam fermentum, vitae hendrerit ipsum vulputate.
+                    </p>
+                    <p>
+                        Aenean euismod interdum arcu nec pulvinar. Duis iaculis porttitor commodo. Duis vel finibus
+                        metus. Nullam scelerisque lacus non mauris venenatis, non ornare lacus scelerisque. Nullam eget
+                        vehicula justo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia
+                        curae; Mauris eu felis ornare, tristique nulla et, pulvinar est. Praesent gravida ut odio vitae
+                        congue. Nulla sed commodo odio. Pellentesque velit odio, finibus at convallis ac, cursus vitae
+                        tellus. Suspendisse eu aliquam massa, sed finibus justo. Vestibulum sed ex quam.
+                    </p>
+                    <p>
+                        Mauris ullamcorper, neque a ultrices fringilla, odio nulla viverra arcu, nec vestibulum lorem
+                        nibh tincidunt turpis. Quisque ac vulputate massa. Ut lectus lorem, finibus at est nec,
+                        tincidunt placerat velit. Sed rhoncus odio non mi euismod, id auctor massa malesuada. Ut congue,
+                        ante ut sollicitudin facilisis, est turpis vestibulum turpis, quis semper felis eros sed sem.
+                        Praesent dictum magna accumsan ex feugiat, in bibendum odio bibendum. Curabitur non sapien dui.
+                        Donec mattis posuere justo, vitae viverra nisi. Donec felis ligula, dictum ac turpis eget,
+                        gravida vehicula enim. Nam metus lectus, feugiat id porttitor in, consequat vel metus.
+                    </p>
+                    <p>
+                        Nam ac dolor ex. Ut sit amet lectus nisi. Nullam lobortis tellus id viverra congue. Donec
+                        iaculis nec eros sed suscipit. Vestibulum eu pharetra ex, id hendrerit diam. Proin varius, nunc
+                        et posuere pharetra, neque elit suscipit ante, sed dapibus felis diam id mauris. Aliquam eu elit
+                        convallis, eleifend lacus efficitur, sollicitudin ligula. Suspendisse commodo leo non ipsum
+                        interdum, et tincidunt nunc mollis. In at eros scelerisque, porttitor dolor porttitor, tristique
+                        lorem. Curabitur vel eros in odio tempus tristique. Integer condimentum, neque eget luctus
+                        iaculis, sem quam suscipit dolor, ac euismod mauris turpis at lacus.
+                    </p>
+                    <p>
+                        Aliquam tristique tincidunt leo in condimentum. Nunc eu finibus nibh. Integer vulputate ex
+                        ultrices turpis sodales, vitae lacinia tellus fermentum. Suspendisse lacinia molestie lacus, in
+                        ultrices tellus tempus non. Curabitur libero mauris, lacinia nec ex sit amet, ornare tempus
+                        dolor. Sed rhoncus ante est, vel sagittis ligula rhoncus non. Etiam sed euismod arcu. Ut eget
+                        nunc ex.
+                    </p>
+                    <p>
+                        In molestie hendrerit nisl, id suscipit lorem eleifend nec. Quisque felis arcu, pulvinar ac
+                        efficitur sed, vehicula ut tortor. Nulla vitae efficitur quam, quis ullamcorper orci. Proin
+                        ornare tellus non elit sagittis, et consectetur mauris pulvinar. Nullam a blandit metus.
+                        Pellentesque commodo suscipit mi, eget sagittis augue luctus vel. Nam pulvinar feugiat tortor,
+                        sit amet vestibulum augue aliquam ut. Suspendisse id arcu sed sapien lacinia feugiat non sit
+                        amet massa. Interdum et malesuada fames ac ante ipsum primis in faucibus. Praesent non libero
+                        laoreet, ornare lectus at, efficitur nisl. Duis luctus lacus non felis facilisis pretium. Cras
+                        nibh turpis, dignissim eu nisi sed, sagittis pretium leo. Aenean vel aliquet nibh, ac tincidunt
+                        velit. Nulla facilisis leo in libero lacinia, eget venenatis tortor blandit.
+                    </p>
+                    <p>
+                        Suspendisse maximus est non sodales tincidunt. Donec et consectetur urna. Donec ac justo sit
+                        amet neque feugiat hendrerit. Phasellus quis odio nulla. Donec vitae tempor purus, vel elementum
+                        nisi. Fusce non ultricies turpis. Phasellus nec odio purus. Integer nisi leo, euismod posuere
+                        erat sit amet, imperdiet efficitur sem. Nulla tincidunt ante eros, at eleifend sapien pharetra
+                        non. Etiam finibus lacus sed eros egestas lobortis.
+                    </p>
+                    <p>
+                        Cras mattis lacinia nulla vel convallis. In efficitur tortor urna, interdum iaculis est iaculis
+                        nec. Aliquam dictum turpis sit amet justo lobortis maximus. Suspendisse bibendum magna faucibus
+                        mi fringilla dictum. Morbi ut vulputate felis, volutpat tempor est. Pellentesque maximus justo
+                        et nisl scelerisque sollicitudin. Vivamus consequat, mauris in rutrum lobortis, nulla sem
+                        dignissim turpis, ac auctor urna felis id nisi. Aenean eleifend arcu magna, at efficitur tellus
+                        faucibus eget.
+                    </p>
+                    <p>
+                        Pellentesque in libero a leo sollicitudin tempor eu vitae elit. Morbi semper sapien id nibh
+                        auctor, ac feugiat nisl scelerisque. Nullam imperdiet ante finibus ultrices blandit. Donec
+                        imperdiet hendrerit hendrerit. Nulla ac sapien vel orci elementum commodo id et nisi. Proin
+                        auctor egestas nulla in ultricies. Donec turpis ex, pretium a tellus et, feugiat finibus mi.
+                    </p>
+                    <p>
+                        Etiam sit amet euismod lectus. Morbi vel libero tempor, pretium erat a, dictum enim. Phasellus
+                        pharetra purus at ullamcorper fermentum. Aenean vehicula lacus in maximus posuere. Nunc
+                        vestibulum dui quis lacinia luctus. Nunc laoreet vulputate maximus. Nunc sagittis posuere urna,
+                        a pretium quam consectetur vel. Duis pellentesque accumsan mauris, eu suscipit eros aliquet
+                        eget. Quisque lacinia ligula sit amet posuere tincidunt. Nullam suscipit, erat non imperdiet
+                        facilisis, ex diam molestie orci, eu rutrum massa erat eu purus. Duis ornare ante et urna
+                        blandit cursus.
+                    </p>
+                </div>
                 <cek-button slot="footer" variant="primary" command="close" commandfor="parent">Close</cek-button>
             </cek-dialog>
         </template>
@@ -108,7 +399,8 @@
     </p>
 
     <p>Provide a mechanism for users to close the dialog, such as a close button. Modal dialogs opened with
-        <code>showModal()</code> can be dismissed with the Esc key, which should be maintained for accessibility.
+        <code>showModal()</code> can be dismissed with the Esc key, which should be maintained for accessibility. If you
+        want to prevent the dialog from closing with the Esc key, use the <code>no-esc-close</code> attribute.
     </p>
 
     <p>The native <code>&lt;dialog&gt;</code> element provides built-in accessibility features. When using
@@ -116,6 +408,11 @@
         dialogs, <code>aria-modal="false"</code> is used. Ensure everything outside the modal dialog is inert using the
         <code>inert</code> attribute.
     </p>
+
+    <p>For critical dialogs where the user must make a choice, you can use <code>role="alertdialog"</code>.
+        Additionally, you can choose not to add a close icon and not use the <code>close-on-outside-click</code>
+        attribute and prevent close on escape key with <code>no-esc-close</code> attribute to ensure the user makes a
+        choice within the dialog.</p>
 
     <h2>Attributes</h2>
 
@@ -135,6 +432,18 @@
                 <td>modal</td>
                 <td>If present, the dialog is shown as a modal dialog.</td>
             </tr>
+            <tr>
+                <td>size</td>
+                <td>The size of the dialog. Can be "small", "medium", or "large".</td>
+            </tr>
+            <tr>
+                <td>close-on-outside-click</td>
+                <td>If present, the dialog will close when the backdrop or outside of the dialog is clicked.</td>
+            </tr>
+            <tr>
+                <td>no-esc-close</td>
+                <td>If present, the dialog will not close when the ESC key is pressed.</td>
+            </tr>
         </tbody>
     </table>
 
@@ -151,10 +460,6 @@
             <tr>
                 <td>header</td>
                 <td>Content to display in the header of the dialog.</td>
-            </tr>
-            <tr>
-                <td>header-actions</td>
-                <td>Content to display in the header actions area.</td>
             </tr>
             <tr>
                 <td>default</td>

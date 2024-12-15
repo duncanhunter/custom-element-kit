@@ -91,7 +91,7 @@ export const buttonStyles = /*css*/ `
   	padding: 0;
   	margin: 0;
   	font: inherit;
-  	color: inherit;
+  	color: var(--cek-text-color-1);
   	cursor: pointer;
   	box-sizing: border-box;
   	text-decoration: none;

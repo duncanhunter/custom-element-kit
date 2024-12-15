@@ -294,6 +294,7 @@ fieldset {
 
 [class^="cek-text-"] {
 	line-height: var(--cek-line-height);
+	margin: 0;
 }
 
 .cek-text-6 {
