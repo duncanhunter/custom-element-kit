@@ -104,6 +104,7 @@ class Dialog extends HTMLElement {
 		this.#dialog.show();
 		this.#autofocus();
 		this.setAttribute("open", "");
+		this.#dialog.setAttribute("aria-modal", "false");
 	}
 
 	/**
@@ -115,6 +116,7 @@ class Dialog extends HTMLElement {
 		this.#autofocus();
 		this.setAttribute("open", "");
 		this.setAttribute("modal", "");
+		this.#dialog.setAttribute("aria-modal", "true");
 	}
 
 	/**
