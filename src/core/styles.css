@@ -108,21 +108,36 @@ fieldset {
 			calc(1% + 7%)
 		);
 
-	--cek-space-0: 0.0625rem; /* 1px */
-	--cek-space-1: 0.125rem; /* 2px */
-	--cek-space-2: 0.25rem; /* 4px */
-	--cek-space-3: 0.375rem; /* 6px */
-	--cek-space-4: 0.5rem; /* 8px */
-	--cek-space-5: 0.75rem; /* 12px */
-	--cek-space-6: 1rem; /* 16px */
-	--cek-space-7: 1.25rem; /* 20px */
-	--cek-space-8: 1.5rem; /* 24px */
-	--cek-space-9: 1.75rem; /* 28px */
-	--cek-space-10: 2.25rem; /* 36px */
-	--cek-space-11: 2.75rem; /* 44px */
-	--cek-space-12: 3rem; /* 48px */
-	--cek-space-13: 3.5rem; /* 56px */
-	--cek-space-14: 4.5rem; /* 72px */
+	/* 1px */
+	--cek-space-0: 0.0625rem;
+	/* 2px */
+	--cek-space-1: 0.125rem;
+	/* 4px */
+	--cek-space-2: 0.25rem;
+	/* 6px */
+	--cek-space-3: 0.375rem;
+	/* 8px */
+	--cek-space-4: 0.5rem;
+	/* 12px */
+	--cek-space-5: 0.75rem;
+	/* 16px */
+	--cek-space-6: 1rem;
+	/* 20px */
+	--cek-space-7: 1.25rem;
+	/* 24px */
+	--cek-space-8: 1.5rem;
+	/* 28px */
+	--cek-space-9: 1.75rem;
+	/* 36px */
+	--cek-space-10: 2.25rem;
+	/* 44px */
+	--cek-space-11: 2.75rem;
+	/* 48px */
+	--cek-space-12: 3rem;
+	/* 56px */
+	--cek-space-13: 3.5rem;
+	/* 72px */
+	--cek-space-14: 4.5rem;
 
 	--cek-font-sans: system-ui, -apple-system, Segoe UI;
 
@@ -140,20 +155,30 @@ fieldset {
 
 	--cek-line-height: calc(2px + 2ex + 2px);
 
-	--cek-font-size-00: clamp(0.625rem, calc(0.625rem + 0.1vw), 0.75rem); /* ~10px to 12px */
-	--cek-font-size-0: clamp(0.75rem, calc(0.75rem + 0.1vw), 0.875rem); /* ~12px to 14px */
-	--cek-font-size-1: clamp(0.875rem, calc(0.875rem + 0.1vw), 1rem); /* ~14px to 16px */
-	--cek-font-size-2: clamp(1rem, calc(1rem + 0.1vw), 1.125rem); /* ~16px to 18px */
-	--cek-font-size-3: clamp(1.125rem, calc(1.125rem + 0.1vw), 1.25rem); /* ~18px to 20px */
-	--cek-font-size-4: clamp(1.25rem, calc(1.25rem + 0.1vw), 1.375rem); /* ~20px to 22px */
-	--cek-font-size-5: clamp(1.375rem, calc(1.375rem + 0.1vw), 1.5rem); /* ~22px to 24px */
-	--cek-font-size-6: clamp(1.5rem, calc(1.5rem + 0.1vw), 1.625rem); /* ~24px to 26px */
-	--cek-font-size-7: clamp(1.625rem, calc(1.625rem + 0.1vw), 1.75rem); /* ~26px to 28px */
-	--cek-font-size-8: clamp(1.75rem, calc(1.75rem + 0.1vw), 1.875rem); /* ~28px to 30px */
+	/* ~10px to 12px */
+	--cek-font-size-00: clamp(0.625rem, calc(0.625rem + 0.1vw), 0.75rem);
+	/* ~12px to 14px */
+	--cek-font-size-0: clamp(0.75rem, calc(0.75rem + 0.1vw), 0.875rem);
+	/* ~14px to 16px */
+	--cek-font-size-1: clamp(0.875rem, calc(0.875rem + 0.1vw), 1rem);
+	/* ~16px to 18px */
+	--cek-font-size-2: clamp(1rem, calc(1rem + 0.1vw), 1.125rem);
+	/* ~18px to 20px */
+	--cek-font-size-3: clamp(1.125rem, calc(1.125rem + 0.1vw), 1.25rem);
+	/* ~20px to 22px */
+	--cek-font-size-4: clamp(1.25rem, calc(1.25rem + 0.1vw), 1.375rem);
+	/* ~22px to 24px */
+	--cek-font-size-5: clamp(1.375rem, calc(1.375rem + 0.1vw), 1.5rem);
+	/* ~24px to 26px */
+	--cek-font-size-6: clamp(1.5rem, calc(1.5rem + 0.1vw), 1.625rem);
+	/* ~26px to 28px */
+	--cek-font-size-7: clamp(1.625rem, calc(1.625rem + 0.1vw), 1.75rem);
+	/* ~28px to 30px */
+	--cek-font-size-8: clamp(1.75rem, calc(1.75rem + 0.1vw), 1.875rem);
 }
 
 :where(html) {
-	font-family: var(--cek-font-sans);
+	--cek-font-family: var(--cek-font-sans);
 	--cek-border-radius: var(--cek-border-radius-2);
 	--cek-border-color: var(--cek-border-color-4);
 	--cek-border-width: 1px;
@@ -164,12 +189,19 @@ fieldset {
 	--cek-focus-ring-offset: var(--cek-space-1);
 	--cek-form-control-border: var(--cek-border-width) solid
 		var(--cek-border-color);
-	--cek-form-control-height-medium: var(--cek-space-9);
 	--cek-text-color-error: var(--cek-color-red-600);
 	--cek-border-color-error: var(--cek-color-red-600);
 	--cek-height-small: var(--cek-space-8);
 	--cek-height-medium: var(--cek-space-10);
 	--cek-height-large: var(--cek-space-11);
+	--cek-color-neutral: light-dark(
+		var(--cek-color-gray-900),
+		var(--cek-color-gray-100)
+	);
+	--cek-text-color-neutral: light-dark(
+		var(--cek-color-gray-100),
+		var(--cek-color-gray-900)
+	);
 	--cek-text-color-disabled: light-dark(
 		var(--cek-color-gray-900),
 		var(--cek-color-gray-100)
@@ -291,14 +323,3 @@ fieldset {
 .cek-text-bold {
 	font-weight: 700;
 }
-
-/* .cek-form-actions {
-	display: flex;
-	gap: var(--cek-space-4);
-}
-
-[cek-form] {
-	display: flex;
-	flex-direction: column;
-	gap: var(--cek-space-4);
-} */

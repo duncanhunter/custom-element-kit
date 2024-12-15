@@ -5,19 +5,47 @@
     <p>The button component supports several variants for different styles and use cases. Use the <span
             class="attribute">variant</span> attribute to change the visual style of the button.</p>
 
-    <cek-button variant="primary">Primary Button</cek-button>
-    <cek-button variant="ascent">Ascent Button</cek-button>
-    <cek-button variant="outline">Outline Button</cek-button>
-    <cek-button variant="text">Text Button</cek-button>
-    <cek-button variant="link">Link Button</cek-button>
+    <div class="flex flex-column gap-3">
+        <cek-button variant="primary">Primary Button</cek-button>
+        <cek-button variant="secondary">Secondary Button</cek-button>
+        <cek-button variant="outline">Outline Button</cek-button>
+        <cek-button variant="ghost">Ghost Button</cek-button>
+        <cek-button variant="link">Link Button</cek-button>
+        <cek-button variant="destructive">Destructive Button</cek-button>
+        <cek-button variant="neutral">Neutral Button</cek-button>
+        <cek-button variant="primary" pill>Primary Pill Button</cek-button>
+        <cek-button variant="primary" button-aria-label="Settings" icon-only>
+            <cek-icon name="settings"></cek-icon>
+        </cek-button>
+        <cek-button variant="secondary" circle button-aria-label="Settings" icon-only>
+            <cek-icon name="settings"></cek-icon>
+        </cek-button>
+        <cek-button variant="ghost" circle button-aria-label="Settings" icon-only>
+            <cek-icon name="settings"></cek-icon>
+        </cek-button>
+    </div>
 
     <cek-code-block lang="xml" theme="github-dark">
         <template>
-            <cek-button variant="primary">Primary Button</cek-button>
-            <cek-button variant="ascent">Ascent Button</cek-button>
-            <cek-button variant="outline">Outline Button</cek-button>
-            <cek-button variant="text">Text Button</cek-button>
-            <cek-button variant="link">Link Button</cek-button>
+            <div class="flex flex-column gap-3">
+                <cek-button variant="primary">Primary Button</cek-button>
+                <cek-button variant="secondary">Secondary Button</cek-button>
+                <cek-button variant="outline">Outline Button</cek-button>
+                <cek-button variant="ghost">Ghost Button</cek-button>
+                <cek-button variant="link">Link Button</cek-button>
+                <cek-button variant="destructive">Destructive Button</cek-button>
+                <cek-button variant="neutral">Neutral Button</cek-button>
+                <cek-button variant="primary" pill>Primary Pill Button</cek-button>
+                <cek-button variant="primary" button-aria-label="Settings" icon-only>
+                    <cek-icon name="settings"></cek-icon>
+                </cek-button>
+                <cek-button variant="secondary" circle button-aria-label="Settings" icon-only>
+                    <cek-icon name="settings"></cek-icon>
+                </cek-button>
+                <cek-button variant="ghost" circle button-aria-label="Settings" icon-only>
+                    <cek-icon name="settings"></cek-icon>
+                </cek-button>
+            </div>
         </template>
     </cek-code-block>
 
@@ -44,14 +72,17 @@
         content before or after the button's text.</p>
 
     <div class="horizontal">
-        <cek-button variant="primary">
+        <cek-button size="small" variant="primary">
             <cek-icon slot="start" name="plus-circle"></cek-icon>
             Add Item
         </cek-button>
-
         <cek-button variant="primary">
             Next
-            <cek-icon slot="end" name="user"></cek-icon>
+            <cek-icon size="medium" slot="end" name="user"></cek-icon>
+        </cek-button>
+        <cek-button size="large" variant="primary">
+            Settings
+            <cek-icon slot="end" name="settings"></cek-icon>
         </cek-button>
     </div>
 
@@ -92,19 +123,21 @@
     </cek-code-block>
 
     <h2>Anchor Functionality</h2>
-    <p>The button component can also function as a link. Use the <span class="attribute">href</span> attribute to transform the button into an anchor element. Optionally, you can use the <span class="attribute">target</span> attribute to specify where to open the linked document.</p>
+    <p>The button component can also function as a link. Use the <span class="attribute">href</span> attribute to
+        transform the button into an anchor element. Optionally, you can use the <span class="attribute">target</span>
+        attribute to specify where to open the linked document.</p>
 
     <cek-button href="https://example.com" target="_blank" variant="link">
         Go to Example
         <cek-icon slot="end" name="arrow-up-right">
-    </cek-icon></cek-button>
+        </cek-icon></cek-button>
 
     <cek-code-block lang="xml" theme="github-dark">
         <template>
             <cek-button href="https://example.com" target="_blank" variant="link">
                 Go to Example
                 <cek-icon slot="end" name="arrow-up-right">
-            </cek-icon></cek-button>
+                </cek-icon></cek-button>
         </template>
     </cek-code-block>
 
@@ -140,8 +173,10 @@
         </tr>
         <tr>
             <td>variant</td>
-            <td>Sets the styling variant of the button. Possible values are <code>primary</code>, <code>ascent</code>,
-                <code>outline</code>, <code>text</code>, and <code>link</code>.
+            <td>Sets the styling variant of the button. Possible values are <code>primary</code>,
+                <code>secondary</code>,
+                <code>outline</code>, <code>ghost</code>, <code>link</code>, <code>destructive</code>,
+                <code>neutral</code>.
             </td>
         </tr>
         <tr>
@@ -155,6 +190,14 @@
             <td>If present, styles the button for icon-only display without text.</td>
         </tr>
         <tr>
+            <td>pill</td>
+            <td>If present, styles the button with a pill shape.</td>
+        </tr>
+        <tr>
+            <td>circle</td>
+            <td>If present, styles the button with a circle shape.</td>
+        </tr>
+        <tr>
             <td>button-aria-label</td>
             <td>Sets an ARIA label for accessibility.</td>
         </tr>
@@ -164,7 +207,9 @@
         </tr>
         <tr>
             <td>target</td>
-            <td>Sets the <code>target</code> attribute of the anchor when <code>href</code> is present. Defaults to <code>_self</code>.</td>
+            <td>Sets the <code>target</code> attribute of the anchor when <code>href</code> is present. Defaults to
+                <code>_self</code>.
+            </td>
         </tr>
     </tbody>
 </table>

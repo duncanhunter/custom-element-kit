@@ -5,21 +5,28 @@
  * @param {Object} attrs - The attributes object, e.g., { name: "home", size: "1em" }.
  * @returns {string} - The rendered HTML with inline SVG and styles.
  */
-export function iconTemplate(attrs = {}) {
+export const iconTemplate = (attrs = {}) => {
 	const iconName = attrs.name || "";
-	const size = attrs.size || "24";
+	const size = attrs.size;
 	const svg = icons[iconName] || "";
-	return svg
-		.replace(
-			"<svg",
-			`<svg height="${size}" width="${size}" part="icon" aria-hidden="true"`,
-		)
-		.toString();
-}
 
-export const iconStyles = `
+	const sizeAttributes = size ? `height="${size}" width="${size}"` : "";
+
+	return svg
+		.replace("<svg", `<svg ${sizeAttributes} part="icon" aria-hidden="true"`)
+		.toString();
+};
+
+export const iconStyles = /*css*/ `
 :host {
   display: flex;
+  --height: 1em;
+  --width: 1em;
+}
+
+svg {
+  height: var(--height);
+  width: var(--width);
 }
 `;
 
@@ -53,7 +60,7 @@ export class Icon extends HTMLElement {
 	}
 
 	get size() {
-		return this.getAttribute("size") || "1em";
+		return this.getAttribute("size");
 	}
 
 	attributeChangedCallback(attrName, oldVal, newVal) {
@@ -88,8 +95,10 @@ export class Icon extends HTMLElement {
 			if (svg) {
 				svg.setAttribute("part", "icon");
 				svg.setAttribute("aria-hidden", "true");
-				svg.style.width = this.size;
-				svg.style.height = this.size;
+				if (this.size) {
+					svg.style.width = this.size;
+					svg.style.height = this.size;
+				}
 			}
 		} catch (error) {
 			console.error("fetchIcon error:", error);

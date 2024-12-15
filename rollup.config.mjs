@@ -59,6 +59,7 @@ export default {
 				{ src: "src/components/icons", dest: "dist" },
 				{ src: "src/core/styles.css", dest: "dist/assets" },
 				{ src: "src/docs/page-layout.css", dest: "dist/assets" },
+				{ src: "src/docs/utilities.css", dest: "dist/assets" },
 				{ src: "src/docs/scroll-spy.js", dest: "dist/assets" },
 				{ src: "src/utils/auto-define-elements.mjs", dest: "dist/assets" },
 			],

@@ -61,7 +61,6 @@ const inputAttributes = [
 ];
 
 export const inputTemplate = (attributes = {}) => {
-	console.log("inputTemplate", attributes);
 	const inputAtts = inputAttributes
 		.filter((attr) => attributes[attr] !== undefined)
 		.map(

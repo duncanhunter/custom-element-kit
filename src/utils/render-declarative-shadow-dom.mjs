@@ -52,8 +52,6 @@ async function getIconContent(element) {
 	const icons = await loadIcons();
 	const svgContent = icons[iconName];
 
-	console.log("svgContent", svgContent, icons[iconName], iconName);
-
 	if (!svgContent) {
 		console.warn(`cek-icon: "${iconName}" not found`);
 		return "<style>:host{display:flex;}</style>";

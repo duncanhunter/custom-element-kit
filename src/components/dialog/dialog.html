@@ -1,0 +1,228 @@
+<section>
+    <h1>Dialog (cek-dialog)</h1>
+
+    <h2>Basic Usage</h2>
+    <p>The dialog component is used to display modal or non-modal dialog.</p>
+
+    <cek-button variant="primary" command="show-modal" commandfor="my-dialog">Open dialog</cek-button>
+    <cek-dialog id="my-dialog">
+        <h2 slot="header">Dialog Title</h2>
+        <cek-button autofocus variant="primary" slot="header-actions" command="close" commandfor="parent">Close
+            Dialog</cek-button>
+        <p>Dialog content</p>
+    </cek-dialog>
+
+    <cek-code-block lang="xml" theme="github-dark">
+        <template>
+            <cek-button variant="primary" command="show-modal" commandfor="my-dialog">Open Dialog</cek-button>
+            <cek-dialog id="my-dialog">
+                <h2 slot="header">Dialog Title</h2>
+                <cek-button autofocus variant="primary" slot="header-actions" command="close" commandfor="parent">Close
+                    Dialog</cek-button>
+                <p>Dialog content</p>
+            </cek-dialog>
+        </template>
+    </cek-code-block>
+
+    <h2>Modal Dialog</h2>
+    <p>Use the show method to open as a non-modal.</p>
+
+    <cek-button variant="primary" command="show" commandfor="non-modal">Open non modal dialog</cek-button>
+    <cek-dialog id="non-modal">
+        <h2 slot="header">Dialog Title</h2>
+        <cek-button autofocus variant="primary" slot="header-actions" command="close" commandfor="parent">Close
+            Dialog</cek-button>
+        <p>Dialog content</p>
+    </cek-dialog>
+
+    <cek-code-block lang="xml" theme="github-dark">
+        <template>
+            <cek-button variant="primary" command="show" commandfor="non-modal">Open non modal dialog</cek-button>
+            <cek-dialog id="non-modal">
+                <h2 slot="header">Dialog Title</h2>
+                <cek-button autofocus variant="primary" slot="header-actions" command="close" commandfor="parent">Close
+                    Dialog</cek-button>
+                <p>Dialog content</p>
+            </cek-dialog>
+        </template>
+    </cek-code-block>
+
+    <h2>Slots</h2>
+    <p>The dialog component supports several slots for customizing the content.</p>
+
+    <cek-button variant="primary" command="show-modal" commandfor="custom-slots-dialog">Open custom slots
+        dialog</cek-button>
+    <cek-dialog id="custom-slots-dialog">
+        <span slot="header">Custom Header</span>
+        <cek-button autofocus slot="header-actions" variant="text" command="close" commandfor="parent">Action
+            close</cek-button>
+        <p>This dialog has custom header and header actions.</p>
+        <cek-button slot="footer" variant="primary" command="close" commandfor="parent">Close</cek-button>
+    </cek-dialog>
+
+    <cek-code-block lang="xml" theme="github-dark">
+        <template>
+            <cek-button variant="primary" command="show-modal" commandfor="custom-slots-dialog">Open custom slots
+                dialog</cek-button>
+            <cek-dialog id="custom-slots-dialog">
+                <span slot="header">Custom Header</span>
+                <cek-button autofocus slot="header-actions" variant="text" command="close" commandfor="parent">Action
+                    close</cek-button>
+                <p>This dialog has custom header and header actions.</p>
+                <cek-button slot="footer" variant="primary" command="close" commandfor="parent">Close</cek-button>
+            </cek-dialog>
+        </template>
+    </cek-code-block>
+
+    <h2>Open Attribute</h2>
+    <p>The <code>open</code> attribute can be used to open the dialog in non-modal mode.</p>
+
+    <cek-code-block lang="xml" theme="github-dark">
+        <template>
+            <cek-dialog open>
+                <h2 slot="header">Dialog Opened with Attribute</h2>
+                <p>This dialog is opened using the <code>open</code> attribute.</p>
+                <cek-button slot="footer" variant="primary" command="close" commandfor="parent">Close</cek-button>
+            </cek-dialog>
+        </template>
+    </cek-code-block>
+
+    <h2>Modal Attribute</h2>
+    <p>The <code>open</code> <code>modal</code> attributes can be used together to open the dialog in modal mode.</p>
+
+    <cek-code-block lang="xml" theme="github-dark">
+        <template>
+            <cek-dialog open modal>
+                <h2 slot="header">Modal Dialog Opened with Attribute</h2>
+                <p>This dialog is opened using the <code>open-modal</code> attribute.</p>
+                <cek-button slot="footer" variant="primary" command="close" commandfor="parent">Close</cek-button>
+            </cek-dialog>
+        </template>
+    </cek-code-block>
+
+</section>
+
+<h2>Attributes</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Attribute</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>open</td>
+            <td>Displays the dialog in non-modal mode when present.</td>
+        </tr>
+        <tr>
+            <td>modal</td>
+            <td>If present, the dialog is shown as a modal dialog.</td>
+        </tr>
+        <tr>
+            <td>open-modal</td>
+            <td>Displays the dialog in modal mode when present.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Slots</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Slot Name</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>header</td>
+            <td>Content to display in the header of the dialog.</td>
+        </tr>
+        <tr>
+            <td>header-actions</td>
+            <td>Content to display in the header actions area.</td>
+        </tr>
+        <tr>
+            <td>default</td>
+            <td>The main content of the dialog.</td>
+        </tr>
+        <tr>
+            <td>footer</td>
+            <td>Content to display in the footer of the dialog.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>CSS Parts</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Part Name</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>dialog</td>
+            <td>The native dialog element.</td>
+        </tr>
+        <tr>
+            <td>header</td>
+            <td>The header element of the dialog.</td>
+        </tr>
+        <tr>
+            <td>content</td>
+            <td>The content element of the dialog.</td>
+        </tr>
+        <tr>
+            <td>footer</td>
+            <td>The footer element of the dialog.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Events</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Event</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>close</td>
+            <td>Dispatched when the dialog is closed.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Methods</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Method</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>show()</td>
+            <td>Shows the dialog as a non-modal dialog.</td>
+        </tr>
+        <tr>
+            <td>showModal()</td>
+            <td>Shows the dialog as a modal dialog.</td>
+        </tr>
+        <tr>
+            <td>close(result)</td>
+            <td>Closes the dialog with an optional result.</td>
+        </tr>
+    </tbody>
+</table>

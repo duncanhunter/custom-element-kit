@@ -46,25 +46,30 @@
         <li><span class="attribute">too-short-message</span> - Custom message for too short validation.</li>
         <li><span class="attribute">too-long-message</span> - Custom message for too long validation.</li>
         <li><span class="attribute">type-mismatch-message</span> - Custom message for type mismatch validation.</li>
-        <li><span class="attribute">pattern-mismatch-message</span> - Custom message for pattern mismatch validation.</li>
+        <li><span class="attribute">pattern-mismatch-message</span> - Custom message for pattern mismatch validation.
+        </li>
         <li><span class="attribute">range-underflow-message</span> - Custom message for range underflow validation.</li>
     </ul>
 
-    <form novalidate>
-        <cek-input value-missing-message="Email address is required" required label="Email Address" type="email"></cek-input>
-        <cek-input required label="Postal Code" pattern="\d{4}" help="Enter a 4-digit code"
-            validate-on-change pattern-mismatch-message="Please enter a valid 4-digit postal code"></cek-input>
-        <cek-input type="number" min="18" range-underflow-message="You must be at least 18 years old" label="Age"></cek-input>
+    <form novalidate class="flex flex-column gap-4">
+        <cek-input value-missing-message="Email address is required" required label="Email Address"
+            type="email"></cek-input>
+        <cek-input required label="Postal Code" pattern="\d{4}" help="Enter a 4-digit code" validate-on-change
+            pattern-mismatch-message="Please enter a valid 4-digit postal code"></cek-input>
+        <cek-input type="number" min="18" range-underflow-message="You must be at least 18 years old"
+            label="Age"></cek-input>
         <cek-button variant="primary" type="submit">Submit & validate</cek-button>
     </form>
 
     <cek-code-block lang="xml" theme="github-dark">
         <template>
             <form novalidate>
-                <cek-input value-missing-message="Email address is required" required label="Email Address" type="email"></cek-input>
-                <cek-input required label="Postal Code" pattern="\d{4}" help="Enter a 4-digit code"
-                    validate-on-change pattern-mismatch-message="Please enter a valid 4-digit postal code"></cek-input>
-                <cek-input type="number" min="18" range-underflow-message="You must be at least 18 years old" label="Age"></cek-input>
+                <cek-input value-missing-message="Email address is required" required label="Email Address"
+                    type="email"></cek-input>
+                <cek-input required label="Postal Code" pattern="\d{4}" help="Enter a 4-digit code" validate-on-change
+                    pattern-mismatch-message="Please enter a valid 4-digit postal code"></cek-input>
+                <cek-input type="number" min="18" range-underflow-message="You must be at least 18 years old"
+                    label="Age"></cek-input>
                 <cek-button variant="primary" type="submit">Submit</cek-button>
             </form>
         </template>
@@ -74,24 +79,56 @@
 
     <p>Small, medium (default) and large sizes.</p>
 
-    <div class="horizontal">
-        <cek-input label="Small" placeholder="Small" size="small"></cek-input>
-        <cek-button variant="primary" size="small">Save</cek-button>
-    </div>
-    <div class="horizontal">
-        <cek-input label="Medium" placeholder="Medium"></cek-input>
-        <cek-button variant="primary" size="medium">Save</cek-button>
-    </div>
-    <div class="horizontal">
-        <cek-input label="Large" placeholder="Large" size="large"></cek-input>
-        <cek-button variant="primary" size="large">Save</cek-button>
+
+    <div class="flex flex-column gap-4">
+        <div class="flex gap-3 items-end">
+            <cek-input label="Small" placeholder="Small" size="small"></cek-input>
+            <cek-button variant="primary" size="small">
+                Save
+                <cek-icon slot="end" name="plus-circle"></cek-icon>
+            </cek-button>
+        </div>
+        <div class="flex gap-3 items-end">
+            <cek-input label="Medium" placeholder="Medium"></cek-input>
+            <cek-button variant="primary" size="medium">
+                Save
+                <cek-icon slot="end" name="plus-circle"></cek-icon>
+            </cek-button>
+        </div>
+        <div class="flex gap-3 items-end">
+            <cek-input label="Large" placeholder="Large" size="large"></cek-input>
+            <cek-button variant="primary" size="large">
+                Save
+                <cek-icon slot="end" name="plus-circle"></cek-icon>
+            </cek-button>
+        </div>
     </div>
 
     <cek-code-block lang="xml" theme="github-dark">
         <template>
-            <cek-input label="Small" placeholder="Small" size="small"></cek-input>
-            <cek-input label="Medium" placeholder="Medium"></cek-input>
-            <cek-input label="Large" placeholder="Large" size="large"></cek-input>
+            <div class="flex flex-column gap-4">
+                <div class="flex gap-3 items-end">
+                    <cek-input label="Small" placeholder="Small" size="small"></cek-input>
+                    <cek-button variant="primary" size="small">
+                        Save
+                        <cek-icon slot="end" name="plus-circle"></cek-icon>
+                    </cek-button>
+                </div>
+                <div class="flex gap-3 items-end">
+                    <cek-input label="Medium" placeholder="Medium"></cek-input>
+                    <cek-button variant="primary" size="medium">
+                        Save
+                        <cek-icon slot="end" name="plus-circle"></cek-icon>
+                    </cek-button>
+                </div>
+                <div class="flex gap-3 items-end">
+                    <cek-input label="Large" placeholder="Large" size="large"></cek-input>
+                    <cek-button variant="primary" size="large">
+                        Save
+                        <cek-icon slot="end" name="plus-circle"></cek-icon>
+                    </cek-button>
+                </div>
+            </div>
         </template>
     </cek-code-block>
 
@@ -100,15 +137,16 @@
     <p>Start and end slots will style kbd, cek-icon, cek-button elements. You can place any other HTML in these slots
         but will need to style them.</p>
 
-    <cek-input label="Icons & buttons">
-        <cek-icon size="1.2em" slot="start" name="currency-dollar"></cek-icon>
-        <cek-button size="small" slot="end" variant="text">Delete</cek-button>
-    </cek-input>
-
-    <cek-input label="kbd">
-        <kbd slot="start">⌘K</kbd>
-        <kbd slot="end">⌘C</kbd>
-    </cek-input>
+    <div class="flex flex-column gap-4">
+        <cek-input label="Icons & buttons">
+            <cek-icon size="1.2em" slot="start" name="currency-dollar"></cek-icon>
+            <cek-button size="small" slot="end" variant="text">Delete</cek-button>
+        </cek-input>
+        <cek-input label="kbd">
+            <kbd slot="start">⌘K</kbd>
+            <kbd slot="end">⌘C</kbd>
+        </cek-input>
+    </div>
 
     <cek-code-block lang="xml" theme="github-dark">
         <template>

@@ -37,7 +37,7 @@ legend {
 #control {
   border: var(--cek-form-control-border);
   border-radius: var(--cek-border-radius);
-  height: var(--cek-form-control-height-medium);
+  height: var(--cek-height-medium);
   font-size: inherit;
   color: inherit;
 }
