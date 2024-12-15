@@ -3,6 +3,8 @@
 
     <h2>Form validation</h2>
 
+    <p>Make sure to add name attributes to the cek-input to have broswer <a href="https://developer.mozilla.org/en-US/docs/Web/API/FormData">form data</a> capture the values</p>
+
     <p>When the cek-input element is placed inside a form, it integrates with the form’s native
         validation behavior and the component’s own validation logic. By default, validation messages appear only after
         the form is submitted. However, you can use the <span class="attribute">validate-on-change</span> attribute to
@@ -26,11 +28,11 @@
     </ul>
 
     <form novalidate class="flex flex-column gap-4">
-        <cek-input value-missing-message="Email address is required" required label="Email Address"
+        <cek-input name="email" value-missing-message="Email address is required" required label="Email Address"
             type="email"></cek-input>
-        <cek-input required label="Postal Code" pattern="\d{4}" help="Enter a 4-digit code" validate-on-change
+        <cek-input name="postcode" required label="Postal Code" pattern="\d{4}" help="Enter a 4-digit code" validate-on-change
             pattern-mismatch-message="Please enter a valid 4-digit postal code"></cek-input>
-        <cek-input type="number" min="18" range-underflow-message="You must be at least 18 years old"
+        <cek-input name="age" type="number" min="18" range-underflow-message="You must be at least 18 years old"
             label="Age"></cek-input>
         <cek-button variant="primary" type="submit">Submit & validate</cek-button>
     </form>
@@ -38,11 +40,11 @@
     <cek-code-block lang="xml" theme="github-dark">
         <template>
             <form novalidate>
-                <cek-input value-missing-message="Email address is required" required label="Email Address"
+                <cek-input name="email" value-missing-message="Email address is required" required label="Email Address"
                     type="email"></cek-input>
-                <cek-input required label="Postal Code" pattern="\d{4}" help="Enter a 4-digit code" validate-on-change
+                <cek-input name="postcode" required label="Postal Code" pattern="\d{4}" help="Enter a 4-digit code" validate-on-change
                     pattern-mismatch-message="Please enter a valid 4-digit postal code"></cek-input>
-                <cek-input type="number" min="18" range-underflow-message="You must be at least 18 years old"
+                <cek-input name="age" type="number" min="18" range-underflow-message="You must be at least 18 years old"
                     label="Age"></cek-input>
                 <cek-button variant="primary" type="submit">Submit</cek-button>
             </form>
@@ -63,7 +65,7 @@
             </cek-button>
         </div>
         <div class="flex gap-3 items-end">
-            <cek-input label="Medium" placeholder="Medium"></cek-input>
+            <cek-input label="Medium" placeholder="Medium" size="medium"></cek-input>
             <cek-button variant="primary" size="medium">
                 Save
                 <cek-icon slot="end" name="plus-circle"></cek-icon>
@@ -153,11 +155,11 @@
         <template>
             <form>
                 <!-- Visible label and help text for screen readers -->
-                <cek-input label="Email" required type="email"
+                <cek-input name="email" label="Email" required type="email"
                     help="We will send a confirmation email to this address."></cek-input>
 
                 <!-- Using input-aria-label for accessibility when no visible label is provided -->
-                <cek-input input-aria-label="Postal Code" pattern="\\d{4}" required validate-on-change></cek-input>
+                <cek-input name="postcode" input-aria-label="Postal Code" pattern="\\d{4}" required validate-on-change></cek-input>
 
                 <button type="submit">Save</button>
             </form>
