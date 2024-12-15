@@ -59,7 +59,7 @@
   	padding: 0;
   	margin: 0;
   	font: inherit;
-  	color: inherit;
+  	color: var(--cek-text-color-1);
   	cursor: pointer;
   	box-sizing: border-box;
   	text-decoration: none;
@@ -262,26 +262,86 @@
 		</svg>
 		</button>
 	</template>Open dialog</cek-button>
-    <cek-dialog id="my-dialog" server-rendered=""><template shadowrootmode="open"><style>
+    <cek-dialog size="medium" id="my-dialog" server-rendered=""><template shadowrootmode="open"><style>
 dialog {
 	z-index: 1;
+	border-radius: var(--cek-border-radius-3);
+	box-shadow: var(--cek-shadow-3);
+	background-color: light-dark(var(--cek-surface-color-0), var(--cek-surface-color-1));
+	border: none;
+	margin-block: var(--cek-space-8);
+    box-sizing: border-box;
+	padding: 0;
+	min-height: 18rem;
+}
+
+:host([open]) dialog {
+	display: flex;
+	margin: auto;
+}
+
+dialog[open] #container {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	margin: var(--cek-space-7);
+}
+
+dialog::backdrop {
+	background-color: rgba(0, 0, 0, 0.8);
+}
+
+header, footer {
+	position: sticky;
+	top: 0;
+	background-color: inherit;
+	z-index: 2;
+}
+
+header {
+	margin-block-end: var(--cek-space-6);
+}
+
+footer {
+	margin-block-start: var(--cek-space-6);
+	bottom: 0;
+}
+
+#content {
+	overflow-y: auto;
+	flex-grow: 1;
+}
+
+:host([size="small"]) dialog {
+	width: 18.75rem;
+}
+
+:host(:not([size])) dialog,
+:host([size="medium"]) dialog {
+	width: 37.5rem;
+}
+
+:host([size="large"]) dialog {
+	width: 56.25rem;
 }
 </style>
-		<dialog id="dialog" part="dialog" aria-modal="true">
-			<header part="header" id="header">
-				<slot name="header"></slot>
-				<slot name="header-actions"></slot>
-			</header>
-			<div id="content" part="content">
-				<slot></slot>
+		<dialog id="dialog" part="dialog" aria-modal="false">
+		  	<div id="container" part="container">
+				<header part="header" id="header">
+					<slot name="header"></slot>
+				</header>
+				<div id="content" part="content">
+					<slot></slot>
+				</div>
+				<footer part="footer">
+					<slot name="footer"></slot>
+				</footer>
 			</div>
-			<footer part="footer">
-				<slot name="footer"></slot>
-			</footer>
 		</dialog>
 	</template>
-        <h2 slot="header">Dialog Title</h2>
-        <cek-button commandfor="parent" command="close" slot="header-actions" variant="primary" autofocus server-rendered=""><template shadowrootmode="open"><style>
+        <div slot="header" class="flex justify-between items-center">
+            <h2 slot="header" class="cek-text-5">Dialog Title</h2>
+            <cek-button commandfor="parent" command="close" icon-only="" variant="ghost" autofocus button-aria-label="close" server-rendered=""><template shadowrootmode="open"><style>
 :host {
   	display: inline-block;
   	font-family: var(--cek-font-family);
@@ -298,7 +358,7 @@ dialog {
   	padding: 0;
   	margin: 0;
   	font: inherit;
-  	color: inherit;
+  	color: var(--cek-text-color-1);
   	cursor: pointer;
   	box-sizing: border-box;
   	text-decoration: none;
@@ -485,7 +545,7 @@ dialog {
 	--width: 1.4em;
 }
 </style>
-		<button id="button" part="button" autofocus command="close" commandfor="parent">
+		<button id="button" part="button" aria-label="close" autofocus command="close" commandfor="parent">
 		<slot name="start"></slot>
 		<div id="label" part="label"><slot></slot></div>
 		<slot name="end"></slot>
@@ -500,19 +560,248 @@ dialog {
 			<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
 		</svg>
 		</button>
-	</template>Close
-            Dialog</cek-button>
+	</template>
+                <cek-icon name="x-mark" server-rendered=""><template shadowrootmode="open"><style>:host{display:flex;}</style><svg height="24" width="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+</svg>
+</template></cek-icon>
+            </cek-button>
+        </div>
         <p>Dialog content</p>
+        <cek-button commandfor="parent" command="close" variant="primary" slot="footer" server-rendered=""><template shadowrootmode="open"><style>
+:host {
+  	display: inline-block;
+  	font-family: var(--cek-font-family);
+  	box-sizing: border-box;
+}
+
+#button {
+  	display: inline-flex;
+  	align-items: center;
+  	justify-content: center;
+  	position: relative;
+  	background: transparent;
+  	border: none;
+  	padding: 0;
+  	margin: 0;
+  	font: inherit;
+  	color: var(--cek-text-color-1);
+  	cursor: pointer;
+  	box-sizing: border-box;
+  	text-decoration: none;
+}
+
+:host([variant]) #button {
+  	border-radius: var(--cek-border-radius);
+  	padding-inline: var(--cek-padding-inline);
+}
+
+:host([variant]) #button:focus {
+  	outline: var(--cek-focus-ring);
+  	outline-offset: var(--cek-focus-ring-offset);
+}
+
+:host([loading]) #button,
+:host([disabled]) #button {
+  	cursor: not-allowed;
+}
+
+:host([loading]) #button {
+  	background-color: lightgray;
+  	color: rgba(0, 0, 0, 0.5);
+}
+
+:host([disabled][variant]) #button {
+  	background-color: var(--cek-surface-color-disabled);
+  	color: var(--cek-text-color-disabled);
+
+	&:focus {
+		outline-color: var(--cek-surface-color-disabled);
+	}
+}
+
+:host([size="small"]) #button {
+  	min-height: var(--cek-height-small);
+  	min-width: var(--cek-height-small);
+  	font-size: var(--cek-font-size-0);
+}
+
+:host(:not([size])) #button, 
+:host([size="medium"]) #button {
+  	min-height: var(--cek-height-medium);
+  	min-width: var(--cek-height-medium);
+  	font-size: var(--cek-font-size-1);
+}
+
+:host([size="large"]) #button {
+  	min-height: var(--cek-height-large);
+  	min-width: var(--cek-height-large);
+  	font-size: var(--cek-font-size-2);
+}
+
+:host([variant="primary"]) #button {
+  	background-color: var(--cek-color-primary-500);
+  	color: white;
+
+  	&:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="secondary"]) #button {
+ 	background-color: var(--cek-surface-color-1);
+ 	 color: var(--cek-text-color-1);
+
+ 	 &:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="outline"]) #button {
+	background-color: transparent;
+	border: 1px solid var(--cek-border-color-2);
+	color: var(--cek-text-color-1);
+
+  	&:hover {
+		text-decoration: underline;
+	}
+}
+
+:host([variant="ghost"]) #button {
+	background: transparent;
+	color: var(--cek-text-color-1);
+}
+
+:host([variant="ghost"]) #button:hover {
+	background-color: var(--cek-surface-color-1);
+}
+
+:host([variant="link"]) #button {
+	background-color: transparent;
+	color: var(--cek-color-primary-500);
+	padding: 0;
+	margin: 0;
+	min-height: 0;
+	min-width: 0;
+
+  	&:hover {
+  		text-decoration: underline;
+  	}
+}
+
+:host([variant="destructive"]) #button {
+ 	background-color: var(--cek-color-red-600);
+  	color: white;
+
+	 &:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="destructive"]) #button:focus {
+  	outline: 2px solid var(--cek-color-red-600);
+}
+
+:host([variant="neutral"]) #button {
+  	background-color: var(--cek-color-neutral);
+  	color: var(--cek-text-color-neutral);
+
+	&:hover {
+		filter: brightness(85%);
+  	}
+
+	&:focus {
+		outline-color: var(--cek-color-neutral);
+  	}
+}
+
+:host([variant="icon"]) #button {
+  	padding: var(--cek-space-2);
+  	margin: 0;
+}
+
+:host([pill]) #button {
+  border-radius: 50px;
+}
+
+:host([circle]) #button {
+  border-radius: 50%;
+  padding: 0;
+  width: var(--cek-height-medium);
+  height: var(--cek-height-medium);
+}
+
+[name="end"]::slotted(*) {
+  	margin-inline-start: 0.5ch;
+}
+
+[name="start"]::slotted(*) {
+  	margin-inline-end: 0.5ch;
+}
+
+#loading-icon {
+  	position: absolute;
+  	display: none;
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+}
+
+:host([loading]) #loading-icon {
+  display: block;
+}
+
+:host([icon-only]) #button {
+  padding: var(--cek-space-2);
+  margin: 0;
+}
+
+#arrow-icon {
+  	display: none;
+  	height: 1em;
+  	width: 1em;
+  	margin-inline-start: 0.5ch;
+}
+
+:host([arrow]) #arrow-icon {
+  	display: block;
+}
+
+::slotted(cek-icon) {
+	--height: 1.4em;
+	--width: 1.4em;
+}
+</style>
+		<button id="button" part="button" command="close" commandfor="parent">
+		<slot name="start"></slot>
+		<div id="label" part="label"><slot></slot></div>
+		<slot name="end"></slot>
+		<svg id="loading-icon" part="loading-icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25" />
+			<path d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7
+			a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z">
+			<animatetransform attributeName="transform" type="rotate" dur="0.75s" values="0 12 12;360 12 12" repeatCount="indefinite" />
+			</path>
+		</svg>
+		<svg id="arrow-icon" part="arrow-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">  
+			<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+		</svg>
+		</button>
+	</template>Close</cek-button>
     </cek-dialog>
 
     <cek-code-block lang="xml" theme="github-dark">
         <template>
             <cek-button variant="primary" command="show-modal" commandfor="my-dialog">Open Dialog</cek-button>
-            <cek-dialog id="my-dialog">
-                <h2 slot="header">Dialog Title</h2>
-                <cek-button autofocus variant="primary" slot="header-actions" command="close" commandfor="parent">Close
-                    Dialog</cek-button>
+            <cek-dialog id="my-dialog" size="medium">
+                <div slot="header" class="flex justify-between items-center">
+                    <h2 slot="header" class="cek-text-5">Dialog Title</h2>
+                    <cek-button button-aria-label="close" autofocus variant="ghost" icon-only="" command="close" commandfor="parent">
+                        <cek-icon name="x-mark"></cek-icon>
+                    </cek-button>
+                </div>
                 <p>Dialog content</p>
+                <cek-button slot="footer" variant="primary" command="close" commandfor="parent">Close</cek-button>
             </cek-dialog>
         </template>
     </cek-code-block>
@@ -537,7 +826,7 @@ dialog {
   	padding: 0;
   	margin: 0;
   	font: inherit;
-  	color: inherit;
+  	color: var(--cek-text-color-1);
   	cursor: pointer;
   	box-sizing: border-box;
   	text-decoration: none;
@@ -740,26 +1029,86 @@ dialog {
 		</svg>
 		</button>
 	</template>Open non modal dialog</cek-button>
-    <cek-dialog id="non-modal" server-rendered=""><template shadowrootmode="open"><style>
+    <cek-dialog size="small" id="non-modal" server-rendered=""><template shadowrootmode="open"><style>
 dialog {
 	z-index: 1;
+	border-radius: var(--cek-border-radius-3);
+	box-shadow: var(--cek-shadow-3);
+	background-color: light-dark(var(--cek-surface-color-0), var(--cek-surface-color-1));
+	border: none;
+	margin-block: var(--cek-space-8);
+    box-sizing: border-box;
+	padding: 0;
+	min-height: 18rem;
+}
+
+:host([open]) dialog {
+	display: flex;
+	margin: auto;
+}
+
+dialog[open] #container {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	margin: var(--cek-space-7);
+}
+
+dialog::backdrop {
+	background-color: rgba(0, 0, 0, 0.8);
+}
+
+header, footer {
+	position: sticky;
+	top: 0;
+	background-color: inherit;
+	z-index: 2;
+}
+
+header {
+	margin-block-end: var(--cek-space-6);
+}
+
+footer {
+	margin-block-start: var(--cek-space-6);
+	bottom: 0;
+}
+
+#content {
+	overflow-y: auto;
+	flex-grow: 1;
+}
+
+:host([size="small"]) dialog {
+	width: 18.75rem;
+}
+
+:host(:not([size])) dialog,
+:host([size="medium"]) dialog {
+	width: 37.5rem;
+}
+
+:host([size="large"]) dialog {
+	width: 56.25rem;
 }
 </style>
-		<dialog id="dialog" part="dialog" aria-modal="true">
-			<header part="header" id="header">
-				<slot name="header"></slot>
-				<slot name="header-actions"></slot>
-			</header>
-			<div id="content" part="content">
-				<slot></slot>
+		<dialog id="dialog" part="dialog" aria-modal="false">
+		  	<div id="container" part="container">
+				<header part="header" id="header">
+					<slot name="header"></slot>
+				</header>
+				<div id="content" part="content">
+					<slot></slot>
+				</div>
+				<footer part="footer">
+					<slot name="footer"></slot>
+				</footer>
 			</div>
-			<footer part="footer">
-				<slot name="footer"></slot>
-			</footer>
 		</dialog>
 	</template>
-        <h2 slot="header">Dialog Title</h2>
-        <cek-button commandfor="parent" command="close" slot="header-actions" variant="primary" autofocus server-rendered=""><template shadowrootmode="open"><style>
+        <div slot="header" class="flex justify-between items-center">
+            <h2 slot="header" class="cek-text-5">Dialog Title</h2>
+            <cek-button commandfor="parent" command="close" icon-only="" variant="ghost" autofocus button-aria-label="close" server-rendered=""><template shadowrootmode="open"><style>
 :host {
   	display: inline-block;
   	font-family: var(--cek-font-family);
@@ -776,7 +1125,7 @@ dialog {
   	padding: 0;
   	margin: 0;
   	font: inherit;
-  	color: inherit;
+  	color: var(--cek-text-color-1);
   	cursor: pointer;
   	box-sizing: border-box;
   	text-decoration: none;
@@ -963,7 +1312,7 @@ dialog {
 	--width: 1.4em;
 }
 </style>
-		<button id="button" part="button" autofocus command="close" commandfor="parent">
+		<button id="button" part="button" aria-label="close" autofocus command="close" commandfor="parent">
 		<slot name="start"></slot>
 		<div id="label" part="label"><slot></slot></div>
 		<slot name="end"></slot>
@@ -978,19 +1327,247 @@ dialog {
 			<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
 		</svg>
 		</button>
-	</template>Close
-            Dialog</cek-button>
-        <p>Dialog content</p>
+	</template>
+                <cek-icon name="x-mark" server-rendered=""><template shadowrootmode="open"><style>:host{display:flex;}</style><svg height="24" width="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+</svg>
+</template></cek-icon>
+            </cek-button>
+        </div>
+        <cek-button commandfor="parent" command="close" variant="primary" slot="footer" server-rendered=""><template shadowrootmode="open"><style>
+:host {
+  	display: inline-block;
+  	font-family: var(--cek-font-family);
+  	box-sizing: border-box;
+}
+
+#button {
+  	display: inline-flex;
+  	align-items: center;
+  	justify-content: center;
+  	position: relative;
+  	background: transparent;
+  	border: none;
+  	padding: 0;
+  	margin: 0;
+  	font: inherit;
+  	color: var(--cek-text-color-1);
+  	cursor: pointer;
+  	box-sizing: border-box;
+  	text-decoration: none;
+}
+
+:host([variant]) #button {
+  	border-radius: var(--cek-border-radius);
+  	padding-inline: var(--cek-padding-inline);
+}
+
+:host([variant]) #button:focus {
+  	outline: var(--cek-focus-ring);
+  	outline-offset: var(--cek-focus-ring-offset);
+}
+
+:host([loading]) #button,
+:host([disabled]) #button {
+  	cursor: not-allowed;
+}
+
+:host([loading]) #button {
+  	background-color: lightgray;
+  	color: rgba(0, 0, 0, 0.5);
+}
+
+:host([disabled][variant]) #button {
+  	background-color: var(--cek-surface-color-disabled);
+  	color: var(--cek-text-color-disabled);
+
+	&:focus {
+		outline-color: var(--cek-surface-color-disabled);
+	}
+}
+
+:host([size="small"]) #button {
+  	min-height: var(--cek-height-small);
+  	min-width: var(--cek-height-small);
+  	font-size: var(--cek-font-size-0);
+}
+
+:host(:not([size])) #button, 
+:host([size="medium"]) #button {
+  	min-height: var(--cek-height-medium);
+  	min-width: var(--cek-height-medium);
+  	font-size: var(--cek-font-size-1);
+}
+
+:host([size="large"]) #button {
+  	min-height: var(--cek-height-large);
+  	min-width: var(--cek-height-large);
+  	font-size: var(--cek-font-size-2);
+}
+
+:host([variant="primary"]) #button {
+  	background-color: var(--cek-color-primary-500);
+  	color: white;
+
+  	&:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="secondary"]) #button {
+ 	background-color: var(--cek-surface-color-1);
+ 	 color: var(--cek-text-color-1);
+
+ 	 &:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="outline"]) #button {
+	background-color: transparent;
+	border: 1px solid var(--cek-border-color-2);
+	color: var(--cek-text-color-1);
+
+  	&:hover {
+		text-decoration: underline;
+	}
+}
+
+:host([variant="ghost"]) #button {
+	background: transparent;
+	color: var(--cek-text-color-1);
+}
+
+:host([variant="ghost"]) #button:hover {
+	background-color: var(--cek-surface-color-1);
+}
+
+:host([variant="link"]) #button {
+	background-color: transparent;
+	color: var(--cek-color-primary-500);
+	padding: 0;
+	margin: 0;
+	min-height: 0;
+	min-width: 0;
+
+  	&:hover {
+  		text-decoration: underline;
+  	}
+}
+
+:host([variant="destructive"]) #button {
+ 	background-color: var(--cek-color-red-600);
+  	color: white;
+
+	 &:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="destructive"]) #button:focus {
+  	outline: 2px solid var(--cek-color-red-600);
+}
+
+:host([variant="neutral"]) #button {
+  	background-color: var(--cek-color-neutral);
+  	color: var(--cek-text-color-neutral);
+
+	&:hover {
+		filter: brightness(85%);
+  	}
+
+	&:focus {
+		outline-color: var(--cek-color-neutral);
+  	}
+}
+
+:host([variant="icon"]) #button {
+  	padding: var(--cek-space-2);
+  	margin: 0;
+}
+
+:host([pill]) #button {
+  border-radius: 50px;
+}
+
+:host([circle]) #button {
+  border-radius: 50%;
+  padding: 0;
+  width: var(--cek-height-medium);
+  height: var(--cek-height-medium);
+}
+
+[name="end"]::slotted(*) {
+  	margin-inline-start: 0.5ch;
+}
+
+[name="start"]::slotted(*) {
+  	margin-inline-end: 0.5ch;
+}
+
+#loading-icon {
+  	position: absolute;
+  	display: none;
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+}
+
+:host([loading]) #loading-icon {
+  display: block;
+}
+
+:host([icon-only]) #button {
+  padding: var(--cek-space-2);
+  margin: 0;
+}
+
+#arrow-icon {
+  	display: none;
+  	height: 1em;
+  	width: 1em;
+  	margin-inline-start: 0.5ch;
+}
+
+:host([arrow]) #arrow-icon {
+  	display: block;
+}
+
+::slotted(cek-icon) {
+	--height: 1.4em;
+	--width: 1.4em;
+}
+</style>
+		<button id="button" part="button" command="close" commandfor="parent">
+		<slot name="start"></slot>
+		<div id="label" part="label"><slot></slot></div>
+		<slot name="end"></slot>
+		<svg id="loading-icon" part="loading-icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25" />
+			<path d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7
+			a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z">
+			<animatetransform attributeName="transform" type="rotate" dur="0.75s" values="0 12 12;360 12 12" repeatCount="indefinite" />
+			</path>
+		</svg>
+		<svg id="arrow-icon" part="arrow-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">  
+			<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+		</svg>
+		</button>
+	</template>Close</cek-button>
     </cek-dialog>
 
     <cek-code-block lang="xml" theme="github-dark">
         <template>
             <cek-button variant="primary" command="show" commandfor="non-modal">Open non modal dialog</cek-button>
-            <cek-dialog id="non-modal">
-                <h2 slot="header">Dialog Title</h2>
-                <cek-button autofocus variant="primary" slot="header-actions" command="close" commandfor="parent">Close
-                    Dialog</cek-button>
+            <cek-dialog id="non-modal" size="small">
+                <div slot="header" class="flex justify-between items-center">
+                    <h2 slot="header" class="cek-text-5">Dialog Title</h2>
+                    <cek-button button-aria-label="close" autofocus variant="ghost" icon-only="" command="close" commandfor="parent">
+                        <cek-icon name="x-mark"></cek-icon>
+                    </cek-button>
+                </div>
                 <p>Dialog content</p>
+                <cek-button slot="footer" variant="primary" command="close" commandfor="parent">Close</cek-button>
             </cek-dialog>
         </template>
     </cek-code-block>
@@ -1015,7 +1592,7 @@ dialog {
   	padding: 0;
   	margin: 0;
   	font: inherit;
-  	color: inherit;
+  	color: var(--cek-text-color-1);
   	cursor: pointer;
   	box-sizing: border-box;
   	text-decoration: none;
@@ -1219,26 +1796,86 @@ dialog {
 		</button>
 	</template>Open custom slots
         dialog</cek-button>
-    <cek-dialog id="custom-slots-dialog" server-rendered=""><template shadowrootmode="open"><style>
+    <cek-dialog size="large" id="custom-slots-dialog" server-rendered=""><template shadowrootmode="open"><style>
 dialog {
 	z-index: 1;
+	border-radius: var(--cek-border-radius-3);
+	box-shadow: var(--cek-shadow-3);
+	background-color: light-dark(var(--cek-surface-color-0), var(--cek-surface-color-1));
+	border: none;
+	margin-block: var(--cek-space-8);
+    box-sizing: border-box;
+	padding: 0;
+	min-height: 18rem;
+}
+
+:host([open]) dialog {
+	display: flex;
+	margin: auto;
+}
+
+dialog[open] #container {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	margin: var(--cek-space-7);
+}
+
+dialog::backdrop {
+	background-color: rgba(0, 0, 0, 0.8);
+}
+
+header, footer {
+	position: sticky;
+	top: 0;
+	background-color: inherit;
+	z-index: 2;
+}
+
+header {
+	margin-block-end: var(--cek-space-6);
+}
+
+footer {
+	margin-block-start: var(--cek-space-6);
+	bottom: 0;
+}
+
+#content {
+	overflow-y: auto;
+	flex-grow: 1;
+}
+
+:host([size="small"]) dialog {
+	width: 18.75rem;
+}
+
+:host(:not([size])) dialog,
+:host([size="medium"]) dialog {
+	width: 37.5rem;
+}
+
+:host([size="large"]) dialog {
+	width: 56.25rem;
 }
 </style>
-		<dialog id="dialog" part="dialog" aria-modal="true">
-			<header part="header" id="header">
-				<slot name="header"></slot>
-				<slot name="header-actions"></slot>
-			</header>
-			<div id="content" part="content">
-				<slot></slot>
+		<dialog id="dialog" part="dialog" aria-modal="false">
+		  	<div id="container" part="container">
+				<header part="header" id="header">
+					<slot name="header"></slot>
+				</header>
+				<div id="content" part="content">
+					<slot></slot>
+				</div>
+				<footer part="footer">
+					<slot name="footer"></slot>
+				</footer>
 			</div>
-			<footer part="footer">
-				<slot name="footer"></slot>
-			</footer>
 		</dialog>
 	</template>
-        <span slot="header">Custom Header</span>
-        <cek-button commandfor="parent" command="close" variant="text" slot="header-actions" autofocus server-rendered=""><template shadowrootmode="open"><style>
+        <div slot="header" class="flex justify-between items-center">
+            <h2 slot="header" class="cek-text-5">Dialog Title</h2>
+            <cek-button commandfor="parent" command="close" icon-only="" variant="ghost" autofocus button-aria-label="close" server-rendered=""><template shadowrootmode="open"><style>
 :host {
   	display: inline-block;
   	font-family: var(--cek-font-family);
@@ -1255,7 +1892,7 @@ dialog {
   	padding: 0;
   	margin: 0;
   	font: inherit;
-  	color: inherit;
+  	color: var(--cek-text-color-1);
   	cursor: pointer;
   	box-sizing: border-box;
   	text-decoration: none;
@@ -1442,7 +2079,7 @@ dialog {
 	--width: 1.4em;
 }
 </style>
-		<button id="button" part="button" autofocus command="close" commandfor="parent">
+		<button id="button" part="button" aria-label="close" autofocus command="close" commandfor="parent">
 		<slot name="start"></slot>
 		<div id="label" part="label"><slot></slot></div>
 		<slot name="end"></slot>
@@ -1457,8 +2094,13 @@ dialog {
 			<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
 		</svg>
 		</button>
-	</template>Action
-            close</cek-button>
+	</template>
+                <cek-icon name="x-mark" server-rendered=""><template shadowrootmode="open"><style>:host{display:flex;}</style><svg height="24" width="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+</svg>
+</template></cek-icon>
+            </cek-button>
+        </div>
         <p>This dialog has custom header and header actions.</p>
         <cek-button commandfor="parent" command="close" variant="primary" slot="footer" server-rendered=""><template shadowrootmode="open"><style>
 :host {
@@ -1477,7 +2119,7 @@ dialog {
   	padding: 0;
   	margin: 0;
   	font: inherit;
-  	color: inherit;
+  	color: var(--cek-text-color-1);
   	cursor: pointer;
   	box-sizing: border-box;
   	text-decoration: none;
@@ -1686,10 +2328,13 @@ dialog {
         <template>
             <cek-button variant="primary" command="show-modal" commandfor="custom-slots-dialog">Open custom slots
                 dialog</cek-button>
-            <cek-dialog id="custom-slots-dialog">
-                <span slot="header">Custom Header</span>
-                <cek-button autofocus slot="header-actions" variant="text" command="close" commandfor="parent">Action
-                    close</cek-button>
+            <cek-dialog id="custom-slots-dialog" size="large">
+                <div slot="header" class="flex justify-between items-center">
+                    <h2 slot="header" class="cek-text-5">Dialog Title</h2>
+                    <cek-button button-aria-label="close" autofocus variant="ghost" icon-only="" command="close" commandfor="parent">
+                        <cek-icon name="x-mark"></cek-icon>
+                    </cek-button>
+                </div>
                 <p>This dialog has custom header and header actions.</p>
                 <cek-button slot="footer" variant="primary" command="close" commandfor="parent">Close</cek-button>
             </cek-dialog>
@@ -1701,8 +2346,8 @@ dialog {
 
     <cek-code-block lang="xml" theme="github-dark">
         <template>
-            <cek-dialog open>
-                <h2 slot="header">Dialog Opened with Attribute</h2>
+            <cek-dialog open size="medium">
+                <h2 slot="header" class="cek-text-5">Dialog Opened with Attribute</h2>
                 <p>This dialog is opened using the <code>open</code> attribute.</p>
                 <cek-button slot="footer" variant="primary" command="close" commandfor="parent">Close</cek-button>
             </cek-dialog>
@@ -1714,9 +2359,2475 @@ dialog {
 
     <cek-code-block lang="xml" theme="github-dark">
         <template>
-            <cek-dialog open modal="">
-                <h2 slot="header">Modal Dialog Opened with Attribute</h2>
+            <cek-dialog open modal="" size="large">
+                <h2 slot="header" class="cek-text-5">Modal Dialog Opened with Attribute</h2>
                 <p>This dialog is opened using the <code>open</code> and <code>modal</code> attributes.</p>
+                <cek-button slot="footer" variant="primary" command="close" commandfor="parent">Close</cek-button>
+            </cek-dialog>
+        </template>
+    </cek-code-block>
+
+    <h2>Sizes</h2>
+    <p>The dialog component supports different sizes using the <code>size</code> attribute. Available sizes are "small",
+        "medium", and "large".</p>
+
+    <div class="flex gap-4">
+        <div>
+            <cek-button commandfor="small-dialog" command="show-modal" variant="primary" server-rendered=""><template shadowrootmode="open"><style>
+:host {
+  	display: inline-block;
+  	font-family: var(--cek-font-family);
+  	box-sizing: border-box;
+}
+
+#button {
+  	display: inline-flex;
+  	align-items: center;
+  	justify-content: center;
+  	position: relative;
+  	background: transparent;
+  	border: none;
+  	padding: 0;
+  	margin: 0;
+  	font: inherit;
+  	color: var(--cek-text-color-1);
+  	cursor: pointer;
+  	box-sizing: border-box;
+  	text-decoration: none;
+}
+
+:host([variant]) #button {
+  	border-radius: var(--cek-border-radius);
+  	padding-inline: var(--cek-padding-inline);
+}
+
+:host([variant]) #button:focus {
+  	outline: var(--cek-focus-ring);
+  	outline-offset: var(--cek-focus-ring-offset);
+}
+
+:host([loading]) #button,
+:host([disabled]) #button {
+  	cursor: not-allowed;
+}
+
+:host([loading]) #button {
+  	background-color: lightgray;
+  	color: rgba(0, 0, 0, 0.5);
+}
+
+:host([disabled][variant]) #button {
+  	background-color: var(--cek-surface-color-disabled);
+  	color: var(--cek-text-color-disabled);
+
+	&:focus {
+		outline-color: var(--cek-surface-color-disabled);
+	}
+}
+
+:host([size="small"]) #button {
+  	min-height: var(--cek-height-small);
+  	min-width: var(--cek-height-small);
+  	font-size: var(--cek-font-size-0);
+}
+
+:host(:not([size])) #button, 
+:host([size="medium"]) #button {
+  	min-height: var(--cek-height-medium);
+  	min-width: var(--cek-height-medium);
+  	font-size: var(--cek-font-size-1);
+}
+
+:host([size="large"]) #button {
+  	min-height: var(--cek-height-large);
+  	min-width: var(--cek-height-large);
+  	font-size: var(--cek-font-size-2);
+}
+
+:host([variant="primary"]) #button {
+  	background-color: var(--cek-color-primary-500);
+  	color: white;
+
+  	&:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="secondary"]) #button {
+ 	background-color: var(--cek-surface-color-1);
+ 	 color: var(--cek-text-color-1);
+
+ 	 &:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="outline"]) #button {
+	background-color: transparent;
+	border: 1px solid var(--cek-border-color-2);
+	color: var(--cek-text-color-1);
+
+  	&:hover {
+		text-decoration: underline;
+	}
+}
+
+:host([variant="ghost"]) #button {
+	background: transparent;
+	color: var(--cek-text-color-1);
+}
+
+:host([variant="ghost"]) #button:hover {
+	background-color: var(--cek-surface-color-1);
+}
+
+:host([variant="link"]) #button {
+	background-color: transparent;
+	color: var(--cek-color-primary-500);
+	padding: 0;
+	margin: 0;
+	min-height: 0;
+	min-width: 0;
+
+  	&:hover {
+  		text-decoration: underline;
+  	}
+}
+
+:host([variant="destructive"]) #button {
+ 	background-color: var(--cek-color-red-600);
+  	color: white;
+
+	 &:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="destructive"]) #button:focus {
+  	outline: 2px solid var(--cek-color-red-600);
+}
+
+:host([variant="neutral"]) #button {
+  	background-color: var(--cek-color-neutral);
+  	color: var(--cek-text-color-neutral);
+
+	&:hover {
+		filter: brightness(85%);
+  	}
+
+	&:focus {
+		outline-color: var(--cek-color-neutral);
+  	}
+}
+
+:host([variant="icon"]) #button {
+  	padding: var(--cek-space-2);
+  	margin: 0;
+}
+
+:host([pill]) #button {
+  border-radius: 50px;
+}
+
+:host([circle]) #button {
+  border-radius: 50%;
+  padding: 0;
+  width: var(--cek-height-medium);
+  height: var(--cek-height-medium);
+}
+
+[name="end"]::slotted(*) {
+  	margin-inline-start: 0.5ch;
+}
+
+[name="start"]::slotted(*) {
+  	margin-inline-end: 0.5ch;
+}
+
+#loading-icon {
+  	position: absolute;
+  	display: none;
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+}
+
+:host([loading]) #loading-icon {
+  display: block;
+}
+
+:host([icon-only]) #button {
+  padding: var(--cek-space-2);
+  margin: 0;
+}
+
+#arrow-icon {
+  	display: none;
+  	height: 1em;
+  	width: 1em;
+  	margin-inline-start: 0.5ch;
+}
+
+:host([arrow]) #arrow-icon {
+  	display: block;
+}
+
+::slotted(cek-icon) {
+	--height: 1.4em;
+	--width: 1.4em;
+}
+</style>
+		<button id="button" part="button" command="show-modal" commandfor="small-dialog">
+		<slot name="start"></slot>
+		<div id="label" part="label"><slot></slot></div>
+		<slot name="end"></slot>
+		<svg id="loading-icon" part="loading-icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25" />
+			<path d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7
+			a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z">
+			<animatetransform attributeName="transform" type="rotate" dur="0.75s" values="0 12 12;360 12 12" repeatCount="indefinite" />
+			</path>
+		</svg>
+		<svg id="arrow-icon" part="arrow-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">  
+			<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+		</svg>
+		</button>
+	</template>Open small dialog</cek-button>
+            <cek-dialog size="small" id="small-dialog" server-rendered=""><template shadowrootmode="open"><style>
+dialog {
+	z-index: 1;
+	border-radius: var(--cek-border-radius-3);
+	box-shadow: var(--cek-shadow-3);
+	background-color: light-dark(var(--cek-surface-color-0), var(--cek-surface-color-1));
+	border: none;
+	margin-block: var(--cek-space-8);
+    box-sizing: border-box;
+	padding: 0;
+	min-height: 18rem;
+}
+
+:host([open]) dialog {
+	display: flex;
+	margin: auto;
+}
+
+dialog[open] #container {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	margin: var(--cek-space-7);
+}
+
+dialog::backdrop {
+	background-color: rgba(0, 0, 0, 0.8);
+}
+
+header, footer {
+	position: sticky;
+	top: 0;
+	background-color: inherit;
+	z-index: 2;
+}
+
+header {
+	margin-block-end: var(--cek-space-6);
+}
+
+footer {
+	margin-block-start: var(--cek-space-6);
+	bottom: 0;
+}
+
+#content {
+	overflow-y: auto;
+	flex-grow: 1;
+}
+
+:host([size="small"]) dialog {
+	width: 18.75rem;
+}
+
+:host(:not([size])) dialog,
+:host([size="medium"]) dialog {
+	width: 37.5rem;
+}
+
+:host([size="large"]) dialog {
+	width: 56.25rem;
+}
+</style>
+		<dialog id="dialog" part="dialog" aria-modal="false">
+		  	<div id="container" part="container">
+				<header part="header" id="header">
+					<slot name="header"></slot>
+				</header>
+				<div id="content" part="content">
+					<slot></slot>
+				</div>
+				<footer part="footer">
+					<slot name="footer"></slot>
+				</footer>
+			</div>
+		</dialog>
+	</template>
+                <div slot="header" class="flex justify-between items-center">
+                    <h2 slot="header" class="cek-text-5">Small Dialog</h2>
+                    <cek-button commandfor="parent" command="close" icon-only="" variant="ghost" autofocus button-aria-label="close" server-rendered=""><template shadowrootmode="open"><style>
+:host {
+  	display: inline-block;
+  	font-family: var(--cek-font-family);
+  	box-sizing: border-box;
+}
+
+#button {
+  	display: inline-flex;
+  	align-items: center;
+  	justify-content: center;
+  	position: relative;
+  	background: transparent;
+  	border: none;
+  	padding: 0;
+  	margin: 0;
+  	font: inherit;
+  	color: var(--cek-text-color-1);
+  	cursor: pointer;
+  	box-sizing: border-box;
+  	text-decoration: none;
+}
+
+:host([variant]) #button {
+  	border-radius: var(--cek-border-radius);
+  	padding-inline: var(--cek-padding-inline);
+}
+
+:host([variant]) #button:focus {
+  	outline: var(--cek-focus-ring);
+  	outline-offset: var(--cek-focus-ring-offset);
+}
+
+:host([loading]) #button,
+:host([disabled]) #button {
+  	cursor: not-allowed;
+}
+
+:host([loading]) #button {
+  	background-color: lightgray;
+  	color: rgba(0, 0, 0, 0.5);
+}
+
+:host([disabled][variant]) #button {
+  	background-color: var(--cek-surface-color-disabled);
+  	color: var(--cek-text-color-disabled);
+
+	&:focus {
+		outline-color: var(--cek-surface-color-disabled);
+	}
+}
+
+:host([size="small"]) #button {
+  	min-height: var(--cek-height-small);
+  	min-width: var(--cek-height-small);
+  	font-size: var(--cek-font-size-0);
+}
+
+:host(:not([size])) #button, 
+:host([size="medium"]) #button {
+  	min-height: var(--cek-height-medium);
+  	min-width: var(--cek-height-medium);
+  	font-size: var(--cek-font-size-1);
+}
+
+:host([size="large"]) #button {
+  	min-height: var(--cek-height-large);
+  	min-width: var(--cek-height-large);
+  	font-size: var(--cek-font-size-2);
+}
+
+:host([variant="primary"]) #button {
+  	background-color: var(--cek-color-primary-500);
+  	color: white;
+
+  	&:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="secondary"]) #button {
+ 	background-color: var(--cek-surface-color-1);
+ 	 color: var(--cek-text-color-1);
+
+ 	 &:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="outline"]) #button {
+	background-color: transparent;
+	border: 1px solid var(--cek-border-color-2);
+	color: var(--cek-text-color-1);
+
+  	&:hover {
+		text-decoration: underline;
+	}
+}
+
+:host([variant="ghost"]) #button {
+	background: transparent;
+	color: var(--cek-text-color-1);
+}
+
+:host([variant="ghost"]) #button:hover {
+	background-color: var(--cek-surface-color-1);
+}
+
+:host([variant="link"]) #button {
+	background-color: transparent;
+	color: var(--cek-color-primary-500);
+	padding: 0;
+	margin: 0;
+	min-height: 0;
+	min-width: 0;
+
+  	&:hover {
+  		text-decoration: underline;
+  	}
+}
+
+:host([variant="destructive"]) #button {
+ 	background-color: var(--cek-color-red-600);
+  	color: white;
+
+	 &:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="destructive"]) #button:focus {
+  	outline: 2px solid var(--cek-color-red-600);
+}
+
+:host([variant="neutral"]) #button {
+  	background-color: var(--cek-color-neutral);
+  	color: var(--cek-text-color-neutral);
+
+	&:hover {
+		filter: brightness(85%);
+  	}
+
+	&:focus {
+		outline-color: var(--cek-color-neutral);
+  	}
+}
+
+:host([variant="icon"]) #button {
+  	padding: var(--cek-space-2);
+  	margin: 0;
+}
+
+:host([pill]) #button {
+  border-radius: 50px;
+}
+
+:host([circle]) #button {
+  border-radius: 50%;
+  padding: 0;
+  width: var(--cek-height-medium);
+  height: var(--cek-height-medium);
+}
+
+[name="end"]::slotted(*) {
+  	margin-inline-start: 0.5ch;
+}
+
+[name="start"]::slotted(*) {
+  	margin-inline-end: 0.5ch;
+}
+
+#loading-icon {
+  	position: absolute;
+  	display: none;
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+}
+
+:host([loading]) #loading-icon {
+  display: block;
+}
+
+:host([icon-only]) #button {
+  padding: var(--cek-space-2);
+  margin: 0;
+}
+
+#arrow-icon {
+  	display: none;
+  	height: 1em;
+  	width: 1em;
+  	margin-inline-start: 0.5ch;
+}
+
+:host([arrow]) #arrow-icon {
+  	display: block;
+}
+
+::slotted(cek-icon) {
+	--height: 1.4em;
+	--width: 1.4em;
+}
+</style>
+		<button id="button" part="button" aria-label="close" autofocus command="close" commandfor="parent">
+		<slot name="start"></slot>
+		<div id="label" part="label"><slot></slot></div>
+		<slot name="end"></slot>
+		<svg id="loading-icon" part="loading-icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25" />
+			<path d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7
+			a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z">
+			<animatetransform attributeName="transform" type="rotate" dur="0.75s" values="0 12 12;360 12 12" repeatCount="indefinite" />
+			</path>
+		</svg>
+		<svg id="arrow-icon" part="arrow-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">  
+			<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+		</svg>
+		</button>
+	</template>
+                        <cek-icon name="x-mark" server-rendered=""><template shadowrootmode="open"><style>:host{display:flex;}</style><svg height="24" width="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+</svg>
+</template></cek-icon>
+                    </cek-button>
+                </div>
+                <p>Small dialog content</p>
+                <cek-button commandfor="parent" command="close" variant="primary" slot="footer" server-rendered=""><template shadowrootmode="open"><style>
+:host {
+  	display: inline-block;
+  	font-family: var(--cek-font-family);
+  	box-sizing: border-box;
+}
+
+#button {
+  	display: inline-flex;
+  	align-items: center;
+  	justify-content: center;
+  	position: relative;
+  	background: transparent;
+  	border: none;
+  	padding: 0;
+  	margin: 0;
+  	font: inherit;
+  	color: var(--cek-text-color-1);
+  	cursor: pointer;
+  	box-sizing: border-box;
+  	text-decoration: none;
+}
+
+:host([variant]) #button {
+  	border-radius: var(--cek-border-radius);
+  	padding-inline: var(--cek-padding-inline);
+}
+
+:host([variant]) #button:focus {
+  	outline: var(--cek-focus-ring);
+  	outline-offset: var(--cek-focus-ring-offset);
+}
+
+:host([loading]) #button,
+:host([disabled]) #button {
+  	cursor: not-allowed;
+}
+
+:host([loading]) #button {
+  	background-color: lightgray;
+  	color: rgba(0, 0, 0, 0.5);
+}
+
+:host([disabled][variant]) #button {
+  	background-color: var(--cek-surface-color-disabled);
+  	color: var(--cek-text-color-disabled);
+
+	&:focus {
+		outline-color: var(--cek-surface-color-disabled);
+	}
+}
+
+:host([size="small"]) #button {
+  	min-height: var(--cek-height-small);
+  	min-width: var(--cek-height-small);
+  	font-size: var(--cek-font-size-0);
+}
+
+:host(:not([size])) #button, 
+:host([size="medium"]) #button {
+  	min-height: var(--cek-height-medium);
+  	min-width: var(--cek-height-medium);
+  	font-size: var(--cek-font-size-1);
+}
+
+:host([size="large"]) #button {
+  	min-height: var(--cek-height-large);
+  	min-width: var(--cek-height-large);
+  	font-size: var(--cek-font-size-2);
+}
+
+:host([variant="primary"]) #button {
+  	background-color: var(--cek-color-primary-500);
+  	color: white;
+
+  	&:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="secondary"]) #button {
+ 	background-color: var(--cek-surface-color-1);
+ 	 color: var(--cek-text-color-1);
+
+ 	 &:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="outline"]) #button {
+	background-color: transparent;
+	border: 1px solid var(--cek-border-color-2);
+	color: var(--cek-text-color-1);
+
+  	&:hover {
+		text-decoration: underline;
+	}
+}
+
+:host([variant="ghost"]) #button {
+	background: transparent;
+	color: var(--cek-text-color-1);
+}
+
+:host([variant="ghost"]) #button:hover {
+	background-color: var(--cek-surface-color-1);
+}
+
+:host([variant="link"]) #button {
+	background-color: transparent;
+	color: var(--cek-color-primary-500);
+	padding: 0;
+	margin: 0;
+	min-height: 0;
+	min-width: 0;
+
+  	&:hover {
+  		text-decoration: underline;
+  	}
+}
+
+:host([variant="destructive"]) #button {
+ 	background-color: var(--cek-color-red-600);
+  	color: white;
+
+	 &:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="destructive"]) #button:focus {
+  	outline: 2px solid var(--cek-color-red-600);
+}
+
+:host([variant="neutral"]) #button {
+  	background-color: var(--cek-color-neutral);
+  	color: var(--cek-text-color-neutral);
+
+	&:hover {
+		filter: brightness(85%);
+  	}
+
+	&:focus {
+		outline-color: var(--cek-color-neutral);
+  	}
+}
+
+:host([variant="icon"]) #button {
+  	padding: var(--cek-space-2);
+  	margin: 0;
+}
+
+:host([pill]) #button {
+  border-radius: 50px;
+}
+
+:host([circle]) #button {
+  border-radius: 50%;
+  padding: 0;
+  width: var(--cek-height-medium);
+  height: var(--cek-height-medium);
+}
+
+[name="end"]::slotted(*) {
+  	margin-inline-start: 0.5ch;
+}
+
+[name="start"]::slotted(*) {
+  	margin-inline-end: 0.5ch;
+}
+
+#loading-icon {
+  	position: absolute;
+  	display: none;
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+}
+
+:host([loading]) #loading-icon {
+  display: block;
+}
+
+:host([icon-only]) #button {
+  padding: var(--cek-space-2);
+  margin: 0;
+}
+
+#arrow-icon {
+  	display: none;
+  	height: 1em;
+  	width: 1em;
+  	margin-inline-start: 0.5ch;
+}
+
+:host([arrow]) #arrow-icon {
+  	display: block;
+}
+
+::slotted(cek-icon) {
+	--height: 1.4em;
+	--width: 1.4em;
+}
+</style>
+		<button id="button" part="button" command="close" commandfor="parent">
+		<slot name="start"></slot>
+		<div id="label" part="label"><slot></slot></div>
+		<slot name="end"></slot>
+		<svg id="loading-icon" part="loading-icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25" />
+			<path d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7
+			a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z">
+			<animatetransform attributeName="transform" type="rotate" dur="0.75s" values="0 12 12;360 12 12" repeatCount="indefinite" />
+			</path>
+		</svg>
+		<svg id="arrow-icon" part="arrow-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">  
+			<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+		</svg>
+		</button>
+	</template>Close</cek-button>
+            </cek-dialog>
+        </div>
+        <div>
+            <cek-button commandfor="medium-dialog" command="show-modal" variant="primary" server-rendered=""><template shadowrootmode="open"><style>
+:host {
+  	display: inline-block;
+  	font-family: var(--cek-font-family);
+  	box-sizing: border-box;
+}
+
+#button {
+  	display: inline-flex;
+  	align-items: center;
+  	justify-content: center;
+  	position: relative;
+  	background: transparent;
+  	border: none;
+  	padding: 0;
+  	margin: 0;
+  	font: inherit;
+  	color: var(--cek-text-color-1);
+  	cursor: pointer;
+  	box-sizing: border-box;
+  	text-decoration: none;
+}
+
+:host([variant]) #button {
+  	border-radius: var(--cek-border-radius);
+  	padding-inline: var(--cek-padding-inline);
+}
+
+:host([variant]) #button:focus {
+  	outline: var(--cek-focus-ring);
+  	outline-offset: var(--cek-focus-ring-offset);
+}
+
+:host([loading]) #button,
+:host([disabled]) #button {
+  	cursor: not-allowed;
+}
+
+:host([loading]) #button {
+  	background-color: lightgray;
+  	color: rgba(0, 0, 0, 0.5);
+}
+
+:host([disabled][variant]) #button {
+  	background-color: var(--cek-surface-color-disabled);
+  	color: var(--cek-text-color-disabled);
+
+	&:focus {
+		outline-color: var(--cek-surface-color-disabled);
+	}
+}
+
+:host([size="small"]) #button {
+  	min-height: var(--cek-height-small);
+  	min-width: var(--cek-height-small);
+  	font-size: var(--cek-font-size-0);
+}
+
+:host(:not([size])) #button, 
+:host([size="medium"]) #button {
+  	min-height: var(--cek-height-medium);
+  	min-width: var(--cek-height-medium);
+  	font-size: var(--cek-font-size-1);
+}
+
+:host([size="large"]) #button {
+  	min-height: var(--cek-height-large);
+  	min-width: var(--cek-height-large);
+  	font-size: var(--cek-font-size-2);
+}
+
+:host([variant="primary"]) #button {
+  	background-color: var(--cek-color-primary-500);
+  	color: white;
+
+  	&:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="secondary"]) #button {
+ 	background-color: var(--cek-surface-color-1);
+ 	 color: var(--cek-text-color-1);
+
+ 	 &:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="outline"]) #button {
+	background-color: transparent;
+	border: 1px solid var(--cek-border-color-2);
+	color: var(--cek-text-color-1);
+
+  	&:hover {
+		text-decoration: underline;
+	}
+}
+
+:host([variant="ghost"]) #button {
+	background: transparent;
+	color: var(--cek-text-color-1);
+}
+
+:host([variant="ghost"]) #button:hover {
+	background-color: var(--cek-surface-color-1);
+}
+
+:host([variant="link"]) #button {
+	background-color: transparent;
+	color: var(--cek-color-primary-500);
+	padding: 0;
+	margin: 0;
+	min-height: 0;
+	min-width: 0;
+
+  	&:hover {
+  		text-decoration: underline;
+  	}
+}
+
+:host([variant="destructive"]) #button {
+ 	background-color: var(--cek-color-red-600);
+  	color: white;
+
+	 &:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="destructive"]) #button:focus {
+  	outline: 2px solid var(--cek-color-red-600);
+}
+
+:host([variant="neutral"]) #button {
+  	background-color: var(--cek-color-neutral);
+  	color: var(--cek-text-color-neutral);
+
+	&:hover {
+		filter: brightness(85%);
+  	}
+
+	&:focus {
+		outline-color: var(--cek-color-neutral);
+  	}
+}
+
+:host([variant="icon"]) #button {
+  	padding: var(--cek-space-2);
+  	margin: 0;
+}
+
+:host([pill]) #button {
+  border-radius: 50px;
+}
+
+:host([circle]) #button {
+  border-radius: 50%;
+  padding: 0;
+  width: var(--cek-height-medium);
+  height: var(--cek-height-medium);
+}
+
+[name="end"]::slotted(*) {
+  	margin-inline-start: 0.5ch;
+}
+
+[name="start"]::slotted(*) {
+  	margin-inline-end: 0.5ch;
+}
+
+#loading-icon {
+  	position: absolute;
+  	display: none;
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+}
+
+:host([loading]) #loading-icon {
+  display: block;
+}
+
+:host([icon-only]) #button {
+  padding: var(--cek-space-2);
+  margin: 0;
+}
+
+#arrow-icon {
+  	display: none;
+  	height: 1em;
+  	width: 1em;
+  	margin-inline-start: 0.5ch;
+}
+
+:host([arrow]) #arrow-icon {
+  	display: block;
+}
+
+::slotted(cek-icon) {
+	--height: 1.4em;
+	--width: 1.4em;
+}
+</style>
+		<button id="button" part="button" command="show-modal" commandfor="medium-dialog">
+		<slot name="start"></slot>
+		<div id="label" part="label"><slot></slot></div>
+		<slot name="end"></slot>
+		<svg id="loading-icon" part="loading-icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25" />
+			<path d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7
+			a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z">
+			<animatetransform attributeName="transform" type="rotate" dur="0.75s" values="0 12 12;360 12 12" repeatCount="indefinite" />
+			</path>
+		</svg>
+		<svg id="arrow-icon" part="arrow-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">  
+			<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+		</svg>
+		</button>
+	</template>Open medium
+                dialog</cek-button>
+            <cek-dialog size="medium" id="medium-dialog" server-rendered=""><template shadowrootmode="open"><style>
+dialog {
+	z-index: 1;
+	border-radius: var(--cek-border-radius-3);
+	box-shadow: var(--cek-shadow-3);
+	background-color: light-dark(var(--cek-surface-color-0), var(--cek-surface-color-1));
+	border: none;
+	margin-block: var(--cek-space-8);
+    box-sizing: border-box;
+	padding: 0;
+	min-height: 18rem;
+}
+
+:host([open]) dialog {
+	display: flex;
+	margin: auto;
+}
+
+dialog[open] #container {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	margin: var(--cek-space-7);
+}
+
+dialog::backdrop {
+	background-color: rgba(0, 0, 0, 0.8);
+}
+
+header, footer {
+	position: sticky;
+	top: 0;
+	background-color: inherit;
+	z-index: 2;
+}
+
+header {
+	margin-block-end: var(--cek-space-6);
+}
+
+footer {
+	margin-block-start: var(--cek-space-6);
+	bottom: 0;
+}
+
+#content {
+	overflow-y: auto;
+	flex-grow: 1;
+}
+
+:host([size="small"]) dialog {
+	width: 18.75rem;
+}
+
+:host(:not([size])) dialog,
+:host([size="medium"]) dialog {
+	width: 37.5rem;
+}
+
+:host([size="large"]) dialog {
+	width: 56.25rem;
+}
+</style>
+		<dialog id="dialog" part="dialog" aria-modal="false">
+		  	<div id="container" part="container">
+				<header part="header" id="header">
+					<slot name="header"></slot>
+				</header>
+				<div id="content" part="content">
+					<slot></slot>
+				</div>
+				<footer part="footer">
+					<slot name="footer"></slot>
+				</footer>
+			</div>
+		</dialog>
+	</template>
+                <div slot="header" class="flex justify-between items-center">
+                    <h2 slot="header" class="cek-text-5">Medium Dialog</h2>
+                    <cek-button commandfor="parent" command="close" icon-only="" variant="ghost" autofocus button-aria-label="close" server-rendered=""><template shadowrootmode="open"><style>
+:host {
+  	display: inline-block;
+  	font-family: var(--cek-font-family);
+  	box-sizing: border-box;
+}
+
+#button {
+  	display: inline-flex;
+  	align-items: center;
+  	justify-content: center;
+  	position: relative;
+  	background: transparent;
+  	border: none;
+  	padding: 0;
+  	margin: 0;
+  	font: inherit;
+  	color: var(--cek-text-color-1);
+  	cursor: pointer;
+  	box-sizing: border-box;
+  	text-decoration: none;
+}
+
+:host([variant]) #button {
+  	border-radius: var(--cek-border-radius);
+  	padding-inline: var(--cek-padding-inline);
+}
+
+:host([variant]) #button:focus {
+  	outline: var(--cek-focus-ring);
+  	outline-offset: var(--cek-focus-ring-offset);
+}
+
+:host([loading]) #button,
+:host([disabled]) #button {
+  	cursor: not-allowed;
+}
+
+:host([loading]) #button {
+  	background-color: lightgray;
+  	color: rgba(0, 0, 0, 0.5);
+}
+
+:host([disabled][variant]) #button {
+  	background-color: var(--cek-surface-color-disabled);
+  	color: var(--cek-text-color-disabled);
+
+	&:focus {
+		outline-color: var(--cek-surface-color-disabled);
+	}
+}
+
+:host([size="small"]) #button {
+  	min-height: var(--cek-height-small);
+  	min-width: var(--cek-height-small);
+  	font-size: var(--cek-font-size-0);
+}
+
+:host(:not([size])) #button, 
+:host([size="medium"]) #button {
+  	min-height: var(--cek-height-medium);
+  	min-width: var(--cek-height-medium);
+  	font-size: var(--cek-font-size-1);
+}
+
+:host([size="large"]) #button {
+  	min-height: var(--cek-height-large);
+  	min-width: var(--cek-height-large);
+  	font-size: var(--cek-font-size-2);
+}
+
+:host([variant="primary"]) #button {
+  	background-color: var(--cek-color-primary-500);
+  	color: white;
+
+  	&:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="secondary"]) #button {
+ 	background-color: var(--cek-surface-color-1);
+ 	 color: var(--cek-text-color-1);
+
+ 	 &:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="outline"]) #button {
+	background-color: transparent;
+	border: 1px solid var(--cek-border-color-2);
+	color: var(--cek-text-color-1);
+
+  	&:hover {
+		text-decoration: underline;
+	}
+}
+
+:host([variant="ghost"]) #button {
+	background: transparent;
+	color: var(--cek-text-color-1);
+}
+
+:host([variant="ghost"]) #button:hover {
+	background-color: var(--cek-surface-color-1);
+}
+
+:host([variant="link"]) #button {
+	background-color: transparent;
+	color: var(--cek-color-primary-500);
+	padding: 0;
+	margin: 0;
+	min-height: 0;
+	min-width: 0;
+
+  	&:hover {
+  		text-decoration: underline;
+  	}
+}
+
+:host([variant="destructive"]) #button {
+ 	background-color: var(--cek-color-red-600);
+  	color: white;
+
+	 &:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="destructive"]) #button:focus {
+  	outline: 2px solid var(--cek-color-red-600);
+}
+
+:host([variant="neutral"]) #button {
+  	background-color: var(--cek-color-neutral);
+  	color: var(--cek-text-color-neutral);
+
+	&:hover {
+		filter: brightness(85%);
+  	}
+
+	&:focus {
+		outline-color: var(--cek-color-neutral);
+  	}
+}
+
+:host([variant="icon"]) #button {
+  	padding: var(--cek-space-2);
+  	margin: 0;
+}
+
+:host([pill]) #button {
+  border-radius: 50px;
+}
+
+:host([circle]) #button {
+  border-radius: 50%;
+  padding: 0;
+  width: var(--cek-height-medium);
+  height: var(--cek-height-medium);
+}
+
+[name="end"]::slotted(*) {
+  	margin-inline-start: 0.5ch;
+}
+
+[name="start"]::slotted(*) {
+  	margin-inline-end: 0.5ch;
+}
+
+#loading-icon {
+  	position: absolute;
+  	display: none;
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+}
+
+:host([loading]) #loading-icon {
+  display: block;
+}
+
+:host([icon-only]) #button {
+  padding: var(--cek-space-2);
+  margin: 0;
+}
+
+#arrow-icon {
+  	display: none;
+  	height: 1em;
+  	width: 1em;
+  	margin-inline-start: 0.5ch;
+}
+
+:host([arrow]) #arrow-icon {
+  	display: block;
+}
+
+::slotted(cek-icon) {
+	--height: 1.4em;
+	--width: 1.4em;
+}
+</style>
+		<button id="button" part="button" aria-label="close" autofocus command="close" commandfor="parent">
+		<slot name="start"></slot>
+		<div id="label" part="label"><slot></slot></div>
+		<slot name="end"></slot>
+		<svg id="loading-icon" part="loading-icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25" />
+			<path d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7
+			a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z">
+			<animatetransform attributeName="transform" type="rotate" dur="0.75s" values="0 12 12;360 12 12" repeatCount="indefinite" />
+			</path>
+		</svg>
+		<svg id="arrow-icon" part="arrow-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">  
+			<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+		</svg>
+		</button>
+	</template>
+                        <cek-icon name="x-mark" server-rendered=""><template shadowrootmode="open"><style>:host{display:flex;}</style><svg height="24" width="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+</svg>
+</template></cek-icon>
+                    </cek-button>
+                </div>
+                <p>Medium dialog content</p>
+                <cek-button commandfor="parent" command="close" variant="primary" slot="footer" server-rendered=""><template shadowrootmode="open"><style>
+:host {
+  	display: inline-block;
+  	font-family: var(--cek-font-family);
+  	box-sizing: border-box;
+}
+
+#button {
+  	display: inline-flex;
+  	align-items: center;
+  	justify-content: center;
+  	position: relative;
+  	background: transparent;
+  	border: none;
+  	padding: 0;
+  	margin: 0;
+  	font: inherit;
+  	color: var(--cek-text-color-1);
+  	cursor: pointer;
+  	box-sizing: border-box;
+  	text-decoration: none;
+}
+
+:host([variant]) #button {
+  	border-radius: var(--cek-border-radius);
+  	padding-inline: var(--cek-padding-inline);
+}
+
+:host([variant]) #button:focus {
+  	outline: var(--cek-focus-ring);
+  	outline-offset: var(--cek-focus-ring-offset);
+}
+
+:host([loading]) #button,
+:host([disabled]) #button {
+  	cursor: not-allowed;
+}
+
+:host([loading]) #button {
+  	background-color: lightgray;
+  	color: rgba(0, 0, 0, 0.5);
+}
+
+:host([disabled][variant]) #button {
+  	background-color: var(--cek-surface-color-disabled);
+  	color: var(--cek-text-color-disabled);
+
+	&:focus {
+		outline-color: var(--cek-surface-color-disabled);
+	}
+}
+
+:host([size="small"]) #button {
+  	min-height: var(--cek-height-small);
+  	min-width: var(--cek-height-small);
+  	font-size: var(--cek-font-size-0);
+}
+
+:host(:not([size])) #button, 
+:host([size="medium"]) #button {
+  	min-height: var(--cek-height-medium);
+  	min-width: var(--cek-height-medium);
+  	font-size: var(--cek-font-size-1);
+}
+
+:host([size="large"]) #button {
+  	min-height: var(--cek-height-large);
+  	min-width: var(--cek-height-large);
+  	font-size: var(--cek-font-size-2);
+}
+
+:host([variant="primary"]) #button {
+  	background-color: var(--cek-color-primary-500);
+  	color: white;
+
+  	&:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="secondary"]) #button {
+ 	background-color: var(--cek-surface-color-1);
+ 	 color: var(--cek-text-color-1);
+
+ 	 &:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="outline"]) #button {
+	background-color: transparent;
+	border: 1px solid var(--cek-border-color-2);
+	color: var(--cek-text-color-1);
+
+  	&:hover {
+		text-decoration: underline;
+	}
+}
+
+:host([variant="ghost"]) #button {
+	background: transparent;
+	color: var(--cek-text-color-1);
+}
+
+:host([variant="ghost"]) #button:hover {
+	background-color: var(--cek-surface-color-1);
+}
+
+:host([variant="link"]) #button {
+	background-color: transparent;
+	color: var(--cek-color-primary-500);
+	padding: 0;
+	margin: 0;
+	min-height: 0;
+	min-width: 0;
+
+  	&:hover {
+  		text-decoration: underline;
+  	}
+}
+
+:host([variant="destructive"]) #button {
+ 	background-color: var(--cek-color-red-600);
+  	color: white;
+
+	 &:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="destructive"]) #button:focus {
+  	outline: 2px solid var(--cek-color-red-600);
+}
+
+:host([variant="neutral"]) #button {
+  	background-color: var(--cek-color-neutral);
+  	color: var(--cek-text-color-neutral);
+
+	&:hover {
+		filter: brightness(85%);
+  	}
+
+	&:focus {
+		outline-color: var(--cek-color-neutral);
+  	}
+}
+
+:host([variant="icon"]) #button {
+  	padding: var(--cek-space-2);
+  	margin: 0;
+}
+
+:host([pill]) #button {
+  border-radius: 50px;
+}
+
+:host([circle]) #button {
+  border-radius: 50%;
+  padding: 0;
+  width: var(--cek-height-medium);
+  height: var(--cek-height-medium);
+}
+
+[name="end"]::slotted(*) {
+  	margin-inline-start: 0.5ch;
+}
+
+[name="start"]::slotted(*) {
+  	margin-inline-end: 0.5ch;
+}
+
+#loading-icon {
+  	position: absolute;
+  	display: none;
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+}
+
+:host([loading]) #loading-icon {
+  display: block;
+}
+
+:host([icon-only]) #button {
+  padding: var(--cek-space-2);
+  margin: 0;
+}
+
+#arrow-icon {
+  	display: none;
+  	height: 1em;
+  	width: 1em;
+  	margin-inline-start: 0.5ch;
+}
+
+:host([arrow]) #arrow-icon {
+  	display: block;
+}
+
+::slotted(cek-icon) {
+	--height: 1.4em;
+	--width: 1.4em;
+}
+</style>
+		<button id="button" part="button" command="close" commandfor="parent">
+		<slot name="start"></slot>
+		<div id="label" part="label"><slot></slot></div>
+		<slot name="end"></slot>
+		<svg id="loading-icon" part="loading-icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25" />
+			<path d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7
+			a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z">
+			<animatetransform attributeName="transform" type="rotate" dur="0.75s" values="0 12 12;360 12 12" repeatCount="indefinite" />
+			</path>
+		</svg>
+		<svg id="arrow-icon" part="arrow-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">  
+			<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+		</svg>
+		</button>
+	</template>Close</cek-button>
+            </cek-dialog>
+        </div>
+        <div>
+            <cek-button commandfor="large-dialog" command="show-modal" variant="primary" server-rendered=""><template shadowrootmode="open"><style>
+:host {
+  	display: inline-block;
+  	font-family: var(--cek-font-family);
+  	box-sizing: border-box;
+}
+
+#button {
+  	display: inline-flex;
+  	align-items: center;
+  	justify-content: center;
+  	position: relative;
+  	background: transparent;
+  	border: none;
+  	padding: 0;
+  	margin: 0;
+  	font: inherit;
+  	color: var(--cek-text-color-1);
+  	cursor: pointer;
+  	box-sizing: border-box;
+  	text-decoration: none;
+}
+
+:host([variant]) #button {
+  	border-radius: var(--cek-border-radius);
+  	padding-inline: var(--cek-padding-inline);
+}
+
+:host([variant]) #button:focus {
+  	outline: var(--cek-focus-ring);
+  	outline-offset: var(--cek-focus-ring-offset);
+}
+
+:host([loading]) #button,
+:host([disabled]) #button {
+  	cursor: not-allowed;
+}
+
+:host([loading]) #button {
+  	background-color: lightgray;
+  	color: rgba(0, 0, 0, 0.5);
+}
+
+:host([disabled][variant]) #button {
+  	background-color: var(--cek-surface-color-disabled);
+  	color: var(--cek-text-color-disabled);
+
+	&:focus {
+		outline-color: var(--cek-surface-color-disabled);
+	}
+}
+
+:host([size="small"]) #button {
+  	min-height: var(--cek-height-small);
+  	min-width: var(--cek-height-small);
+  	font-size: var(--cek-font-size-0);
+}
+
+:host(:not([size])) #button, 
+:host([size="medium"]) #button {
+  	min-height: var(--cek-height-medium);
+  	min-width: var(--cek-height-medium);
+  	font-size: var(--cek-font-size-1);
+}
+
+:host([size="large"]) #button {
+  	min-height: var(--cek-height-large);
+  	min-width: var(--cek-height-large);
+  	font-size: var(--cek-font-size-2);
+}
+
+:host([variant="primary"]) #button {
+  	background-color: var(--cek-color-primary-500);
+  	color: white;
+
+  	&:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="secondary"]) #button {
+ 	background-color: var(--cek-surface-color-1);
+ 	 color: var(--cek-text-color-1);
+
+ 	 &:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="outline"]) #button {
+	background-color: transparent;
+	border: 1px solid var(--cek-border-color-2);
+	color: var(--cek-text-color-1);
+
+  	&:hover {
+		text-decoration: underline;
+	}
+}
+
+:host([variant="ghost"]) #button {
+	background: transparent;
+	color: var(--cek-text-color-1);
+}
+
+:host([variant="ghost"]) #button:hover {
+	background-color: var(--cek-surface-color-1);
+}
+
+:host([variant="link"]) #button {
+	background-color: transparent;
+	color: var(--cek-color-primary-500);
+	padding: 0;
+	margin: 0;
+	min-height: 0;
+	min-width: 0;
+
+  	&:hover {
+  		text-decoration: underline;
+  	}
+}
+
+:host([variant="destructive"]) #button {
+ 	background-color: var(--cek-color-red-600);
+  	color: white;
+
+	 &:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="destructive"]) #button:focus {
+  	outline: 2px solid var(--cek-color-red-600);
+}
+
+:host([variant="neutral"]) #button {
+  	background-color: var(--cek-color-neutral);
+  	color: var(--cek-text-color-neutral);
+
+	&:hover {
+		filter: brightness(85%);
+  	}
+
+	&:focus {
+		outline-color: var(--cek-color-neutral);
+  	}
+}
+
+:host([variant="icon"]) #button {
+  	padding: var(--cek-space-2);
+  	margin: 0;
+}
+
+:host([pill]) #button {
+  border-radius: 50px;
+}
+
+:host([circle]) #button {
+  border-radius: 50%;
+  padding: 0;
+  width: var(--cek-height-medium);
+  height: var(--cek-height-medium);
+}
+
+[name="end"]::slotted(*) {
+  	margin-inline-start: 0.5ch;
+}
+
+[name="start"]::slotted(*) {
+  	margin-inline-end: 0.5ch;
+}
+
+#loading-icon {
+  	position: absolute;
+  	display: none;
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+}
+
+:host([loading]) #loading-icon {
+  display: block;
+}
+
+:host([icon-only]) #button {
+  padding: var(--cek-space-2);
+  margin: 0;
+}
+
+#arrow-icon {
+  	display: none;
+  	height: 1em;
+  	width: 1em;
+  	margin-inline-start: 0.5ch;
+}
+
+:host([arrow]) #arrow-icon {
+  	display: block;
+}
+
+::slotted(cek-icon) {
+	--height: 1.4em;
+	--width: 1.4em;
+}
+</style>
+		<button id="button" part="button" command="show-modal" commandfor="large-dialog">
+		<slot name="start"></slot>
+		<div id="label" part="label"><slot></slot></div>
+		<slot name="end"></slot>
+		<svg id="loading-icon" part="loading-icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25" />
+			<path d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7
+			a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z">
+			<animatetransform attributeName="transform" type="rotate" dur="0.75s" values="0 12 12;360 12 12" repeatCount="indefinite" />
+			</path>
+		</svg>
+		<svg id="arrow-icon" part="arrow-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">  
+			<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+		</svg>
+		</button>
+	</template>Open large dialog</cek-button>
+            <cek-dialog size="large" id="large-dialog" server-rendered=""><template shadowrootmode="open"><style>
+dialog {
+	z-index: 1;
+	border-radius: var(--cek-border-radius-3);
+	box-shadow: var(--cek-shadow-3);
+	background-color: light-dark(var(--cek-surface-color-0), var(--cek-surface-color-1));
+	border: none;
+	margin-block: var(--cek-space-8);
+    box-sizing: border-box;
+	padding: 0;
+	min-height: 18rem;
+}
+
+:host([open]) dialog {
+	display: flex;
+	margin: auto;
+}
+
+dialog[open] #container {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	margin: var(--cek-space-7);
+}
+
+dialog::backdrop {
+	background-color: rgba(0, 0, 0, 0.8);
+}
+
+header, footer {
+	position: sticky;
+	top: 0;
+	background-color: inherit;
+	z-index: 2;
+}
+
+header {
+	margin-block-end: var(--cek-space-6);
+}
+
+footer {
+	margin-block-start: var(--cek-space-6);
+	bottom: 0;
+}
+
+#content {
+	overflow-y: auto;
+	flex-grow: 1;
+}
+
+:host([size="small"]) dialog {
+	width: 18.75rem;
+}
+
+:host(:not([size])) dialog,
+:host([size="medium"]) dialog {
+	width: 37.5rem;
+}
+
+:host([size="large"]) dialog {
+	width: 56.25rem;
+}
+</style>
+		<dialog id="dialog" part="dialog" aria-modal="false">
+		  	<div id="container" part="container">
+				<header part="header" id="header">
+					<slot name="header"></slot>
+				</header>
+				<div id="content" part="content">
+					<slot></slot>
+				</div>
+				<footer part="footer">
+					<slot name="footer"></slot>
+				</footer>
+			</div>
+		</dialog>
+	</template>
+                <div slot="header" class="flex justify-between items-center">
+                    <h2 slot="header" class="cek-text-5">Large Dialog</h2>
+                    <cek-button commandfor="parent" command="close" icon-only="" variant="ghost" autofocus button-aria-label="close" server-rendered=""><template shadowrootmode="open"><style>
+:host {
+  	display: inline-block;
+  	font-family: var(--cek-font-family);
+  	box-sizing: border-box;
+}
+
+#button {
+  	display: inline-flex;
+  	align-items: center;
+  	justify-content: center;
+  	position: relative;
+  	background: transparent;
+  	border: none;
+  	padding: 0;
+  	margin: 0;
+  	font: inherit;
+  	color: var(--cek-text-color-1);
+  	cursor: pointer;
+  	box-sizing: border-box;
+  	text-decoration: none;
+}
+
+:host([variant]) #button {
+  	border-radius: var(--cek-border-radius);
+  	padding-inline: var(--cek-padding-inline);
+}
+
+:host([variant]) #button:focus {
+  	outline: var(--cek-focus-ring);
+  	outline-offset: var(--cek-focus-ring-offset);
+}
+
+:host([loading]) #button,
+:host([disabled]) #button {
+  	cursor: not-allowed;
+}
+
+:host([loading]) #button {
+  	background-color: lightgray;
+  	color: rgba(0, 0, 0, 0.5);
+}
+
+:host([disabled][variant]) #button {
+  	background-color: var(--cek-surface-color-disabled);
+  	color: var(--cek-text-color-disabled);
+
+	&:focus {
+		outline-color: var(--cek-surface-color-disabled);
+	}
+}
+
+:host([size="small"]) #button {
+  	min-height: var(--cek-height-small);
+  	min-width: var(--cek-height-small);
+  	font-size: var(--cek-font-size-0);
+}
+
+:host(:not([size])) #button, 
+:host([size="medium"]) #button {
+  	min-height: var(--cek-height-medium);
+  	min-width: var(--cek-height-medium);
+  	font-size: var(--cek-font-size-1);
+}
+
+:host([size="large"]) #button {
+  	min-height: var(--cek-height-large);
+  	min-width: var(--cek-height-large);
+  	font-size: var(--cek-font-size-2);
+}
+
+:host([variant="primary"]) #button {
+  	background-color: var(--cek-color-primary-500);
+  	color: white;
+
+  	&:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="secondary"]) #button {
+ 	background-color: var(--cek-surface-color-1);
+ 	 color: var(--cek-text-color-1);
+
+ 	 &:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="outline"]) #button {
+	background-color: transparent;
+	border: 1px solid var(--cek-border-color-2);
+	color: var(--cek-text-color-1);
+
+  	&:hover {
+		text-decoration: underline;
+	}
+}
+
+:host([variant="ghost"]) #button {
+	background: transparent;
+	color: var(--cek-text-color-1);
+}
+
+:host([variant="ghost"]) #button:hover {
+	background-color: var(--cek-surface-color-1);
+}
+
+:host([variant="link"]) #button {
+	background-color: transparent;
+	color: var(--cek-color-primary-500);
+	padding: 0;
+	margin: 0;
+	min-height: 0;
+	min-width: 0;
+
+  	&:hover {
+  		text-decoration: underline;
+  	}
+}
+
+:host([variant="destructive"]) #button {
+ 	background-color: var(--cek-color-red-600);
+  	color: white;
+
+	 &:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="destructive"]) #button:focus {
+  	outline: 2px solid var(--cek-color-red-600);
+}
+
+:host([variant="neutral"]) #button {
+  	background-color: var(--cek-color-neutral);
+  	color: var(--cek-text-color-neutral);
+
+	&:hover {
+		filter: brightness(85%);
+  	}
+
+	&:focus {
+		outline-color: var(--cek-color-neutral);
+  	}
+}
+
+:host([variant="icon"]) #button {
+  	padding: var(--cek-space-2);
+  	margin: 0;
+}
+
+:host([pill]) #button {
+  border-radius: 50px;
+}
+
+:host([circle]) #button {
+  border-radius: 50%;
+  padding: 0;
+  width: var(--cek-height-medium);
+  height: var(--cek-height-medium);
+}
+
+[name="end"]::slotted(*) {
+  	margin-inline-start: 0.5ch;
+}
+
+[name="start"]::slotted(*) {
+  	margin-inline-end: 0.5ch;
+}
+
+#loading-icon {
+  	position: absolute;
+  	display: none;
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+}
+
+:host([loading]) #loading-icon {
+  display: block;
+}
+
+:host([icon-only]) #button {
+  padding: var(--cek-space-2);
+  margin: 0;
+}
+
+#arrow-icon {
+  	display: none;
+  	height: 1em;
+  	width: 1em;
+  	margin-inline-start: 0.5ch;
+}
+
+:host([arrow]) #arrow-icon {
+  	display: block;
+}
+
+::slotted(cek-icon) {
+	--height: 1.4em;
+	--width: 1.4em;
+}
+</style>
+		<button id="button" part="button" aria-label="close" autofocus command="close" commandfor="parent">
+		<slot name="start"></slot>
+		<div id="label" part="label"><slot></slot></div>
+		<slot name="end"></slot>
+		<svg id="loading-icon" part="loading-icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25" />
+			<path d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7
+			a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z">
+			<animatetransform attributeName="transform" type="rotate" dur="0.75s" values="0 12 12;360 12 12" repeatCount="indefinite" />
+			</path>
+		</svg>
+		<svg id="arrow-icon" part="arrow-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">  
+			<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+		</svg>
+		</button>
+	</template>
+                        <cek-icon name="x-mark" server-rendered=""><template shadowrootmode="open"><style>:host{display:flex;}</style><svg height="24" width="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+</svg>
+</template></cek-icon>
+                    </cek-button>
+                </div>
+                <div id="lipsum">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam felis metus, pharetra a mattis a,
+                        aliquet nec tortor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
+                        cubilia curae; Nulla accumsan sem accumsan tristique pharetra. In hac habitasse platea dictumst.
+                        Nulla ut libero lorem. Donec maximus tincidunt libero in feugiat. Vivamus tempus ligula pulvinar
+                        feugiat sodales. Praesent pulvinar velit sit amet enim sodales, ut efficitur arcu rhoncus. Sed
+                        dapibus leo non quam accumsan lobortis. Ut malesuada in nisl et vestibulum. Vestibulum molestie
+                        at mauris sit amet sodales. Aliquam vitae sapien accumsan, congue arcu bibendum, tempus nisi.
+                        Duis vitae dolor eros. Sed viverra quam vel quam fermentum, vitae hendrerit ipsum vulputate.
+                    </p>
+                    <p>
+                        Aenean euismod interdum arcu nec pulvinar. Duis iaculis porttitor commodo. Duis vel finibus
+                        metus. Nullam scelerisque lacus non mauris venenatis, non ornare lacus scelerisque. Nullam eget
+                        vehicula justo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia
+                        curae; Mauris eu felis ornare, tristique nulla et, pulvinar est. Praesent gravida ut odio vitae
+                        congue. Nulla sed commodo odio. Pellentesque velit odio, finibus at convallis ac, cursus vitae
+                        tellus. Suspendisse eu aliquam massa, sed finibus justo. Vestibulum sed ex quam.
+                    </p>
+                    <p>
+                        Mauris ullamcorper, neque a ultrices fringilla, odio nulla viverra arcu, nec vestibulum lorem
+                        nibh tincidunt turpis. Quisque ac vulputate massa. Ut lectus lorem, finibus at est nec,
+                        tincidunt placerat velit. Sed rhoncus odio non mi euismod, id auctor massa malesuada. Ut congue,
+                        ante ut sollicitudin facilisis, est turpis vestibulum turpis, quis semper felis eros sed sem.
+                        Praesent dictum magna accumsan ex feugiat, in bibendum odio bibendum. Curabitur non sapien dui.
+                        Donec mattis posuere justo, vitae viverra nisi. Donec felis ligula, dictum ac turpis eget,
+                        gravida vehicula enim. Nam metus lectus, feugiat id porttitor in, consequat vel metus.
+                    </p>
+                    <p>
+                        Nam ac dolor ex. Ut sit amet lectus nisi. Nullam lobortis tellus id viverra congue. Donec
+                        iaculis nec eros sed suscipit. Vestibulum eu pharetra ex, id hendrerit diam. Proin varius, nunc
+                        et posuere pharetra, neque elit suscipit ante, sed dapibus felis diam id mauris. Aliquam eu elit
+                        convallis, eleifend lacus efficitur, sollicitudin ligula. Suspendisse commodo leo non ipsum
+                        interdum, et tincidunt nunc mollis. In at eros scelerisque, porttitor dolor porttitor, tristique
+                        lorem. Curabitur vel eros in odio tempus tristique. Integer condimentum, neque eget luctus
+                        iaculis, sem quam suscipit dolor, ac euismod mauris turpis at lacus.
+                    </p>
+                    <p>
+                        Aliquam tristique tincidunt leo in condimentum. Nunc eu finibus nibh. Integer vulputate ex
+                        ultrices turpis sodales, vitae lacinia tellus fermentum. Suspendisse lacinia molestie lacus, in
+                        ultrices tellus tempus non. Curabitur libero mauris, lacinia nec ex sit amet, ornare tempus
+                        dolor. Sed rhoncus ante est, vel sagittis ligula rhoncus non. Etiam sed euismod arcu. Ut eget
+                        nunc ex.
+                    </p>
+                    <p>
+                        In molestie hendrerit nisl, id suscipit lorem eleifend nec. Quisque felis arcu, pulvinar ac
+                        efficitur sed, vehicula ut tortor. Nulla vitae efficitur quam, quis ullamcorper orci. Proin
+                        ornare tellus non elit sagittis, et consectetur mauris pulvinar. Nullam a blandit metus.
+                        Pellentesque commodo suscipit mi, eget sagittis augue luctus vel. Nam pulvinar feugiat tortor,
+                        sit amet vestibulum augue aliquam ut. Suspendisse id arcu sed sapien lacinia feugiat non sit
+                        amet massa. Interdum et malesuada fames ac ante ipsum primis in faucibus. Praesent non libero
+                        laoreet, ornare lectus at, efficitur nisl. Duis luctus lacus non felis facilisis pretium. Cras
+                        nibh turpis, dignissim eu nisi sed, sagittis pretium leo. Aenean vel aliquet nibh, ac tincidunt
+                        velit. Nulla facilisis leo in libero lacinia, eget venenatis tortor blandit.
+                    </p>
+                    <p>
+                        Suspendisse maximus est non sodales tincidunt. Donec et consectetur urna. Donec ac justo sit
+                        amet neque feugiat hendrerit. Phasellus quis odio nulla. Donec vitae tempor purus, vel elementum
+                        nisi. Fusce non ultricies turpis. Phasellus nec odio purus. Integer nisi leo, euismod posuere
+                        erat sit amet, imperdiet efficitur sem. Nulla tincidunt ante eros, at eleifend sapien pharetra
+                        non. Etiam finibus lacus sed eros egestas lobortis.
+                    </p>
+                    <p>
+                        Cras mattis lacinia nulla vel convallis. In efficitur tortor urna, interdum iaculis est iaculis
+                        nec. Aliquam dictum turpis sit amet justo lobortis maximus. Suspendisse bibendum magna faucibus
+                        mi fringilla dictum. Morbi ut vulputate felis, volutpat tempor est. Pellentesque maximus justo
+                        et nisl scelerisque sollicitudin. Vivamus consequat, mauris in rutrum lobortis, nulla sem
+                        dignissim turpis, ac auctor urna felis id nisi. Aenean eleifend arcu magna, at efficitur tellus
+                        faucibus eget.
+                    </p>
+                    <p>
+                        Pellentesque in libero a leo sollicitudin tempor eu vitae elit. Morbi semper sapien id nibh
+                        auctor, ac feugiat nisl scelerisque. Nullam imperdiet ante finibus ultrices blandit. Donec
+                        imperdiet hendrerit hendrerit. Nulla ac sapien vel orci elementum commodo id et nisi. Proin
+                        auctor egestas nulla in ultricies. Donec turpis ex, pretium a tellus et, feugiat finibus mi.
+                    </p>
+                    <p>
+                        Etiam sit amet euismod lectus. Morbi vel libero tempor, pretium erat a, dictum enim. Phasellus
+                        pharetra purus at ullamcorper fermentum. Aenean vehicula lacus in maximus posuere. Nunc
+                        vestibulum dui quis lacinia luctus. Nunc laoreet vulputate maximus. Nunc sagittis posuere urna,
+                        a pretium quam consectetur vel. Duis pellentesque accumsan mauris, eu suscipit eros aliquet
+                        eget. Quisque lacinia ligula sit amet posuere tincidunt. Nullam suscipit, erat non imperdiet
+                        facilisis, ex diam molestie orci, eu rutrum massa erat eu purus. Duis ornare ante et urna
+                        blandit cursus.
+                    </p>
+                </div>
+                <cek-button commandfor="parent" command="close" variant="primary" slot="footer" server-rendered=""><template shadowrootmode="open"><style>
+:host {
+  	display: inline-block;
+  	font-family: var(--cek-font-family);
+  	box-sizing: border-box;
+}
+
+#button {
+  	display: inline-flex;
+  	align-items: center;
+  	justify-content: center;
+  	position: relative;
+  	background: transparent;
+  	border: none;
+  	padding: 0;
+  	margin: 0;
+  	font: inherit;
+  	color: var(--cek-text-color-1);
+  	cursor: pointer;
+  	box-sizing: border-box;
+  	text-decoration: none;
+}
+
+:host([variant]) #button {
+  	border-radius: var(--cek-border-radius);
+  	padding-inline: var(--cek-padding-inline);
+}
+
+:host([variant]) #button:focus {
+  	outline: var(--cek-focus-ring);
+  	outline-offset: var(--cek-focus-ring-offset);
+}
+
+:host([loading]) #button,
+:host([disabled]) #button {
+  	cursor: not-allowed;
+}
+
+:host([loading]) #button {
+  	background-color: lightgray;
+  	color: rgba(0, 0, 0, 0.5);
+}
+
+:host([disabled][variant]) #button {
+  	background-color: var(--cek-surface-color-disabled);
+  	color: var(--cek-text-color-disabled);
+
+	&:focus {
+		outline-color: var(--cek-surface-color-disabled);
+	}
+}
+
+:host([size="small"]) #button {
+  	min-height: var(--cek-height-small);
+  	min-width: var(--cek-height-small);
+  	font-size: var(--cek-font-size-0);
+}
+
+:host(:not([size])) #button, 
+:host([size="medium"]) #button {
+  	min-height: var(--cek-height-medium);
+  	min-width: var(--cek-height-medium);
+  	font-size: var(--cek-font-size-1);
+}
+
+:host([size="large"]) #button {
+  	min-height: var(--cek-height-large);
+  	min-width: var(--cek-height-large);
+  	font-size: var(--cek-font-size-2);
+}
+
+:host([variant="primary"]) #button {
+  	background-color: var(--cek-color-primary-500);
+  	color: white;
+
+  	&:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="secondary"]) #button {
+ 	background-color: var(--cek-surface-color-1);
+ 	 color: var(--cek-text-color-1);
+
+ 	 &:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="outline"]) #button {
+	background-color: transparent;
+	border: 1px solid var(--cek-border-color-2);
+	color: var(--cek-text-color-1);
+
+  	&:hover {
+		text-decoration: underline;
+	}
+}
+
+:host([variant="ghost"]) #button {
+	background: transparent;
+	color: var(--cek-text-color-1);
+}
+
+:host([variant="ghost"]) #button:hover {
+	background-color: var(--cek-surface-color-1);
+}
+
+:host([variant="link"]) #button {
+	background-color: transparent;
+	color: var(--cek-color-primary-500);
+	padding: 0;
+	margin: 0;
+	min-height: 0;
+	min-width: 0;
+
+  	&:hover {
+  		text-decoration: underline;
+  	}
+}
+
+:host([variant="destructive"]) #button {
+ 	background-color: var(--cek-color-red-600);
+  	color: white;
+
+	 &:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="destructive"]) #button:focus {
+  	outline: 2px solid var(--cek-color-red-600);
+}
+
+:host([variant="neutral"]) #button {
+  	background-color: var(--cek-color-neutral);
+  	color: var(--cek-text-color-neutral);
+
+	&:hover {
+		filter: brightness(85%);
+  	}
+
+	&:focus {
+		outline-color: var(--cek-color-neutral);
+  	}
+}
+
+:host([variant="icon"]) #button {
+  	padding: var(--cek-space-2);
+  	margin: 0;
+}
+
+:host([pill]) #button {
+  border-radius: 50px;
+}
+
+:host([circle]) #button {
+  border-radius: 50%;
+  padding: 0;
+  width: var(--cek-height-medium);
+  height: var(--cek-height-medium);
+}
+
+[name="end"]::slotted(*) {
+  	margin-inline-start: 0.5ch;
+}
+
+[name="start"]::slotted(*) {
+  	margin-inline-end: 0.5ch;
+}
+
+#loading-icon {
+  	position: absolute;
+  	display: none;
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+}
+
+:host([loading]) #loading-icon {
+  display: block;
+}
+
+:host([icon-only]) #button {
+  padding: var(--cek-space-2);
+  margin: 0;
+}
+
+#arrow-icon {
+  	display: none;
+  	height: 1em;
+  	width: 1em;
+  	margin-inline-start: 0.5ch;
+}
+
+:host([arrow]) #arrow-icon {
+  	display: block;
+}
+
+::slotted(cek-icon) {
+	--height: 1.4em;
+	--width: 1.4em;
+}
+</style>
+		<button id="button" part="button" command="close" commandfor="parent">
+		<slot name="start"></slot>
+		<div id="label" part="label"><slot></slot></div>
+		<slot name="end"></slot>
+		<svg id="loading-icon" part="loading-icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25" />
+			<path d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7
+			a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z">
+			<animatetransform attributeName="transform" type="rotate" dur="0.75s" values="0 12 12;360 12 12" repeatCount="indefinite" />
+			</path>
+		</svg>
+		<svg id="arrow-icon" part="arrow-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">  
+			<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+		</svg>
+		</button>
+	</template>Close</cek-button>
+            </cek-dialog>
+        </div>
+    </div>
+
+    <cek-code-block lang="xml" theme="github-dark">
+        <template>
+            <cek-button variant="primary" command="show-modal" commandfor="small-dialog">Open small dialog</cek-button>
+            <cek-dialog id="small-dialog" size="small">
+                <div slot="header" class="flex justify-between items-center">
+                    <h2 slot="header" class="cek-text-5">Small Dialog</h2>
+                    <cek-button button-aria-label="close" autofocus variant="ghost" icon-only="" command="close" commandfor="parent">
+                        <cek-icon name="x-mark"></cek-icon>
+                    </cek-button>
+                </div>
+                <p>Small dialog content</p>
+                <cek-button slot="footer" variant="primary" command="close" commandfor="parent">Close</cek-button>
+            </cek-dialog>
+
+            <cek-button variant="primary" command="show-modal" commandfor="medium-dialog">Open medium
+                dialog</cek-button>
+            <cek-dialog id="medium-dialog" size="medium">
+                <div slot="header" class="flex justify-between items-center">
+                    <h2 slot="header" class="cek-text-5">Medium Dialog</h2>
+                    <cek-button button-aria-label="close" autofocus variant="ghost" icon-only="" command="close" commandfor="parent">
+                        <cek-icon name="x-mark"></cek-icon>
+                    </cek-button>
+                </div>
+                <p>Medium dialog content</p>
+                <cek-button slot="footer" variant="primary" command="close" commandfor="parent">Close</cek-button>
+            </cek-dialog>
+
+            <cek-button variant="primary" command="show-modal" commandfor="large-dialog">Open large dialog</cek-button>
+            <cek-dialog id="large-dialog" size="large">
+                <div slot="header" class="flex justify-between items-center">
+                    <h2 slot="header" class="cek-text-5">Large Dialog</h2>
+                    <cek-button button-aria-label="close" autofocus variant="ghost" icon-only="" command="close" commandfor="parent">
+                        <cek-icon name="x-mark"></cek-icon>
+                    </cek-button>
+                </div>
+                <div id="lipsum">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam felis metus, pharetra a mattis a,
+                        aliquet nec tortor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
+                        cubilia curae; Nulla accumsan sem accumsan tristique pharetra. In hac habitasse platea dictumst.
+                        Nulla ut libero lorem. Donec maximus tincidunt libero in feugiat. Vivamus tempus ligula pulvinar
+                        feugiat sodales. Praesent pulvinar velit sit amet enim sodales, ut efficitur arcu rhoncus. Sed
+                        dapibus leo non quam accumsan lobortis. Ut malesuada in nisl et vestibulum. Vestibulum molestie
+                        at mauris sit amet sodales. Aliquam vitae sapien accumsan, congue arcu bibendum, tempus nisi.
+                        Duis vitae dolor eros. Sed viverra quam vel quam fermentum, vitae hendrerit ipsum vulputate.
+                    </p>
+                    <p>
+                        Aenean euismod interdum arcu nec pulvinar. Duis iaculis porttitor commodo. Duis vel finibus
+                        metus. Nullam scelerisque lacus non mauris venenatis, non ornare lacus scelerisque. Nullam eget
+                        vehicula justo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia
+                        curae; Mauris eu felis ornare, tristique nulla et, pulvinar est. Praesent gravida ut odio vitae
+                        congue. Nulla sed commodo odio. Pellentesque velit odio, finibus at convallis ac, cursus vitae
+                        tellus. Suspendisse eu aliquam massa, sed finibus justo. Vestibulum sed ex quam.
+                    </p>
+                    <p>
+                        Mauris ullamcorper, neque a ultrices fringilla, odio nulla viverra arcu, nec vestibulum lorem
+                        nibh tincidunt turpis. Quisque ac vulputate massa. Ut lectus lorem, finibus at est nec,
+                        tincidunt placerat velit. Sed rhoncus odio non mi euismod, id auctor massa malesuada. Ut congue,
+                        ante ut sollicitudin facilisis, est turpis vestibulum turpis, quis semper felis eros sed sem.
+                        Praesent dictum magna accumsan ex feugiat, in bibendum odio bibendum. Curabitur non sapien dui.
+                        Donec mattis posuere justo, vitae viverra nisi. Donec felis ligula, dictum ac turpis eget,
+                        gravida vehicula enim. Nam metus lectus, feugiat id porttitor in, consequat vel metus.
+                    </p>
+                    <p>
+                        Nam ac dolor ex. Ut sit amet lectus nisi. Nullam lobortis tellus id viverra congue. Donec
+                        iaculis nec eros sed suscipit. Vestibulum eu pharetra ex, id hendrerit diam. Proin varius, nunc
+                        et posuere pharetra, neque elit suscipit ante, sed dapibus felis diam id mauris. Aliquam eu elit
+                        convallis, eleifend lacus efficitur, sollicitudin ligula. Suspendisse commodo leo non ipsum
+                        interdum, et tincidunt nunc mollis. In at eros scelerisque, porttitor dolor porttitor, tristique
+                        lorem. Curabitur vel eros in odio tempus tristique. Integer condimentum, neque eget luctus
+                        iaculis, sem quam suscipit dolor, ac euismod mauris turpis at lacus.
+                    </p>
+                    <p>
+                        Aliquam tristique tincidunt leo in condimentum. Nunc eu finibus nibh. Integer vulputate ex
+                        ultrices turpis sodales, vitae lacinia tellus fermentum. Suspendisse lacinia molestie lacus, in
+                        ultrices tellus tempus non. Curabitur libero mauris, lacinia nec ex sit amet, ornare tempus
+                        dolor. Sed rhoncus ante est, vel sagittis ligula rhoncus non. Etiam sed euismod arcu. Ut eget
+                        nunc ex.
+                    </p>
+                    <p>
+                        In molestie hendrerit nisl, id suscipit lorem eleifend nec. Quisque felis arcu, pulvinar ac
+                        efficitur sed, vehicula ut tortor. Nulla vitae efficitur quam, quis ullamcorper orci. Proin
+                        ornare tellus non elit sagittis, et consectetur mauris pulvinar. Nullam a blandit metus.
+                        Pellentesque commodo suscipit mi, eget sagittis augue luctus vel. Nam pulvinar feugiat tortor,
+                        sit amet vestibulum augue aliquam ut. Suspendisse id arcu sed sapien lacinia feugiat non sit
+                        amet massa. Interdum et malesuada fames ac ante ipsum primis in faucibus. Praesent non libero
+                        laoreet, ornare lectus at, efficitur nisl. Duis luctus lacus non felis facilisis pretium. Cras
+                        nibh turpis, dignissim eu nisi sed, sagittis pretium leo. Aenean vel aliquet nibh, ac tincidunt
+                        velit. Nulla facilisis leo in libero lacinia, eget venenatis tortor blandit.
+                    </p>
+                    <p>
+                        Suspendisse maximus est non sodales tincidunt. Donec et consectetur urna. Donec ac justo sit
+                        amet neque feugiat hendrerit. Phasellus quis odio nulla. Donec vitae tempor purus, vel elementum
+                        nisi. Fusce non ultricies turpis. Phasellus nec odio purus. Integer nisi leo, euismod posuere
+                        erat sit amet, imperdiet efficitur sem. Nulla tincidunt ante eros, at eleifend sapien pharetra
+                        non. Etiam finibus lacus sed eros egestas lobortis.
+                    </p>
+                    <p>
+                        Cras mattis lacinia nulla vel convallis. In efficitur tortor urna, interdum iaculis est iaculis
+                        nec. Aliquam dictum turpis sit amet justo lobortis maximus. Suspendisse bibendum magna faucibus
+                        mi fringilla dictum. Morbi ut vulputate felis, volutpat tempor est. Pellentesque maximus justo
+                        et nisl scelerisque sollicitudin. Vivamus consequat, mauris in rutrum lobortis, nulla sem
+                        dignissim turpis, ac auctor urna felis id nisi. Aenean eleifend arcu magna, at efficitur tellus
+                        faucibus eget.
+                    </p>
+                    <p>
+                        Pellentesque in libero a leo sollicitudin tempor eu vitae elit. Morbi semper sapien id nibh
+                        auctor, ac feugiat nisl scelerisque. Nullam imperdiet ante finibus ultrices blandit. Donec
+                        imperdiet hendrerit hendrerit. Nulla ac sapien vel orci elementum commodo id et nisi. Proin
+                        auctor egestas nulla in ultricies. Donec turpis ex, pretium a tellus et, feugiat finibus mi.
+                    </p>
+                    <p>
+                        Etiam sit amet euismod lectus. Morbi vel libero tempor, pretium erat a, dictum enim. Phasellus
+                        pharetra purus at ullamcorper fermentum. Aenean vehicula lacus in maximus posuere. Nunc
+                        vestibulum dui quis lacinia luctus. Nunc laoreet vulputate maximus. Nunc sagittis posuere urna,
+                        a pretium quam consectetur vel. Duis pellentesque accumsan mauris, eu suscipit eros aliquet
+                        eget. Quisque lacinia ligula sit amet posuere tincidunt. Nullam suscipit, erat non imperdiet
+                        facilisis, ex diam molestie orci, eu rutrum massa erat eu purus. Duis ornare ante et urna
+                        blandit cursus.
+                    </p>
+                </div>
                 <cek-button slot="footer" variant="primary" command="close" commandfor="parent">Close</cek-button>
             </cek-dialog>
         </template>
@@ -1730,7 +4841,8 @@ dialog {
     </p>
 
     <p>Provide a mechanism for users to close the dialog, such as a close button. Modal dialogs opened with
-        <code>showModal()</code> can be dismissed with the Esc key, which should be maintained for accessibility.
+        <code>showModal()</code> can be dismissed with the Esc key, which should be maintained for accessibility. If you
+        want to prevent the dialog from closing with the Esc key, use the <code>no-esc-close</code> attribute.
     </p>
 
     <p>The native <code>&lt;dialog&gt;</code> element provides built-in accessibility features. When using
@@ -1738,6 +4850,11 @@ dialog {
         dialogs, <code>aria-modal="false"</code> is used. Ensure everything outside the modal dialog is inert using the
         <code>inert</code> attribute.
     </p>
+
+    <p>For critical dialogs where the user must make a choice, you can use <code>role="alertdialog"</code>.
+        Additionally, you can choose not to add a close icon and not use the <code>close-on-outside-click</code>
+        attribute and prevent close on escape key with <code>no-esc-close</code> attribute to ensure the user makes a
+        choice within the dialog.</p>
 
     <h2>Attributes</h2>
 
@@ -1757,6 +4874,18 @@ dialog {
                 <td>modal</td>
                 <td>If present, the dialog is shown as a modal dialog.</td>
             </tr>
+            <tr>
+                <td>size</td>
+                <td>The size of the dialog. Can be "small", "medium", or "large".</td>
+            </tr>
+            <tr>
+                <td>close-on-outside-click</td>
+                <td>If present, the dialog will close when the backdrop or outside of the dialog is clicked.</td>
+            </tr>
+            <tr>
+                <td>no-esc-close</td>
+                <td>If present, the dialog will not close when the ESC key is pressed.</td>
+            </tr>
         </tbody>
     </table>
 
@@ -1773,10 +4902,6 @@ dialog {
             <tr>
                 <td>header</td>
                 <td>Content to display in the header of the dialog.</td>
-            </tr>
-            <tr>
-                <td>header-actions</td>
-                <td>Content to display in the header actions area.</td>
             </tr>
             <tr>
                 <td>default</td>
