@@ -14,6 +14,8 @@
  * @attribute {string} button-aria-label - Sets an ARIA label for accessibility.
  * @attribute {string} href - Transforms the button into an anchor element with this `href`.
  * @attribute {string} target - Sets the `target` attribute of the anchor when `href` is present. Defaults to `_self`.
+ * @attribute {string} command - The command to execute when the button is clicked. The command should match a public method name of the target element.
+ * @attribute {string} commandfor - The ID of the element to execute the command on. If set to `parent`, the command will be executed on the parent element.
  *
  * @slot start - Content to display before the button's text (e.g., icons).
  * @slot end - Content to display after the button's text (e.g., icons).
@@ -31,16 +33,23 @@ const buttonAttributes = [
 	"href",
 	"target",
 	"autofocus",
+	"command",
+	"commandfor",
 ];
 
 export const buttonTemplate = (attributes = {}) => {
 	const tag = attributes.href ? "a" : "button";
 	const buttonAtts = buttonAttributes
 		.filter((attr) => attributes[attr] !== undefined)
-		.map(
-			(attr) =>
-				`${attr === "button-aria-label" ? "aria-label" : attr}="${attributes[attr]}"`,
-		)
+		.map((attr) => {
+			if (attr === "disabled") {
+				return `aria-disabled="${!!attributes[attr]}"`;
+			}
+			if (attr === "button-aria-label") {
+				return `aria-label="${attributes[attr]}"`;
+			}
+			return `${attr}="${attributes[attr]}"`;
+		})
 		.join(" ");
 
 	return /*html*/ `
@@ -101,7 +110,6 @@ export const buttonStyles = /*css*/ `
 :host([loading]) #button,
 :host([disabled]) #button {
   	cursor: not-allowed;
-  	pointer-events: none;
 }
 
 :host([loading]) #button {
@@ -110,8 +118,12 @@ export const buttonStyles = /*css*/ `
 }
 
 :host([disabled][variant]) #button {
-  	background-color: #ccc;
-  	color: rgba(0, 0, 0, 0.5);
+  	background-color: var(--cek-surface-color-disabled);
+  	color: var(--cek-text-color-disabled);
+
+	&:focus {
+		outline-color: var(--cek-surface-color-disabled);
+	}
 }
 
 :host([size="small"]) #button {
@@ -202,6 +214,10 @@ export const buttonStyles = /*css*/ `
 
 	&:hover {
 		filter: brightness(85%);
+  	}
+
+	&:focus {
+		outline-color: var(--cek-color-neutral);
   	}
 }
 
@@ -313,9 +329,13 @@ export class Button extends HTMLElement {
 	}
 
 	set disabled(value) {
-		value
-			? this.setAttribute("disabled", "")
-			: this.removeAttribute("disabled");
+		if (value) {
+			this.setAttribute("disabled", "");
+			this.#button.setAttribute("aria-disabled", "true");
+		} else {
+			this.removeAttribute("disabled");
+			this.#button.removeAttribute("aria-disabled");
+		}
 	}
 
 	get #attributes() {
@@ -371,7 +391,13 @@ export class Button extends HTMLElement {
 					? "aria-label"
 					: buttonAttribute;
 
-			if (this.hasAttribute(buttonAttribute)) {
+			if (buttonAttribute === "disabled") {
+				if (this.hasAttribute("disabled")) {
+					this.#button.setAttribute("aria-disabled", "true");
+				} else {
+					this.#button.removeAttribute("aria-disabled");
+				}
+			} else if (this.hasAttribute(buttonAttribute)) {
 				this.#button.setAttribute(
 					newAttribute,
 					this.getAttribute(buttonAttribute),
@@ -414,6 +440,14 @@ export class Button extends HTMLElement {
 		}
 	}
 
+	#findClosestCustomElementHost() {
+		let node = this.parentElement;
+		while (node && !node.tagName?.startsWith("CEK-")) {
+			node = node.parentElement;
+		}
+		return node;
+	}
+
 	#onClick = (event) => {
 		if (this.disabled || this.loading) {
 			event.preventDefault();
@@ -435,7 +469,7 @@ export class Button extends HTMLElement {
 		if (commandFor && command) {
 			const target =
 				commandFor === "parent"
-					? this.parentElement
+					? this.#findClosestCustomElementHost()
 					: this.ownerDocument.getElementById(commandFor);
 
 			if (target) {

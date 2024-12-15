@@ -22,8 +22,6 @@
  * @attribute {string} title - Advisory information for the input.
  * @attribute {boolean} spellcheck - Whether spell checking is enabled for the input.
  * @attribute {string} input-aria-label - Aria-label attribute for the input control.
- * @attribute {boolean} password-button - If present, toggles a show/hide password button.
- * @attribute {boolean} clear-button - If present, shows a clear button when the input has a value.
  * @attribute {boolean} validate-on-change - If present, the input is validated on change events.
  * @attribute {string} value-missing-message - Custom message for value missing validation.
  * @attribute {string} too-short-message - Custom message for too short validation.
@@ -38,6 +36,10 @@
  * @slot error - The error message text node.
  * @slot start - Content to display before the input (e.g., icons).
  * @slot end - Content to display after the input (e.g., icons).
+ *
+ * @method focus - Moves keyboard focus to the input element.
+ * @method togglePassword - Toggles the input type between `password` and `text`.
+ * @method clear - Clears the input value.
  */
 
 const inputAttributes = [
@@ -71,14 +73,6 @@ export const inputTemplate = (attributes = {}) => {
 	const labelText = attributes.label ?? "";
 	const helpText = attributes.help ?? "";
 	const errorText = attributes.error ?? "";
-	const showPasswordButton = attributes["password-button"] !== undefined;
-	const showClearButton =
-		attributes["clear-button"] !== undefined &&
-		(attributes.value ?? "").length > 0;
-	const passwordButtonStyle = showPasswordButton
-		? "display:flex;"
-		: "display:none;";
-	const clearButtonStyle = showClearButton ? "display:flex;" : "display:none;";
 
 	return /*html*/ `
 		<label for="input" id="label" part="label">
@@ -93,20 +87,6 @@ export const inputTemplate = (attributes = {}) => {
 		<div id="container" part="container">
 			<slot name="start"></slot>
 			<input part="input" id="input" ${inputAtts} aria-describedby="help error">
-			<button part="password-button" id="password-button" aria-label="show password toggle" style="${passwordButtonStyle}">
-				<svg part="hide-password-icon" id="hide-password-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88" />
-				</svg>
-				<svg part="show-password-icon" id="show-password-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-					<path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-				</svg>
-			</button>
-			<button part="clear-button" id="clear-button" aria-label="clear" style="${clearButtonStyle}">
-				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-				</svg>
-			</button>
 			<slot name="end"></slot>
 		</div>
 		`;
@@ -219,37 +199,7 @@ export const inputStyles = /* css */ `
 	color: var(--cek-text-color-2);
 	align-self: center;
 }
-
-#password-button #hide-password-icon {
-	display: none;
-}
-
-#password-button, #clear-button {
-	display: none;
-	border: none;
-	background: none;
-	cursor: pointer;
-	padding: 0 var(--cek-space-1);
-	margin-inline: var(--cek-space-3);
-	align-self: center;
-}
-
-#password-button:focus, #clear-button:focus {
-	border-radius: var(--cek-border-radius);
-	outline: var(--cek-focus-ring);
-	outline-offset: var(--cek-focus-ring-offset);
-}
-
-#password-button #hide-password-icon {
-	display: none;
-}
-
-#password-button svg, #clear-button svg {
-	font-size: var(--cek-font-size-1);
-	color: var(--cek-text-color-1);
-	height: 1em;
-	width: 1em;
-}`;
+`;
 
 class Input extends HTMLElement {
 	static get observedAttributes() {
@@ -285,6 +235,21 @@ class Input extends HTMLElement {
 	}
 
 	/**
+	 * The current type of the input.
+	 * @type {string}
+	 */
+	get type() {
+		return this.#input.type;
+	}
+
+	set type(type) {
+		if (this.#input.type !== type) {
+			this.#input.type = type;
+		}
+		this.setAttribute("type", type);
+	}
+
+	/**
 	 * The name of the input, used during form submission.
 	 * @type {string|null}
 	 */
@@ -314,14 +279,6 @@ class Input extends HTMLElement {
 		return this.shadowRoot.getElementById("input");
 	}
 
-	get #passwordButton() {
-		return this.shadowRoot.getElementById("password-button");
-	}
-
-	get #clearButton() {
-		return this.shadowRoot.getElementById("clear-button");
-	}
-
 	get #attributes() {
 		const attributes = {};
 		for (const { name, value } of this.attributes) {
@@ -331,11 +288,17 @@ class Input extends HTMLElement {
 	}
 
 	connectedCallback() {
-		this.#attachEvents();
+		this.#input.addEventListener("input", this.#onInput);
+		this.#input.addEventListener("change", this.#onChange);
+		this.addEventListener("command", this.#onCommand);
 	}
 
 	disconnectedCallback() {
-		this.#detachEvents();
+		this.#input.removeEventListener("input", this.#onInput);
+		this.#input.removeEventListener("change", this.#onChange);
+		this.#internals.form?.removeEventListener("submit", this.#onFormSubmit);
+		this.#input.removeEventListener("keyup", this.#onKeyUp);
+		this.removeEventListener("command", this.#onCommand);
 	}
 
 	/**
@@ -370,8 +333,6 @@ class Input extends HTMLElement {
 		this.#internals.form.removeAttribute("submitted");
 		this.#internals.setFormValue("");
 		this.#internals.setValidity({});
-		this.#updateClearButtonVisibility();
-		this.#resetPasswordButton();
 	}
 
 	attributeChangedCallback(name, _oldValue, newValue) {
@@ -390,23 +351,16 @@ class Input extends HTMLElement {
 		this.#input.focus();
 	}
 
-	#attachEvents() {
-		this.#input.addEventListener("input", this.#onInput);
-		this.#input.addEventListener("change", this.#onChange);
-		this.#passwordButton.addEventListener("click", this.#onPasswordButtonClick);
-		this.#clearButton.addEventListener("click", this.#onClearButtonClick);
+	/**
+	 * Toggles the inner inputs type of password.
+	 */
+	togglePassword() {
+		this.type = this.type === "password" ? "text" : "password";
 	}
 
-	#detachEvents() {
-		this.#input.removeEventListener("input", this.#onInput);
-		this.#input.removeEventListener("change", this.#onChange);
-		this.#internals.form?.removeEventListener("submit", this.#onFormSubmit);
-		this.#input.removeEventListener("keyup", this.#onKeyUp);
-		this.#passwordButton.removeEventListener(
-			"click",
-			this.#onPasswordButtonClick,
-		);
-		this.#clearButton.removeEventListener("click", this.#onClearButtonClick);
+	/** Clears the input value. */
+	clear() {
+		this.value = "";
 	}
 
 	#copyInputAttributes() {
@@ -428,7 +382,6 @@ class Input extends HTMLElement {
 	#onInput = (event) => {
 		this.value = this.#input.value;
 		this.#validate();
-		this.#updateClearButtonVisibility();
 		this.dispatchEvent(new event.constructor(event.type, event));
 	};
 
@@ -456,43 +409,13 @@ class Input extends HTMLElement {
 		}
 	};
 
-	#onClearButtonClick = (event) => {
-		event.preventDefault();
-		event.stopImmediatePropagation();
-		this.#input.value = "";
-		this.#updateClearButtonVisibility();
-		setTimeout(() => this.#input.focus(), 200);
-	};
+	#onCommand = (event) => {
+		const method = event.command.replace(/(-\w)/g, (c) => c[1].toUpperCase());
 
-	#onPasswordButtonClick = () => {
-		if (this.#input.type === "password") {
-			this.#input.type = "text";
-			this.shadowRoot.getElementById("hide-password-icon").style.display =
-				"block";
-			this.shadowRoot.getElementById("show-password-icon").style.display =
-				"none";
-		} else {
-			this.#resetPasswordButton();
+		if (method in this) {
+			this[method](event);
 		}
 	};
-
-	#resetPasswordButton() {
-		if (this.hasAttribute("password-button")) {
-			this.#input.type = "password";
-			this.shadowRoot.getElementById("hide-password-icon").style.display =
-				"none";
-			this.shadowRoot.getElementById("show-password-icon").style.display =
-				"block";
-		}
-	}
-
-	#updateClearButtonVisibility() {
-		if (this.value.length > 0 && this.hasAttribute("clear-button")) {
-			this.#clearButton.style.display = "flex";
-		} else {
-			this.#clearButton.style.display = "none";
-		}
-	}
 
 	#validate(showError = false) {
 		this.#internals.setValidity({});
