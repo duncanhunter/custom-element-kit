@@ -1,0 +1,652 @@
+<!DOCTYPE html><html lang="en"><html lang="en">
+
+<head><base href="/custom-element-kit/14-tests/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Custom Element Kit Docs">
+    <title>Custom Element Kit</title>
+    <link rel="stylesheet" href="./assets/styles.css">
+    <link rel="stylesheet" href="./assets/page-layout.css">
+    <link rel="stylesheet" href="./assets/utilities.css">
+    <script src="./assets/scroll-spy.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <header class="flex justify-between items-center">
+            <h1 class="cek-text-2">Custom Element Kit</h1>
+            <cek-theme-select server-rendered=""><template shadowrootmode="open"><style></style></template></cek-theme-select>
+        </header>
+        <div class="content">
+            <aside class="main-nav">
+                <nav aria-label="Main Navigation">
+                    <h2 class="cek-text-1 cek-text-bold">Getting Started</h2>
+                    <ul>
+                        <li><a href="welcome.html">Getting Started</a></li>
+                    </ul>
+                    <h2 class="cek-text-1 cek-text-bold">Components</h2>
+                    <ul>
+                        <li><a href="dialog.html">Dialog</a></li>
+                        <li><a href="button.html">Button</a></li>
+                        <li><a href="icon.html">Icon</a></li>
+                        <li><a href="input.html">Input</a></li>
+                        <li><a href="form.html">Form</a></li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <main id="main-content" tabindex="-1">
+                <html><head></head><body><section>
+  <h1>Input (cek-input)</h1>
+
+  <cek-form skip-server-render="" fetch-swap="outerHTML" fetch-target="ui-input[name=email]" fetch="post:/api/endpoint1" server-rendered=""><template shadowrootmode="open"><style>
+</style>
+	<slot></slot>
+</template>
+    <cek-input label="nsw" required server-rendered=""><template shadowrootmode="open"><style>
+:host {
+	display: block;
+	font-family: var(--cek-font-family);
+}
+
+#container {
+	display: flex;
+	align-items: stretch;
+	border: var(--cek-form-control-border);
+	border-radius: var(--cek-border-radius);
+	box-sizing: border-box;
+}
+
+#container:has(#input:focus) {
+	outline: var(--cek-focus-ring);
+	outline-offset: var(--cek-focus-ring-offset);
+}
+
+#input {
+	border: none;
+	padding: 0;
+	outline: none;
+	flex: 1;
+	font-size: inherit;
+	font-family: inherit;
+	color: inherit;
+	margin-inline: var(--cek-space-2);
+	background-color: var(--cek-surface-color-0);
+}
+
+:host([size="small"]) #container {
+	min-height: var(--cek-height-small);
+}
+
+:host([label][size="small"]) #label,
+:host([help][size="small"]) #help,
+:host([error][size="small"]) #error,
+:host([size="small"]) #input::placeholder {
+	font-size: var(--cek-font-size-0);
+}
+
+:host(:not([size])) #container,
+:host([size="medium"]) #container {
+	min-height: var(--cek-height-medium);
+}
+
+:host([label][size="medium"]) #label,
+:host([help][size="medium"]) #help,
+:host([error][size="medium"]) #error,
+:host([size="medium"]) #input::placeholder {
+	font-size: var(--cek-font-size-1);
+}
+
+:host([size="large"]) #container {
+	min-height: var(--cek-height-large);
+}
+
+:host([label][size="large"]) #label,
+:host([help][size="large"]) #help,
+:host([error][size="large"]) #error,
+:host([size="large"]) #input::placeholder {
+	font-size: var(--cek-font-size-2);
+}
+
+#help {
+	color: var(--cek-text-color-3);
+}
+
+#error {
+	color: var(--cek-text-color-error);
+}
+  
+:host([label]) #label,
+:host([help]) #help,
+:host([error]) #error {
+	display: block;
+	margin-block-end: var(--cek-space-2);
+}
+
+:host([error]) #container {
+	border-color: var(--cek-border-color-error);
+}
+  
+:host([error]) #container:has(#input:focus) {
+	outline-color: var(--cek-border-color-error);
+}
+
+[name="start"]::slotted(cek-icon),
+[name="end"]::slotted(cek-icon) {
+	margin: var(--cek-space-2);
+	align-self: center;
+}
+[name="start"]::slotted(cek-button),
+[name="end"]::slotted(cek-button) {
+	margin: var(--cek-space-3);
+	align-self: center;
+}
+
+[name="start"]::slotted(kbd), [name="end"]::slotted(kbd) {
+	padding: var(--cek-space-1) var(--cek-space-2);
+	margin: var(--cek-space-2);
+	border: var(--cek-border);
+	border-radius: var(--cek-border-radius);
+	color: var(--cek-text-color-2);
+	align-self: center;
+}
+</style>
+		<label for="input" id="label" part="label">
+			<slot name="label">nsw</slot>
+		</label>
+		<div id="help" part="help">
+			<slot name="help"></slot>
+		</div>
+		<div id="error" part="error">
+			<slot name="error"></slot>
+		</div>
+		<div id="container" part="container">
+			<slot name="start"></slot>
+			<input part="input" id="input" required aria-describedby="help error">
+			<slot name="end"></slot>
+		</div>
+		</template></cek-input>
+    <div class="cek-form-actions">
+      <cek-button type="submit" variant="primary" server-rendered=""><template shadowrootmode="open"><style>
+:host {
+  	display: inline-block;
+  	font-family: var(--cek-font-family);
+  	box-sizing: border-box;
+}
+
+#button {
+  	display: inline-flex;
+  	align-items: center;
+  	justify-content: center;
+  	position: relative;
+  	background: transparent;
+  	border: none;
+  	padding: 0;
+  	margin: 0;
+  	font: inherit;
+  	color: var(--cek-text-color-1);
+  	cursor: pointer;
+  	box-sizing: border-box;
+  	text-decoration: none;
+}
+
+:host([variant]) #button {
+  	border-radius: var(--cek-border-radius);
+  	padding-inline: var(--cek-padding-inline);
+}
+
+:host([variant]) #button:focus {
+  	outline: var(--cek-focus-ring);
+  	outline-offset: var(--cek-focus-ring-offset);
+}
+
+:host([loading]) #button,
+:host([disabled]) #button {
+  	cursor: not-allowed;
+}
+
+:host([loading]) #button {
+  	background-color: lightgray;
+  	color: rgba(0, 0, 0, 0.5);
+}
+
+:host([disabled][variant]) #button {
+  	background-color: var(--cek-surface-color-disabled);
+  	color: var(--cek-text-color-disabled);
+
+	&:focus {
+		outline-color: var(--cek-surface-color-disabled);
+	}
+}
+
+:host([size="small"]) #button {
+  	min-height: var(--cek-height-small);
+  	min-width: var(--cek-height-small);
+  	font-size: var(--cek-font-size-0);
+}
+
+:host(:not([size])) #button, 
+:host([size="medium"]) #button {
+  	min-height: var(--cek-height-medium);
+  	min-width: var(--cek-height-medium);
+  	font-size: var(--cek-font-size-1);
+}
+
+:host([size="large"]) #button {
+  	min-height: var(--cek-height-large);
+  	min-width: var(--cek-height-large);
+  	font-size: var(--cek-font-size-2);
+}
+
+:host([variant="primary"]) #button {
+  	background-color: var(--cek-color-primary-500);
+  	color: white;
+
+  	&:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="secondary"]) #button {
+ 	background-color: var(--cek-surface-color-1);
+ 	 color: var(--cek-text-color-1);
+
+ 	 &:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="outline"]) #button {
+	background-color: transparent;
+	border: 1px solid var(--cek-border-color-2);
+	color: var(--cek-text-color-1);
+
+  	&:hover {
+		text-decoration: underline;
+	}
+}
+
+:host([variant="ghost"]) #button {
+	background: transparent;
+	color: var(--cek-text-color-1);
+}
+
+:host([variant="ghost"]) #button:hover {
+	background-color: var(--cek-surface-color-1);
+}
+
+:host([variant="link"]) #button {
+	background-color: transparent;
+	color: var(--cek-color-primary-500);
+	padding: 0;
+	margin: 0;
+	min-height: 0;
+	min-width: 0;
+
+  	&:hover {
+  		text-decoration: underline;
+  	}
+}
+
+:host([variant="destructive"]) #button {
+ 	background-color: var(--cek-color-red-600);
+  	color: white;
+
+	 &:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="destructive"]) #button:focus {
+  	outline: 2px solid var(--cek-color-red-600);
+}
+
+:host([variant="neutral"]) #button {
+  	background-color: var(--cek-color-neutral);
+  	color: var(--cek-text-color-neutral);
+
+	&:hover {
+		filter: brightness(85%);
+  	}
+
+	&:focus {
+		outline-color: var(--cek-color-neutral);
+  	}
+}
+
+:host([variant="icon"]) #button {
+  	padding: var(--cek-space-2);
+  	margin: 0;
+}
+
+:host([pill]) #button {
+  border-radius: 50px;
+}
+
+:host([circle]) #button {
+  border-radius: 50%;
+  padding: 0;
+  width: var(--cek-height-medium);
+  height: var(--cek-height-medium);
+}
+
+[name="end"]::slotted(*) {
+  	margin-inline-start: 0.5ch;
+}
+
+[name="start"]::slotted(*) {
+  	margin-inline-end: 0.5ch;
+}
+
+#loading-icon {
+  	position: absolute;
+  	display: none;
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+}
+
+:host([loading]) #loading-icon {
+  display: block;
+}
+
+:host([icon-only]) #button {
+  padding: var(--cek-space-2);
+  margin: 0;
+}
+
+#arrow-icon {
+  	display: none;
+  	height: 1em;
+  	width: 1em;
+  	margin-inline-start: 0.5ch;
+}
+
+:host([arrow]) #arrow-icon {
+  	display: block;
+}
+
+::slotted(cek-icon) {
+	--height: 1.4em;
+	--width: 1.4em;
+}
+</style>
+		<button id="button" part="button" type="submit">
+		<slot name="start"></slot>
+		<div id="label" part="label"><slot></slot></div>
+		<slot name="end"></slot>
+		<svg id="loading-icon" part="loading-icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25" />
+			<path d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7
+			a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z">
+			<animatetransform attributeName="transform" type="rotate" dur="0.75s" values="0 12 12;360 12 12" repeatCount="indefinite" />
+			</path>
+		</svg>
+		<svg id="arrow-icon" part="arrow-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">  
+			<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+		</svg>
+		</button>
+	</template>Submit</cek-button>
+      <cek-button type="reset" variant="secondary" server-rendered=""><template shadowrootmode="open"><style>
+:host {
+  	display: inline-block;
+  	font-family: var(--cek-font-family);
+  	box-sizing: border-box;
+}
+
+#button {
+  	display: inline-flex;
+  	align-items: center;
+  	justify-content: center;
+  	position: relative;
+  	background: transparent;
+  	border: none;
+  	padding: 0;
+  	margin: 0;
+  	font: inherit;
+  	color: var(--cek-text-color-1);
+  	cursor: pointer;
+  	box-sizing: border-box;
+  	text-decoration: none;
+}
+
+:host([variant]) #button {
+  	border-radius: var(--cek-border-radius);
+  	padding-inline: var(--cek-padding-inline);
+}
+
+:host([variant]) #button:focus {
+  	outline: var(--cek-focus-ring);
+  	outline-offset: var(--cek-focus-ring-offset);
+}
+
+:host([loading]) #button,
+:host([disabled]) #button {
+  	cursor: not-allowed;
+}
+
+:host([loading]) #button {
+  	background-color: lightgray;
+  	color: rgba(0, 0, 0, 0.5);
+}
+
+:host([disabled][variant]) #button {
+  	background-color: var(--cek-surface-color-disabled);
+  	color: var(--cek-text-color-disabled);
+
+	&:focus {
+		outline-color: var(--cek-surface-color-disabled);
+	}
+}
+
+:host([size="small"]) #button {
+  	min-height: var(--cek-height-small);
+  	min-width: var(--cek-height-small);
+  	font-size: var(--cek-font-size-0);
+}
+
+:host(:not([size])) #button, 
+:host([size="medium"]) #button {
+  	min-height: var(--cek-height-medium);
+  	min-width: var(--cek-height-medium);
+  	font-size: var(--cek-font-size-1);
+}
+
+:host([size="large"]) #button {
+  	min-height: var(--cek-height-large);
+  	min-width: var(--cek-height-large);
+  	font-size: var(--cek-font-size-2);
+}
+
+:host([variant="primary"]) #button {
+  	background-color: var(--cek-color-primary-500);
+  	color: white;
+
+  	&:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="secondary"]) #button {
+ 	background-color: var(--cek-surface-color-1);
+ 	 color: var(--cek-text-color-1);
+
+ 	 &:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="outline"]) #button {
+	background-color: transparent;
+	border: 1px solid var(--cek-border-color-2);
+	color: var(--cek-text-color-1);
+
+  	&:hover {
+		text-decoration: underline;
+	}
+}
+
+:host([variant="ghost"]) #button {
+	background: transparent;
+	color: var(--cek-text-color-1);
+}
+
+:host([variant="ghost"]) #button:hover {
+	background-color: var(--cek-surface-color-1);
+}
+
+:host([variant="link"]) #button {
+	background-color: transparent;
+	color: var(--cek-color-primary-500);
+	padding: 0;
+	margin: 0;
+	min-height: 0;
+	min-width: 0;
+
+  	&:hover {
+  		text-decoration: underline;
+  	}
+}
+
+:host([variant="destructive"]) #button {
+ 	background-color: var(--cek-color-red-600);
+  	color: white;
+
+	 &:hover {
+		filter: brightness(85%);
+  	}
+}
+
+:host([variant="destructive"]) #button:focus {
+  	outline: 2px solid var(--cek-color-red-600);
+}
+
+:host([variant="neutral"]) #button {
+  	background-color: var(--cek-color-neutral);
+  	color: var(--cek-text-color-neutral);
+
+	&:hover {
+		filter: brightness(85%);
+  	}
+
+	&:focus {
+		outline-color: var(--cek-color-neutral);
+  	}
+}
+
+:host([variant="icon"]) #button {
+  	padding: var(--cek-space-2);
+  	margin: 0;
+}
+
+:host([pill]) #button {
+  border-radius: 50px;
+}
+
+:host([circle]) #button {
+  border-radius: 50%;
+  padding: 0;
+  width: var(--cek-height-medium);
+  height: var(--cek-height-medium);
+}
+
+[name="end"]::slotted(*) {
+  	margin-inline-start: 0.5ch;
+}
+
+[name="start"]::slotted(*) {
+  	margin-inline-end: 0.5ch;
+}
+
+#loading-icon {
+  	position: absolute;
+  	display: none;
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+}
+
+:host([loading]) #loading-icon {
+  display: block;
+}
+
+:host([icon-only]) #button {
+  padding: var(--cek-space-2);
+  margin: 0;
+}
+
+#arrow-icon {
+  	display: none;
+  	height: 1em;
+  	width: 1em;
+  	margin-inline-start: 0.5ch;
+}
+
+:host([arrow]) #arrow-icon {
+  	display: block;
+}
+
+::slotted(cek-icon) {
+	--height: 1.4em;
+	--width: 1.4em;
+}
+</style>
+		<button id="button" part="button" type="reset">
+		<slot name="start"></slot>
+		<div id="label" part="label"><slot></slot></div>
+		<slot name="end"></slot>
+		<svg id="loading-icon" part="loading-icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25" />
+			<path d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7
+			a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z">
+			<animatetransform attributeName="transform" type="rotate" dur="0.75s" values="0 12 12;360 12 12" repeatCount="indefinite" />
+			</path>
+		</svg>
+		<svg id="arrow-icon" part="arrow-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">  
+			<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+		</svg>
+		</button>
+	</template>Reset</cek-button>
+    </div>
+  </cek-form>
+
+  <cek-code-block lang="xml" theme="github-dark">
+    <template>
+      <cek-form skip-server-render="">
+        <cek-input required label="nsw"></cek-input>
+        <div class="cek-form-actions">
+          <cek-button variant="primary" type="submit">Submit</cek-button>
+          <cek-button variant="secondary" type="reset">Reset</cek-button>
+        </div>
+      </cek-form>
+    </template>
+  </cek-code-block>
+</section></body></html>
+            </main>
+
+            <aside class="page-nav">
+                <nav aria-label="Page navigation">
+                    <h2 class="cek-text-1 cek-text-bold">On this page</h2>
+                    <!-- Dynamic table of contents will be loaded here -->
+                    <ul id="menu-list"></ul>
+                </nav>
+            </aside>
+        </div>
+    </div>
+    <script type="module">
+        import autoDefineElements from './assets/auto-define-elements.mjs';
+        autoDefineElements('production');
+        generateTOC();
+        document.addEventListener('DOMContentLoaded', () => {
+            const page = (window.location.pathname.split('/').pop().replace('.html', '')) || 'welcome';
+            document.querySelectorAll('aside.main-nav a').forEach(link => {
+                if (link.getAttribute('href').includes(page)) {
+                    link.classList.add('active');
+                    link.setAttribute('aria-current', 'page');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
