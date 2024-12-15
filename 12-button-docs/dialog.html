@@ -995,7 +995,7 @@ dialog {
         </template>
     </cek-code-block>
 
-    <h2>Slots</h2>
+    <h2>Header and Footer Slots</h2>
     <p>The dialog component supports several slots for customizing the content.</p>
 
     <cek-button commandfor="custom-slots-dialog" command="show-modal" variant="primary" server-rendered=""><template shadowrootmode="open"><style>
@@ -1722,6 +1722,23 @@ dialog {
         </template>
     </cek-code-block>
 
+    <h2>Accessibility</h2>
+
+    <p>When implementing a dialog, it is important to set the initial focus appropriately. Use the
+        <code>autofocus</code> attribute to ensure the initial focus is on the most important element. If unsure, set
+        the focus on the <code>&lt;dialog&gt;</code> element itself.
+    </p>
+
+    <p>Provide a mechanism for users to close the dialog, such as a close button. Modal dialogs opened with
+        <code>showModal()</code> can be dismissed with the Esc key, which should be maintained for accessibility.
+    </p>
+
+    <p>The native <code>&lt;dialog&gt;</code> element provides built-in accessibility features. When using
+        <code>showModal()</code>, the dialog is treated as modal with <code>aria-modal="true"</code>. For non-modal
+        dialogs, <code>aria-modal="false"</code> is used. Ensure everything outside the modal dialog is inert using the
+        <code>inert</code> attribute.
+    </p>
+
     <h2>Attributes</h2>
 
     <table>
@@ -1843,19 +1860,6 @@ dialog {
         </tbody>
     </table>
 
-    <h2>Accessibility</h2>
-
-    <p>When implementing a dialog, it is important to set the initial focus appropriately. Use the
-        <code>autofocus</code> attribute to ensure the initial focus is on the most important element. If unsure, set
-        the focus on the <code>&lt;dialog&gt;</code> element itself.</p>
-
-    <p>Provide a mechanism for users to close the dialog, such as a close button. Modal dialogs opened with
-        <code>showModal()</code> can be dismissed with the Esc key, which should be maintained for accessibility.</p>
-
-    <p>The native <code>&lt;dialog&gt;</code> element provides built-in accessibility features. When using
-        <code>showModal()</code>, the dialog is treated as modal with <code>aria-modal="true"</code>. For non-modal
-        dialogs, <code>aria-modal="false"</code> is used. Ensure everything outside the modal dialog is inert using the
-        <code>inert</code> attribute.</p>
 
 </section></body></html>
             </main>
