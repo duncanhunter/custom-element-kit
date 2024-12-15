@@ -1,6 +1,6 @@
-import { FormElement } from "../../core/form-element.js";
+import { FormElement } from "../../src/core/form-element.js";
 
-export const checkboxTemplate = /* html */ `
+export const checkboxTemplate = () => /* html */ `
 <input type="checkbox" id="control" part="control" aria-describedby="help error"/>
 <div>
 	<label for="control" id="label" part="label"><slot name="label"></slot></label>

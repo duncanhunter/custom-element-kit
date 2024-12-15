@@ -1,7 +1,7 @@
 function generateTOC() {
     const currentFile = window.location.pathname.split('/').pop(); // e.g. "input.html"
     const mainContent = document.getElementById('main-content');
-    const headings = mainContent.querySelectorAll('h2, h3');
+    const headings = mainContent.querySelectorAll('#main-content > section > h2, #main-content > section > h3');
     const menuList = document.getElementById('menu-list');
 
     function generateId(string) {

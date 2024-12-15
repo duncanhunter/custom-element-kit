@@ -1,32 +1,6 @@
 <section>
     <h1>Input (cek-input)</h1>
 
-    <h2>Clear button</h2>
-
-    <p>This input includes a <span class="attribute">clear-button</span> attribute, which displays a clear button when
-        the input field contains a value.</p>
-    <cek-input clear-button value="nsw" label="State"></cek-input>
-
-    <cek-code-block lang="xml" theme="github-dark">
-        <template>
-            <cek-input clear-button value="nsw" label="State"></cek-input>
-        </template>
-    </cek-code-block>
-
-    <h2>Password button</h2>
-
-    <p>This input includes a <span class="attribute">password-button</span> and <span
-            class="attribute">type="password"</span> attribute, which displays a password button that toggles the
-        password type attribute on and off.</p>
-
-    <cek-input type="password" password-button value="12345" label="Password"></cek-input>
-
-    <cek-code-block lang="xml" theme="github-dark">
-        <template>
-            <cek-input type="password" password-button value="12345" label="Password"></cek-input>
-        </template>
-    </cek-code-block>
-
     <h2>Form validation</h2>
 
     <p>When the cek-input element is placed inside a form, it integrates with the form’s native
@@ -40,20 +14,36 @@
             class="attribute">validate-on-change</span>. This ensures a consistent experience for users correcting their
         input after an initial form submission.</p>
 
-    <form novalidate>
-        <cek-input valuemissing="Email address is required" required label="Email Address" type="email"></cek-input>
-        <cek-input required label="Postal Code" pattern="\d{4}" help="Enter a 4-digit code"
-            validate-on-change></cek-input>
+    <p>You can also provide custom validation messages using the following attributes:</p>
+    <ul>
+        <li><span class="attribute">value-missing-message</span> - Custom message for value missing validation.</li>
+        <li><span class="attribute">too-short-message</span> - Custom message for too short validation.</li>
+        <li><span class="attribute">too-long-message</span> - Custom message for too long validation.</li>
+        <li><span class="attribute">type-mismatch-message</span> - Custom message for type mismatch validation.</li>
+        <li><span class="attribute">pattern-mismatch-message</span> - Custom message for pattern mismatch validation.
+        </li>
+        <li><span class="attribute">range-underflow-message</span> - Custom message for range underflow validation.</li>
+    </ul>
+
+    <form novalidate class="flex flex-column gap-4">
+        <cek-input value-missing-message="Email address is required" required label="Email Address"
+            type="email"></cek-input>
+        <cek-input required label="Postal Code" pattern="\d{4}" help="Enter a 4-digit code" validate-on-change
+            pattern-mismatch-message="Please enter a valid 4-digit postal code"></cek-input>
+        <cek-input type="number" min="18" range-underflow-message="You must be at least 18 years old"
+            label="Age"></cek-input>
         <cek-button variant="primary" type="submit">Submit & validate</cek-button>
     </form>
-
 
     <cek-code-block lang="xml" theme="github-dark">
         <template>
             <form novalidate>
-                <cek-input required label="Email Address" type="email"></cek-input>
-                <cek-input required label="Postal Code" pattern="\d{4}" help="Enter a 4-digit code"
-                    validate-on-change></cek-input>
+                <cek-input value-missing-message="Email address is required" required label="Email Address"
+                    type="email"></cek-input>
+                <cek-input required label="Postal Code" pattern="\d{4}" help="Enter a 4-digit code" validate-on-change
+                    pattern-mismatch-message="Please enter a valid 4-digit postal code"></cek-input>
+                <cek-input type="number" min="18" range-underflow-message="You must be at least 18 years old"
+                    label="Age"></cek-input>
                 <cek-button variant="primary" type="submit">Submit</cek-button>
             </form>
         </template>
@@ -63,24 +53,56 @@
 
     <p>Small, medium (default) and large sizes.</p>
 
-    <div class="horizontal">
-        <cek-input label="Small" placeholder="Small" size="small"></cek-input>
-        <cek-button variant="primary" size="small">Save</cek-button>
-    </div>
-    <div class="horizontal">
-        <cek-input label="Medium" placeholder="Medium"></cek-input>
-        <cek-button variant="primary" size="medium">Save</cek-button>
-    </div>
-    <div class="horizontal">
-        <cek-input label="Large" placeholder="Large" size="large"></cek-input>
-        <cek-button variant="primary" size="large">Save</cek-button>
+
+    <div class="flex flex-column gap-4">
+        <div class="flex gap-3 items-end">
+            <cek-input label="Small" placeholder="Small" size="small"></cek-input>
+            <cek-button variant="primary" size="small">
+                Save
+                <cek-icon slot="end" name="plus-circle"></cek-icon>
+            </cek-button>
+        </div>
+        <div class="flex gap-3 items-end">
+            <cek-input label="Medium" placeholder="Medium"></cek-input>
+            <cek-button variant="primary" size="medium">
+                Save
+                <cek-icon slot="end" name="plus-circle"></cek-icon>
+            </cek-button>
+        </div>
+        <div class="flex gap-3 items-end">
+            <cek-input label="Large" placeholder="Large" size="large"></cek-input>
+            <cek-button variant="primary" size="large">
+                Save
+                <cek-icon slot="end" name="plus-circle"></cek-icon>
+            </cek-button>
+        </div>
     </div>
 
     <cek-code-block lang="xml" theme="github-dark">
         <template>
-            <cek-input label="Small" placeholder="Small" size="small"></cek-input>
-            <cek-input label="Medium" placeholder="Medium"></cek-input>
-            <cek-input label="Large" placeholder="Large" size="large"></cek-input>
+            <div class="flex flex-column gap-4">
+                <div class="flex gap-3 items-end">
+                    <cek-input label="Small" placeholder="Small" size="small"></cek-input>
+                    <cek-button variant="primary" size="small">
+                        Save
+                        <cek-icon slot="end" name="plus-circle"></cek-icon>
+                    </cek-button>
+                </div>
+                <div class="flex gap-3 items-end">
+                    <cek-input label="Medium" placeholder="Medium"></cek-input>
+                    <cek-button variant="primary" size="medium">
+                        Save
+                        <cek-icon slot="end" name="plus-circle"></cek-icon>
+                    </cek-button>
+                </div>
+                <div class="flex gap-3 items-end">
+                    <cek-input label="Large" placeholder="Large" size="large"></cek-input>
+                    <cek-button variant="primary" size="large">
+                        Save
+                        <cek-icon slot="end" name="plus-circle"></cek-icon>
+                    </cek-button>
+                </div>
+            </div>
         </template>
     </cek-code-block>
 
@@ -89,15 +111,16 @@
     <p>Start and end slots will style kbd, cek-icon, cek-button elements. You can place any other HTML in these slots
         but will need to style them.</p>
 
-    <cek-input label="Icons & buttons">
-        <cek-icon size="1.2em" slot="start" name="currency-dollar"></cek-icon>
-        <cek-button size="small" slot="end" variant="text">Delete</cek-button>
-    </cek-input>
-
-    <cek-input label="kbd">
-        <kbd slot="start">⌘K</kbd>
-        <kbd slot="end">⌘C</kbd>
-    </cek-input>
+    <div class="flex flex-column gap-4">
+        <cek-input label="Icons & buttons">
+            <cek-icon size="1.2em" slot="start" name="currency-dollar"></cek-icon>
+            <cek-button size="small" slot="end" variant="text">Delete</cek-button>
+        </cek-input>
+        <cek-input label="kbd">
+            <kbd slot="start">⌘K</kbd>
+            <kbd slot="end">⌘C</kbd>
+        </cek-input>
+    </div>
 
     <cek-code-block lang="xml" theme="github-dark">
         <template>
@@ -141,256 +164,353 @@
         </template>
     </cek-code-block>
 
+    <h2>Command buttons</h2>
+
+    <p>You can use slotted cek-button's with commands for clear and close. This example also uses CSS to toggle the
+        password icon based on the input's type attribute.</p>
+
+    <style>
+        cek-input#password-input[type="password"] {
+            #show-password-icon {
+                display: none;
+            }
+
+            #hide-password-icon {
+                display: flex;
+            }
+        }
+
+        cek-input#password-input:not([type="password"]) {
+            #show-password-icon {
+                display: flex;
+            }
+
+            #hide-password-icon {
+                display: none;
+            }
+        }
+    </style>
+    <div class="flex flex-column gap-4">
+        <cek-input id="password-input" value="123" label="Password" type="password">
+            <cek-button button-aria-label="toggle password visibility" slot="end" variant="ghost" icon-only size="small"
+                command="toggle-password" commandfor="parent">
+                <cek-icon id="show-password-icon" name="eye-slash"></cek-icon>
+                <cek-icon id="hide-password-icon" name="eye"></cek-icon>
+            </cek-button>
+        </cek-input>
+        <cek-input value="nsw" label="State">
+            <cek-button button-aria-label="clear input value" slot="end" variant="ghost" icon-only size="small"
+                command="clear" commandfor="parent">
+                <cek-icon name="x-mark"></cek-icon>
+            </cek-button>
+        </cek-input>
+    </div>
+
+    <cek-code-block lang="xml" theme="github-dark">
+        <template>
+            <style>
+                cek-input#password-input[type="password"] {
+                    #show-password-icon {
+                        display: none;
+                    }
+
+                    #hide-password-icon {
+                        display: block;
+                    }
+                }
+
+                cek-input#password-input:not([type="password"]) {
+                    #show-password-icon {
+                        display: block;
+                    }
+
+                    #hide-password-icon {
+                        display: none;
+                    }
+                }
+            </style>
+            <div class="flex flex-column gap-4">
+                <cek-input id="password-input" value="123" label="Password" type="password">
+                    <cek-button button-aria-label="toggle password visibility" slot="end" variant="ghost" icon-only
+                        size="small" command="toggle-password" commandfor="parent">
+                        <cek-icon id="show-password-icon" name="eye-slash"></cek-icon>
+                        <cek-icon id="hide-password-icon" name="eye"></cek-icon>
+                    </cek-button>
+                </cek-input>
+                <cek-input value="nsw" label="State">
+                    <cek-button button-aria-label="clear input value" slot="end" variant="ghost" icon-only size="small"
+                        command="clear" commandfor="parent">
+                        <cek-icon name="x-mark"></cek-icon>
+                    </cek-button>
+                </cek-input>
+            </div>
+        </template>
+    </cek-code-block>
+
+    <h2>Attributes</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Attribute</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>label</td>
+                <td>Sets the text content of the label element. Shown above the input field.</td>
+            </tr>
+            <tr>
+                <td>help</td>
+                <td>Sets the help text displayed above the input field, typically used for guidance.</td>
+            </tr>
+            <tr>
+                <td>error</td>
+                <td>When present, displays an error message. Also styles the input container to indicate an error state.
+                </td>
+            </tr>
+            <tr>
+                <td>required</td>
+                <td>Marks the input as required. If missing, the user can submit a form without providing a value.</td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>Sets the input type (e.g. text, password, number). Defaults to text if not provided.</td>
+            </tr>
+            <tr>
+                <td>disabled</td>
+                <td>Disables the input. User cannot interact with the field when disabled.</td>
+            </tr>
+            <tr>
+                <td>inputmode</td>
+                <td>Provides a hint to virtual keyboards about what type of data might be entered.</td>
+            </tr>
+            <tr>
+                <td>placeholder</td>
+                <td>Sets placeholder text displayed when the input is empty and unfocused.</td>
+            </tr>
+            <tr>
+                <td>min</td>
+                <td>Minimum value for types like number/date.</td>
+            </tr>
+            <tr>
+                <td>max</td>
+                <td>Maximum value for types like number/date.</td>
+            </tr>
+            <tr>
+                <td>minlength</td>
+                <td>Minimum length for text input validation.</td>
+            </tr>
+            <tr>
+                <td>maxlength</td>
+                <td>Maximum length for text input validation.</td>
+            </tr>
+            <tr>
+                <td>pattern</td>
+                <td>Defines a regular expression the input’s value must match for validation.</td>
+            </tr>
+            <tr>
+                <td>step</td>
+                <td>Specifies the numeric intervals for numeric or date-based inputs.</td>
+            </tr>
+            <tr>
+                <td>autocomplete</td>
+                <td>Hints to the browser’s autofill feature whether or how the input should be autocompleted.</td>
+            </tr>
+            <tr>
+                <td>autofocus</td>
+                <td>If present, the input will automatically focus when the page loads.</td>
+            </tr>
+            <tr>
+                <td>title</td>
+                <td>Displays a tooltip when hovered if provided. Also used for accessibility.</td>
+            </tr>
+            <tr>
+                <td>spellcheck</td>
+                <td>Whether the input should be checked for spelling errors.</td>
+            </tr>
+            <tr>
+                <td>input-aria-label</td>
+                <td>Sets an ARIA label on the input for accessibility. Reflected as `aria-label` internally.</td>
+            </tr>
+            <tr>
+                <td>validate-on-change</td>
+                <td>Triggers validation when the input’s value changes (on change event) rather than just on submit.
+                </td>
+            </tr>
+            <tr>
+                <td>value-missing-message</td>
+                <td>Custom message for value missing validation.</td>
+            </tr>
+            <tr>
+                <td>too-short-message</td>
+                <td>Custom message for too short validation.</td>
+            </tr>
+            <tr>
+                <td>too-long-message</td>
+                <td>Custom message for too long validation.</td>
+            </tr>
+            <tr>
+                <td>type-mismatch-message</td>
+                <td>Custom message for type mismatch validation.</td>
+            </tr>
+            <tr>
+                <td>range-underflow-message</td>
+                <td>Custom message for range underflow validation.</td>
+            </tr>
+            <tr>
+                <td>range-overflow-message</td>
+                <td>Custom message for range overflow validation.</td>
+            </tr>
+            <tr>
+                <td>pattern-mismatch-message</td>
+                <td>Custom message for pattern mismatch validation.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Slots</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Slot Name</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>label</td>
+                <td>Replaces the text inside the label element.</td>
+            </tr>
+            <tr>
+                <td>help</td>
+                <td>Replaces the help text content displayed above the input.</td>
+            </tr>
+            <tr>
+                <td>error</td>
+                <td>Replaces the error message content displayed above the input when in error state.</td>
+            </tr>
+            <tr>
+                <td>start</td>
+                <td>Content inserted at the start (left side) of the input container, such as an icon.</td>
+            </tr>
+            <tr>
+                <td>end</td>
+                <td>Content inserted at the end (right side) of the input container, such as an icon or keyboard hint.
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>CSS parts</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Part Name</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>label</td>
+                <td>The label element that shows the field’s label text.</td>
+            </tr>
+            <tr>
+                <td>help</td>
+                <td>The element containing help text.</td>
+            </tr>
+            <tr>
+                <td>error</td>
+                <td>The element containing error message text.</td>
+            </tr>
+            <tr>
+                <td>container</td>
+                <td>The wrapper element around the input and any start/end slots.</td>
+            </tr>
+            <tr>
+                <td>control</td>
+                <td>The actual input element.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Events</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Event</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>input</td>
+                <td>Fired when the input's value changes (on each keystroke or value change).</td>
+            </tr>
+            <tr>
+                <td>change</td>
+                <td>Fired when the input's value is committed (on blur or form submission), mirroring native input
+                    behavior.
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Methods</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Method</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>focus()</td>
+                <td>Moves keyboard focus to the internal input element.</td>
+            </tr>
+            <tr>
+                <td>togglePassword()</td>
+                <td>Toggles the input type between password and text.</td>
+            </tr>
+            <tr>
+                <td>clear()</td>
+                <td>Clears the input value.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Properties</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Property</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>value</td>
+                <td>The current value of the input.</td>
+            </tr>
+            <tr>
+                <td>name</td>
+                <td>The name of the form control, if assigned.</td>
+            </tr>
+            <tr>
+                <td>validity</td>
+                <td>Reflects the validation state of the input.</td>
+            </tr>
+            <tr>
+                <td>validationMessage</td>
+                <td>The validation message if the input is invalid, otherwise an empty string.</td>
+            </tr>
+        </tbody>
+    </table>
 </section>
-
-<h2>Attributes</h2>
-
-<table>
-    <thead>
-        <tr>
-            <th>Attribute</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>label</td>
-            <td>Sets the text content of the label element. Shown above the input field.</td>
-        </tr>
-        <tr>
-            <td>help</td>
-            <td>Sets the help text displayed above the input field, typically used for guidance.</td>
-        </tr>
-        <tr>
-            <td>error</td>
-            <td>When present, displays an error message. Also styles the input container to indicate an error state.
-            </td>
-        </tr>
-        <tr>
-            <td>required</td>
-            <td>Marks the input as required. If missing, the user can submit a form without providing a value.</td>
-        </tr>
-        <tr>
-            <td>type</td>
-            <td>Sets the input type (e.g. text, password, number). Defaults to text if not provided.</td>
-        </tr>
-        <tr>
-            <td>disabled</td>
-            <td>Disables the input. User cannot interact with the field when disabled.</td>
-        </tr>
-        <tr>
-            <td>inputmode</td>
-            <td>Provides a hint to virtual keyboards about what type of data might be entered.</td>
-        </tr>
-        <tr>
-            <td>placeholder</td>
-            <td>Sets placeholder text displayed when the input is empty and unfocused.</td>
-        </tr>
-        <tr>
-            <td>min</td>
-            <td>Minimum value for types like number/date.</td>
-        </tr>
-        <tr>
-            <td>max</td>
-            <td>Maximum value for types like number/date.</td>
-        </tr>
-        <tr>
-            <td>minlength</td>
-            <td>Minimum length for text input validation.</td>
-        </tr>
-        <tr>
-            <td>maxlength</td>
-            <td>Maximum length for text input validation.</td>
-        </tr>
-        <tr>
-            <td>pattern</td>
-            <td>Defines a regular expression the input’s value must match for validation.</td>
-        </tr>
-        <tr>
-            <td>step</td>
-            <td>Specifies the numeric intervals for numeric or date-based inputs.</td>
-        </tr>
-        <tr>
-            <td>autocomplete</td>
-            <td>Hints to the browser’s autofill feature whether or how the input should be autocompleted.</td>
-        </tr>
-        <tr>
-            <td>autofocus</td>
-            <td>If present, the input will automatically focus when the page loads.</td>
-        </tr>
-        <tr>
-            <td>title</td>
-            <td>Displays a tooltip when hovered if provided. Also used for accessibility.</td>
-        </tr>
-        <tr>
-            <td>spellcheck</td>
-            <td>Whether the input should be checked for spelling errors.</td>
-        </tr>
-        <tr>
-            <td>input-aria-label</td>
-            <td>Sets an ARIA label on the input for accessibility. Reflected as `aria-label` internally.</td>
-        </tr>
-        <tr>
-            <td>password-button</td>
-            <td>Enables a button to toggle password visibility if the input type is password.</td>
-        </tr>
-        <tr>
-            <td>clear-button</td>
-            <td>Enables a button to clear the input value.</td>
-        </tr>
-        <tr>
-            <td>validate-on-change</td>
-            <td>Triggers validation when the input’s value changes (on change event) rather than just on submit.</td>
-        </tr>
-    </tbody>
-</table>
-
-<h2>Slots</h2>
-
-<table>
-    <thead>
-        <tr>
-            <th>Slot Name</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>label</td>
-            <td>Replaces the text inside the label element.</td>
-        </tr>
-        <tr>
-            <td>help</td>
-            <td>Replaces the help text content displayed above the input.</td>
-        </tr>
-        <tr>
-            <td>error</td>
-            <td>Replaces the error message content displayed above the input when in error state.</td>
-        </tr>
-        <tr>
-            <td>start</td>
-            <td>Content inserted at the start (left side) of the input container, such as an icon.</td>
-        </tr>
-        <tr>
-            <td>end</td>
-            <td>Content inserted at the end (right side) of the input container, such as an icon or keyboard hint.</td>
-        </tr>
-    </tbody>
-</table>
-
-<h2>CSS parts</h2>
-
-<table>
-    <thead>
-        <tr>
-            <th>Part Name</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>label</td>
-            <td>The label element that shows the field’s label text.</td>
-        </tr>
-        <tr>
-            <td>help</td>
-            <td>The element containing help text.</td>
-        </tr>
-        <tr>
-            <td>error</td>
-            <td>The element containing error message text.</td>
-        </tr>
-        <tr>
-            <td>container</td>
-            <td>The wrapper element around the input and any start/end slots.</td>
-        </tr>
-        <tr>
-            <td>control</td>
-            <td>The actual input element.</td>
-        </tr>
-        <tr>
-            <td>password-button</td>
-            <td>The toggle button to show/hide password characters.</td>
-        </tr>
-        <tr>
-            <td>hide-password-icon</td>
-            <td>The icon displayed on the password button when the input type is password.</td>
-        </tr>
-        <tr>
-            <td>show-password-icon</td>
-            <td>The icon displayed on the password button when the input type is text.</td>
-        </tr>
-        <tr>
-            <td>clear-button</td>
-            <td>The button to clear the input’s value.</td>
-        </tr>
-    </tbody>
-</table>
-
-<h2>Events</h2>
-
-<table>
-    <thead>
-        <tr>
-            <th>Event</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>input</td>
-            <td>Fired when the input's value changes (on each keystroke or value change).</td>
-        </tr>
-        <tr>
-            <td>change</td>
-            <td>Fired when the input's value is committed (on blur or form submission), mirroring native input behavior.
-            </td>
-        </tr>
-    </tbody>
-</table>
-
-<h2>Methods</h2>
-
-<table>
-    <thead>
-        <tr>
-            <th>Method</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>focus()</td>
-            <td>Moves keyboard focus to the internal input element.</td>
-        </tr>
-    </tbody>
-</table>
-
-<h2>Properties</h2>
-
-<table>
-    <thead>
-        <tr>
-            <th>Property</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>value</td>
-            <td>The current value of the input.</td>
-        </tr>
-        <tr>
-            <td>name</td>
-            <td>The name of the form control, if assigned.</td>
-        </tr>
-        <tr>
-            <td>validity</td>
-            <td>Reflects the validation state of the input.</td>
-        </tr>
-        <tr>
-            <td>validationMessage</td>
-            <td>The validation message if the input is invalid, otherwise an empty string.</td>
-        </tr>
-    </tbody>
-</table>

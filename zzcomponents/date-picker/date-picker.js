@@ -1,8 +1,8 @@
 import {
 	initializeCalendarNavigation,
 	renderCalendar,
-} from "../../core/calendar.js";
-import { createPopover } from "../../core/popover.js";
+} from "../../src/core/calendar.js";
+import { createPopover } from "../../src/core/popover.js";
 
 export const datePickerTemplate = /* html */ `
 <label for="control" id="label" part="label"><slot name="label"></slot></label>

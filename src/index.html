@@ -8,6 +8,7 @@
     <title>Custom Element Kit</title>
     <link rel="stylesheet" href="./core/styles.css">
     <link rel="stylesheet" href="./docs/page-layout.css">
+    <link rel="stylesheet" href="./docs/utilities.css">
     <script src="./docs/scroll-spy.js"></script>
     <script>
         window.cekConfig = () => ({
@@ -42,8 +43,9 @@
 
 <body>
     <div class="container">
-        <header>
+        <header class="flex justify-between items-center">
             <h1 class="cek-text-2">Custom Element Kit</h1>
+            <cek-theme-select></cek-theme-select>
         </header>
         <div class="content">
             <aside class="main-nav">
@@ -54,7 +56,9 @@
                     </ul>
                     <h2 class="cek-text-1 cek-text-bold">Components</h2>
                     <ul>
+                        <li><a href="dialog.html">Dialog</a></li>
                         <li><a href="button.html">Button</a></li>
+                        <li><a href="icon.html">Icon</a></li>
                         <li><a href="input.html">Input</a></li>
                         <li><a href="form.html">Form</a></li>
                     </ul>

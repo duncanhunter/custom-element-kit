@@ -7,7 +7,7 @@ import copy from "rollup-plugin-copy";
 import minifyHTML from "rollup-plugin-minify-html-literals";
 import multiInput from "rollup-plugin-multi-input";
 import summary from "rollup-plugin-summary";
-import { replaceElementWithDeclarativeShadowDom } from "./src/utils/replace-element-with-declarative-shadow-dom.mjs";
+import { renderDeclarativeShadowDom } from "./src/utils/render-declarative-shadow-dom.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -50,7 +50,7 @@ export default {
 						/<head(\s[^>]*)?>/,
 						`<head$1>${baseTag}`,
 					);
-					return replaceElementWithDeclarativeShadowDom(updatedHtml);
+					return renderDeclarativeShadowDom(updatedHtml);
 				},
 			],
 		}),
@@ -59,6 +59,7 @@ export default {
 				{ src: "src/components/icons", dest: "dist" },
 				{ src: "src/core/styles.css", dest: "dist/assets" },
 				{ src: "src/docs/page-layout.css", dest: "dist/assets" },
+				{ src: "src/docs/utilities.css", dest: "dist/assets" },
 				{ src: "src/docs/scroll-spy.js", dest: "dist/assets" },
 				{ src: "src/utils/auto-define-elements.mjs", dest: "dist/assets" },
 			],

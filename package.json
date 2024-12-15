@@ -5,11 +5,12 @@
 	"type": "module",
 	"scripts": {
 		"serve": "http-server src -c-1 --proxy http://localhost:8080?",
-		"serve-icons": "http-server src/components/icons -p 8081 -c-1 --cors",
+		"serve-icons": "http-server src/icons -p 8081 -c-1 --cors",
 		"serve:prod": "http-server dist",
 		"test": "npx playwright test",
 		"test:update-snapshots": "npx playwright test --update-snapshots",
 		"build": "rollup -c",
+		"build:icons": "node src/utils/build-icons.js",
 		"format": "npx @biomejs/biome check --write --unsafe .",
 		"check": "npx @biomejs/biome check ."
 	},
