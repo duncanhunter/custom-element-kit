@@ -1,0 +1,176 @@
+<!DOCTYPE html><html lang="en"><html lang="en">
+
+<head><base href="/custom-element-kit/main/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Custom Element Kit Docs">
+    <title>Custom Element Kit</title>
+    <link rel="stylesheet" href="./assets/styles.css">
+    <link rel="stylesheet" href="./assets/page-layout.css">
+    <link rel="stylesheet" href="./assets/utilities.css">
+    <script src="./assets/scroll-spy.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <header class="flex justify-between items-center">
+            <h1 class="cek-text-2">Custom Element Kit</h1>
+            <cek-theme-select server-rendered=""><template shadowrootmode="open"><style></style></template></cek-theme-select>
+        </header>
+        <div class="content">
+            <aside class="main-nav">
+                <nav aria-label="Main Navigation">
+                    <h2 class="cek-text-1 cek-text-bold">Getting Started</h2>
+                    <ul>
+                        <li><a href="welcome.html">Getting Started</a></li>
+                    </ul>
+                    <h2 class="cek-text-1 cek-text-bold">Components</h2>
+                    <ul>
+                        <li><a href="dialog.html">Dialog</a></li>
+                        <li><a href="button.html">Button</a></li>
+                        <li><a href="icon.html">Icon</a></li>
+                        <li><a href="input.html">Input</a></li>
+                        <li><a href="form.html">Form</a></li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <main id="main-content" tabindex="-1">
+                <html><head></head><body><section>
+    <h1>Icon (cek-icon)</h1>
+
+    <h2>Basic Usage</h2>
+    <p>The icon component is used to display SVG icons. Use the <span class="attribute">name</span> attribute to specify
+        the icon to display.</p>
+
+    <cek-icon name="plus-circle" server-rendered=""><template shadowrootmode="open"><style>:host{display:flex;}</style><svg height="24" width="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+</svg>
+</template></cek-icon>
+    <cek-icon name="user" server-rendered=""><template shadowrootmode="open"><style>:host{display:flex;}</style><svg height="24" width="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+</svg>
+</template></cek-icon>
+
+    <cek-code-block lang="xml" theme="github-dark">
+        <template>
+            <cek-icon name="plus-circle"></cek-icon>
+            <cek-icon name="user"></cek-icon>
+        </template>
+    </cek-code-block>
+
+    <h2>Sizes</h2>
+    <p>Use the <span class="attribute">size</span> attribute to adjust the size of the icon.</p>
+
+    <cek-icon size="1em" name="plus-circle" server-rendered=""><template shadowrootmode="open"><style>:host{display:flex;}</style><svg height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+</svg>
+</template></cek-icon>
+    <cek-icon size="2em" name="plus-circle" server-rendered=""><template shadowrootmode="open"><style>:host{display:flex;}</style><svg height="2em" width="2em" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+</svg>
+</template></cek-icon>
+    <cek-icon size="3em" name="plus-circle" server-rendered=""><template shadowrootmode="open"><style>:host{display:flex;}</style><svg height="3em" width="3em" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+</svg>
+</template></cek-icon>
+
+    <cek-code-block lang="xml" theme="github-dark">
+        <template>
+            <cek-icon name="plus-circle" size="1em"></cek-icon>
+            <cek-icon name="plus-circle" size="2em"></cek-icon>
+            <cek-icon name="plus-circle" size="3em"></cek-icon>
+        </template>
+    </cek-code-block>
+
+    <h2>Colors</h2>
+    <p>Use CSS to style the color of the icon.</p>
+
+    <cek-icon style="color: red;" name="plus-circle" server-rendered=""><template shadowrootmode="open"><style>:host{display:flex;}</style><svg height="24" width="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+</svg>
+</template></cek-icon>
+    <cek-icon style="color: green;" name="plus-circle" server-rendered=""><template shadowrootmode="open"><style>:host{display:flex;}</style><svg height="24" width="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+</svg>
+</template></cek-icon>
+    <cek-icon style="color: blue;" name="plus-circle" server-rendered=""><template shadowrootmode="open"><style>:host{display:flex;}</style><svg height="24" width="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+</svg>
+</template></cek-icon>
+
+    <cek-code-block lang="xml" theme="github-dark">
+        <template>
+            <cek-icon name="plus-circle" style="color: red;"></cek-icon>
+            <cek-icon name="plus-circle" style="color: green;"></cek-icon>
+            <cek-icon name="plus-circle" style="color: blue;"></cek-icon>
+        </template>
+    </cek-code-block>
+
+</section>
+
+<h2>Attributes</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Attribute</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>name</td>
+            <td>Specifies the name of the icon to display.</td>
+        </tr>
+        <tr>
+            <td>size</td>
+            <td>Specifies the size of the icon. Accepts any valid CSS size value (e.g., 1em, 24px).</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>CSS Parts</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Part Name</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>icon</td>
+            <td>The SVG element representing the icon.</td>
+        </tr>
+    </tbody>
+</table></body></html>
+            </main>
+
+            <aside class="page-nav">
+                <nav aria-label="Page navigation">
+                    <h2 class="cek-text-1 cek-text-bold">On this page</h2>
+                    <!-- Dynamic table of contents will be loaded here -->
+                    <ul id="menu-list"></ul>
+                </nav>
+            </aside>
+        </div>
+    </div>
+    <script type="module">
+        import autoDefineElements from './assets/auto-define-elements.mjs';
+        autoDefineElements('production');
+        generateTOC();
+        document.addEventListener('DOMContentLoaded', () => {
+            const page = (window.location.pathname.split('/').pop().replace('.html', '')) || 'welcome';
+            document.querySelectorAll('aside.main-nav a').forEach(link => {
+                if (link.getAttribute('href').includes(page)) {
+                    link.classList.add('active');
+                    link.setAttribute('aria-current', 'page');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en"><html lang="en">
 
 <head><base href="/custom-element-kit/main/">
     <meta charset="UTF-8">
@@ -8,13 +7,15 @@
     <title>Custom Element Kit</title>
     <link rel="stylesheet" href="./assets/styles.css">
     <link rel="stylesheet" href="./assets/page-layout.css">
+    <link rel="stylesheet" href="./assets/utilities.css">
     <script src="./assets/scroll-spy.js"></script>
 </head>
 
 <body>
     <div class="container">
-        <header>
+        <header class="flex justify-between items-center">
             <h1 class="cek-text-2">Custom Element Kit</h1>
+            <cek-theme-select server-rendered=""><template shadowrootmode="open"><style></style></template></cek-theme-select>
         </header>
         <div class="content">
             <aside class="main-nav">
@@ -25,7 +26,9 @@
                     </ul>
                     <h2 class="cek-text-1 cek-text-bold">Components</h2>
                     <ul>
+                        <li><a href="dialog.html">Dialog</a></li>
                         <li><a href="button.html">Button</a></li>
+                        <li><a href="icon.html">Icon</a></li>
                         <li><a href="input.html">Input</a></li>
                         <li><a href="form.html">Form</a></li>
                     </ul>

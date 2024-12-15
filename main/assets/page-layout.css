@@ -42,14 +42,14 @@ main {
 		line-height: var(--cek-line-height);
 		font-weight: 700;
 	}
-	
+
 	h2 {
 		margin-block: 1.6rem 0.8rem;
 		line-height: var(--cek-line-height);
 		font-weight: 600;
 		font-size: var(--cek-font-size-3);
 	}
-	
+
 	h3 {
 		font-size: var(--cek-font-size-2);
 		margin-block: 0.6rem;
@@ -66,24 +66,19 @@ main {
 		margin-block: 1rem;
 		display: block;
 	}
-	
-	cek-input {
-		/* Need to change this to be a generic gap for other component docs */
-		display:block;
-		margin-block: 1rem;
-	}
 
 	.horizontal {
-		cek-input {
-			margin-block: 0;
-		}
-
 		display: flex;
 		gap: 0.4rem;
 		align-items: flex-end;
 		margin-block: 1rem;
 	}
 
+	.vertical {
+		display: flex;
+		flex-direction: column;
+		gap: 0.4rem;
+	}
 }
 
 aside {
@@ -126,44 +121,44 @@ aside.main-nav {
 aside.page-nav nav {
 	padding-inline-start: 1rem;
 	position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    align-self: flex-start;
-    height: 100vh;
-    overflow-y: auto;
+	position: sticky;
+	top: 0;
+	align-self: flex-start;
+	height: 100vh;
+	overflow-y: auto;
 
 	li {
 		padding: var(--cek-space-4) 0;
 	}
 
 	li a {
-		display: block;
+		display: inline-block;
 		text-decoration: none;
 		color: var(--cek-text-color-1);
-  	}
+	}
 
-   	li a.active {
-    	font-weight: bold;
+	li a.active {
+		font-weight: bold;
 		color: var(--cek-color-primary-500);
-  	}
+	}
 }
 
 .heading-link {
-  	position: relative;
-  	text-decoration: none;
-  	color: inherit;
+	position: relative;
+	text-decoration: none;
+	color: inherit;
 }
 
 .heading-link:hover {
-  	border-bottom: 2px solid var(--cek-color-primary-500);
+	border-bottom: 2px solid var(--cek-color-primary-500);
 }
 
 .heading-link:hover::after {
-  	content: "#";
-  	position: absolute;
-  	right: -1em;
-  	color: var(--cek-color-primary-500);
-  	opacity: 0.7;
+	content: "#";
+	position: absolute;
+	right: -1em;
+	color: var(--cek-color-primary-500);
+	opacity: 0.7;
 }
 
 span.attribute {
@@ -174,32 +169,34 @@ span.attribute {
 }
 
 table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 16px 0;
-    color: var(--cek-text-color);
+	width: 100%;
+	border-collapse: collapse;
+	margin: 16px 0;
+	color: var(--cek-text-color);
 }
 
 td:first-child {
-    white-space: nowrap;
+	white-space: nowrap;
 }
 
 th {
-    text-align: left;
-    padding: 12px;
-    background-color: var(--cek-background-color);
-    border-bottom: 2px solid var(--cek-border-color);
+	text-align: left;
+	padding: 12px;
+	background-color: var(--cek-background-color);
+	border-bottom: 2px solid var(--cek-border-color);
 }
 
 td {
-    padding: 12px;
-    border-bottom: 1px solid var(--cek-border-color);
+	padding: 12px;
+	border-bottom: 1px solid var(--cek-border-color);
 }
 
 tr:hover {
-    background-color: var(--cek-surface-color-1);
+	background-color: var(--cek-surface-color-1);
 }
 
+
+/* Note: Need to make responsive sidebar and on this page components until the just remove */
 @media screen and (max-width: 1024px) {
 	aside.page-nav {
 		display: none;
