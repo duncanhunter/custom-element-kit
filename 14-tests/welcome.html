@@ -9,13 +9,19 @@
     <link rel="stylesheet" href="./assets/page-layout.css">
     <link rel="stylesheet" href="./assets/utilities.css">
     <script src="./assets/scroll-spy.js"></script>
+    <script type="module">
+        import { buttonStyles } from './button.js';
+        const style = document.createElement('style');
+        style.textContent = buttonStyles;
+        document.head.appendChild(style);
+    </script>
 </head>
 
 <body>
     <div class="container">
         <header class="flex justify-between items-center">
             <h1 class="cek-text-2">Custom Element Kit</h1>
-            <cek-theme-select server-rendered=""><template shadowrootmode="open"><style></style></template></cek-theme-select>
+            <cek-theme-select></cek-theme-select>
         </header>
         <div class="content">
             <aside class="main-nav">

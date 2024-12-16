@@ -9,13 +9,19 @@
     <link rel="stylesheet" href="./assets/page-layout.css">
     <link rel="stylesheet" href="./assets/utilities.css">
     <script src="./assets/scroll-spy.js"></script>
+    <script type="module">
+        import { buttonStyles } from './button.js';
+        const style = document.createElement('style');
+        style.textContent = buttonStyles;
+        document.head.appendChild(style);
+    </script>
 </head>
 
 <body>
     <div class="container">
         <header class="flex justify-between items-center">
             <h1 class="cek-text-2">Custom Element Kit</h1>
-            <cek-theme-select server-rendered=""><template shadowrootmode="open"><style></style></template></cek-theme-select>
+            <cek-theme-select></cek-theme-select>
         </header>
         <div class="content">
             <aside class="main-nav">
@@ -43,14 +49,8 @@
     <p>The icon component is used to display SVG icons. Use the <span class="attribute">name</span> attribute to specify
         the icon to display.</p>
 
-    <cek-icon name="plus-circle" server-rendered=""><template shadowrootmode="open"><style>:host{display:flex;}</style><svg height="24" width="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-</svg>
-</template></cek-icon>
-    <cek-icon name="user" server-rendered=""><template shadowrootmode="open"><style>:host{display:flex;}</style><svg height="24" width="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-</svg>
-</template></cek-icon>
+    <cek-icon server-rendered="" name="plus-circle"><template shadowrootmode="open"><style>:host { display: inline-flex; font-size: inherit; /* Inherits font-size from parent */ width: 1.2em; /* Allows scaling based on font-size */ height: 1.2em; /* Allows scaling based on font-size */ /* Allow size attribute to override font-size */ font-size: var(--icon-size, 1.2em); /* Increased default icon size */ } svg { width: 100%; height: 100%; /* Ensures SVG scales with the host */ }</style><svg part="icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg></template></cek-icon>
+    <cek-icon server-rendered="" name="user"><template shadowrootmode="open"><style>:host { display: inline-flex; font-size: inherit; /* Inherits font-size from parent */ width: 1.2em; /* Allows scaling based on font-size */ height: 1.2em; /* Allows scaling based on font-size */ /* Allow size attribute to override font-size */ font-size: var(--icon-size, 1.2em); /* Increased default icon size */ } svg { width: 100%; height: 100%; /* Ensures SVG scales with the host */ }</style><svg part="icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" /></svg></template></cek-icon>
 
     <cek-code-block lang="xml" theme="github-dark">
         <template>
@@ -62,18 +62,9 @@
     <h2>Sizes</h2>
     <p>Use the <span class="attribute">size</span> attribute to adjust the size of the icon.</p>
 
-    <cek-icon size="1em" name="plus-circle" server-rendered=""><template shadowrootmode="open"><style>:host{display:flex;}</style><svg height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-</svg>
-</template></cek-icon>
-    <cek-icon size="2em" name="plus-circle" server-rendered=""><template shadowrootmode="open"><style>:host{display:flex;}</style><svg height="2em" width="2em" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-</svg>
-</template></cek-icon>
-    <cek-icon size="3em" name="plus-circle" server-rendered=""><template shadowrootmode="open"><style>:host{display:flex;}</style><svg height="3em" width="3em" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-</svg>
-</template></cek-icon>
+    <cek-icon server-rendered="" name="plus-circle" size="1em"><template shadowrootmode="open"><style>:host { display: inline-flex; font-size: inherit; /* Inherits font-size from parent */ width: 1.2em; /* Allows scaling based on font-size */ height: 1.2em; /* Allows scaling based on font-size */ /* Allow size attribute to override font-size */ font-size: var(--icon-size, 1.2em); /* Increased default icon size */ } svg { width: 100%; height: 100%; /* Ensures SVG scales with the host */ }</style><svg height="1em" width="1em" part="icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg></template></cek-icon>
+    <cek-icon server-rendered="" name="plus-circle" size="2em"><template shadowrootmode="open"><style>:host { display: inline-flex; font-size: inherit; /* Inherits font-size from parent */ width: 1.2em; /* Allows scaling based on font-size */ height: 1.2em; /* Allows scaling based on font-size */ /* Allow size attribute to override font-size */ font-size: var(--icon-size, 1.2em); /* Increased default icon size */ } svg { width: 100%; height: 100%; /* Ensures SVG scales with the host */ }</style><svg height="2em" width="2em" part="icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg></template></cek-icon>
+    <cek-icon server-rendered="" name="plus-circle" size="3em"><template shadowrootmode="open"><style>:host { display: inline-flex; font-size: inherit; /* Inherits font-size from parent */ width: 1.2em; /* Allows scaling based on font-size */ height: 1.2em; /* Allows scaling based on font-size */ /* Allow size attribute to override font-size */ font-size: var(--icon-size, 1.2em); /* Increased default icon size */ } svg { width: 100%; height: 100%; /* Ensures SVG scales with the host */ }</style><svg height="3em" width="3em" part="icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg></template></cek-icon>
 
     <cek-code-block lang="xml" theme="github-dark">
         <template>
@@ -86,18 +77,9 @@
     <h2>Colors</h2>
     <p>Use CSS to style the color of the icon.</p>
 
-    <cek-icon style="color: red;" name="plus-circle" server-rendered=""><template shadowrootmode="open"><style>:host{display:flex;}</style><svg height="24" width="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-</svg>
-</template></cek-icon>
-    <cek-icon style="color: green;" name="plus-circle" server-rendered=""><template shadowrootmode="open"><style>:host{display:flex;}</style><svg height="24" width="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-</svg>
-</template></cek-icon>
-    <cek-icon style="color: blue;" name="plus-circle" server-rendered=""><template shadowrootmode="open"><style>:host{display:flex;}</style><svg height="24" width="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-</svg>
-</template></cek-icon>
+    <cek-icon server-rendered="" name="plus-circle" style="color: red;"><template shadowrootmode="open"><style>:host { display: inline-flex; font-size: inherit; /* Inherits font-size from parent */ width: 1.2em; /* Allows scaling based on font-size */ height: 1.2em; /* Allows scaling based on font-size */ /* Allow size attribute to override font-size */ font-size: var(--icon-size, 1.2em); /* Increased default icon size */ } svg { width: 100%; height: 100%; /* Ensures SVG scales with the host */ }</style><svg part="icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg></template></cek-icon>
+    <cek-icon server-rendered="" name="plus-circle" style="color: green;"><template shadowrootmode="open"><style>:host { display: inline-flex; font-size: inherit; /* Inherits font-size from parent */ width: 1.2em; /* Allows scaling based on font-size */ height: 1.2em; /* Allows scaling based on font-size */ /* Allow size attribute to override font-size */ font-size: var(--icon-size, 1.2em); /* Increased default icon size */ } svg { width: 100%; height: 100%; /* Ensures SVG scales with the host */ }</style><svg part="icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg></template></cek-icon>
+    <cek-icon server-rendered="" name="plus-circle" style="color: blue;"><template shadowrootmode="open"><style>:host { display: inline-flex; font-size: inherit; /* Inherits font-size from parent */ width: 1.2em; /* Allows scaling based on font-size */ height: 1.2em; /* Allows scaling based on font-size */ /* Allow size attribute to override font-size */ font-size: var(--icon-size, 1.2em); /* Increased default icon size */ } svg { width: 100%; height: 100%; /* Ensures SVG scales with the host */ }</style><svg part="icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg></template></cek-icon>
 
     <cek-code-block lang="xml" theme="github-dark">
         <template>

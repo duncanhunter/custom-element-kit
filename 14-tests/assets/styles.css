@@ -191,7 +191,7 @@ fieldset {
 		var(--cek-border-color);
 	--cek-text-color-error: var(--cek-color-red-600);
 	--cek-border-color-error: var(--cek-color-red-600);
-	--cek-height-small: var(--cek-space-8);
+	--cek-height-small: var(--cek-space-9);
 	--cek-height-medium: var(--cek-space-10);
 	--cek-height-large: var(--cek-space-11);
 	--cek-color-neutral: light-dark(
