@@ -122,25 +122,6 @@
         </template>
     </cek-code-block>
 
-    <h2>Anchor Functionality</h2>
-    <p>The button component can also function as a link. Use the <span class="attribute">href</span> attribute to
-        transform the button into an anchor element. Optionally, you can use the <span class="attribute">target</span>
-        attribute to specify where to open the linked document.</p>
-
-    <cek-button href="https://example.com" target="_blank" variant="link">
-        Go to Example
-        <cek-icon slot="end" name="arrow-up-right">
-        </cek-icon></cek-button>
-
-    <cek-code-block lang="xml" theme="github-dark">
-        <template>
-            <cek-button href="https://example.com" target="_blank" variant="link">
-                Go to Example
-                <cek-icon slot="end" name="arrow-up-right">
-                </cek-icon></cek-button>
-        </template>
-    </cek-code-block>
-
     <h2>Commands</h2>
 
     <p>The button component supports executing commands on other elements. Use the <span
@@ -232,16 +213,6 @@
                 <td>Sets an ARIA label for accessibility.</td>
             </tr>
             <tr>
-                <td>href</td>
-                <td>Transforms the button into an anchor element with this <code>href</code>.</td>
-            </tr>
-            <tr>
-                <td>target</td>
-                <td>Sets the <code>target</code> attribute of the anchor when <code>href</code> is present. Defaults to
-                    <code>_self</code>.
-                </td>
-            </tr>
-            <tr>
                 <td>command</td>
                 <td>The command to execute when the button is clicked. The command should match a public method name of
                     the
@@ -301,10 +272,6 @@
             <tr>
                 <td>loading-icon</td>
                 <td>The loading spinner displayed when <code>loading</code> is present.</td>
-            </tr>
-            <tr>
-                <td>arrow-icon</td>
-                <td>The arrow icon displayed when <code>arrow</code> is present.</td>
             </tr>
         </tbody>
     </table>

@@ -5,15 +5,12 @@
  * @attribute {string} type - Sets the button type. Possible values are `button`, `submit`, and `reset`. Defaults to `button`.
  * @attribute {boolean} disabled - Disables the button when present.
  * @attribute {boolean} loading - Shows a loading indicator when present.
- * @attribute {boolean} arrow - Displays an arrow icon when present.
  * @attribute {string} variant - Sets the styling variant of the button. Possible values are `primary`, `secondary`, `outline`, `ghost`, `link`, `destructive`, `neutral`.
  * @attribute {string} size - Sets the size of the button. Possible values are `small`, `medium`, and `large`.
  * @attribute {boolean} icon-only - If present, styles the button for icon-only display without text.
  * @attribute {boolean} pill - If present, styles the button with a pill shape.
  * @attribute {boolean} circle - If present, styles the button with a circle shape.
  * @attribute {string} button-aria-label - Sets an ARIA label for accessibility.
- * @attribute {string} href - Transforms the button into an anchor element with this `href`.
- * @attribute {string} target - Sets the `target` attribute of the anchor when `href` is present. Defaults to `_self`.
  * @attribute {string} command - The command to execute when the button is clicked. The command should match a public method name of the target element.
  * @attribute {string} commandfor - The ID of the element to execute the command on. If set to `parent`, the command will be executed on the parent element.
  *
@@ -30,15 +27,17 @@ const buttonAttributes = [
 	"disabled",
 	"button-aria-label",
 	"value",
-	"href",
-	"target",
 	"autofocus",
 	"command",
 	"commandfor",
+	"variant",
+	"size",
+	"icon-only",
+	"pill",
+	"circle",
 ];
 
 export const buttonTemplate = (attributes = {}) => {
-	const tag = attributes.href ? "a" : "button";
 	const buttonAtts = buttonAttributes
 		.filter((attr) => attributes[attr] !== undefined)
 		.map((attr) => {
@@ -53,7 +52,7 @@ export const buttonTemplate = (attributes = {}) => {
 		.join(" ");
 
 	return /*html*/ `
-		<${tag} id="button" part="button" ${buttonAtts}>
+		<button id="button" part="button" ${buttonAtts}>
 		<slot name="start"></slot>
 		<div id="label" part="label"><slot></slot></div>
 		<slot name="end"></slot>
@@ -66,22 +65,17 @@ export const buttonTemplate = (attributes = {}) => {
 				values="0 12 12;360 12 12" repeatCount="indefinite"/>
 			</path>
 		</svg>
-		<svg id="arrow-icon" part="arrow-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" 
-			fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">  
-			<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-		</svg>
-		</${tag}>
+		</button>
 	`;
 };
 
 export const buttonStyles = /*css*/ `
 :host {
   	display: inline-block;
-  	font-family: var(--cek-font-family);
-  	box-sizing: border-box;
 }
 
-#button {
+button {
+	font-family: var(--cek-font-family);
   	display: inline-flex;
   	align-items: center;
   	justify-content: center;
@@ -97,27 +91,27 @@ export const buttonStyles = /*css*/ `
   	text-decoration: none;
 }
 
-:host([variant]) #button {
+:host([variant]) button {
   	border-radius: var(--cek-border-radius);
   	padding-inline: var(--cek-padding-inline);
 }
 
-:host([variant]) #button:focus {
+:host([variant]) button:focus {
   	outline: var(--cek-focus-ring);
   	outline-offset: var(--cek-focus-ring-offset);
 }
 
-:host([loading]) #button,
-:host([disabled]) #button {
+:host([loading]) button,
+:host([disabled]) button {
   	cursor: not-allowed;
 }
 
-:host([loading]) #button {
+:host([loading]) button {
   	background-color: lightgray;
   	color: rgba(0, 0, 0, 0.5);
 }
 
-:host([disabled][variant]) #button {
+:host([disabled][variant]) button {
   	background-color: var(--cek-surface-color-disabled);
   	color: var(--cek-text-color-disabled);
 
@@ -126,26 +120,26 @@ export const buttonStyles = /*css*/ `
 	}
 }
 
-:host([size="small"]) #button {
+:host([size="small"]) button {
   	min-height: var(--cek-height-small);
   	min-width: var(--cek-height-small);
   	font-size: var(--cek-font-size-0);
 }
 
-:host(:not([size])) #button, 
-:host([size="medium"]) #button {
+:host(:not([size])) button, 
+:host([size="medium"]) button {
   	min-height: var(--cek-height-medium);
   	min-width: var(--cek-height-medium);
   	font-size: var(--cek-font-size-1);
 }
 
-:host([size="large"]) #button {
+:host([size="large"]) button {
   	min-height: var(--cek-height-large);
   	min-width: var(--cek-height-large);
   	font-size: var(--cek-font-size-2);
 }
 
-:host([variant="primary"]) #button {
+:host([variant="primary"]) button {
   	background-color: var(--cek-color-primary-500);
   	color: white;
 
@@ -154,7 +148,7 @@ export const buttonStyles = /*css*/ `
   	}
 }
 
-:host([variant="secondary"]) #button {
+:host([variant="secondary"]) button {
  	background-color: var(--cek-surface-color-1);
  	 color: var(--cek-text-color-1);
 
@@ -163,7 +157,7 @@ export const buttonStyles = /*css*/ `
   	}
 }
 
-:host([variant="outline"]) #button {
+:host([variant="outline"]) button {
 	background-color: transparent;
 	border: 1px solid var(--cek-border-color-2);
 	color: var(--cek-text-color-1);
@@ -173,16 +167,16 @@ export const buttonStyles = /*css*/ `
 	}
 }
 
-:host([variant="ghost"]) #button {
+:host([variant="ghost"]) button {
 	background: transparent;
 	color: var(--cek-text-color-1);
 }
 
-:host([variant="ghost"]) #button:hover {
+:host([variant="ghost"]) button:hover {
 	background-color: var(--cek-surface-color-1);
 }
 
-:host([variant="link"]) #button {
+:host([variant="link"]) button {
 	background-color: transparent;
 	color: var(--cek-color-primary-500);
 	padding: 0;
@@ -195,7 +189,7 @@ export const buttonStyles = /*css*/ `
   	}
 }
 
-:host([variant="destructive"]) #button {
+:host([variant="destructive"]) button {
  	background-color: var(--cek-color-red-600);
   	color: white;
 
@@ -204,11 +198,11 @@ export const buttonStyles = /*css*/ `
   	}
 }
 
-:host([variant="destructive"]) #button:focus {
+:host([variant="destructive"]) button:focus {
   	outline: 2px solid var(--cek-color-red-600);
 }
 
-:host([variant="neutral"]) #button {
+:host([variant="neutral"]) button {
   	background-color: var(--cek-color-neutral);
   	color: var(--cek-text-color-neutral);
 
@@ -221,16 +215,16 @@ export const buttonStyles = /*css*/ `
   	}
 }
 
-:host([variant="icon"]) #button {
+:host([variant="icon"]) button {
   	padding: var(--cek-space-2);
   	margin: 0;
 }
 
-:host([pill]) #button {
+:host([pill]) button {
   border-radius: 50px;
 }
 
-:host([circle]) #button {
+:host([circle]) button {
   border-radius: 50%;
   padding: 0;
   width: var(--cek-height-medium);
@@ -257,22 +251,12 @@ export const buttonStyles = /*css*/ `
   display: block;
 }
 
-:host([icon-only]) #button {
+:host([icon-only]) button {
   padding: var(--cek-space-2);
   margin: 0;
 }
 
-#arrow-icon {
-  	display: none;
-  	height: 1em;
-  	width: 1em;
-  	margin-inline-start: 0.5ch;
-}
-
-:host([arrow]) #arrow-icon {
-  	display: block;
-}
-
+// this should scale with font?
 ::slotted(cek-icon) {
 	--height: 1.4em;
 	--width: 1.4em;
@@ -351,10 +335,7 @@ export class Button extends HTMLElement {
 	}
 
 	connectedCallback() {
-		this.#maybeTransformToAnchor();
-		if (!this.hasAttribute("href")) {
-			this.#button.addEventListener("click", this.#onClick);
-		}
+		this.#button.addEventListener("click", this.#onClick);
 		this.#copyButtonAttributes();
 	}
 
@@ -364,7 +345,6 @@ export class Button extends HTMLElement {
 
 	attributeChangedCallback(name, oldValue, newValue) {
 		if (buttonAttributes.includes(name) || name === "loading") {
-			this.#maybeTransformToAnchor();
 			this.#copyButtonAttributes();
 		}
 	}
@@ -409,34 +389,6 @@ export class Button extends HTMLElement {
 			} else {
 				this.#button.removeAttribute(newAttribute);
 			}
-		}
-	}
-
-	#maybeTransformToAnchor() {
-		const button = this.#button;
-		const shouldBeLink = this.hasAttribute("href");
-
-		if (shouldBeLink && button.tagName.toLowerCase() === "button") {
-			const anchor = document.createElement("a");
-			anchor.id = "button";
-			anchor.part.add("button");
-
-			while (button.firstChild) {
-				anchor.appendChild(button.firstChild);
-			}
-
-			button.replaceWith(anchor);
-		} else if (!shouldBeLink && button.tagName.toLowerCase() === "a") {
-			const button = document.createElement("button");
-			button.id = "button";
-			button.part.add("button");
-
-			while (button.firstChild) {
-				button.appendChild(button.firstChild);
-			}
-
-			button.replaceWith(button);
-			button.addEventListener("click", this.#onClick);
 		}
 	}
 
