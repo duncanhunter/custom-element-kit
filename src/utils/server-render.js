@@ -38,10 +38,9 @@ export function renderDeclarativeShadowDom(htmlString) {
 		const tagName = element.localName;
 		const { template, styles } = components[tagName] ?? {};
 
-		if (!template) {
+		if (!template || tagName === "cek-code-block") {
 			continue;
 		}
-
 		const attrs = getAttributes(element);
 
 		if (tagName === "cek-icon") {
@@ -51,6 +50,7 @@ export function renderDeclarativeShadowDom(htmlString) {
 		const htmlContent = template(attrs);
 
 		element.innerHTML = `<template shadowrootmode="open"><style>${minifyCss(styles)}</style>${htmlContent}</template>${element.innerHTML}`;
+		element.setAttribute("server-rendered", "");
 	}
 
 	return `<!DOCTYPE html><html lang="en">${document.documentElement.outerHTML}`;

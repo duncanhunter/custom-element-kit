@@ -17,14 +17,18 @@ export const iconTemplate = (attrs = {}) => {
 
 export const iconStyles = /*css*/ `
 :host {
-  display: flex;
-  --height: 1em;
-  --width: 1em;
+    display: inline-flex;
+    font-size: inherit; /* Inherits font-size from parent */
+    width: 1.2em; /* Allows scaling based on font-size */
+    height: 1.2em; /* Allows scaling based on font-size */
+    /* Allow size attribute to override font-size */
+    font-size: var(--icon-size, 1.2em); /* Increased default icon size */
 }
 
 svg {
-  height: var(--height);
-  width: var(--width);
+    width: 100%;
+    height: 100%;
+    /* Ensures SVG scales with the host */
 }
 `;
 

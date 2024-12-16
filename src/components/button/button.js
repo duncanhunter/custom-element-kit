@@ -20,6 +20,9 @@
  * @event click - Dispatched when the button is activated. For a link, dispatched upon navigation activation.
  *
  * @method focus - Moves keyboard focus to the button or anchor.
+ *
+ * @csspart button - The internal button element that can be styled externally.
+ * @csspart loading-text - The loading-text.
  */
 
 const buttonAttributes = [
@@ -35,6 +38,9 @@ const buttonAttributes = [
 	"icon-only",
 	"pill",
 	"circle",
+	"loading",
+	"loading-text",
+	"autocomplete",
 ];
 
 export const buttonTemplate = (attributes = {}) => {
@@ -50,21 +56,15 @@ export const buttonTemplate = (attributes = {}) => {
 			return `${attr}="${attributes[attr]}"`;
 		})
 		.join(" ");
+	const loadingText = attributes["loading-text"] || "";
+	const ariaBusy = attributes.loading ? `aria-busy="true"` : "";
 
 	return /*html*/ `
-		<button id="button" part="button" ${buttonAtts}>
+		<button class="cek-button" part="button" ${buttonAtts} ${ariaBusy}>
 		<slot name="start"></slot>
-		<div id="label" part="label"><slot></slot></div>
+		<slot></slot>
+		<span part="loading-text">${loadingText}</span>
 		<slot name="end"></slot>
-		<svg id="loading-icon" part="loading-icon" width="24" height="24" viewBox="0 0 24 24" 
-			xmlns="http://www.w3.org/2000/svg">
-			<path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25"/>
-			<path d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7
-			a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z">
-			<animateTransform attributeName="transform" type="rotate" dur="0.75s" 
-				values="0 12 12;360 12 12" repeatCount="indefinite"/>
-			</path>
-		</svg>
 		</button>
 	`;
 };
@@ -74,7 +74,7 @@ export const buttonStyles = /*css*/ `
   	display: inline-block;
 }
 
-button {
+.cek-button {
 	font-family: var(--cek-font-family);
   	display: inline-flex;
   	align-items: center;
@@ -82,191 +82,239 @@ button {
   	position: relative;
   	background: transparent;
   	border: none;
-  	padding: 0;
+  	padding-inline: 0.6rem;
   	margin: 0;
   	font: inherit;
   	color: var(--cek-text-color-1);
   	cursor: pointer;
   	box-sizing: border-box;
   	text-decoration: none;
+	  gap: 0.5ch;
 }
 
-:host([variant]) button {
+.cek-button:not([loading-text]) [part="loading-text"] {
+	display: none;
+}
+
+.cek-button[size="small"] {
+    --spinner-size: 0.8rem;
+    --spinner-border-width: 0.125rem;
+	min-height: var(--cek-height-small);
+	min-width: var(--cek-height-small);
+	font-size: var(--cek-font-size-0);
+}
+
+.cek-button:not([size]),
+.cek-button[size="medium"] {
+    --spinner-size: 1.3rem;
+    --spinner-border-width: 0.1875rem;
+	min-height: var(--cek-height-medium);
+	min-width: var(--cek-height-medium);
+	font-size: var(--cek-font-size-1);
+}
+
+.cek-button[size="large"] {
+    --spinner-size: 1.8rem;
+    --spinner-border-width: 0.25rem;
+	min-height: var(--cek-height-large);
+	min-width: var(--cek-height-large);
+	font-size: var(--cek-font-size-2);
+}
+
+.cek-button cek-icon {
+    font-size: var(--icon-size);
+    width: 1em;
+    height: 1em;
+}
+
+.cek-button[variant] {
   	border-radius: var(--cek-border-radius);
   	padding-inline: var(--cek-padding-inline);
 }
 
-:host([variant]) button:focus {
+.cek-button[variant]:focus {
   	outline: var(--cek-focus-ring);
   	outline-offset: var(--cek-focus-ring-offset);
 }
 
-:host([loading]) button,
-:host([disabled]) button {
-  	cursor: not-allowed;
+.cek-button[loading],
+.cek-button[aria-disabled="true"] {
+	cursor: not-allowed;
 }
 
-:host([loading]) button {
-  	background-color: lightgray;
-  	color: rgba(0, 0, 0, 0.5);
-}
-
-:host([disabled][variant]) button {
-  	background-color: var(--cek-surface-color-disabled);
-  	color: var(--cek-text-color-disabled);
+.cek-button[variant][disabled],
+.cek-button[aria-disabled="true"] {
+	background-color: var(--cek-surface-color-2);
+	color: var(--cek-text-color-2);
 
 	&:focus {
-		outline-color: var(--cek-surface-color-disabled);
+		outline-color: var(--cek-surface-color-2);
 	}
-}
-
-:host([size="small"]) button {
-  	min-height: var(--cek-height-small);
-  	min-width: var(--cek-height-small);
-  	font-size: var(--cek-font-size-0);
-}
-
-:host(:not([size])) button, 
-:host([size="medium"]) button {
-  	min-height: var(--cek-height-medium);
-  	min-width: var(--cek-height-medium);
-  	font-size: var(--cek-font-size-1);
-}
-
-:host([size="large"]) button {
-  	min-height: var(--cek-height-large);
-  	min-width: var(--cek-height-large);
-  	font-size: var(--cek-font-size-2);
-}
-
-:host([variant="primary"]) button {
-  	background-color: var(--cek-color-primary-500);
-  	color: white;
-
-  	&:hover {
-		filter: brightness(85%);
-  	}
-}
-
-:host([variant="secondary"]) button {
- 	background-color: var(--cek-surface-color-1);
- 	 color: var(--cek-text-color-1);
-
- 	 &:hover {
-		filter: brightness(85%);
-  	}
-}
-
-:host([variant="outline"]) button {
-	background-color: transparent;
-	border: 1px solid var(--cek-border-color-2);
-	color: var(--cek-text-color-1);
-
-  	&:hover {
-		text-decoration: underline;
-	}
-}
-
-:host([variant="ghost"]) button {
-	background: transparent;
-	color: var(--cek-text-color-1);
-}
-
-:host([variant="ghost"]) button:hover {
-	background-color: var(--cek-surface-color-1);
-}
-
-:host([variant="link"]) button {
-	background-color: transparent;
-	color: var(--cek-color-primary-500);
-	padding: 0;
-	margin: 0;
-	min-height: 0;
-	min-width: 0;
-
-  	&:hover {
-  		text-decoration: underline;
-  	}
-}
-
-:host([variant="destructive"]) button {
- 	background-color: var(--cek-color-red-600);
-  	color: white;
-
-	 &:hover {
-		filter: brightness(85%);
-  	}
-}
-
-:host([variant="destructive"]) button:focus {
-  	outline: 2px solid var(--cek-color-red-600);
-}
-
-:host([variant="neutral"]) button {
-  	background-color: var(--cek-color-neutral);
-  	color: var(--cek-text-color-neutral);
-
+	
 	&:hover {
-		filter: brightness(85%);
-  	}
-
-	&:focus {
-		outline-color: var(--cek-color-neutral);
-  	}
+		outline-color: var(--cek-surface-color-3);
+		background-color: var(--cek-surface-color-3)
+	};
 }
 
-:host([variant="icon"]) button {
-  	padding: var(--cek-space-2);
-  	margin: 0;
+.cek-button[loading]::after {
+    content: "";
+    position: absolute;
+    width: var(--spinner-size, 1.5rem);
+    height: var(--spinner-size, 1.5rem);
+	border: 2px solid var(--cek-color-gray-100);
+	border-top-color: var(--cek-color-gray-400); 
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(0deg);
+    animation: spin 0.75s linear infinite;
+    pointer-events: none;
 }
 
-:host([pill]) button {
-  border-radius: 50px;
+.cek-button[variant="neutral"][loading]::after,
+.cek-button[variant="secondary"][loading]::after {
+	border-color: light-dark(var(--cek-color-gray-400), var(--cek-color-gray-100));
+	border-top-color: light-dark(var(--cek-color-gray-100),var(--cek-color-gray-400)); 
 }
 
-:host([circle]) button {
-  border-radius: 50%;
-  padding: 0;
-  width: var(--cek-height-medium);
-  height: var(--cek-height-medium);
+.cek-button[loading][loading-text]:not([loadin-text=""]) [part="loading-text"] {
+    display: flex;
 }
 
-[name="end"]::slotted(*) {
-  	margin-inline-start: 0.5ch;
+.cek-button[loading]:not([loading-text]) [part="loading-text"],
+.cek-button[loading-text]:not([loading]) [part="loading-text"] {
+    display: none;
 }
 
-[name="start"]::slotted(*) {
-  	margin-inline-end: 0.5ch;
+.cek-button[loading][loading-text] slot:not([name]) {
+    display: none;
 }
 
-#loading-icon {
-  	position: absolute;
-  	display: none;
-  	top: 50%;
-  	left: 50%;
-  	transform: translate(-50%, -50%);
+@keyframes spin {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
 }
 
-:host([loading]) #loading-icon {
-  display: block;
+@media (prefers-reduced-motion: reduce) {
+    .cek-button[loading]::after {
+        animation: none;
+        border-top: none;
+		border: none;
+    }
 }
 
-:host([icon-only]) button {
-  padding: var(--cek-space-2);
-  margin: 0;
+.cek-button[icon-only] {
+	padding: 0;
 }
 
-// this should scale with font?
-::slotted(cek-icon) {
-	--height: 1.4em;
-	--width: 1.4em;
+.cek-button[icon-only][loading]::after {
+    width: var(--spinner-size, 1.5rem);
+    height: var(--spinner-size, 1.5rem);
+    border-width: var(--spinner-border-width, 0.1875rem);
+}
+
+.cek-button[variant="primary"] {
+    background-color: var(--cek-color-primary-500);
+    color: white;
+}
+
+.cek-button[variant="primary"]:hover {
+    filter: brightness(85%);
+}
+
+.cek-button[variant="secondary"] {
+    background-color: var(--cek-surface-color-1);
+    color: var(--cek-text-color-1);
+}
+
+.cek-button[variant="secondary"]:hover {
+    filter: brightness(85%);
+}
+
+.cek-button[variant="outline"] {
+    background-color: transparent;
+    border: 1px solid var(--cek-border-color-2);
+    color: var(--cek-text-color-1);
+}
+
+.cek-button[variant="outline"]:hover {
+    text-decoration: underline;
+}
+
+.cek-button[variant="ghost"] {
+    background: transparent;
+    color: var(--cek-text-color-1);
+}
+
+.cek-button[variant="ghost"]:hover {
+    background-color: var(--cek-surface-color-1);
+}
+
+.cek-button[variant="link"] {
+    background-color: transparent;
+    color: var(--cek-color-primary-500);
+    padding: 0;
+    margin: 0;
+    min-height: 0;
+    min-width: 0;
+}
+
+.cek-button[variant="link"]:hover {
+    text-decoration: underline;
+}
+
+.cek-button[variant="destructive"] {
+    background-color: var(--cek-color-red-600);
+    color: white;
+}
+
+.cek-button[variant="destructive"]:hover {
+    filter: brightness(85%);
+}
+
+.cek-button[variant="destructive"]:focus {
+    outline: 2px solid var(--cek-color-red-600);
+}
+
+.cek-button[variant="neutral"] {
+    background-color: var(--cek-color-neutral);
+    color: var(--cek-text-color-neutral);
+}
+
+.cek-button[variant="neutral"]:hover {
+    filter: brightness(85%);
+}
+
+.cek-button[variant="neutral"]:focus {
+    outline-color: var(--cek-color-neutral);
+}
+
+.cek-button[variant="icon"] {
+    padding: var(--cek-space-2);
+    margin: 0;
+}
+
+.cek-button[pill] {
+    border-radius: 50px;
+}
+
+.cek-button[circle] {
+    border-radius: 50%;
+    padding: 0;
+    width: var(--cek-height-medium);
+    height: var(--cek-height-medium);
 }
 `;
 
 export class Button extends HTMLElement {
 	static formAssociated = true;
 	static get observedAttributes() {
-		return ["loading", ...buttonAttributes];
+		return [...buttonAttributes];
 	}
 
 	#internals;
@@ -315,10 +363,8 @@ export class Button extends HTMLElement {
 	set disabled(value) {
 		if (value) {
 			this.setAttribute("disabled", "");
-			this.#button.setAttribute("aria-disabled", "true");
 		} else {
 			this.removeAttribute("disabled");
-			this.#button.removeAttribute("aria-disabled");
 		}
 	}
 
@@ -331,7 +377,11 @@ export class Button extends HTMLElement {
 	}
 
 	get #button() {
-		return this.shadowRoot.getElementById("button");
+		return this.shadowRoot.querySelector("button");
+	}
+
+	get #loadingTextElement() {
+		return this.shadowRoot.querySelector("[part=loading-text]");
 	}
 
 	connectedCallback() {
@@ -377,11 +427,27 @@ export class Button extends HTMLElement {
 				} else {
 					this.#button.removeAttribute("aria-disabled");
 				}
+			} else if (buttonAttribute === "loading") {
+				if (this.hasAttribute("loading")) {
+					this.#button.setAttribute("aria-busy", "true");
+					this.#button.setAttribute("loading", "true");
+				} else {
+					this.#button.removeAttribute("aria-busy");
+					this.#button.removeAttribute("loading");
+				}
+			} else if (buttonAttribute === "loading-text") {
+				if (this.hasAttribute("loading-text")) {
+					this.#loadingTextElement.textContent =
+						this.getAttribute("loading-text");
+				} else {
+					this.#loadingTextElement.textContent = "";
+				}
 			} else if (this.hasAttribute(buttonAttribute)) {
 				this.#button.setAttribute(
 					newAttribute,
 					this.getAttribute(buttonAttribute),
 				);
+				// Note: If no attribute is on the host then set these defaults or remove them.
 			} else if (buttonAttribute === "type" && !this.hasAttribute("href")) {
 				this.#button.type = "text";
 			} else if (buttonAttribute === "autocomplete") {

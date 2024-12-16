@@ -10,6 +10,12 @@
     <link rel="stylesheet" href="./assets/page-layout.css">
     <link rel="stylesheet" href="./assets/utilities.css">
     <script src="./assets/scroll-spy.js"></script>
+    <script type="module">
+        import { buttonStyles } from './button.js';
+        const style = document.createElement('style');
+        style.textContent = buttonStyles;
+        document.head.appendChild(style);
+    </script>
 </head>
 
 <body>

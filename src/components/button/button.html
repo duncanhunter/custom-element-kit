@@ -5,12 +5,16 @@
     <p>The button component supports several variants for different styles and use cases. Use the <span
             class="attribute">variant</span> attribute to change the visual style of the button.</p>
 
-    <div class="flex flex-column gap-4">
+    <div class="flex flex-wrap items-center gap-4">
         <cek-button variant="primary">Primary Button</cek-button>
         <cek-button variant="secondary">Secondary Button</cek-button>
         <cek-button variant="outline">Outline Button</cek-button>
         <cek-button variant="ghost">Ghost Button</cek-button>
         <cek-button variant="link">Link Button</cek-button>
+        <cek-button variant="link">
+            Link Button
+            <cek-icon name="settings"></cek-icon>
+        </cek-button>
         <cek-button variant="destructive">Destructive Button</cek-button>
         <cek-button variant="neutral">Neutral Button</cek-button>
         <cek-button variant="primary" pill>Primary Pill Button</cek-button>
@@ -103,11 +107,35 @@
     <h2>Loading State</h2>
     <p>Add the <span class="attribute">loading</span> attribute to display a loading indicator inside the button.</p>
 
-    <cek-button variant="primary" loading>Loading...</cek-button>
+    <div class="horizontal">
+        <cek-button loading variant="primary" size="small">Suubmit</cek-button>
+        <cek-button loading variant="primary" size="medium">Acept</cek-button>
+        <cek-button loading variant="primary" size="large">Save</cek-button>
+    </div>
 
     <cek-code-block lang="xml" theme="github-dark">
         <template>
-            <cek-button variant="primary" loading>Loading...</cek-button>
+            <cek-button loading variant="primary" size="small">Submit</cek-button>
+            <cek-button loading variant="primary" size="medium">Accept</cek-button>
+            <cek-button loading variant="primary" size="large">Save</cek-button>
+        </template>
+    </cek-code-block>
+
+    <h2>Loading Text</h2>
+    <p>Add the <span class="attribute">loading</span> and <span class="attribute">loading-text</span> attributes to
+        display a loading indicator with custom text inside the button.</p>
+
+    <div class="horizontal">
+        <cek-button loading loading-text="Submitting..." variant="neutral" size="small">Submit</cek-button>
+        <cek-button loading loading-text="Please wait" variant="secondary" size="medium">Accept</cek-button>
+        <cek-button loading loading-text="Saving" variant="outline" size="large">Save</cek-button>
+    </div>
+
+    <cek-code-block lang="xml" theme="github-dark">
+        <template>
+            <cek-button loading loading-text="Submitting..." variant="neutral" size="small">Submit</cek-button>
+            <cek-button loading loading-text="Please wait" variant="secondary" size="medium">Accept</cek-button>
+            <cek-button loading loading-text="Saving" variant="outline" size="large">Save</cek-button>
         </template>
     </cek-code-block>
 
@@ -153,6 +181,140 @@
             </cek-dialog>
         </template>
     </cek-code-block>
+
+    <h2>Styles Native Elements</h2>
+
+    <h3>Buttons</h3>
+
+    <p>You can apply the <code>buttonStyles</code> to native HTML <code>&lt;button&gt;</code> or
+        <code>&lt;anchor&gt;</code> elements to achieve the same styling as the <code>cek-button</code> component. This
+        is particularly useful in scenarios where you need to use native buttons or anchors for better accessibility or
+        specific functionality.
+    </p>
+
+    <p>Not all cek-button functionality is CSS based including loading text, disabled states and commands. The disabled
+        attribute will still work to style the button.</p>
+
+    <p>You can import button styles from the button.js module and then inline them in a style tag like below</p>
+
+    <cek-code-block lang="xml" theme="github-dark">
+
+        <head>
+            <script type="module">
+                import { buttonStyles } from './button.js';
+                const style = document.createElement('style');
+                style.textContent = buttonStyles;
+                document.head.appendChild(style);
+            </script>
+        </head>
+    </cek-code-block>
+
+    <div class="flex flex-wrap gap-4">
+        <button class="cek-button" variant="primary">Primary Button</button>
+        <button class="cek-button" variant="secondary">Secondary Button</button>
+        <button class="cek-button" variant="outline">Outline Button</button>
+        <button class="cek-button" variant="ghost">Ghost Button</button>
+        <button class="cek-button" variant="link">Link Button</button>
+        <button class="cek-button" variant="destructive">Destructive Button</button>
+        <button class="cek-button" variant="neutral">Neutral Button</button>
+        <button class="cek-button" variant="neutral">
+            Neutral Button
+            <cek-icon name="settings"></cek-icon>
+        </button>
+        <button class="cek-button" disabled variant="neutral">Neutral Button Disabled</button>
+        <button class="cek-button" variant="primary" pill>Primary Pill Button</button>
+        <button class="cek-button" variant="primary" aria-label="Settings" icon-only>
+            <cek-icon name="settings"></cek-icon>
+        </button>
+        <button class="cek-button" variant="secondary" circle aria-label="Settings" icon-only>
+            <cek-icon name="settings"></cek-icon>
+        </button>
+        <button class="cek-button" variant="ghost" circle aria-label="Settings" icon-only>
+            <cek-icon name="settings"></cek-icon>
+        </button>
+    </div>
+
+    <cek-code-block lang="xml" theme="github-dark">
+        <template>
+            <button class="cek-button" variant="primary">Primary Button</button>
+            <button class="cek-button" variant="secondary">Secondary Button</button>
+            <button class="cek-button" variant="outline">Outline Button</button>
+            <button class="cek-button" variant="ghost">Ghost Button</button>
+            <button class="cek-button" variant="link">Link Button</button>
+            <button class="cek-button" variant="destructive">Destructive Button</button>
+            <button class="cek-button" variant="neutral">Neutral Button</button>
+            <button class="cek-button" variant="neutral">
+                Neutral Button
+                <cek-icon name="settings"></cek-icon>
+            </button>
+            <button class="cek-button" disabled variant="neutral">Neutral Button Disabled</button>
+            <button class="cek-button" variant="primary" pill>Primary Pill Button</button>
+            <button class="cek-button" variant="primary" button-aria-label="Settings" icon-only>
+                <span class="cek-icon" name="settings"></span>
+            </button>
+            <button class="cek-button" variant="secondary" circle button-aria-label="Settings" icon-only>
+                <span class="cek-icon" name="settings"></span>
+            </button>
+            <button class="cek-button" variant="ghost" circle button-aria-label="Settings" icon-only>
+                <span class="cek-icon" name="settings"></span>
+            </button>
+        </template>
+    </cek-code-block>
+
+    <h3>Anchors</h3>
+
+    <p>If you need a anchor tag that looks like a button you can use the button styles on a native anchor. This is
+        also
+        useful if you need to access the anchor for navigating with single page applications like angular router
+        links
+        or react Link tags.</p>
+
+    <div class="flex flex-wrap gap-4">
+        <a href="#" class="cek-button" variant="primary">Primary Link Button</a>
+        <a href="#" class="cek-button" variant="secondary">Secondary Link Button</a>
+        <a href="#" class="cek-button" variant="outline">Outline Link Button</a>
+        <a href="#" class="cek-button" variant="ghost">Ghost Link Button</a>
+        <a href="#" class="cek-button" variant="link">Link Button</a>
+        <a href="#" class="cek-button" variant="destructive">Destructive Link Button</a>
+        <a href="#" class="cek-button" variant="neutral">Neutral Link Button</a>
+    </div>
+
+    <cek-code-block lang="xml" theme="github-dark">
+        <template>
+            <a href="#" class="cek-button" variant="primary">Primary Link Button</a>
+            <a href="#" class="cek-button" variant="secondary">Secondary Link Button</a>
+            <a href="#" class="cek-button" variant="outline">Outline Link Button</a>
+            <a href="#" class="cek-button" variant="ghost">Ghost Link Button</a>
+            <a href="#" class="cek-button" variant="link">Link Button</a>
+            <a href="#" class="cek-button" variant="destructive">Destructive Link Button</a>
+            <a href="#" class="cek-button" variant="neutral">Neutral Link Button</a>
+        </template>
+    </cek-code-block>
+
+    <h2>Accessibility</h2>
+    <p>Ensuring accessibility is crucial for providing a good user experience for all users, including those using
+        assistive technologies.</p>
+
+    <h3>Disabled</h3>
+
+    <p>Disabled buttons will are still focusable but click events blocked and aria-disabled="true" added.</p>
+
+    <h3>Loading Text</h3>
+
+    <p>The <span class="attribute">loading-text</span> attribute is essential for conveying the loading state to
+        users.
+        When loading is true <code>aria-busy</code> will be set on the button. This is only functional with the
+        <code>cek-button</code> component and does not work with native buttons styled using <code>cek-button</code>
+        styles.
+    </p>
+
+    <p>If user's motion preferences are set to prefers reduced motion, the spinner will be hidden. It is recommended
+        to
+        use <span class="attribute">loading-text</span> in these scenarios to provide clear feedback.</p>
+
+    <p>If you are using a native button and still want to display loading feedback, you can use JavaScript to swap
+        the
+        button's default slot content to custom text during the loading state.</p>
 
     <h2>Attributes</h2>
 
@@ -214,13 +376,15 @@
             </tr>
             <tr>
                 <td>command</td>
-                <td>The command to execute when the button is clicked. The command should match a public method name of
+                <td>The command to execute when the button is clicked. The command should match a public method name
+                    of
                     the
                     target element.</td>
             </tr>
             <tr>
                 <td>commandfor</td>
-                <td>The ID of the element to execute the command on. If set to <code>parent</code>, the command will be
+                <td>The ID of the element to execute the command on. If set to <code>parent</code>, the command will
+                    be
                     executed on the parent element.</td>
             </tr>
         </tbody>
@@ -266,12 +430,8 @@
                 <td>The native button or anchor element.</td>
             </tr>
             <tr>
-                <td>label</td>
-                <td>The label element inside the button.</td>
-            </tr>
-            <tr>
-                <td>loading-icon</td>
-                <td>The loading spinner displayed when <code>loading</code> is present.</td>
+                <td>loading-text</td>
+                <td>The loading text displayed when <code>loading</code> is present.</td>
             </tr>
         </tbody>
     </table>
@@ -309,5 +469,4 @@
             </tr>
         </tbody>
     </table>
-
 </section>
