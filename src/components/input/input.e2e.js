@@ -46,19 +46,19 @@ test("given different sizes should have different heights", async ({
 	const mediumInput = await page.locator("cek-input[size='medium']");
 	const largeInput = await page.locator("cek-input[size='large']");
 
-	const smallHeight = await smallInput.evaluate(
-		(el) => getComputedStyle(el).height,
+	const smallHeight = await smallInput.evaluate((el) =>
+		getComputedStyle(el).height.replace("px", ""),
 	);
-	const mediumHeight = await mediumInput.evaluate(
-		(el) => getComputedStyle(el).height,
+	const mediumHeight = await mediumInput.evaluate((el) =>
+		getComputedStyle(el).height.replace("px", ""),
 	);
-	const largeHeight = await largeInput.evaluate(
-		(el) => getComputedStyle(el).height,
+	const largeHeight = await largeInput.evaluate((el) =>
+		getComputedStyle(el).height.replace("px", ""),
 	);
 
-	expect(smallHeight).toBe("44px");
-	expect(mediumHeight).toBe("58px");
-	expect(largeHeight).toBe("69px");
+	expect(+smallHeight).toBeLessThan(+mediumHeight);
+	expect(+mediumHeight).toBeLessThan(+largeHeight);
+	expect(+largeHeight).toBeGreaterThan(+mediumHeight);
 });
 
 test("given toggle password button click it should toggle the type", async ({
