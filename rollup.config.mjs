@@ -7,7 +7,7 @@ import copy from "rollup-plugin-copy";
 import minifyHTML from "rollup-plugin-minify-html-literals";
 import multiInput from "rollup-plugin-multi-input";
 import summary from "rollup-plugin-summary";
-import { renderDeclarativeShadowDom } from "./src/utils/render-declarative-shadow-dom.mjs";
+import { renderDeclarativeShadowDom } from "./src/utils/server-render.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

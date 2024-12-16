@@ -1,5 +1,3 @@
-// import icons from '/icons.js';
-
 /**
  * A template function used during SSR to produce the icon inline.
  * @param {Object} attrs - The attributes object, e.g., { name: "home", size: "1em" }.
@@ -8,7 +6,7 @@
 export const iconTemplate = (attrs = {}) => {
 	const iconName = attrs.name || "";
 	const size = attrs.size;
-	const svg = icons[iconName] || "";
+	const svg = attrs.svg || "";
 
 	const sizeAttributes = size ? `height="${size}" width="${size}"` : "";
 
